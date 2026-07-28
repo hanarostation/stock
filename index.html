@@ -1,0 +1,612 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나스닥 멀티에이전트 추천 리포트</title>
+<meta name="description" content="TradingAgents 프레임워크 기반 나스닥 시총 상위 200 종목 일일 멀티에이전트 분석 리포트 아카이브">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232a78d6'/><path d='M22 66 L40 46 L54 58 L78 32' stroke='white' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<style>
+/* ─────────────────────────────────────────────
+   리포트 HTML과 동일한 디자인 토큰
+   ───────────────────────────────────────────── */
+:root{
+  --bg:#f9f9f7; --surface:#fcfcfb; --surface2:#fdfdfc;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#898781;
+  --line:rgba(11,11,11,0.10); --line2:#e1e0d9; --line3:#c3c2b7;
+  --accent:#2a78d6; --gold:#eda100; --up:#006300; --dn:#d03b3b; --violet:#4a3aa7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* ── 상단 바 ── */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;
+ justify-content:space-between;gap:18px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.brand .logo{width:29px;height:29px;border-radius:8px;background:var(--accent);flex:0 0 29px;
+ display:flex;align-items:center;justify-content:center}
+.brand .logo svg{width:17px;height:17px}
+.nav{display:flex;gap:4px}
+.nav button{font:inherit;font-size:13px;font-weight:700;color:var(--ink2);background:none;
+ border:1px solid transparent;padding:6px 15px;border-radius:99px;cursor:pointer;
+ transition:background .15s,color .15s,border-color .15s}
+.nav button:hover{background:#f2f1ed;color:var(--ink)}
+.nav button[aria-current="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ── 히어로 ── */
+.hero{padding:42px 0 8px}
+.pill{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;
+ padding:3px 11px;border-radius:99px;letter-spacing:.03em;margin-bottom:14px}
+.pill.gray{background:var(--ink2)}
+.pill.gold{background:var(--gold);color:#3d2a00}
+h1{font-size:32px;margin:0 0 8px;letter-spacing:-.03em;line-height:1.25}
+.lede{color:var(--ink2);font-size:14.5px;max-width:660px;margin:0}
+h2{font-size:19px;margin:44px 0 16px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+ letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px}
+h2 .cnt{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:0}
+h3{font-size:15.5px;margin:0 0 9px;letter-spacing:-.01em}
+h4{font-size:11.5px;margin:0 0 9px;color:var(--ink2);text-transform:uppercase;letter-spacing:.07em}
+
+/* ── 최신 리포트 배너 ── */
+.latest{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ padding:20px 24px;margin-top:26px;transition:box-shadow .18s,border-color .18s}
+.latest:hover{border-color:rgba(42,120,214,.4);box-shadow:0 6px 22px -12px rgba(11,11,11,.28)}
+.latest .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.latest .l-sub{font-size:12.5px;color:var(--ink3)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;
+ font-size:13px;font-weight:700;padding:11px 20px;border-radius:99px;white-space:nowrap;
+ border:1px solid var(--ink);cursor:pointer;font-family:inherit;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn.ghost{background:transparent;color:var(--ink2);border-color:var(--line3)}
+.btn.ghost:hover{background:#f2f1ed;opacity:1}
+
+/* ── 필터 ── */
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.search{flex:1;min-width:200px;position:relative}
+.search input{width:100%;font:inherit;font-size:13.5px;padding:9px 13px 9px 34px;
+ background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--ink)}
+.search input:focus{outline:2px solid rgba(42,120,214,.35);outline-offset:-1px;border-color:var(--accent)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);
+ width:15px;height:15px;opacity:.4;pointer-events:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:12px;font-weight:700;color:var(--ink2);background:var(--surface);
+ border:1px solid var(--line);padding:7px 13px;border-radius:99px;cursor:pointer;
+ transition:background .15s,color .15s,border-color .15s}
+.chip:hover{background:#f2f1ed}
+.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ── 리포트 카드 그리드 ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:13px}
+.rcard{display:block;background:var(--surface);border:1px solid var(--line);border-radius:13px;
+ padding:17px 19px 16px;position:relative;overflow:hidden;
+ transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.rcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
+ opacity:0;transition:opacity .16s}
+.rcard:hover{transform:translateY(-2px);border-color:rgba(42,120,214,.45);
+ box-shadow:0 10px 26px -16px rgba(11,11,11,.4)}
+.rcard:hover::before{opacity:1}
+.rcard .row1{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.rcard .dow{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.06em}
+.rcard .dow.sat{color:var(--accent)}
+.rcard .dow.sun{color:var(--dn)}
+.rcard .date{font-size:21px;font-weight:800;letter-spacing:-.03em;
+ font-variant-numeric:tabular-nums;margin:0 0 4px}
+.rcard .title{font-size:12.5px;color:var(--ink2);line-height:1.5;margin:0 0 12px;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rcard .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;
+ padding-top:10px;border-top:1px dotted var(--line2);font-size:11.5px;color:var(--ink3)}
+.rcard .go{font-weight:700;color:var(--accent);display:inline-flex;align-items:center;gap:3px}
+.tag{display:inline-block;font-size:10px;font-weight:800;padding:2.5px 8px;border-radius:99px;
+ letter-spacing:.04em;white-space:nowrap}
+.tag.new{background:#e8f7e8;color:var(--up)}
+.tag.today{background:var(--accent);color:#fff}
+
+/* ── 상태 표시 ── */
+.state{background:var(--surface);border:1px dashed var(--line3);border-radius:13px;
+ padding:38px 24px;text-align:center;color:var(--ink2)}
+.state b{display:block;font-size:15px;color:var(--ink);margin-bottom:7px}
+.state p{margin:0 0 4px;font-size:13px}
+.state code{background:#f2f1ed;border:1px solid var(--line);border-radius:5px;
+ padding:1px 6px;font-size:12px}
+.skel{background:var(--surface);border:1px solid var(--line);border-radius:13px;height:148px;
+ position:relative;overflow:hidden}
+.skel::after{content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,transparent,rgba(11,11,11,.045),transparent);
+ animation:sh 1.25s infinite}
+@keyframes sh{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.note{font-size:12px;color:var(--ink3);margin:12px 0 0;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--up);flex:0 0 7px}
+.dot.warn{background:var(--gold)}
+.dot.err{background:var(--dn)}
+
+/* ── 개요 페이지 ── */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:22px 24px}
+.panel p:first-child{margin-top:0}
+.panel p:last-child{margin-bottom:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:13px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.stat .k{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+.stat .v{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:3px 0 1px}
+.stat .s{font-size:11.5px;color:var(--ink3)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden;font-size:13px}
+th{background:var(--bg);text-align:left;padding:10px 13px;font-size:11px;color:var(--ink2);
+ border-bottom:1px solid var(--line3);letter-spacing:.04em;white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+
+/* 파이프라인 */
+.pipe{display:flex;flex-direction:column;gap:11px}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+ padding:15px 18px;position:relative}
+.stage-h{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.stage-n{width:25px;height:25px;flex:0 0 25px;border-radius:7px;background:var(--accent);color:#fff;
+ font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.stage-t{font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.stage-m{font-size:11px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+.agents{display:flex;gap:8px;flex-wrap:wrap}
+.ag{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 12px;
+ font-size:12px;flex:1 1 190px;min-width:170px}
+.ag b{display:block;font-size:12.5px;margin-bottom:2px}
+.ag span{color:var(--ink3);font-size:11.5px;line-height:1.45;display:block}
+.arrow{text-align:center;color:var(--line3);font-size:15px;line-height:1;margin:-3px 0}
+.seq{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12px}
+.seq .s{background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-weight:700}
+.seq .s.bull{border-color:rgba(0,99,0,.35);color:var(--up)}
+.seq .s.bear{border-color:rgba(208,59,59,.35);color:var(--dn)}
+.seq .s.fac{border-color:rgba(74,58,167,.4);color:var(--violet)}
+.seq .a{color:var(--ink3)}
+.rules{margin:0;padding-left:19px;font-size:13px;color:var(--ink2)}
+.rules li{margin-bottom:7px}
+.rules b{color:var(--ink)}
+pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:15px 17px;
+ overflow-x:auto;font-size:12.3px;line-height:1.75;margin:0;
+ font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;color:var(--ink2)}
+.srcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:11px}
+.src{display:block;background:var(--surface);border:1px solid var(--line);border-radius:11px;
+ padding:13px 16px;transition:border-color .15s,background .15s}
+.src:hover{border-color:rgba(42,120,214,.5);background:#f5f8fd}
+.src b{display:block;font-size:13px;margin-bottom:2px}
+.src span{font-size:11.5px;color:var(--ink3);word-break:break-all}
+.src .u{color:var(--accent)}
+.warnbox{background:#fef9ec;border:1px solid rgba(237,161,0,.4);border-left:3px solid var(--gold);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:13px;color:var(--ink2)}
+.warnbox b{color:var(--ink)}
+.disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2)}
+
+footer{margin-top:56px;padding:26px 0 44px;border-top:1px solid var(--line2);
+ font-size:12px;color:var(--ink3);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+
+.view[hidden]{display:none}
+@media(max-width:640px){
+  h1{font-size:25px}
+  .hero{padding:30px 0 4px}
+  .topbar-in{height:56px;gap:10px}
+  .brand{font-size:13px;white-space:nowrap;gap:8px}
+  .brand .logo{width:26px;height:26px;flex:0 0 26px}
+  .brand span.full{display:none}
+  .nav{flex:0 0 auto}
+  .nav button{font-size:12px;padding:6px 11px;white-space:nowrap}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .rcard{padding:14px 15px}
+  .rcard .date{font-size:18px}
+  .latest{padding:17px 18px}
+  .wrap,.topbar-in{padding:0 15px}
+}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="#reports">
+      <span class="logo"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      <span>나스닥 멀티에이전트<span class="full"> 리포트</span></span>
+    </a>
+    <nav class="nav">
+      <button data-view="reports" aria-current="true">일일 리포트</button>
+      <button data-view="about">시스템 개요</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════ 일일 리포트 게시판 ══════════════ -->
+<section class="view" id="view-reports">
+  <div class="wrap">
+    <div class="hero">
+      <span class="pill">DAILY REPORT ARCHIVE</span>
+      <h1>나스닥 멀티에이전트 추천 리포트</h1>
+      <p class="lede">14개 AI 에이전트가 나스닥 시총 상위 200 종목을 분석해 매일 발행하는
+        단기 스윙 추천 리포트입니다. 날짜를 클릭하면 해당 일자 리포트로 이동합니다.</p>
+    </div>
+
+    <div id="latest-slot"></div>
+
+    <h2 id="reports">리포트 목록 <span class="cnt" id="count"></span></h2>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6" stroke-linecap="round"/></svg>
+        <input id="q" type="search" placeholder="날짜 검색 (예: 2026-07 또는 07-27)" autocomplete="off">
+      </label>
+      <div class="chips" id="months"></div>
+    </div>
+
+    <div id="list"><div class="grid">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div></div>
+    <p class="note" id="status"></p>
+  </div>
+</section>
+
+<!-- ══════════════ 시스템 개요 ══════════════ -->
+<section class="view" id="view-about" hidden>
+  <div class="wrap">
+    <div class="hero">
+      <span class="pill gray">SYSTEM ARCHITECTURE</span>
+      <h1>멀티에이전트 분석 시스템</h1>
+      <p class="lede">TradingAgents (arXiv:2412.20138) 프레임워크를 기반으로 구성한
+        14개 에이전트 파이프라인입니다. 애널리스트 → 리서치 토론 → 트레이더 → 리스크위원회 →
+        펀드매니저 순으로 검증을 통과한 종목만 최종 추천에 오릅니다.</p>
+    </div>
+
+    <h2>운영 기준</h2>
+    <div class="cols">
+      <div class="stat"><div class="k">유니버스</div><div class="v">TOP 200</div><div class="s">나스닥 시총 상위 (NDX 100 + 비NDX 중대형)</div></div>
+      <div class="stat"><div class="k">투자 스타일</div><div class="v">단기 스윙</div><div class="s">공격형 · 보유기간 1~4주</div></div>
+      <div class="stat"><div class="k">목표 수익률</div><div class="v">+5~15%</div><div class="s">손절 −5% (고변동성 최대 −8%)</div></div>
+      <div class="stat"><div class="k">발행 주기</div><div class="v">매일</div><div class="s">미국장 마감 후 · 한국시간 평일 오전</div></div>
+    </div>
+
+    <h2>에이전트 파이프라인 <span class="cnt">14 agents · 5 stages</span></h2>
+    <div class="pipe">
+
+      <div class="stage">
+        <div class="stage-h"><span class="stage-n">Ⅰ</span><span class="stage-t">애널리스트팀</span>
+          <span class="stage-m">4인 · 병렬 실행</span></div>
+        <div class="agents">
+          <div class="ag"><b>펀더멘털</b><span>밸류에이션, EPS 리비전, 내부자거래(Form 4), 13F, 공매도 비중</span></div>
+          <div class="ag"><b>센티먼트</b><span>Reddit·X·StockTwits, put-call, IV rank, Fear&amp;Greed — 역발상 해석 포함</span></div>
+          <div class="ag"><b>뉴스</b><span>FOMC, CPI/PCE, 관세, 지정학, 메모리 사이클, 종목별 실적 촉매</span></div>
+          <div class="ag"><b>테크니컬</b><span>60개 지표 (추세12·모멘텀12·변동성10·거래량10·지지저항10·상대강도6)</span></div>
+        </div>
+        <p style="margin:11px 0 0;font-size:12px;color:var(--ink3)">→ 가중 종합점수 산출 후 <b style="color:var(--ink)">상위 14종목</b>만 다음 단계 진출</p>
+      </div>
+      <div class="arrow">▼</div>
+
+      <div class="stage">
+        <div class="stage-h"><span class="stage-n">Ⅱ</span><span class="stage-t">리서치팀</span>
+          <span class="stage-m">5인 · 순차 토론</span></div>
+        <div class="seq">
+          <span class="s bull">Bull R1</span><span class="a">→</span>
+          <span class="s bear">Bear R1 반박</span><span class="a">→</span>
+          <span class="s bull">Bull R2 재반박</span><span class="a">→</span>
+          <span class="s bear">Bear R2 최종반론</span><span class="a">→</span>
+          <span class="s fac">Facilitator 판정</span>
+        </div>
+      </div>
+      <div class="arrow">▼</div>
+
+      <div class="stage">
+        <div class="stage-h"><span class="stage-n">Ⅲ</span><span class="stage-t">트레이더</span>
+          <span class="stage-m">1인</span></div>
+        <div class="agents">
+          <div class="ag" style="flex:1 1 100%"><b>매매 설계</b><span>매매신호 · 진입가 · 목표가 · 손절가 · 손익비(R/R) · 승률 추정 · 기대값 산출</span></div>
+        </div>
+      </div>
+      <div class="arrow">▼</div>
+
+      <div class="stage">
+        <div class="stage-h"><span class="stage-n">Ⅳ</span><span class="stage-t">리스크관리팀</span>
+          <span class="stage-m">3인 · 병렬 심사</span></div>
+        <div class="agents">
+          <div class="ag"><b>공격형 위원</b><span>상승 시나리오와 모멘텀 지속 가능성 옹호</span></div>
+          <div class="ag"><b>중립형 위원</b><span>양측 논거의 균형과 포지션 크기 적정성 검토</span></div>
+          <div class="ag"><b>보수형 위원</b><span>하방 리스크·유동성·이벤트 리스크 집중 검증</span></div>
+        </div>
+      </div>
+      <div class="arrow">▼</div>
+
+      <div class="stage">
+        <div class="stage-h"><span class="stage-n">Ⅴ</span><span class="stage-t">펀드매니저</span>
+          <span class="stage-m">1인 · 최종 승인</span></div>
+        <div class="agents">
+          <div class="ag" style="flex:1 1 100%"><b>최종 포트폴리오</b><span>승인·강등·탈락 판정 후 <b>상위 10종목</b>과 포트폴리오 비중 확정</span></div>
+        </div>
+      </div>
+    </div>
+
+    <h2>종합점수 가중치 <span class="cnt">공격형 스윙 기준</span></h2>
+    <table>
+      <thead><tr><th>분석 축</th><th>가중치</th><th>비고</th></tr></thead>
+      <tbody>
+        <tr><td>테크니컬</td><td class="n">35%</td><td>단기 스윙 특성상 최대 가중</td></tr>
+        <tr><td>센티먼트</td><td class="n">25%</td><td>과열 구간에서는 역발상 감점 적용</td></tr>
+        <tr><td>뉴스</td><td class="n">22%</td><td>촉매 임박도에 따라 가산</td></tr>
+        <tr><td>펀더멘털</td><td class="n">18%</td><td>1~4주 보유 기준이라 상대적 저가중</td></tr>
+      </tbody>
+    </table>
+
+    <h2>자동 강등 · 탈락 규칙</h2>
+    <div class="panel">
+      <ul class="rules">
+        <li><b>손익비(R/R) &lt; 1.5</b> → 관망 강등</li>
+        <li><b>기대값 &lt; 0</b> (승률×수익률 + (1−승률)×손실률) → 관망 강등</li>
+        <li><b>리스크위원 3인 중 2인 이상 반대</b> → 원칙적 탈락</li>
+        <li><b>동일 섹터 3종목 초과 금지</b></li>
+        <li><b>반도체·AI인프라 합산 비중 30% 초과 금지</b></li>
+        <li><b>종목당 비중 4~12%</b>, 현금 최소 15% 유지</li>
+        <li><b>승률 추정 70% 초과</b>는 극히 예외적 경우만 (스윙 현실 승률 40~60%)</li>
+      </ul>
+    </div>
+
+    <h2>산식</h2>
+    <pre>expected_return_pct   = (target - entry) / entry × 100
+downside_pct          = (stop - entry) / entry × 100          (음수)
+rr_ratio              = expected_return_pct / |downside_pct|
+expected_value_pct    = p × expected_return_pct + (1-p) × downside_pct,   p = win_prob/100
+
+포트폴리오 예상수익률 = Σ(position_pct × expected_return_pct) / 100
+최대손실 추정         = Σ(position_pct × downside_pct) / 100</pre>
+
+    <h2>출처 및 데이터 소스</h2>
+    <h4 style="margin-top:-4px">프레임워크</h4>
+    <div class="srcs" style="margin-bottom:16px">
+      <a class="src" href="https://arxiv.org/abs/2412.20138" target="_blank" rel="noopener">
+        <b>TradingAgents: Multi-Agents LLM Financial Trading Framework</b>
+        <span class="u">arxiv.org/abs/2412.20138</span></a>
+      <a class="src" href="https://github.com/TauricResearch/TradingAgents" target="_blank" rel="noopener">
+        <b>TauricResearch / TradingAgents</b>
+        <span class="u">github.com/TauricResearch/TradingAgents</span></a>
+    </div>
+
+    <h4>시세 · 종목 데이터</h4>
+    <div class="srcs" style="margin-bottom:16px">
+      <a class="src" href="https://www.slickcharts.com/nasdaq100" target="_blank" rel="noopener">
+        <b>Slickcharts — 나스닥100</b><span>NDX 전 종목 티커·비중·현재가·등락률 (일일 시세 주 소스)</span></a>
+      <a class="src" href="https://stockanalysis.com/list/nasdaq-stocks/" target="_blank" rel="noopener">
+        <b>Stock Analysis — 나스닥 전 종목</b><span>나스닥 전체 시가총액 랭킹, 유니버스 선정 기준</span></a>
+      <a class="src" href="https://www.kiplinger.com/investing/stocks" target="_blank" rel="noopener">
+        <b>Kiplinger — 실적 캘린더</b><span>주간 어닝 발표 일정</span></a>
+    </div>
+
+    <h4>매크로 · 시황</h4>
+    <div class="srcs" style="margin-bottom:16px">
+      <a class="src" href="https://www.fxstreet.com/" target="_blank" rel="noopener">
+        <b>FXStreet</b><span>매크로 전망 및 기술적 분석</span></a>
+      <a class="src" href="https://www.cnbc.com/markets/" target="_blank" rel="noopener">
+        <b>CNBC Markets</b><span>당일 시황 및 종목 뉴스</span></a>
+      <a class="src" href="https://www.federalreserve.gov/" target="_blank" rel="noopener">
+        <b>Federal Reserve</b><span>FOMC 일정·성명, 금리 정책</span></a>
+      <a class="src" href="https://www.sec.gov/edgar/search/" target="_blank" rel="noopener">
+        <b>SEC EDGAR</b><span>Form 4 내부자거래, 13F 기관 보유</span></a>
+    </div>
+
+    <div class="warnbox">
+      <b>데이터 수집 제약</b> — 분석 환경의 egress 프록시가 직접 HTTP 호출을 차단하기 때문에
+      yfinance·stooq·나스닥 API·SEC·FRED 등의 직접 호출은 사용하지 않으며,
+      모든 데이터는 WebFetch / WebSearch 도구 경로를 통해 수집합니다.
+      따라서 <b>시세는 리포트 발행 시점의 스냅샷</b>이며 실시간 값이 아닙니다.
+    </div>
+
+    <h2>면책</h2>
+    <div class="disc">
+      본 시스템의 산출물은 LLM 기반 분석 결과이며 <b>투자 조언이 아닙니다</b>.
+      승률·기대값은 모델 추정치로 실현 수익을 보장하지 않습니다.
+      리포트에 포함된 시세·재무 수치는 오류를 포함할 수 있으며, 투자 판단 전 반드시 원본 데이터를
+      직접 확인하시기 바랍니다. 실제 투자 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%">
+  <span>나스닥 멀티에이전트 추천 시스템 · TradingAgents 프레임워크 기반</span>
+  <span id="foot-meta"></span>
+</div></footer>
+
+<script>
+/* ═══════════════════════════════════════════════════════════
+   설정 — 필요할 때만 수정하세요.
+   기본값(null)이면 GitHub Pages URL에서 owner/repo를 자동 인식합니다.
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  owner:  null,        // 예: "myname"  (null = 자동 인식)
+  repo:   null,        // 예: "stock-reports" (null = 자동 인식)
+  branch: "main",      // 기본 브랜치명 (master면 "master"로 변경)
+  dir:    "reports",   // 리포트 HTML을 올리는 폴더
+  title:  "나스닥 멀티에이전트 추천 리포트"
+};
+
+/* ── 탭 전환 ── */
+const views = {reports: document.getElementById('view-reports'), about: document.getElementById('view-about')};
+const navBtns = [...document.querySelectorAll('.nav button')];
+function show(v){
+  if(!views[v]) v = 'reports';
+  for(const k in views) views[k].hidden = (k !== v);
+  navBtns.forEach(b => b.setAttribute('aria-current', String(b.dataset.view === v)));
+  if(location.hash.slice(1) !== v) history.replaceState(null,'','#'+v);
+  window.scrollTo({top:0});
+}
+navBtns.forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
+show(location.hash.slice(1) || 'reports');
+
+/* ── 유틸 ── */
+const DOW = ['일','월','화','수','목','금','토'];
+const pad = n => String(n).padStart(2,'0');
+const todayStr = (() => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; })();
+function daysAgo(ds){
+  const [y,m,d] = ds.split('-').map(Number);
+  const a = new Date(y, m-1, d), b = new Date();
+  return Math.round((new Date(b.getFullYear(),b.getMonth(),b.getDate()) - a) / 86400000);
+}
+function relLabel(n){
+  if(n <= 0) return '오늘';
+  if(n === 1) return '어제';
+  if(n < 7)  return n + '일 전';
+  if(n < 31) return Math.floor(n/7) + '주 전';
+  return Math.floor(n/30) + '개월 전';
+}
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ── owner/repo 자동 인식 ── */
+function detectRepo(){
+  if(CONFIG.owner && CONFIG.repo) return {owner:CONFIG.owner, repo:CONFIG.repo};
+  const h = location.hostname, segs = location.pathname.split('/').filter(Boolean);
+  if(h.endsWith('.github.io')){
+    const owner = CONFIG.owner || h.replace('.github.io','');
+    // 프로젝트 페이지( /repo/ ) vs 사용자 페이지( / )
+    const hasFile = segs.length && /\.html?$/i.test(segs[segs.length-1]);
+    const dirs = hasFile ? segs.slice(0,-1) : segs;
+    const repo = CONFIG.repo || (dirs.length ? dirs[0] : h);
+    return {owner, repo};
+  }
+  return null;
+}
+
+/* ── 리포트 목록 수집 ── */
+async function fromGitHub(){
+  const r = detectRepo();
+  if(!r) throw new Error('local');
+  const url = `https://api.github.com/repos/${r.owner}/${r.repo}/contents/${CONFIG.dir}?ref=${CONFIG.branch}`;
+  const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+  if(!res.ok) throw new Error('github ' + res.status);
+  const data = await res.json();
+  if(!Array.isArray(data)) throw new Error('github shape');
+  return {items: parseNames(data.map(f => f.name)), src:'github', repo:r};
+}
+async function fromJson(){
+  const res = await fetch(CONFIG.dir + '/reports.json?t=' + Date.now(), {cache:'no-store'});
+  if(!res.ok) throw new Error('json ' + res.status);
+  const data = await res.json();
+  const arr = Array.isArray(data) ? data : (data.reports || []);
+  const items = arr.map(x => typeof x === 'string' ? {date:x} : x)
+    .filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x.date))
+    .map(x => ({date:x.date, file:x.file || (x.date + '.html'), title:x.title || ''}));
+  items.sort((a,b) => b.date.localeCompare(a.date));
+  return {items, src:'json'};
+}
+function parseNames(names){
+  const items = [];
+  for(const name of names){
+    const m = name.match(/(\d{4}-\d{2}-\d{2})/);
+    if(m && /\.html?$/i.test(name)) items.push({date:m[1], file:name, title:''});
+  }
+  items.sort((a,b) => b.date.localeCompare(a.date));
+  return items;
+}
+
+/* ── 렌더링 ── */
+let ALL = [], monthFilter = '', query = '';
+
+function cardHTML(it){
+  const [y,m,d] = it.date.split('-').map(Number);
+  const dow = new Date(y, m-1, d).getDay();
+  const n = daysAgo(it.date);
+  let tag = '';
+  if(it.date === todayStr) tag = '<span class="tag today">TODAY</span>';
+  else if(n <= 2 && n >= 0) tag = '<span class="tag new">NEW</span>';
+  const href = CONFIG.dir + '/' + (it.file || (it.date + '.html'));
+  return `<a class="rcard" href="${esc(href)}">
+    <div class="row1"><span class="dow${dow===0?' sun':dow===6?' sat':''}">${y}년 ${m}월 · ${DOW[dow]}요일</span>${tag}</div>
+    <p class="date">${pad(m)}월 ${pad(d)}일</p>
+    <p class="title">${esc(it.title || CONFIG.title)}</p>
+    <div class="foot"><span>${relLabel(n)}</span><span class="go">리포트 열기 →</span></div>
+  </a>`;
+}
+
+function render(){
+  const list = document.getElementById('list');
+  let items = ALL;
+  if(monthFilter) items = items.filter(i => i.date.startsWith(monthFilter));
+  if(query){ const q = query.trim().toLowerCase(); items = items.filter(i => i.date.includes(q) || (i.title||'').toLowerCase().includes(q)); }
+
+  document.getElementById('count').textContent =
+    ALL.length ? (items.length === ALL.length ? `총 ${ALL.length}건` : `${items.length} / ${ALL.length}건`) : '';
+
+  if(!items.length){
+    list.innerHTML = ALL.length
+      ? `<div class="state"><b>조건에 맞는 리포트가 없습니다</b><p>검색어나 월 필터를 바꿔보세요.</p></div>`
+      : '';
+    return;
+  }
+  list.innerHTML = `<div class="grid">${items.map(cardHTML).join('')}</div>`;
+}
+
+function renderLatest(){
+  const slot = document.getElementById('latest-slot');
+  if(!ALL.length){ slot.innerHTML = ''; return; }
+  const it = ALL[0];
+  const [y,m,d] = it.date.split('-').map(Number);
+  const dow = new Date(y, m-1, d).getDay();
+  const href = CONFIG.dir + '/' + (it.file || (it.date + '.html'));
+  slot.innerHTML = `<a class="latest" href="${esc(href)}">
+    <div><span class="pill gold" style="margin-bottom:9px">최신 리포트</span>
+      <div class="l-date">${y}년 ${m}월 ${d}일 (${DOW[dow]})</div>
+      <div class="l-sub">${esc(it.title || CONFIG.title)} · ${relLabel(daysAgo(it.date))}</div></div>
+    <span class="btn">지금 열기 →</span></a>`;
+}
+
+function renderMonths(){
+  const box = document.getElementById('months');
+  const ms = [...new Set(ALL.map(i => i.date.slice(0,7)))].sort().reverse().slice(0,8);
+  if(ms.length < 2){ box.innerHTML = ''; return; }
+  box.innerHTML = `<button class="chip" data-m="" aria-pressed="true">전체</button>` +
+    ms.map(m => `<button class="chip" data-m="${m}" aria-pressed="false">${m.replace('-','년 ')}월</button>`).join('');
+  box.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    monthFilter = c.dataset.m;
+    box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    render();
+  }));
+}
+
+function setStatus(kind, text){
+  const el = document.getElementById('status');
+  el.innerHTML = `<span class="dot ${kind}"></span><span>${text}</span>`;
+}
+
+/* ── 부팅 ── */
+(async function init(){
+  let res = null, err1 = null;
+  try { res = await fromGitHub(); }
+  catch(e){ err1 = e; try { res = await fromJson(); } catch(e2){ /* both failed */ } }
+
+  if(res && res.items.length){
+    ALL = res.items;
+    renderLatest(); renderMonths(); render();
+    const when = new Date().toLocaleTimeString('ko-KR',{hour:'2-digit',minute:'2-digit'});
+    setStatus('', res.src === 'github'
+      ? `GitHub <code>${esc(res.repo.owner)}/${esc(res.repo.repo)}</code> 의 <code>${CONFIG.dir}/</code> 폴더를 자동으로 읽었습니다 · ${when} 기준`
+      : `<code>${CONFIG.dir}/reports.json</code> 목록을 읽었습니다 · ${when} 기준`);
+    document.getElementById('foot-meta').textContent = `총 ${ALL.length}건 · 최신 ${ALL[0].date}`;
+    return;
+  }
+
+  // 목록을 가져오지 못한 경우
+  const isLocal = location.protocol === 'file:';
+  document.getElementById('list').innerHTML = `<div class="state">
+    <b>${isLocal ? '로컬에서 연 파일입니다' : '아직 리포트 목록을 불러오지 못했습니다'}</b>
+    <p>${isLocal
+      ? 'GitHub에 올린 뒤 <code>github.io</code> 주소로 접속하면 <code>reports/</code> 폴더의 파일이 자동으로 나열됩니다.'
+      : '저장소가 <b>Public</b> 인지, <code>' + CONFIG.dir + '/</code> 폴더에 <code>YYYY-MM-DD.html</code> 파일이 있는지 확인해주세요.'}</p>
+    <p style="margin-top:12px"><a class="btn ghost" href="${CONFIG.dir}/">${CONFIG.dir}/ 폴더 열어보기</a></p>
+  </div>`;
+  setStatus('warn', isLocal
+    ? '로컬 미리보기 모드 — 목록 자동 인식은 배포 후 동작합니다.'
+    : `자동 인식 실패${err1 ? ' (' + esc(err1.message) + ')' : ''} — CONFIG의 owner/repo/branch 값을 직접 지정해보세요.`);
+})();
+
+document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
+</script>
+</body>
+</html>
