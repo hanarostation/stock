@@ -68,6 +68,48 @@ h4{font-size:11.5px;margin:0 0 9px;color:var(--ink2);text-transform:uppercase;le
 .btn.ghost{background:transparent;color:var(--ink2);border-color:var(--line3)}
 .btn.ghost:hover{background:#f2f1ed;opacity:1}
 
+/* ── 최신 리포트 요약 카드 ── */
+.sumcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;margin-top:26px}
+.sum-h{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ padding:20px 24px}
+.sum-h .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.sum-h .l-sub{font-size:12.5px;color:var(--ink3)}
+.sum-b{border-top:1px solid var(--line2);background:var(--surface2);padding:17px 24px 19px}
+.sum-load{padding:22px 24px;border-top:1px solid var(--line2);background:var(--surface2);
+ font-size:12.5px;color:var(--ink3)}
+.stiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 15px}
+.stile{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.stile .k{font-size:11px;color:var(--ink3);letter-spacing:.03em}
+.stile .v{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:2px 0 1px;
+ font-variant-numeric:tabular-nums}
+.stile .s{font-size:11px;color:var(--ink3)}
+.up{color:var(--up)}.dn{color:var(--dn)}.neutral{color:var(--ink)}
+.tscroll{overflow-x:auto;border-radius:11px;border:1px solid var(--line)}
+table.sum{border:none;border-radius:0;font-size:12.5px;min-width:640px}
+table.sum th{padding:9px 11px;background:var(--bg)}
+table.sum td{padding:9px 11px}
+table.sum .tk{font-weight:800;font-size:13.5px;letter-spacing:-.01em}
+table.sum .kr{font-size:11px;color:var(--ink3);display:block;margin-top:1px}
+table.sum td.n{font-weight:400}
+table.sum td.n b{font-weight:800}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:99px;
+ white-space:nowrap}
+.badge.sig{background:var(--accent);color:#fff}
+.badge.sigc{background:#fdf0cf;color:#7a5400}
+.badge.crit{background:#f2f1ed;color:var(--ink3)}
+.wbar{display:flex;align-items:center;gap:7px;min-width:76px}
+.wbar i{display:block;height:7px;border-radius:4px;background:var(--accent);min-width:2px}
+.sum-f{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ margin-top:13px;font-size:11.5px;color:var(--ink3)}
+.linkbtn{font:inherit;font-size:12px;font-weight:700;color:var(--ink2);background:var(--surface);
+ border:1px solid var(--line3);padding:6px 13px;border-radius:99px;cursor:pointer}
+.linkbtn:hover{background:#f2f1ed}
+.watchrow{margin-top:11px;font-size:12px;color:var(--ink3);display:none}
+.watchrow.on{display:block}
+.watchrow b{color:var(--ink2)}
+.swipe{display:none;font-size:11px;color:var(--ink3);margin:7px 0 0;text-align:right}
+
 /* ── 필터 ── */
 .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
 .search{flex:1;min-width:200px;position:relative}
@@ -203,6 +245,12 @@ footer{margin-top:56px;padding:26px 0 44px;border-top:1px solid var(--line2);
   .rcard .date{font-size:18px}
   .latest{padding:17px 18px}
   .wrap,.topbar-in{padding:0 15px}
+  .sum-h{padding:17px 18px}
+  .sum-b{padding:15px 18px 17px}
+  .sum-h .l-date{font-size:21px}
+  .stiles{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stile .v{font-size:19px}
+  .swipe{display:block}
 }
 </style>
 </head>
@@ -550,11 +598,151 @@ function renderLatest(){
   const [y,m,d] = it.date.split('-').map(Number);
   const dow = new Date(y, m-1, d).getDay();
   const href = CONFIG.dir + '/' + (it.file || (it.date + '.html'));
-  slot.innerHTML = `<a class="latest" href="${esc(href)}">
-    <div><span class="pill gold" style="margin-bottom:9px">최신 리포트</span>
-      <div class="l-date">${y}년 ${m}월 ${d}일 (${DOW[dow]})</div>
-      <div class="l-sub">${esc(it.title || CONFIG.title)} · ${relLabel(daysAgo(it.date))}</div></div>
-    <span class="btn">지금 열기 →</span></a>`;
+  slot.innerHTML = `<div class="sumcard">
+    <div class="sum-h">
+      <div><span class="pill gold" style="margin-bottom:9px">최신 리포트</span>
+        <div class="l-date">${y}년 ${m}월 ${d}일 (${DOW[dow]})</div>
+        <div class="l-sub">${esc(it.title || CONFIG.title)} · ${relLabel(daysAgo(it.date))}</div></div>
+      <a class="btn" href="${esc(href)}">리포트 전체 보기 →</a>
+    </div>
+    <div class="sum-load" id="sum-slot">추천 종목 요약을 불러오는 중…</div>
+  </div>`;
+  loadSummary(it, href);
+}
+
+/* ═══ 최신 리포트 HTML을 파싱해 요약 만들기 ═══ */
+const num = s => { const m = String(s).replace(/,/g,'').match(/-?\d+(\.\d+)?/); return m ? parseFloat(m[0]) : null; };
+
+function pickIdx(headers, wanted){
+  let i = headers.findIndex(h => h === wanted);
+  if(i < 0) i = headers.findIndex(h => h.startsWith(wanted));
+  return i;
+}
+
+function parseReport(html){
+  const doc = new DOMParser().parseFromString(html, 'text/html');
+
+  // ① 상단 지표 타일
+  const tiles = [...doc.querySelectorAll('.tiles .tile')].map(t => ({
+    k: (t.querySelector('.t-l')||{}).textContent || '',
+    v: (t.querySelector('.t-v')||{}).textContent || '',
+    s: (t.querySelector('.t-s')||{}).textContent || '',
+    dir: (t.querySelector('.t-v')||{className:''}).className.replace('t-v','').trim()
+  })).filter(t => t.v);
+
+  // ② "최종 승인 …" 제목 다음에 오는 표
+  let table = null;
+  for(const h of doc.querySelectorAll('h2')){
+    if(/최종\s*승인/.test(h.textContent)){
+      let n = h.nextElementSibling;
+      while(n && n.tagName !== 'TABLE') n = n.nextElementSibling;
+      table = n; break;
+    }
+  }
+  if(!table) table = doc.querySelector('table');
+  if(!table) return {tiles, rows:[]};
+
+  const headers = [...table.querySelectorAll('thead th')].map(th => th.textContent.trim());
+  const IX = {
+    name:   pickIdx(headers,'종목'),   sector: pickIdx(headers,'섹터'),
+    entry:  pickIdx(headers,'진입'),   target: pickIdx(headers,'목표'),
+    stop:   pickIdx(headers,'손절'),   ret:    pickIdx(headers,'예상수익'),
+    rr:     pickIdx(headers,'손익비'), win:    pickIdx(headers,'승률'),
+    ev:     pickIdx(headers,'기대값'), weight: pickIdx(headers,'비중'),
+    grade:  pickIdx(headers,'승인')
+  };
+  if(IX.name < 0 || IX.weight < 0) return {tiles, rows:[]};
+
+  const cell = (tds, i) => (i >= 0 && tds[i]) ? tds[i] : null;
+  const txt  = (tds, i) => { const c = cell(tds,i); return c ? c.textContent.trim() : ''; };
+
+  const rows = [...table.querySelectorAll('tbody tr')].map(tr => {
+    const tds = [...tr.children];
+    const nameCell = cell(tds, IX.name);
+    if(!nameCell) return null;
+    const gradeCell = cell(tds, IX.grade);
+    return {
+      ticker: (nameCell.querySelector('.tk')||{}).textContent || nameCell.textContent.trim().split('\n')[0],
+      kr:     (nameCell.querySelector('.sub')||{}).textContent || '',
+      sector: txt(tds, IX.sector),
+      entry:  txt(tds, IX.entry),  target: txt(tds, IX.target), stop: txt(tds, IX.stop),
+      ret:    txt(tds, IX.ret),    rr: txt(tds, IX.rr),
+      win:    txt(tds, IX.win),    ev: txt(tds, IX.ev),
+      weight: num(txt(tds, IX.weight)),
+      weightText: txt(tds, IX.weight),
+      grade:  gradeCell ? ((gradeCell.querySelector('.badge')||{}).textContent || '').trim() : '',
+      cond:   gradeCell ? ((gradeCell.querySelector('.cond') ||{}).textContent || '').trim() : ''
+    };
+  }).filter(r => r && r.ticker);
+
+  return {tiles, rows};
+}
+
+function gradeClass(g){
+  if(/조건부/.test(g)) return 'sigc';
+  if(/관망|보류/.test(g)) return 'crit';
+  return 'sig';
+}
+
+function renderSummary(data, href){
+  const slot = document.getElementById('sum-slot');
+  if(!slot) return;
+  const buys = data.rows.filter(r => r.weight > 0);
+  const watch = data.rows.filter(r => !(r.weight > 0));
+  if(!buys.length && !data.tiles.length) throw new Error('빈 요약');
+
+  const maxW = Math.max(...buys.map(r => r.weight || 0), 1);
+
+  const tilesHTML = data.tiles.length ? `<div class="stiles">${data.tiles.slice(0,4).map(t => `
+    <div class="stile"><div class="k">${esc(t.k)}</div>
+      <div class="v ${esc(t.dir||'neutral')}">${esc(t.v)}</div>
+      <div class="s">${esc(t.s)}</div></div>`).join('')}</div>` : '';
+
+  const tableHTML = buys.length ? `<div class="tscroll"><table class="sum"><thead><tr>
+      <th>종목</th><th>신호</th><th class="n">진입</th><th class="n">목표</th><th class="n">손절</th>
+      <th class="n">예상수익</th><th class="n">손익비</th><th class="n">기대값</th><th>비중</th>
+    </tr></thead><tbody>${buys.map(r => `<tr>
+      <td><span class="tk">${esc(r.ticker)}</span><span class="kr">${esc(r.kr || r.sector)}</span></td>
+      <td><span class="badge ${gradeClass(r.grade)}">${esc(r.grade || '매수')}</span></td>
+      <td class="n">${esc(r.entry)}</td>
+      <td class="n up">${esc(r.target)}</td>
+      <td class="n dn">${esc(r.stop)}</td>
+      <td class="n up"><b>${esc(r.ret)}</b></td>
+      <td class="n">${esc(r.rr)}</td>
+      <td class="n ${num(r.ev) < 0 ? 'dn' : 'up'}"><b>${esc(r.ev)}</b></td>
+      <td><span class="wbar"><i style="width:${Math.round((r.weight/maxW)*46)}px"></i>${esc(r.weightText || (r.weight + '%'))}</span></td>
+    </tr>`).join('')}</tbody></table></div>
+    <p class="swipe">← 표를 좌우로 밀어 전체 항목 보기</p>` : '';
+
+  const watchHTML = watch.length ? `
+    <div class="sum-f">
+      <button class="linkbtn" id="watch-btn">관망 ${watch.length}종목 보기</button>
+      <span>자동 추출된 요약입니다 · 조건·근거는 리포트 원문에서 확인하세요</span>
+    </div>
+    <div class="watchrow" id="watch-row"><b>관망</b> — ${watch.map(r => esc(r.ticker)).join(' · ')}
+      <span style="color:var(--ink3)"> (비중 0%, 신규 진입 대상 아님)</span></div>`
+    : `<div class="sum-f"><span></span><span>자동 추출된 요약입니다 · 조건·근거는 리포트 원문에서 확인하세요</span></div>`;
+
+  slot.outerHTML = `<div class="sum-b" id="sum-slot">
+    ${tilesHTML}${tableHTML}${watchHTML}</div>`;
+
+  const wb = document.getElementById('watch-btn');
+  if(wb) wb.addEventListener('click', () => {
+    const row = document.getElementById('watch-row');
+    const on = row.classList.toggle('on');
+    wb.textContent = on ? '관망 종목 접기' : `관망 ${watch.length}종목 보기`;
+  });
+}
+
+async function loadSummary(item, href){
+  try{
+    const res = await fetch(href, {cache:'no-store'});
+    if(!res.ok) throw new Error('fetch ' + res.status);
+    renderSummary(parseReport(await res.text()), href);
+  }catch(e){
+    const slot = document.getElementById('sum-slot');
+    if(slot) slot.remove();   // 요약만 조용히 숨김 — 목록은 정상 동작
+  }
 }
 
 function renderMonths(){
