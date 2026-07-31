@@ -708,16 +708,52 @@ function detectRepo(){
   return null;
 }
 
+/* ── GitHub 파일 목록 (호출 1회 + 캐시 공유) ──
+   폴더마다 contents API를 부르면 비로그인 한도(IP당 시간당 60회)를 빠르게 소진해
+   목록이 통째로 안 나오는 문제가 생깁니다. git/trees 한 번으로 전체 경로를 받아
+   reports/ 와 eval/ 이 함께 쓰고, 결과는 localStorage에 캐시합니다. */
+const GH = {ttl: 10*60*1000, stale: 24*60*60*1000, key:'ds-gh-tree', p:null};
+
+function ghCacheRead(){
+  try{
+    const o = JSON.parse(localStorage.getItem(GH.key) || 'null');
+    return (o && Array.isArray(o.paths) && typeof o.t === 'number') ? o : null;
+  }catch(e){ return null; }
+}
+function ghPaths(){
+  if(GH.p) return GH.p;
+  GH.p = (async () => {
+    const r = detectRepo();
+    if(!r) throw new Error('local');
+    const cached = ghCacheRead();
+    if(cached && Date.now() - cached.t < GH.ttl) return cached.paths;   // 신선한 캐시 우선
+    try{
+      const url = `https://api.github.com/repos/${r.owner}/${r.repo}/git/trees/${CONFIG.branch}?recursive=1`;
+      const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+      if(!res.ok) throw new Error(res.status === 403 || res.status === 429 ? 'ratelimit' : 'github ' + res.status);
+      const j = await res.json();
+      const paths = (j.tree || []).filter(x => x.type === 'blob').map(x => x.path);
+      try{ localStorage.setItem(GH.key, JSON.stringify({t:Date.now(), paths})); }catch(e){}
+      return paths;
+    }catch(e){
+      if(cached && Date.now() - cached.t < GH.stale) return cached.paths; // 한도 초과 시 캐시로 버팀
+      throw e;
+    }
+  })();
+  return GH.p;
+}
+function ghFilesIn(paths, dir){
+  const pre = (dir + '/').toLowerCase();
+  return paths.filter(p => p.toLowerCase().startsWith(pre))
+              .map(p => p.slice(dir.length + 1))
+              .filter(n => n && !n.includes('/'));
+}
+
 /* ── 리포트 목록 수집 ── */
 async function fromGitHub(){
-  const r = detectRepo();
-  if(!r) throw new Error('local');
-  const url = `https://api.github.com/repos/${r.owner}/${r.repo}/contents/${CONFIG.dir}?ref=${CONFIG.branch}`;
-  const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
-  if(!res.ok) throw new Error('github ' + res.status);
-  const data = await res.json();
-  if(!Array.isArray(data)) throw new Error('github shape');
-  return {items: parseNames(data.map(f => f.name)), src:'github', repo:r};
+  const items = parseNames(ghFilesIn(await ghPaths(), CONFIG.dir));
+  if(!items.length) throw new Error('empty');
+  return {items, src:'github', repo: detectRepo()};
 }
 async function fromJson(){
   const res = await fetch(CONFIG.dir + '/reports.json?t=' + Date.now(), {cache:'no-store'});
@@ -964,17 +1000,24 @@ function setStatus(kind, text){
   }
 
   // 목록을 가져오지 못한 경우
-  const isLocal = location.protocol === 'file:';
+  const isLocal  = location.protocol === 'file:';
+  const isLimit  = err1 && /ratelimit|403|429/.test(err1.message);
   document.getElementById('list').innerHTML = `<div class="state">
-    <b>${isLocal ? '로컬에서 연 파일입니다' : '아직 리포트 목록을 불러오지 못했습니다'}</b>
+    <b>${isLocal ? '로컬에서 연 파일입니다'
+        : isLimit ? 'GitHub API 호출 한도에 걸렸습니다'
+        : '아직 리포트 목록을 불러오지 못했습니다'}</b>
     <p>${isLocal
       ? 'GitHub에 올린 뒤 <code>github.io</code> 주소로 접속하면 <code>reports/</code> 폴더의 파일이 자동으로 나열됩니다.'
-      : '저장소가 <b>Public</b> 인지, <code>' + CONFIG.dir + '/</code> 폴더에 <code>YYYY-MM-DD.html</code> 파일이 있는지 확인해주세요.'}</p>
+      : isLimit
+        ? '비로그인 GitHub API는 <b>IP당 시간당 60회</b>로 제한됩니다. 잠시 뒤 새로고침하면 다시 표시되며, <code>' + CONFIG.dir + '/reports.json</code> 을 만들어 두면 한도와 무관하게 항상 나옵니다.'
+        : '저장소가 <b>Public</b> 인지, <code>' + CONFIG.dir + '/</code> 폴더에 <code>YYYY-MM-DD.html</code> 파일이 있는지 확인해주세요.'}</p>
     <p style="margin-top:12px"><a class="btn ghost" href="${CONFIG.dir}/">${CONFIG.dir}/ 폴더 열어보기</a></p>
   </div>`;
   setStatus('warn', isLocal
     ? '로컬 미리보기 모드 — 목록 자동 인식은 배포 후 동작합니다.'
-    : `자동 인식 실패${err1 ? ' (' + esc(err1.message) + ')' : ''} — CONFIG의 owner/repo/branch 값을 직접 지정해보세요.`);
+    : isLimit
+      ? 'GitHub API 한도 초과 — 약 1시간 뒤 자동 복구됩니다.'
+      : `자동 인식 실패${err1 ? ' (' + esc(err1.message) + ')' : ''} — CONFIG의 owner/repo/branch 값을 직접 지정해보세요.`);
 })();
 
 document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
@@ -1018,14 +1061,7 @@ function gradeCls(g){
 }
 
 async function evalMonthsFromGitHub(){
-  const r = detectRepo();
-  if(!r) throw new Error('local');
-  const url = `https://api.github.com/repos/${r.owner}/${r.repo}/contents/${EVAL.dir}?ref=${CONFIG.branch}`;
-  const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
-  if(!res.ok) throw new Error('github ' + res.status);
-  const data = await res.json();
-  if(!Array.isArray(data)) throw new Error('github shape');
-  const ms = data.map(f => f.name)
+  const ms = ghFilesIn(await ghPaths(), EVAL.dir)   // 리포트 목록과 동일한 캐시 재사용 (추가 호출 없음)
     .map(n => { const m = /(\d{4})-(\d{2})\.html?$/i.exec(n); return m ? `${m[1]}-${m[2]}` : null; })
     .filter(Boolean);
   return [...new Set(ms)].sort().reverse();
