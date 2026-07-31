@@ -246,8 +246,10 @@ pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:1
 .donate{margin-top:12px;background:var(--surface);border:1px solid var(--line);
  border-left:3px solid var(--gold);border-radius:0 13px 13px 0;padding:17px 20px;
  display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
-.d-txt b{display:block;font-size:14px;letter-spacing:-.01em;margin-bottom:2px}
-.d-txt span{font-size:12.5px;color:var(--ink3)}
+.d-txt{flex:1 1 300px;max-width:560px}
+.d-txt>b{display:block;font-size:14px;letter-spacing:-.01em;margin-bottom:3px}
+.d-txt span{font-size:12.5px;color:var(--ink3);line-height:1.55}
+.d-txt span b{font-weight:700;color:var(--ink2)}
 .d-acc{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
 .d-bank{font-size:11px;font-weight:800;color:#3d2a00;background:var(--gold);
  padding:3px 10px;border-radius:99px;letter-spacing:.02em}
@@ -529,7 +531,8 @@ expected_value_pct    = p × expected_return_pct + (1-p) × downside_pct,   p = 
     <div class="donate">
       <div class="d-txt">
         <b>데이터 스테이션 나스닥 분석 시스템 후원 하기</b>
-        <span>리포트가 도움이 되셨다면 분석 시스템 운영에 힘을 보태주세요.</span>
+        <span>서버·API 운영비 후원입니다. <b>후원 여부와 무관하게 모든 리포트는 동일하게 무료 공개</b>되며,
+          후원자 전용 종목·정보나 특전은 일절 제공하지 않습니다.</span>
       </div>
       <div class="d-acc">
         <span class="d-bank">카카오뱅크</span>
