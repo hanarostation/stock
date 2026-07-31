@@ -230,6 +230,40 @@ pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:1
 .disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
  border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2)}
 
+/* ── 모형 안정성 평가 ── */
+.pill.violet{background:var(--violet)}
+.evalcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;margin-top:26px}
+.ev-h{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ padding:20px 24px}
+.ev-h .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.ev-h .l-sub{font-size:12.5px;color:var(--ink3)}
+.ev-b{border-top:1px solid var(--line2);background:var(--surface2);padding:18px 24px 20px}
+.ev-grade{display:flex;align-items:flex-start;gap:14px;margin:0 0 16px}
+.gbadge{flex:0 0 auto;font-size:13px;font-weight:800;letter-spacing:.02em;
+ padding:7px 16px;border-radius:99px;white-space:nowrap}
+.gbadge.amber{background:#fdf0cf;color:#7a5400;border:1px solid rgba(237,161,0,.55)}
+.gbadge.red{background:#fdecec;color:#a12020;border:1px solid rgba(208,59,59,.5)}
+.gbadge.green{background:#e8f7e8;color:#0a5a0a;border:1px solid rgba(0,99,0,.35)}
+.ev-gt b{display:block;font-size:14.5px;letter-spacing:-.01em;margin-bottom:3px}
+.ev-gt span{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.ev-b .stiles{grid-template-columns:repeat(4,1fr);margin:0}
+.ev-b .stile .v{font-size:20px}
+.ev-b .stile .s{line-height:1.5;margin-top:2px}
+.ecard .date{font-size:21px;font-weight:800;letter-spacing:-.03em;margin:0 0 4px}
+.gdot{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800}
+.gdot i{width:8px;height:8px;border-radius:50%;display:block}
+.gdot.amber{color:#8a6000}.gdot.amber i{background:var(--gold)}
+.gdot.red{color:var(--dn)}.gdot.red i{background:var(--dn)}
+.gdot.green{color:var(--up)}.gdot.green i{background:var(--up)}
+@media(max-width:640px){
+  .ev-h{padding:17px 18px}
+  .ev-b{padding:16px 18px 18px}
+  .ev-h .l-date{font-size:21px}
+  .ev-b .stiles{grid-template-columns:repeat(2,1fr)}
+  .ev-grade{gap:10px}
+}
+
 /* ── 하단 링크 ── */
 .links{margin-top:10px}
 .linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:12px}
@@ -266,7 +300,20 @@ pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:1
 }
 
 footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
- font-size:12px;color:var(--ink3);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+ font-size:12px;color:var(--ink3)}
+.foot-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%}
+
+/* ── 방문자 카운터 ── */
+.visits{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
+ margin:0 0 18px;padding:13px 18px;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px}
+.visits[hidden]{display:none}
+.v-item{display:flex;align-items:baseline;gap:8px;padding:0 18px}
+.v-item+.v-item{border-left:1px solid var(--line2)}
+.v-k{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+.v-v{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em;
+ font-variant-numeric:tabular-nums}
+.v-note{width:100%;text-align:center;font-size:11px;color:var(--ink3);margin:7px 0 0}
 
 .view[hidden]{display:none}
 @media(max-width:640px){
@@ -276,7 +323,9 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
   .brand{font-size:13px;white-space:nowrap;gap:8px}
   .brand .logo{width:26px;height:26px;flex:0 0 26px}
   .brand span.full{display:none}
-  .nav{flex:0 0 auto}
+  .nav{flex:0 0 auto;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+   scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
   .nav button{font-size:12px;padding:6px 11px;white-space:nowrap}
   .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
   .rcard{padding:14px 15px}
@@ -290,6 +339,11 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
   .stile .v{font-size:19px}
   .swipe{display:block}
 }
+@media(max-width:540px){
+  .brand span.txt{display:none}          /* 탭 3개 확보 — 로고만 표시 */
+  .nav{gap:2px}
+  .nav button{font-size:11.5px;padding:6px 9px}
+}
 </style>
 </head>
 <body>
@@ -302,10 +356,11 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
              onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
         <span class="fallback"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
       </span>
-      <span>데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
+      <span class="txt">데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
     </a>
     <nav class="nav">
       <button data-view="reports" aria-current="true">일일 리포트</button>
+      <button data-view="eval">모형 안정성 평가</button>
       <button data-view="about">시스템 개요</button>
     </nav>
   </div>
@@ -344,6 +399,33 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
       승률·기대값은 모델 추정치로 실현 수익을 보장하지 않습니다.
       리포트에 포함된 시세·재무 수치는 오류를 포함할 수 있으며, 투자 판단 전 반드시 원본 데이터를
       직접 확인하시기 바랍니다. 실제 투자 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 모형 안정성 평가 ══════════════ -->
+<section class="view" id="view-eval" hidden>
+  <div class="wrap">
+    <div class="hero">
+      <span class="pill violet">MONTHLY MODEL VALIDATION</span>
+      <h1>모형 안정성 평가</h1>
+      <p class="lede">매월 발행하는 모형 위험·안정성 점검 리포트입니다. 드리프트(PSI), 체결 가정,
+        관측창 성숙도, 산식·규칙 검증 결과를 확정지표 기준으로 평가합니다.</p>
+    </div>
+
+    <div id="eval-latest"></div>
+
+    <h2 id="evals">평가 리포트 목록 <span class="cnt" id="eval-count"></span></h2>
+
+    <div id="eval-list"><div class="grid">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div></div>
+    <p class="note" id="eval-status"></p>
+
+    <h2>면책</h2>
+    <div class="disc">
+      모형 안정성 평가는 시스템 산출물의 재현성·안정성을 자체 점검한 결과이며 <b>투자 조언이 아닙니다</b>.
+      평가 등급과 지표는 관측 표본이 제한된 상태에서 산출되므로 향후 재평가에 따라 변경될 수 있습니다.
     </div>
   </div>
 </section>
@@ -544,9 +626,15 @@ expected_value_pct    = p × expected_return_pct + (1-p) × downside_pct,   p = 
   </div>
 </section>
 
-<footer><div class="wrap" style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%">
-  <span>나스닥 멀티에이전트 추천 시스템 · TradingAgents 프레임워크 기반</span>
-  <span id="foot-meta"></span>
+<footer><div class="wrap">
+  <div class="visits" id="visits" hidden>
+    <span class="v-item"><span class="v-k">오늘 조회</span><span class="v-v" id="v-today">–</span></span>
+    <span class="v-item"><span class="v-k">누적 조회</span><span class="v-v" id="v-total">–</span></span>
+  </div>
+  <div class="foot-row">
+    <span>나스닥 멀티에이전트 추천 시스템 · TradingAgents 프레임워크 기반</span>
+    <span id="foot-meta"></span>
+  </div>
 </div></footer>
 
 <script>
@@ -563,13 +651,25 @@ const CONFIG = {
 };
 
 /* ── 탭 전환 ── */
-const views = {reports: document.getElementById('view-reports'), about: document.getElementById('view-about')};
+const views = {
+  reports: document.getElementById('view-reports'),
+  eval:    document.getElementById('view-eval'),
+  about:   document.getElementById('view-about')
+};
 const navBtns = [...document.querySelectorAll('.nav button')];
+let visitsReady = false, curView = 'reports';
+/* 조회수 카운터는 [시스템 개요] 탭에서만 노출 (집계는 모든 페이지에서 수행) */
+function syncVisits(){
+  const el = document.getElementById('visits');
+  if(el) el.hidden = !(visitsReady && curView === 'about');
+}
 function show(v){
   if(!views[v]) v = 'reports';
+  curView = v;
   for(const k in views) views[k].hidden = (k !== v);
   navBtns.forEach(b => b.setAttribute('aria-current', String(b.dataset.view === v)));
   if(location.hash.slice(1) !== v) history.replaceState(null,'','#'+v);
+  syncVisits();
   window.scrollTo({top:0});
 }
 navBtns.forEach(b => b.addEventListener('click', () => show(b.dataset.view)));
@@ -878,6 +978,166 @@ function setStatus(kind, text){
 })();
 
 document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
+
+/* ═══════════════════════════════════════════════════════════
+   모형 안정성 평가 (월간)
+   · 리포트 파일 : eval/eval-YYYY-MM.html  (GitHub)
+   · 새 회차 발행 시 아래 EVAL.summary 에 해당 월 블록만 추가하면
+     최신 요약 카드가 자동으로 갱신됩니다. (파일 목록은 자동 인식)
+   ═══════════════════════════════════════════════════════════ */
+const EVAL = {
+  dir:   "eval",
+  title: "모형 안정성 평가",
+  summary: {
+    "2026-07": {
+      grade: "Amber",
+      headline: "종합 모형위험등급 — 주의",
+      note: "확정지표 10개 중 Green 2 · Amber 6 · Red 2. Red 3개 이상 → Red, Red 1개 이상 또는 Amber 4개 이상 → Amber, 그 외 Green. 성과계열(B·C·D·F)은 관측창 미성숙으로 등급 산정에서 제외했다.",
+      tiles: [
+        {k:"종합 PSI (모형 드리프트)", v:"1.286", s:"기준 2026-07-24 → 평가 2026-07-30. 0.25 초과 = 재보정 구간", tone:"dn"},
+        {k:"지정가 체결률",           v:"53.3%", s:"경과보유 30건 중 16건 체결. 미체결 46.7%",                    tone:"neutral"},
+        {k:"관측창 성숙도",           v:"11%",   s:"성숙 코호트 0/4건 — 승률·캘리브레이션 확정 불가",             tone:"neutral"},
+        {k:"산식·규칙 위반",          v:"0건",   s:"전 40건 재계산 대조. 운영사고는 별도 21건",                   tone:"up"}
+      ]
+    }
+  }
+};
+
+const evalFile  = m => `${EVAL.dir}/eval-${m}.html`;
+const evalLabel = m => { const [y,mm] = m.split('-'); return `${y}년 ${Number(mm)}월`; };
+function evalRel(m){
+  const [y,mm] = m.split('-').map(Number), now = new Date();
+  const diff = (now.getFullYear() - y) * 12 + (now.getMonth() + 1 - mm);
+  return diff <= 0 ? '이번 달' : diff === 1 ? '지난달' : diff + '개월 전';
+}
+function gradeCls(g){
+  const s = String(g || '').toLowerCase();
+  if(s.includes('red')   || /경고|위험/.test(g)) return 'red';
+  if(s.includes('green') || /양호|정상/.test(g)) return 'green';
+  return 'amber';
+}
+
+async function evalMonthsFromGitHub(){
+  const r = detectRepo();
+  if(!r) throw new Error('local');
+  const url = `https://api.github.com/repos/${r.owner}/${r.repo}/contents/${EVAL.dir}?ref=${CONFIG.branch}`;
+  const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+  if(!res.ok) throw new Error('github ' + res.status);
+  const data = await res.json();
+  if(!Array.isArray(data)) throw new Error('github shape');
+  const ms = data.map(f => f.name)
+    .map(n => { const m = /(\d{4})-(\d{2})\.html?$/i.exec(n); return m ? `${m[1]}-${m[2]}` : null; })
+    .filter(Boolean);
+  return [...new Set(ms)].sort().reverse();
+}
+
+function evalLatestHTML(m){
+  const s = EVAL.summary[m];
+  const href = evalFile(m);
+  const head = `<div class="ev-h">
+      <div><span class="pill gold" style="margin-bottom:9px">최신 평가</span>
+        <div class="l-date">${evalLabel(m)}</div>
+        <div class="l-sub">${esc(EVAL.title)} · ${evalRel(m)}</div></div>
+      <a class="btn" href="${esc(href)}">평가 리포트 전체 보기 →</a>
+    </div>`;
+  if(!s) return `<div class="evalcard">${head}</div>`;
+
+  const tiles = (s.tiles || []).map(t => `
+    <div class="stile"><div class="k">${esc(t.k)}</div>
+      <div class="v ${esc(t.tone || 'neutral')}">${esc(t.v)}</div>
+      <div class="s">${esc(t.s)}</div></div>`).join('');
+
+  return `<div class="evalcard">${head}
+    <div class="ev-b">
+      <div class="ev-grade">
+        <span class="gbadge ${gradeCls(s.grade)}">${esc(s.grade)}</span>
+        <div class="ev-gt"><b>${esc(s.headline)}</b><span>${esc(s.note)}</span></div>
+      </div>
+      ${tiles ? `<div class="stiles">${tiles}</div>` : ''}
+    </div>
+  </div>`;
+}
+
+function evalCardHTML(m){
+  const [y, mm] = m.split('-');
+  const s = EVAL.summary[m];
+  const g = s ? `<span class="gdot ${gradeCls(s.grade)}"><i></i>${esc(s.grade)}</span>` : '';
+  return `<a class="rcard ecard" href="${esc(evalFile(m))}">
+    <div class="row1"><span class="dow">${y}년 · 월간 평가</span>${g}</div>
+    <p class="date">${Number(mm)}월</p>
+    <p class="title">${esc(EVAL.title)}</p>
+    <div class="foot"><span>${evalRel(m)}</span><span class="go">리포트 열기 →</span></div>
+  </a>`;
+}
+
+(async function initEval(){
+  let months = [];
+  try { months = await evalMonthsFromGitHub(); } catch(e){ /* 로컬/실패 시 아래 폴백 */ }
+  if(!months.length) months = Object.keys(EVAL.summary).sort().reverse();
+
+  const listEl = document.getElementById('eval-list');
+  const cntEl  = document.getElementById('eval-count');
+  const stEl   = document.getElementById('eval-status');
+
+  if(!months.length){
+    document.getElementById('eval-latest').innerHTML = '';
+    listEl.innerHTML = `<div class="state"><b>아직 발행된 평가 리포트가 없습니다</b>
+      <p><code>${EVAL.dir}/eval-YYYY-MM.html</code> 파일을 올리면 자동으로 나열됩니다.</p></div>`;
+    stEl.innerHTML = '';
+    return;
+  }
+
+  document.getElementById('eval-latest').innerHTML = evalLatestHTML(months[0]);
+  listEl.innerHTML = `<div class="grid">${months.map(evalCardHTML).join('')}</div>`;
+  cntEl.textContent = `총 ${months.length}건`;
+  stEl.innerHTML = '';
+})();
+
+/* ═══ 방문자 카운터 (DB 없이 외부 무료 카운터 API 사용) ═══
+   ns 값만 사이트마다 고유하게 유지하면 됩니다. 값이 공개 조회 가능한 서비스이므로
+   민감한 정보는 담지 마세요. 1차: Abacus, 실패 시 2차: CountAPI(mileshilliard). */
+const COUNTER = {
+  ns:   "datastation-nasdaq",                       // 사이트 고유 네임스페이스 (원하는 값으로 변경)
+  a:    "https://abacus.jasoncameron.dev",          // 1차 제공자
+  b:    "https://countapi.mileshilliard.com/api/v1" // 2차(백업) 제공자
+};
+
+(function(){
+  const box = document.getElementById('visits');
+  if(!box) return;
+
+  const kstDate = () => new Intl.DateTimeFormat('en-CA',
+    {timeZone:'Asia/Seoul', year:'numeric', month:'2-digit', day:'2-digit'}).format(new Date());
+  const fmt = n => Number(n).toLocaleString('ko-KR');
+
+  async function jget(url){
+    const r = await fetch(url, {cache:'no-store'});
+    if(!r.ok) throw new Error(r.status);
+    const j = await r.json();
+    const v = Number(j.value);
+    if(!isFinite(v)) throw new Error('shape');
+    return v;
+  }
+  // action: 'hit'(증가 후 값) | 'get'(현재 값)
+  async function count(action, key){
+    try{ return await jget(`${COUNTER.a}/${action}/${encodeURIComponent(COUNTER.ns)}/${encodeURIComponent(key)}`); }
+    catch(e){ return await jget(`${COUNTER.b}/${action}/${encodeURIComponent(COUNTER.ns + '_' + key)}`); }
+  }
+
+  (async function(){
+    const dayKey = 'd-' + kstDate();   // 한국시간 날짜 기준 일일 조회수
+    // 페이지가 열릴 때마다 1씩 증가 (조회수 기준)
+    const [today_, total_] = await Promise.allSettled([count('hit', dayKey), count('hit', 'total')]);
+    if(today_.status !== 'fulfilled' && total_.status !== 'fulfilled') return;  // 조용히 숨김
+
+    document.getElementById('v-today').textContent =
+      today_.status === 'fulfilled' ? fmt(today_.value) : '–';
+    document.getElementById('v-total').textContent =
+      total_.status === 'fulfilled' ? fmt(total_.value) : '–';
+    visitsReady = true;
+    syncVisits();   // [시스템 개요] 탭일 때만 실제로 노출
+  })();
+})();
 
 /* ── 후원 계좌 복사 ── */
 (function(){
