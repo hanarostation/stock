@@ -230,7 +230,40 @@ pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:1
 .disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
  border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2)}
 
-footer{margin-top:56px;padding:26px 0 44px;border-top:1px solid var(--line2);
+/* ── 하단 링크 ── */
+.links{margin-top:10px}
+.linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:12px}
+.lcard{display:flex;flex-direction:column;gap:4px;background:var(--surface);
+ border:1px solid var(--line);border-radius:13px;padding:16px 18px 14px;
+ transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s}
+.lcard:hover{transform:translateY(-2px);border-color:rgba(42,120,214,.45);background:#f5f8fd;
+ box-shadow:0 10px 26px -16px rgba(11,11,11,.4)}
+.lcard b{font-size:14px;letter-spacing:-.01em}
+.lcard span{font-size:12.5px;color:var(--ink2);line-height:1.55}
+.lcard .u{font-size:11.5px;font-weight:700;color:var(--accent);margin-top:5px;word-break:break-all}
+
+/* ── 후원 계좌 ── */
+.donate{margin-top:12px;background:var(--surface);border:1px solid var(--line);
+ border-left:3px solid var(--gold);border-radius:0 13px 13px 0;padding:17px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.d-txt b{display:block;font-size:14px;letter-spacing:-.01em;margin-bottom:2px}
+.d-txt span{font-size:12.5px;color:var(--ink3)}
+.d-acc{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.d-bank{font-size:11px;font-weight:800;color:#3d2a00;background:var(--gold);
+ padding:3px 10px;border-radius:99px;letter-spacing:.02em}
+.d-no{font-size:16.5px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;
+ font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;user-select:all}
+.d-name{font-size:12.5px;color:var(--ink2)}
+.btn.copy{font-size:12px;padding:8px 15px}
+.btn.copy.done{background:var(--up);border-color:var(--up)}
+@media(max-width:640px){
+  .donate{padding:15px 16px}
+  .d-acc{width:100%}
+  .d-no{font-size:15px}
+  .btn.copy{margin-left:auto}
+}
+
+footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
  font-size:12px;color:var(--ink3);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
 
 .view[hidden]{display:none}
@@ -302,6 +335,14 @@ footer{margin-top:56px;padding:26px 0 44px;border-top:1px solid var(--line2);
       <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
     </div></div>
     <p class="note" id="status"></p>
+
+    <h2>면책</h2>
+    <div class="disc">
+      본 시스템의 산출물은 LLM 기반 분석 결과이며 <b>투자 조언이 아닙니다</b>.
+      승률·기대값은 모델 추정치로 실현 수익을 보장하지 않습니다.
+      리포트에 포함된 시세·재무 수치는 오류를 포함할 수 있으며, 투자 판단 전 반드시 원본 데이터를
+      직접 확인하시기 바랍니다. 실제 투자 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+    </div>
   </div>
 </section>
 
@@ -461,6 +502,41 @@ expected_value_pct    = p × expected_return_pct + (1-p) × downside_pct,   p = 
       승률·기대값은 모델 추정치로 실현 수익을 보장하지 않습니다.
       리포트에 포함된 시세·재무 수치는 오류를 포함할 수 있으며, 투자 판단 전 반드시 원본 데이터를
       직접 확인하시기 바랍니다. 실제 투자 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════ 데이터스테이션 링크 ══════════════ -->
+<section class="links">
+  <div class="wrap">
+    <h2>데이터스테이션 바로가기 <span class="cnt">공식 채널</span></h2>
+    <div class="linkgrid">
+      <a class="lcard" href="https://www.data-station.co.kr/index" target="_blank" rel="noopener">
+        <b>데이터스테이션 홈페이지</b>
+        <span>데이터 분석과 AI 컨설팅을 만나는 공식 홈페이지입니다.</span>
+        <span class="u">www.data-station.co.kr →</span></a>
+      <a class="lcard" href="https://data-station.liveklass.com/" target="_blank" rel="noopener">
+        <b>데이터스테이션 아카데미</b>
+        <span>현직 컨설턴트가 가르치는 데이터 분석·AI 실무 교육 과정입니다.</span>
+        <span class="u">data-station.liveklass.com →</span></a>
+      <a class="lcard" href="https://data-station.liveklass.com/p/new-4" target="_blank" rel="noopener">
+        <b>데이터 AI 인사이트</b>
+        <span>AI·데이터 트렌드와 실무 활용법을 짚어보는 아티클 모음입니다.</span>
+        <span class="u">아티클 보러가기 →</span></a>
+    </div>
+
+    <!-- ── 후원 계좌 ── -->
+    <div class="donate">
+      <div class="d-txt">
+        <b>데이터 스테이션 나스닥 분석 시스템 후원 하기</b>
+        <span>리포트가 도움이 되셨다면 분석 시스템 운영에 힘을 보태주세요.</span>
+      </div>
+      <div class="d-acc">
+        <span class="d-bank">카카오뱅크</span>
+        <span class="d-no" id="acc-no">3333-26-4199475</span>
+        <span class="d-name">데이터스테이션</span>
+        <button class="btn copy" id="acc-copy" type="button" data-copy="카카오뱅크 3333-26-4199475 데이터스테이션">계좌 복사</button>
+      </div>
     </div>
   </div>
 </section>
@@ -799,6 +875,35 @@ function setStatus(kind, text){
 })();
 
 document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
+
+/* ── 후원 계좌 복사 ── */
+(function(){
+  const btn = document.getElementById('acc-copy');
+  if(!btn) return;
+  function fallbackCopy(text){
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.setAttribute('readonly','');
+    ta.style.cssText = 'position:fixed;top:-1000px;opacity:0';
+    document.body.appendChild(ta); ta.select(); ta.setSelectionRange(0, text.length);
+    let ok = false;
+    try { ok = document.execCommand('copy'); } catch(e){}
+    document.body.removeChild(ta);
+    return ok;
+  }
+  let timer = null;
+  btn.addEventListener('click', async () => {
+    const text = btn.dataset.copy;
+    let ok = false;
+    try {
+      if(navigator.clipboard && window.isSecureContext){ await navigator.clipboard.writeText(text); ok = true; }
+      else ok = fallbackCopy(text);
+    } catch(e){ ok = fallbackCopy(text); }
+    btn.textContent = ok ? '복사됨 ✓' : '복사 실패';
+    btn.classList.toggle('done', ok);
+    clearTimeout(timer);
+    timer = setTimeout(() => { btn.textContent = '계좌 복사'; btn.classList.remove('done'); }, 1800);
+  });
+})();
 </script>
 </body>
 </html>
