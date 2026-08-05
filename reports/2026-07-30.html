@@ -138,7 +138,90 @@ table.mini{border:none;border-radius:0;font-size:12.3px}
  .card-b{flex-direction:column} .card-f{grid-template-columns:1fr}
  .prices{grid-template-columns:repeat(3,1fr)}
 }
-</style></head><body><div class="wrap">
+</style></head><body>
+<!-- ═══ 데이터스테이션 공통 상단바 — index 헤더 이식 + 뒤로가기 (공통 삽입 블록) ═══ -->
+<style>
+.ds-topbar{position:sticky;top:0;z-index:900;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+ border-bottom:1px solid rgba(11,11,11,.10);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif}
+.ds-topbar *{box-sizing:border-box}
+.ds-topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px;height:60px}
+.ds-brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;
+ font-size:15.5px;color:#0b0b0b;text-decoration:none;min-width:0;white-space:nowrap}
+.ds-logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.ds-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.ds-logo .ds-fb{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.ds-logo .ds-fb svg{width:17px;height:17px}
+.ds-nav{display:flex;gap:4px;align-items:center;margin-left:auto;overflow-x:auto;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ds-nav::-webkit-scrollbar{display:none}
+a.ds-tab{font-size:13px;font-weight:700;color:#52514e;border:1px solid transparent;
+ padding:6px 15px;border-radius:99px;text-decoration:none;white-space:nowrap;
+ transition:background .15s,color .15s,border-color .15s}
+a.ds-tab:hover{background:#f2f1ed;color:#0b0b0b}
+a.ds-tab[aria-current="true"]{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+a.ds-back{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:#2a78d6;color:#fff;
+ font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:99px;border:1px solid #2a78d6;
+ text-decoration:none;white-space:nowrap;transition:opacity .15s}
+a.ds-back:hover{opacity:.85}
+@media(max-width:640px){
+  .ds-topbar-in{height:56px;gap:10px;padding:0 15px}
+  .ds-brand{font-size:13px;gap:8px}
+  .ds-logo{width:26px;height:26px;flex:0 0 26px}
+  .ds-full{display:none}
+  a.ds-tab{font-size:12px;padding:6px 11px}
+  a.ds-back{font-size:12px;padding:7px 13px}
+}
+@media(max-width:540px){
+  .ds-txt{display:none}
+  .ds-nav{gap:2px}
+  a.ds-tab{font-size:11.5px;padding:6px 9px}
+}
+@media print{.ds-topbar{display:none}}
+</style>
+<div class="ds-topbar" id="ds-topbar">
+  <div class="ds-topbar-in">
+    <a class="ds-brand" href="../index.html" data-ds-home="">
+      <span class="ds-logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고" id="ds-logo-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="ds-fb"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="ds-txt">데이터스테이션 나스닥<span class="ds-full"> 분석 리포트</span></span>
+    </a>
+    <nav class="ds-nav">
+      <a class="ds-tab" href="../index.html#reports" data-ds-home="#reports" aria-current="true">일일 리포트</a>
+      <a class="ds-tab" href="../index.html#eval" data-ds-home="#eval">모형 안정성 평가</a>
+      <a class="ds-tab" href="../index.html#about" data-ds-home="#about">시스템 개요</a>
+    </nav>
+    <a class="ds-back" id="ds-back" href="../index.html#reports" data-ds-home="#reports">← 목록으로</a>
+  </div>
+</div>
+<script>
+(function(){
+  /* reports/·eval/ 폴더 밖(index와 같은 폴더 등)에서 열리면 링크·로고 경로 보정 */
+  if(!/\/(reports|eval)\/[^\/]*$/i.test(location.pathname)){
+    document.querySelectorAll('#ds-topbar [data-ds-home]').forEach(function(a){
+      a.setAttribute('href','index.html'+a.getAttribute('data-ds-home'));
+    });
+    var im=document.getElementById('ds-logo-img'); if(im) im.src='image/logo.png';
+  }
+  /* index에서 넘어온 경우: 브라우저 뒤로가기로 목록 상태(스크롤·필터) 유지 */
+  var bk=document.getElementById('ds-back');
+  if(bk) bk.addEventListener('click',function(e){
+    try{
+      if(document.referrer && new URL(document.referrer).origin===location.origin && history.length>1){
+        e.preventDefault(); history.back();
+      }
+    }catch(err){}
+  });
+})();
+</script>
+<!-- ═══ /공통 상단바 ═══ -->
+<div class="wrap">
 
 <div class="hero">
   <span class="pill">TradingAgents 멀티에이전트</span>
