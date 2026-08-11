@@ -1,0 +1,384 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나스닥 멀티에이전트 추천 리포트 — 2026-08-10</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f9f9f7;color:#0b0b0b;
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:28px 22px 60px}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(11,11,11,0.10)}
+.topbar-in{max-width:1320px;margin:0 auto;padding:0 22px;display:flex;align-items:center;
+ justify-content:space-between;gap:18px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.brand .logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand .logo .fallback{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{font:inherit;font-size:13px;font-weight:700;color:#52514e;background:none;
+ border:1px solid transparent;padding:6px 15px;border-radius:99px;cursor:pointer;
+ display:inline-flex;align-items:center;gap:6px;
+ transition:background .15s,color .15s,border-color .15s}
+.nav a:hover{background:#f2f1ed;color:#0b0b0b}
+.nav a.back{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+.nav a.back:hover{background:#000;color:#fff}
+.backfoot{display:flex;justify-content:center;margin:38px 0 0}
+.backfoot a{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;
+ background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:99px;padding:10px 22px;
+ color:#52514e}
+.backfoot a:hover{background:#f2f1ed;color:#0b0b0b}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:17px;margin:38px 0 14px;padding-bottom:8px;
+ border-bottom:2px solid #0b0b0b;letter-spacing:-.01em}
+h3{font-size:16px;margin:0}
+h4{font-size:12px;margin:0 0 8px;color:#52514e;text-transform:uppercase;letter-spacing:.06em}
+.hero{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;
+ padding:22px 24px;margin-bottom:22px}
+.hero .sub{color:#52514e;font-size:13px}
+.pill{display:inline-block;background:#2a78d6;color:#fff;font-size:11px;font-weight:700;
+ padding:3px 10px;border-radius:99px;margin-right:8px;letter-spacing:.03em}
+.pill.gray{background:#52514e}
+.macro{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mk{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:8px;
+ padding:6px 11px;font-size:12px}
+.mk b{color:#0b0b0b}.mk span{color:#898781}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 8px}
+.tile{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:15px 17px}
+.t-l{font-size:11.5px;color:#898781;letter-spacing:.03em}
+.t-v{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:4px 0 2px}
+.t-s{font-size:11px;color:#898781}
+.up{color:#006300}.dn{color:#d03b3b}.neutral{color:#0b0b0b}
+.panel{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:20px 22px}
+.panel p{margin:0 0 10px}
+.dualbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.dualbox>div{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:10px;padding:13px 15px;font-size:13px}
+.dualbox h4{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;background:#fcfcfb;
+ border:1px solid rgba(11,11,11,0.10);border-radius:12px;overflow:hidden;font-size:12.6px}
+th{background:#f9f9f7;text-align:left;padding:9px 7px;font-size:10.5px;color:#52514e;
+ border-bottom:1px solid #c3c2b7;white-space:nowrap;letter-spacing:.03em}
+td{padding:9px 7px;border-bottom:1px solid #e1e0d9;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rk{font-weight:800;color:#898781;text-align:center;width:26px}
+.tk{font-size:13.5px;letter-spacing:-.01em}
+.sub{font-size:11.5px;color:#898781}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;
+ padding:2px 8px;border-radius:99px;white-space:nowrap}
+.badge.good{background:#e8f7e8;color:#0a6b0a}
+.badge.warn{background:#fef4dd;color:#8a6100}
+.badge.crit{background:#fbe9e9;color:#a32020}
+.badge.sig{background:#2a78d6;color:#fff}
+.badge.sigc{background:#eda100;color:#3d2a00}
+.rrbar{display:flex;align-items:center;width:210px}
+.rr-l{width:100px;display:flex;justify-content:flex-end}
+.rr-r{width:100px}
+.rr-mid{width:1px;height:16px;background:#c3c2b7;
+ box-shadow:-2px 0 0 #fcfcfb,2px 0 0 #fcfcfb;z-index:1}
+.rr-fill{height:9px;display:block;border-radius:4px}
+.rr-fill.up{background:#2a78d6;border-radius:0 4px 4px 0}
+.rr-fill.dn{background:#e34948;border-radius:4px 0 0 4px}
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;overflow:hidden;
+ break-inside:avoid;page-break-inside:avoid}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:14px 20px;background:#f9f9f7;border-bottom:1px solid #e1e0d9}
+.ch-left{display:flex;align-items:center;gap:14px}
+.ch-right{display:flex;gap:7px;align-items:center}
+.rank{font-size:19px;font-weight:800;color:#2a78d6;min-width:64px}
+.meta{font-size:11.5px;color:#898781;margin-top:2px}
+.card-b{display:flex;gap:20px;padding:18px 20px;align-items:flex-start}
+.radar{flex:0 0 176px}
+.card-main{flex:1;min-width:0}
+.prices{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:13px}
+.pz{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:8px 10px}
+.pz span{display:block;font-size:10.5px;color:#898781}
+.pz b{font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pz i{display:block;font-size:11px;font-style:normal;font-weight:700}
+.pz.up b,.pz.up i{color:#006300}.pz.dn b,.pz.dn i{color:#d03b3b}
+.thesis{margin:0 0 10px;font-size:13.5px}
+.cat,.adj{font-size:12.5px;background:#f9f9f7;border-left:3px solid #eda100;
+ padding:7px 11px;border-radius:0 7px 7px 0;margin-top:7px}
+.adj{border-left-color:#4a3aa7}
+.cat b,.adj b{color:#52514e;margin-right:6px;font-size:11px}
+.card-f{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;padding:15px 20px 18px;
+ border-top:1px solid #e1e0d9;background:#fdfdfc}
+.ch{display:flex;gap:9px;font-size:12.3px;padding:4px 0;border-bottom:1px dotted #e1e0d9}
+.ch:last-child{border-bottom:none}
+.ch-k{flex:0 0 78px;font-weight:700;color:#2a78d6;font-size:11.5px}
+.ch-v{color:#52514e}
+.risks ul{margin:0;padding-left:17px;font-size:12.3px;color:#52514e}
+.risks li{margin-bottom:5px}
+.srow{display:flex;align-items:center;gap:12px;padding:6px 0}
+.sname{flex:0 0 210px;font-size:13px}
+.sbar{flex:1;height:12px;background:#e1e0d9;border-radius:6px;overflow:hidden}
+.sbar i{display:block;height:100%;border-radius:6px}
+.spct{flex:0 0 52px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:13px}
+.anx{padding:13px 0;border-bottom:1px solid #e1e0d9}
+.anx:last-child{border-bottom:none}
+.anx p{margin:0;font-size:13px;color:#52514e}
+details.deb{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:11px;
+ margin-bottom:9px;overflow:hidden}
+details.deb>summary{padding:12px 18px;cursor:pointer;font-weight:700;font-size:13.5px;
+ background:#f9f9f7;list-style:none}
+details.deb.bull>summary{border-left:4px solid #2a78d6}
+details.deb.bear>summary{border-left:4px solid #e34948}
+details.deb[open]>summary{border-bottom:1px solid #e1e0d9}
+.thesis-p{padding:14px 18px 4px;margin:0;font-size:13px;color:#52514e;
+ background:#fdfdfc;border-bottom:1px solid #e1e0d9}
+.dbi{padding:11px 18px;border-bottom:1px dotted #e1e0d9;font-size:12.8px}
+.dbt{font-weight:800;margin-right:8px}
+.dbc{font-size:11px;color:#898781;background:#f9f9f7;padding:1px 8px;border-radius:99px}
+.dbi p{margin:6px 0 0}
+.rebut{color:#52514e;border-left:2px solid #c3c2b7;padding-left:9px;font-size:12.3px}
+table.mini{border:none;border-radius:0;font-size:12.3px}
+.rat{font-size:12.2px;color:#52514e}
+.flag{font-size:11.5px;color:#d03b3b;margin-top:3px}
+.rk-item{padding:12px 0;border-bottom:1px solid #e1e0d9}
+.rk-item:last-child{border-bottom:none}
+.rk-h{display:flex;align-items:center;gap:9px;font-size:13.5px}
+.rk-n{background:#e34948;color:#fff;font-weight:800;width:21px;height:21px;border-radius:50%;
+ display:inline-flex;align-items:center;justify-content:center;font-size:11.5px}
+.rk-q,.rk-e{font-size:12.4px;color:#52514e;margin-top:4px;padding-left:30px}
+.rk-q b,.rk-e b{color:#898781;font-size:11px;margin-right:6px}
+.disc{margin-top:34px;background:#fbe9e9;border:1px solid #f0c9c9;border-radius:11px;
+ padding:16px 19px;font-size:12.3px;color:#7d2020}
+.disc b{display:block;margin-bottom:6px;font-size:13px}
+.foot{margin-top:20px;font-size:11.5px;color:#898781;text-align:center}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:11.5px}
+.fl{background:#2a78d6;color:#fff;padding:4px 11px;border-radius:7px;font-weight:700}
+.fl.g{background:#52514e}
+.ar{color:#898781;font-weight:700}
+@media print{
+ body{background:#fff} .wrap{max-width:none;padding:0}
+ .topbar,.backfoot{display:none !important}
+ h2{page-break-after:avoid} .card{page-break-inside:avoid}
+ details.deb{page-break-inside:avoid} summary{list-style:none}
+ .tiles{page-break-inside:avoid}
+}
+@media(max-width:900px){
+ .tiles{grid-template-columns:repeat(2,1fr)}
+ .card-b{flex-direction:column} .card-f{grid-template-columns:1fr}
+ .prices{grid-template-columns:repeat(3,1fr)} .dualbox{grid-template-columns:1fr}
+}
+@media(max-width:640px){
+ .topbar-in{height:56px;gap:10px;padding:0 14px}
+ .brand{font-size:13px;white-space:nowrap;gap:8px}
+ .brand .logo{width:26px;height:26px;flex:0 0 26px}
+ .brand span.full{display:none}
+ .nav a{font-size:12px;padding:6px 11px;white-space:nowrap}
+}
+@media(max-width:540px){
+ .brand span.txt{display:none}
+ .nav a{font-size:11.5px;padding:6px 9px}
+}
+</style></head><body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="../index.html">
+      <span class="logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fallback"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="txt">데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
+    </a>
+    <nav class="nav">
+      <a class="back" href="../index.html#reports" aria-label="리포트 목록으로 돌아가기">← 목록으로</a>
+      <a href="../index.html#about">시스템 개요</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <span class="pill">TradingAgents 멀티에이전트</span>
+  <span class="pill gray">단기 스윙 · 공격형</span>
+  <h1>나스닥 종목 추천 리포트</h1>
+  <div class="sub">데이터 기준 <b>2026-08-10 미국장 정규장 마감 (4:00 PM EDT)</b> · 생성 2026-08-11 10:16 KST ·
+   유니버스 나스닥 시총 상위 200 → 후보 12 → 리서치 6 → 트레이더 3 → 매수 승인 1</div>
+  <div class="flow">
+    <span class="fl">Ⅰ 애널리스트 2인</span><span class="ar">→</span><span class="fl">Ⅱ 리서치 2인</span><span class="ar">→</span><span class="fl">Ⅲ 트레이더</span><span class="ar">→</span><span class="fl">Ⅳ 리스크 3관점</span><span class="ar">→</span><span class="fl g">Ⅴ 펀드매니저(메인)</span>
+  </div>
+  <div class="macro">
+    <div class="mk"><span>나스닥 종합</span> <b>26,605.36 (-0.32%)</b></div><div class="mk"><span>S&amp;P 500</span> <b>7,753.11 (-0.06%)</b></div><div class="mk"><span>다우</span> <b>53,975.98 (-0.11%)</b></div><div class="mk"><span>러셀2000</span> <b>약 3,025~3,035 (미확정)</b></div><div class="mk"><span>VIX</span> <b>약 15.8 (8/7 14.92)</b></div><div class="mk"><span>미 10년물</span> <b>4.71% (+6bp)</b></div><div class="mk"><span>연방기금</span> <b>3.50~3.75% (실효 3.63%)</b></div><div class="mk"><span>9/16 인상확률</span> <b>약 50% (8/7 43.9%)</b></div><div class="mk"><span>WTI / Brent</span> <b>$79~80 / $85 (+1.3~2.9%)</b></div><div class="mk"><span>금</span> <b>약 $4,391~4,406 (+1.1%)</b></div><div class="mk"><span>7월 CPI (8/12)</span> <b>컨센 헤드라인 +3.4% YoY / 코어 +2.5%</b></div>
+  </div>
+</div>
+
+<div class="tiles"><div class="tile"><div class="t-l">비중가중 예상수익률</div><div class="t-v up">+0.4%</div><div class="t-s">목표가 전량 도달 가정</div></div><div class="tile"><div class="t-l">비중가중 기대값</div><div class="t-v neutral">+0.1%</div><div class="t-s">승률 반영 (알파 주장 없음)</div></div><div class="tile"><div class="t-l">최대손실 (정상 / 갭조정)</div><div class="t-v dn">-0.2% / -0.2%</div><div class="t-s">전 종목 손절 동시 발동</div></div><div class="tile"><div class="t-l">투자비중 / 현금</div><div class="t-v neutral">5% / 95%</div><div class="t-s">유효 베팅수 1.00</div></div></div>
+
+<h2>펀드매니저 총평</h2>
+<div class="panel">
+  <p>매수 승인 1종(VRTX 4→5%) · 탈락 2종(AVGO·AMZN) · 관망 9종 — 배정 5% / 현금 95%. 유가 급등이 인플레 우려를 되살려 나스닥이 -0.32%로 밀린 날이며, 9/16 인상 확률이 43.9%에서 약 50%로 되올랐다. 이번 사이클의 핵심은 직전 사이클이 스스로 증명한 &#x27;초과엣지 = 시장 베타의 재표기&#x27;라는 진단에 대한 응답이다. 그 진단이 옳다면 해법은 베타가 아닌 종목 고유 사건에 배정하는 것이고, 12종목 중 그 조건을 만족한 것은 3상 톱라인 양성이라는 확인된 임상 촉매를 가진 VRTX(베타 0.30) 하나뿐이었다. 나머지 11종목은 전부 배제됐고 그 사실을 감추지 않는다. 다만 승인의 부호는 승률 56%라는 가정 하나에 걸려 있다 — 마팅게일 손익분기승률이 37.78%이므로 이 설계의 기대값은 정의상 p=37.78%에서 정확히 0이 되고, 초과엣지 +18.22%p는 이 시스템 역사상 최대의 알파 주장이다. 그 주장을 정당화하는 것은 모델이 아니라 서브에이전트의 정성 판단이므로, 비중을 리스크 3관점 권고의 하단(보수형 4~6%)인 5%로 묶었다.</p>
+  <h4 style="margin-top:16px">시장 국면 진단</h4>
+  <p>&#x27;인플레 재점화 vs 고용 둔화&#x27;가 정면 충돌하며 시장이 방향을 잃은 관망 국면이다. 호르무즈 해협 지정학으로 WTI가 $79~80, Brent가 $85까지 오르자 10년물이 +6bp 상승하고 9/16 인상 확률이 43.9%→약 50%로 되올랐다 — 8/7 고용 쇼크가 만든 &#x27;인상 서사 붕괴&#x27; 내러티브가 사흘 만에 절반쯤 되감긴 것이다. 지수 아래에서는 뚜렷한 분화가 진행 중이다. 에너지가 유일한 상승 섹터였고 기술·부동산이 가장 부진했으며, INTC는 150억 달러 희석성 증자로 -4.06%, NVDA는 캐펙스 집약도 우려로 -2.86%였다. 반대로 개별 촉매를 가진 종목(DDOG +11.48%, FANG +5.81%, VRTX +5.61%, CRWD +5.01%)은 지수와 무관하게 크게 올랐다. 즉 이 국면은 &#x27;지수 베타로는 아무것도 벌 수 없고 종목 고유 사건만 값이 매겨지는&#x27; 시장이며, 이는 공교롭게도 직전 사이클이 자기 모형의 결함으로 지목한 바로 그 지점을 시장이 대신 검증해 주는 구도다. 8/12 CPI가 이 균형을 어느 쪽으로든 깨뜨릴 것이고, 진입 주문은 그 이전에 놓인다.</p>
+  <h4 style="margin-top:16px">두 결과 병기 — 승률 가정의 규범적 지위</h4>
+  <div class="dualbox">
+    <div><h4>파이프라인 확정 승률 56% 적용</h4>VRTX 기대값 +2.3872% · 포트 조건부 기대값 +0.1194%p · 체결확률 55% 반영 무조건부 +0.0656%p · 현금 허들(실효 FF 3.63% × 26일 = 0.2586%) 차감 후 +0.0585%p · 슬리피지 차감 후 +0.0570%p. 배정 5%, 현금 95%, 베타 노출 0.0150.</div>
+    <div><h4>마팅게일 귀무가설(무드리프트) 적용</h4>손익분기승률 = (진입−손절)/(목표−손절) = 25/66.17 = 37.78%. 이 승률에서 기대값은 정의상 정확히 0이며, 현금 허들·슬리피지를 차감하면 -0.0086%p로 음수가 된다. 즉 이 승인의 부호는 전적으로 &#x27;승률이 37.78%를 넘는다&#x27;는 가정에 걸려 있고, 그 초과분 +18.22%p는 모델이 아니라 정성 판단의 산물이다. p=42%면 비용 후 +0.0066%p, p=45%면 +0.0174%p로 여전히 양수다.</div>
+  </div>
+  <p style="margin-top:12px">판정: 파이프라인 확정 승률(56%)을 정본으로 삼되, 마팅게일 귀무가설 결과를 등가로 병기한다. 두 결과의 부호가 다르기 때문이다 — 확정 승률에서는 비용 후 현금 대비 +0.0570%p, 귀무가설에서는 -0.0086%p다. 직전 사이클은 &#x27;알파 0&#x27;을 증명하고도 8%를 집행했고 그 결과 현금 대비 -0.0016%p였다. 이번에는 알파를 주장하되 그 주장의 크기(+18.22%p)가 이례적으로 크다는 사실을 표에 드러내고, 비중으로 그 불확실성의 값을 치른다. 5%라는 숫자는 &#x27;이 정도 알파를 믿는다&#x27;가 아니라 &#x27;이 정도 틀려도 감당한다&#x27;는 뜻이다.</p>
+</div>
+
+<h2>최종 승인 등급표 — 후보 12종목 전수</h2>
+<table>
+<thead><tr>
+<th>#</th><th>종목</th><th>섹터</th><th>승인 등급</th><th>명문규칙</th><th class="n">진입</th><th class="n">목표</th><th class="n">손절</th>
+<th class="n">예상수익</th><th class="n">손실</th><th class="n">손익비</th><th class="n">손절÷ATR</th><th class="n">승률</th>
+<th class="n">손익분기</th><th class="n">기대값</th><th class="n">비중</th><th>손실 ← → 수익</th>
+</tr></thead><tbody><tr><td class="rk">1</td><td><b class="tk">VRTX</b><div class="sub">버텍스 파마슈티컬스</div></td><td class="sub">바이오테크</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과 (손절÷ATR 1.52 — 여유 얇음)</span></td><td class="n">$505.00</td><td class="n up">$546.17</td><td class="n dn">$480.00</td><td class="n up"><b>+8.2%</b></td><td class="n dn">-5.0%</td><td class="n">1.65</td><td class="n">1.52</td><td class="n">56%</td><td class="n">37.8%</td><td class="n up"><b>+2.4%</b></td><td class="n"><b>5.0%</b></td><td class="bar"><div class="rrbar" title="목표 +8.2% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:52.6px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:86.6px"></span></div></div></td></tr><tr><td class="rk">2</td><td><b class="tk">AVGO</b><div class="sub">브로드컴</div></td><td class="sub">반도체</td><td><span class="badge crit">탈락</span></td><td><span class="badge crit">위반 (손절÷ATR 1.46 &lt; 1.50)</span></td><td class="n">$405.00</td><td class="n up">$450.00</td><td class="n dn">$381.50</td><td class="n up"><b>+11.1%</b></td><td class="n dn">-5.8%</td><td class="n">1.91</td><td class="n">1.46</td><td class="n">47%</td><td class="n">34.3%</td><td class="n up"><b>+2.1%</b></td><td class="n"><b>0.0%</b></td><td class="bar"><div class="rrbar" title="목표 +11.1% / 손절 -5.8%"><div class="rr-l"><span class="rr-fill dn" style="width:61.6px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:118.0px"></span></div></div></td></tr><tr><td class="rk">3</td><td><b class="tk">AMZN</b><div class="sub">아마존</div></td><td class="sub">인터넷/클라우드</td><td><span class="badge crit">탈락</span></td><td><span class="badge crit">위반 (R/R 1.11 &lt; 1.50)</span></td><td class="n">$270.00</td><td class="n up">$285.00</td><td class="n dn">$256.50</td><td class="n up"><b>+5.6%</b></td><td class="n dn">-5.0%</td><td class="n">1.11</td><td class="n">1.51</td><td class="n">50%</td><td class="n">47.4%</td><td class="n up"><b>+0.3%</b></td><td class="n"><b>0.0%</b></td><td class="bar"><div class="rrbar" title="목표 +5.6% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:53.1px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:59.1px"></span></div></div></td></tr><tr><td class="rk">4</td><td><b class="tk">DDOG</b><div class="sub">데이터독</div></td><td class="sub">소프트웨어/관측</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">5</td><td><b class="tk">FANG</b><div class="sub">다이아몬드백 에너지</div></td><td class="sub">에너지</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">6</td><td><b class="tk">REGN</b><div class="sub">리제네론</div></td><td class="sub">바이오테크</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">7</td><td><b class="tk">NVDA</b><div class="sub">엔비디아</div></td><td class="sub">반도체</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">8</td><td><b class="tk">PLTR</b><div class="sub">팔란티어</div></td><td class="sub">AI/데이터</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">9</td><td><b class="tk">FTNT</b><div class="sub">포티넷</div></td><td class="sub">사이버보안</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">10</td><td><b class="tk">MSFT</b><div class="sub">마이크로소프트</div></td><td class="sub">소프트웨어</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">11</td><td><b class="tk">GOOGL</b><div class="sub">알파벳 A</div></td><td class="sub">인터넷/플랫폼</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">12</td><td><b class="tk">CRWD</b><div class="sub">크라우드스트라이크</div></td><td class="sub">사이버보안</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">리서치·규칙 검정 단계 배제</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr></tbody></table>
+
+<h2>배정·조건부 종목 상세</h2>
+<div class="cards">
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">VRTX</span>
+      <div>
+        <h3>버텍스 파마슈티컬스</h3>
+        <div class="meta">바이오테크 · 비중 5.0% · 통과 (손절÷ATR 1.52 — 여유 얇음)</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> 중</span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,48.0 128.1,75.0 112.8,122.1 63.2,122.1 51.0,76.0" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="48.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 74점</title></circle><circle cx="128.1" cy="75.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 78점</title></circle><circle cx="112.8" cy="122.1" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 78점</title></circle><circle cx="63.2" cy="122.1" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 78점</title></circle><circle cx="51.0" cy="76.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 72점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">74</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">72</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$505.00</b></div>
+        <div class="pz up"><span>목표</span><b>$546.17</b><i>+8.2%</i></div>
+        <div class="pz dn"><span>손절</span><b>$480.00</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>1.65</b><i>1.52</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>56%</b><i>37.8%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+2.4%</b></div>
+      </div>
+      <p class="thesis">비오피오이드 진통제 3상 톱라인 양성과 연간 매출 가이던스 상향이라는 확인된 종목 고유 촉매를 가진 유일한 후보다. 베타 0.30으로 12종목 중 가장 낮아, 직전 사이클이 스스로 증명한 &#x27;초과엣지가 곧 시장 베타의 재표기&#x27;라는 함정에서 구조적으로 벗어나 있다. 이번 사이클 배정의 근거는 수익 크기가 아니라 바로 이 점이다.</p>
+      <div class="cat"><b>진입 근거</b> 8/10 종가 523.91(+5.61%). 당일 고점 546.17에서 519.82까지 밀린 뒤 마감 — 촉매 이전 박스권(465~498) 상단이자 지지1(496.07) 바로 아래인 505.00을 지정가로 설정. 종가 대비 -3.6%(≈1.15×ATR14). 체결확률 55%.</div>
+      <div class="adj"><b>집행 조건</b> 리스크 3관점 권고 비중은 공격형 12% / 중립형 8% / 보수형 4~6%였다. 단일 종목으로 분산이 0이고, 8/12 CPI가 진입 2거래일 이내이며, 손절÷ATR 1.5188이 문턱 1.5에 얇게 걸쳐 있고, 승률 56%가 마팅게일 손익분기 37.78%를 18.2%p 초과한다는 강한 주장에 의존한다. 이 넷을 이유로 보수형 권고 하단부인 5%로 확정한다.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4><div class="ch"><span class="ch-k">애널리스트</span><span class="ch-v">테크 74 / 센티 78 / 뉴스 78 / 펀더 78 → 가중 종합 76.60 (12종목 1위)</span></div><div class="ch"><span class="ch-k">리서치</span><span class="ch-v">강세 채택. 최강 약세 논거(이미 +5.61% 반응, RSI 70.19, 52주 최고까지 4.2%)를 인정하되 컨센서스 563.08(+7.48%)이 스윙 최소치를 상회함을 근거로 승률 56% 확정</span></div><div class="ch"><span class="ch-k">트레이더</span><span class="ch-v">Wilder ATR14 = 16.4608 (3.14%) 직접 계산. 25거래일 OHLC, 최근일 종가 정본 일치 확인</span></div><div class="ch"><span class="ch-k">리스크</span><span class="ch-v">공격형 찬성(12%) · 중립형 찬성(8%) · 보수형 반대 → 2:1 통과 (규칙3 탈락요건 미충족)</span></div><div class="ch"><span class="ch-k">펀드매니저</span><span class="ch-v">하드체크 5항 전항 통과. 비중은 보수형 권고 하단 5%로 확정</span></div></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul><li>8/12 CPI가 진입 2거래일 이내 — 컨센 상회 시 종목별 정밀 손실은 확인실패(모델 부재)</li><li>3상 데이터 발표 직후라 후속 뉴스(적응증·부작용·경쟁 데이터) 갭이 손절 480을 관통할 수 있음. 관통확률 확인실패</li><li>단일 종목 배정 — 분산 0. 위 두 리스크가 헤지 없이 포트폴리오에 그대로 전이</li><li>손절÷ATR 1.5188 — 문턱 1.5 대비 여유 0.019에 불과</li><li>진입가 505 ~ 중간저항 530 거리가 4.95%로 &#x27;&lt;5%&#x27; 규칙에 형식상 저촉 소지 (감사 플래그)</li></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">AVGO</span>
+      <div>
+        <h3>브로드컴</h3>
+        <div class="meta">반도체 · 비중 0.0% · 위반 (손절÷ATR 1.46 &lt; 1.50)</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge crit"><b>·</b> 하</span>
+      <span class="badge crit">탈락</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,48.6 127.0,75.3 108.6,116.4 62.6,122.9 64.9,80.5" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="48.6" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 73점</title></circle><circle cx="127.0" cy="75.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 76점</title></circle><circle cx="108.6" cy="116.4" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 65점</title></circle><circle cx="62.6" cy="122.9" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 80점</title></circle><circle cx="64.9" cy="80.5" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 45점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">73</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">76</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">65</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">80</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">45</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$405.00</b></div>
+        <div class="pz up"><span>목표</span><b>$450.00</b><i>+11.1%</i></div>
+        <div class="pz dn"><span>손절</span><b>$381.50</b><i>-5.8%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>1.91</b><i>1.46</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>47%</b><i>34.3%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+2.1%</b></div>
+      </div>
+      <p class="thesis">컨센서스 상승여력 +25.0%로 후보군 최대이나, 9/2(수) 실적이 보유창 내부에 확정 포함되고 리스크 3관점 전원이 반대했다. 결정적으로 손절÷ATR가 재계산 결과 1.4646으로 문턱 1.5 미만이다 — 트레이더 제시치 1.528은 분모 혼용 산식 오류였다.</p>
+      <div class="cat"><b>진입 근거</b> 8/10 종가 422.40(-1.25%). 후보 중 유일한 하락이며 그 사유가 NVDA와 동일한 &#x27;AI 캐펙스 집약도 우려&#x27;로, 종목 고유 알파와 구분되지 않는다.</div>
+      <div class="adj"><b>집행 조건</b> 직전 사이클에서 AVGO 갭조정 R/R 1.4999를 반올림으로 통과 처리했고 검증 단계가 이를 &#x27;면도날&#x27;로 기록했다. 이번 사이클은 같은 유형의 면도날 판정을 반복하지 않는다 — 1.4646은 문언상 명백한 미달이다. 손절을 380.00으로 넓히면 1.558로 통과하나(R/R 1.80), 9/2 실적 배제사유는 그대로 남으므로 재설계하지 않는다.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4><div class="ch"><span class="ch-k">애널리스트</span><span class="ch-v">펀더멘털 80 (EPS 성장 +124.6%) — 12종목 1위. 가중 종합 73.25 (공동 2위)</span></div><div class="ch"><span class="ch-k">리서치</span><span class="ch-v">판정보류. 9/2 실적 확정을 웹조사로 재확인(stocktitan·Yahoo 보도자료)해 배제</span></div><div class="ch"><span class="ch-k">트레이더</span><span class="ch-v">조건부 설계. ATR14 16.0454 (3.80% — 3종 중 최고)</span></div><div class="ch"><span class="ch-k">리스크</span><span class="ch-v">공격형·중립형·보수형 전원 반대 (0:3) → 규칙3 원칙적 탈락</span></div><div class="ch"><span class="ch-k">펀드매니저</span><span class="ch-v">규칙8 위반 확정 + 규칙3 3관점 전원 반대 → 탈락</span></div></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul><li>9/2 실적 — 보유창 내부 확정. 강제청산일 8/28로만 회피 가능하며 스윙 보유창이 12거래일로 절반 이하 단축</li><li>트레일링 PER 약 71배 — 10년물 4.71% 상승 국면에서 할인율 압박</li><li>8/10 하락 사유가 NVDA와 동일 서사 — 매크로 충격 시 동반 낙폭</li></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">AMZN</span>
+      <div>
+        <h3>아마존</h3>
+        <div class="meta">인터넷/클라우드 · 비중 0.0% · 위반 (R/R 1.11 &lt; 1.50)</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge crit"><b>·</b> 하</span>
+      <span class="badge crit">탈락</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,49.7 128.1,75.0 110.2,118.6 64.2,120.8 63.3,80.0" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="49.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 71점</title></circle><circle cx="128.1" cy="75.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 78점</title></circle><circle cx="110.2" cy="118.6" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 70점</title></circle><circle cx="64.2" cy="120.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 75점</title></circle><circle cx="63.3" cy="80.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 48점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">71</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">70</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">75</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">48</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$270.00</b></div>
+        <div class="pz up"><span>목표</span><b>$285.00</b><i>+5.6%</i></div>
+        <div class="pz dn"><span>손절</span><b>$256.50</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>1.11</b><i>1.51</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>50%</b><i>47.4%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+0.3%</b></div>
+      </div>
+      <p class="thesis">52주 최고 287.20까지 3.28%뿐이고 확인된 신규 촉매가 없다. 진입가를 270으로 낮추면 그 거리가 6.37%로 재계산되지만, 중립형은 이를 &#x27;규칙 회피(gaming)&#x27;로 판정했다 — 되돌림이 오지 않으면 체결되지 않고, 되돌림이 오면 그 하락 자체가 모멘텀 약화의 증거이므로 저항 리스크는 사라지지 않고 형태만 바뀐다.</p>
+      <div class="cat"><b>진입 근거</b> 8/10 종가 278.09(+1.32%), 장중 고가 280.14. 직전 사이클 지정가 264.87은 8/10 저가 273.60에도 닿지 못해 미체결.</div>
+      <div class="adj"><b>집행 조건</b> R/R 1.1111은 재량이 아닌 하드 임계치 위반이며 3관점 전원이 반대했다. 트레이더가 이 위반을 스스로 고지하고 목표를 부풀리거나 손절을 좁혀 통과시키지 않은 점은 이번 사이클 절차 품질의 성과로 기록한다.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4><div class="ch"><span class="ch-k">애널리스트</span><span class="ch-v">센티먼트 78 (공동 1위). 가중 종합 73.25 (공동 2위)</span></div><div class="ch"><span class="ch-k">리서치</span><span class="ch-v">판정보류 — 배제규칙 2호(52주 최고 근접 + 신규 촉매 부재)</span></div><div class="ch"><span class="ch-k">트레이더</span><span class="ch-v">ATR14 8.9642 (3.22%). R/R 1.111 위반을 자체 고지</span></div><div class="ch"><span class="ch-k">리스크</span><span class="ch-v">전원 반대 (0:3). 중립형이 진입가 조정을 &#x27;규칙 회피&#x27;로 판정</span></div><div class="ch"><span class="ch-k">펀드매니저</span><span class="ch-v">규칙1 위반 + 규칙3 → 탈락</span></div></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul><li>7월 고용 -23,000 및 5·6월 -103,000 하향의 &#x27;경기 둔화&#x27; 측면에 소매·광고가 정면 노출 (베타 1.45)</li><li>유가 급등이 물류비 역풍으로 이중 타격 — 정량화 확인실패</li><li>R/R 1.111 — 손익분기승률 47.37%에 승률 추정 50%로 여유가 2.63%p뿐</li></ul></div>
+  </div>
+</article></div>
+
+<h2>집행 지침</h2>
+<table><thead><tr><th>티커</th><th class="n">지정가</th><th class="n">체결 하한</th><th>주문 취소일</th>
+<th>축소 규칙</th><th>강제 청산</th><th>진입 근거</th></tr></thead><tbody><tr><td><b>VRTX</b></td><td class="n">$505.00</td><td class="n">$480.00</td><td class="sub">2026-08-24 미체결 시 전량 취소(GTD, GTC 금지), 8/12 CPI 헤드라인이 컨센 +0.2%p 이상 상회 시 당일 취소, VIX 20 이상 급등 시 취소, 시가 474.68 이하 갭다운 시 즉시 취소</td><td class="sub">목표 546.17 도달 시 50% 익절 후 잔여 손절을 진입가(505.00)로 상향. 손절 480.00 도달 시 부분청산 없이 전량 청산.</td><td class="sub">2026-09-04(금) 종가 — 8월 고용보고서·9/16 FOMC 이전 청산</td><td class="rat">촉매 이전 박스권(465~498) 상단 + 지지1(496.07) 바로 아래. 종가 대비 -3.6%(≈1.15×ATR14 16.46). 체결확률 55%.</td></tr></tbody></table>
+
+<h2>포트폴리오 섹터 배분</h2>
+<div class="panel"><div class="srow"><span class="sname">바이오테크 (VRTX)</span><span class="sbar"><i style="width:5.3%;background:#3987e5"></i></span><span class="spct">5.0%</span></div><div class="srow"><span class="sname">현금</span><span class="sbar"><i style="width:100.0%;background:#2a78d6"></i></span><span class="spct">95.0%</span></div></div>
+
+<h2>Ⅰ. 애널리스트 — 4축 시장 진단</h2>
+<div class="panel"><div class="anx"><h4>테크니컬 (35%)</h4><p>상위 3종은 VRTX 74 · AVGO 73 · DDOG 72. 하위는 MSFT 57(최근 7거래일 약 +28% 급등, RSI 79로 12종목 중 가장 극단적 과매수) · NVDA 63 · GOOGL 64(가격 자체 미확정). CRWD·REGN·PLTR·MSFT 4종목이 RSI 70 이상 과매수 구간에 동시 진입해 신규 진입 타이밍 리스크가 후보군 전반에 걸쳐 있다. 확인실패 8건 — 전 종목 당일 실거래량, 전 종목 MACD, DDOG 옵션 데이터(4개월 전 자료로 사용 불가), GOOGL 애널리스트 목표가 등.</p></div><div class="anx"><h4>센티먼트 (25%)</h4><p>CNN Fear&amp;Greed 64(탐욕). VIX는 8/7 14.92에서 약 15.8로 소폭 상승했으나 여전히 낮다. AMZN·VRTX 78이 최고, CRWD 58이 최저(컨센서스 목표가가 현재가보다 낮은 유일한 사례). 시장 전반이 탐욕 구간에 있다는 것은 REGN·MSFT 같은 RSI 80 내외 종목의 상승이 종목 고유 정보가 아니라 시장 심리의 반영일 가능성을 높인다.</p></div><div class="anx"><h4>뉴스 (22%)</h4><p>DDOG 80이 최고 — 8/6 OpenAI 사용축소 공시로 -19% 폭락 후 8/10 Needham 260→300, Baird 210→300, Stifel 305 유지 등 목표가 대거 상향으로 +11.48% 반등. VRTX 78은 3상 톱라인 양성 + 가이던스 상향. NVDA 58이 최저로, 8/26 실적이 보유창 정중앙이라는 이진 리스크를 반영했다. AVGO 65도 9/2 실적 리스크가 반영된 값이다.</p></div><div class="anx"><h4>펀더멘털 (18%)</h4><p>NVDA 82 · AVGO 80(EPS 성장 +124.6%) · GOOGL 78 · VRTX 78 순. 최하위는 CRWD 40(GAAP 적자 확대 + 컨센서스 목표가가 현재가 하회)과 PLTR 50(PER 147배·PSR 68배). FTNT 55는 PER 58배에 컨센서스 상승여력이 -2%다. 확인실패 6건 — 전 종목 PSR, REGN 최근 2주 신규 촉매, AMZN 가을 AWS 이벤트 일정, GOOGL 가격 자체, DDOG 차기 실적일, 다수 종목 매출성장 정밀치(TTM 대체).</p></div></div>
+
+<h2>Ⅱ. 리서치 — Bull vs Bear 변증 공방</h2>
+<details class="deb bull"><summary>🐂 강세 논거 (Bull)</summary><p class="thesis-p">상위 6종목 각각에 대해 강세 논거를 근거 데이터와 함께 제시했다.</p><div class="dbi"><span class="dbt">VRTX</span><span class="dbc">강</span><p>비오피오이드 진통제 3상 톱라인 양성(안전성 우위·유효성 유의) + 연간 매출 가이던스 상향. 애널 평균 목표 557.64~563.08, 고 653. 단일질환 전문기업에서 다각화 바이오파마로의 전환.</p></div><div class="dbi"><span class="dbt">AVGO</span><span class="dbc">강</span><p>컨센서스 상승여력 +25.0%로 후보군 최대. EPS 성장 +124.6%. AI ASIC 서사의 핵심 수혜주.</p></div><div class="dbi"><span class="dbt">AMZN</span><span class="dbc">중</span><p>AWS 성장 +37%, 컨센서스 목표 324.94(+16.85%). 52주 최고 재도전 구간.</p></div><div class="dbi"><span class="dbt">DDOG</span><span class="dbc">중</span><p>Q2 매출 $1.12B(+35.6%), EPS 0.65(컨센 0.59). FY26 가이던스 $4.46B(약 +30%)로 상향. OpenAI 역풍은 연 약 $80M로 관리 가능하다는 것이 다수 데스크 판단.</p></div><div class="dbi"><span class="dbt">FANG</span><span class="dbc">중</span><p>호르무즈 긴장으로 WTI +2.9%. 8/10 유일한 상승 섹터. 컨센서스 목표 232.93(+17.1%). 포트폴리오 유일의 비AI 분산원.</p></div><div class="dbi"><span class="dbt">REGN</span><span class="dbc">약</span><p>3거래일 연속 상승. 8사이클 묵은 약가 리스크 해소 후 추세 지속.</p></div></details><details class="deb bear"><summary>🐻 약세 반박 (Bear)</summary><p class="thesis-p">강세 논거를 하나씩 정면 반박하고, 강세 측이 언급하지 않은 독립 약세 논거를 추가했다.</p><div class="dbi"><span class="dbt">VRTX</span><span class="dbc">중</span><p>3상 데이터에 시장이 이미 당일 +5.61%로 반응했다. RSI 70.19 과열이고 52주 최고 546.17까지 4.2%뿐이며 보유창 내 확인된 후속 촉매가 없다 — 전형적 sell-the-news 구도.</p><p class="rebut"><b>↳ 반박</b> 애널 목표 상향은 데이터 발표에 대한 사후 조정이지 새로운 정보가 아니다.</p></div><div class="dbi"><span class="dbt">AVGO</span><span class="dbc">강</span><p>9/2 실적이 보유창 내부에 확정 포함된다. 트레일링 PER 71배. 8/10 -1.25% 하락이 NVDA와 완전히 동일한 &#x27;AI 캐펙스 집약도 우려&#x27;로 설명된다.</p><p class="rebut"><b>↳ 반박</b> 컨센서스 +25%는 12개월 목표이지 1~4주 스윙 목표가 아니다.</p></div><div class="dbi"><span class="dbt">AMZN</span><span class="dbc">강</span><p>7월 고용 -23,000 및 5·6월 -103,000 하향이 소매·광고에 직결되는데 유가 급등이 물류비 부담까지 더해 이중 타격. 52주 최고까지 3.28%뿐.</p><p class="rebut"><b>↳ 반박</b> AWS +37%와 OpenAI 계약은 8/10 기준 이미 알려진 정보로 신규성이 없다.</p></div><div class="dbi"><span class="dbt">DDOG</span><span class="dbc">강</span><p>PER 531배. Goldman만 유일하게 매도(목표 158, -39%)를 유지한다. -19%/+11.5%의 4거래일 왕복 변동성이 -5~-8% 손절 규칙과 구조적으로 충돌한다.</p><p class="rebut"><b>↳ 반박</b> OpenAI 사용 축소가 구조적 훼손인지 일회성인지는 어떤 공개 자료로도 확인 불가다.</p></div><div class="dbi"><span class="dbt">FANG</span><span class="dbc">강</span><p>지정학 리스크 프리미엄은 양방향이다. &#x27;협상 타결 임박&#x27; 보도 하나로 되돌려질 수 있는 외생 변수에 전적으로 기댄 상승이며 비대칭이 역방향이다.</p><p class="rebut"><b>↳ 반박</b> 실제로 8/10 당일에도 이란의 &#x27;타결 매우 근접&#x27; 발언이 보도됐다.</p></div><div class="dbi"><span class="dbt">REGN</span><span class="dbc">강</span><p>컨센서스 목표 833.54는 현재가 대비 +3.16%로 스윙 목표 최소치 +5%에 산술적으로 미달한다. RSI 83.2는 12종목 중 최고 과열이다.</p><p class="rebut"><b>↳ 반박</b> 약가 리스크 해소는 이미 8/7 사이클에 반영된 과거 사건이다.</p></div></details><details class="deb bull"><summary>🐂 재반박 · 인정 (Bull rebuttal)</summary><p class="thesis-p">약세 반박 중 유효한 것을 인정하고 과장된 것만 재반박했다. 6종목 중 5종목에서 약세 논거의 핵심을 인정했다.</p><div class="dbi"><span class="dbt">VRTX</span><span class="dbc">중</span><p>과열과 52주 최고 근접은 인정한다. 다만 컨센서스 563.08은 52주 최고보다 위이고, BofA 672·Barclays 617 등 대형 데스크 목표가가 훨씬 높아 돌파 시도 여력 자체는 남아 있다. 이 종목만이 확인된 임상 촉매를 갖는다.</p></div><div class="dbi"><span class="dbt">FANG</span><span class="dbc">약</span><p>전면 인정한다 — 현재 FANG 진입은 사실상 호르무즈 긴장 지속·격화에 베팅하는 것이다.</p></div><div class="dbi"><span class="dbt">REGN</span><span class="dbc">약</span><p>인정한다. +5% 달성에 사상 최고가 경신이 전제되는데 확인된 신규 촉매가 없다.</p></div><div class="dbi"><span class="dbt">DDOG</span><span class="dbc">약</span><p>Goldman 단독 매도와 왕복 변동성은 인정한다. 손절 규칙과의 충돌은 실질적 문제다.</p></div><div class="dbi"><span class="dbt">AVGO</span><span class="dbc">중</span><p>9/2 실적은 인정한다. 강제청산일 단축 외에 회피 수단이 없다.</p></div><div class="dbi"><span class="dbt">AMZN</span><span class="dbc">중</span><p>신규 촉매 부재는 인정한다. 경기 둔화 노출도 사실이다.</p></div></details>
+<h2 style="font-size:15px;border-bottom-width:1px">Facilitator 판정</h2>
+<div class="panel"><p>Facilitator는 6종목 중 1종목만 트레이더 단계로 진출시켰다. 판정 기준은 넷이었다 — ①컨센서스 상승여력이 스윙 최소치 +5%에 미달하는가 ②52주 최고까지 +5% 미만인데 확인된 신규 촉매가 없는가 ③보유창 내 이진 이벤트가 있고 상쇄 근거가 없는가 ④상승 논거가 전적으로 외생 변수에 노출되는가. 여기에 직전 사이클의 교훈을 별도 검정으로 추가했다: &#x27;이 종목의 상승 논거가 나스닥 지수 상승 논거와 구분되는가.&#x27; 이 다섯째 검정에서 AVGO·AMZN·DDOG·REGN이 &#x27;구분 안 됨&#x27; 또는 &#x27;부분적&#x27;으로 판정됐고, FANG은 나스닥 베타가 아닌 다른 종류의 매크로 베팅으로 치환한 것에 불과하다고 판정됐다. VRTX만이 &#x27;구분됨 — 베타 0.30, 순수 종목 고유 임상 이벤트&#x27;로 통과했다.</p>
+<h4 style="margin-top:14px">핵심 쟁점</h4><ul style="margin:0;padding-left:18px;font-size:13px;color:#52514e"><li>AVGO 실적일 소스 불일치(context.md &#x27;9월초 추정&#x27; vs 애널리스트 &#x27;9/2 확정&#x27;)를 웹조사 1회로 해소 — stocktitan·Yahoo Finance 공식 보도자료로 9/2(수) 확정. 이것이 AVGO를 배제로 돌린 결정적 근거가 됐다.</li><li>52주 최고 근접 종목이 VRTX(-4.2%)·AMZN(-3.3%)·REGN(-1.6%)로 겹쳐, CPI발 조정 시 상관을 가지고 동시 되돌림에 노출된다 — 분산 효과가 제한적</li><li>반도체 30% 상한 규칙은 지키더라도 &#x27;AI 캐펙스 지출 서사&#x27;에 대한 간접 집중은 현행 규칙이 포착하지 못한다 (AVGO·AMZN·NVDA·DDOG가 모두 이 서사에 연동)</li><li>후보가 1종목으로 좁혀진 것은 실패가 아니라 판정 규율이 정상 작동한 신호로 해석해야 한다</li></ul></div>
+<table style="margin-top:12px"><thead><tr><th>티커</th><th>승자</th><th>명문규칙</th>
+<th>판정 근거</th></tr></thead><tbody><tr><td><b>VRTX</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">통과</span></td><td class="rat">승률 56%. 3상 톱라인 양성이라는 확인된 종목 고유 촉매, 컨센서스 563.08(+7.48%)이 스윙 최소치 상회, 베타 0.30으로 지수 서사와 절연. 다만 RSI 70.19·52주 최고 4.2% 잔여를 이유로 60%대가 아닌 50대 중반으로 보수화.</td></tr><tr><td><b>AMZN</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달 (배제규칙 2호)</span></td><td class="rat">승률 50%. 52주 최고까지 3.28%인데 확인된 신규 촉매 부재. 제시된 촉매는 이미 반영된 정보. 직전 사이클 264.87 미체결 위에서 더 높은 가격을 CPI 직전에 쫓는 진입 규율 문제도 부가 근거.</td></tr><tr><td><b>AVGO</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달 (배제규칙 3호)</span></td><td class="rat">승률 47%. 9/2 실적 보유창 내 확정. 8/10 하락이 NVDA와 동일 서사로 설명되어 종목 고유 알파와 구분되지 않음.</td></tr><tr><td><b>DDOG</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달</span></td><td class="rat">승률 42%. 약세 강도 64 &gt; 강세 52. PER 531배, Goldman 단독 매도, 왕복 변동성이 손절 규칙과 양립 불가.</td></tr><tr><td><b>FANG</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달 (배제규칙 4호)</span></td><td class="rat">승률 38%. 상승 논거가 전적으로 외생 변수 되돌림에 노출되며 강세 측도 이를 인정.</td></tr><tr><td><b>REGN</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달 (배제규칙 1·2호)</span></td><td class="rat">승률 35%. 상승여력 +3.16% &lt; 5% 및 52주 최고까지 1.6%인데 신규 촉매 부재 — 이중 배제.</td></tr></tbody></table>
+
+<h2>Ⅲ. 트레이더 — 시장 포지셔닝</h2>
+<div class="panel"><p>ATR14는 3종목 전부 stockanalysis 일별 OHLC 25거래일로 Wilder 평활 직접 계산했고(외부 표기치 미사용), 최근일 종가가 정본과 정확히 일치해 데이터 교체는 불필요했다 — 직전 사이클의 장중 스냅샷 사고가 이번엔 재현되지 않았다. 세 종목 모두 종가 추격을 피하고 0.9~1.15×ATR 아래에 지정가를 놓았으며, 체결확률은 VRTX 55% / AMZN 50% / AVGO 45%로 추정했다. 자기고지 6건을 기록했고 그중 가장 중요한 것은 &#x27;AMZN 진입가를 낮춰 잡으면 52주 최고 거리 배제사유가 산술적으로 무력화되는 구조적 허점&#x27;이다 — 설계자가 자기 설계의 규칙 회피 가능성을 스스로 신고한 사례이며, 중립형 감사가 이를 받아 &#x27;규칙 회피(gaming)&#x27;로 정식 판정했다. AVGO 손절은 노이즈 손절을 피하려 -5%에서 -5.80%로 재량 확대했는데, 바로 이 재량이 손절÷ATR 산식 오류와 결합해 겉보기 통과(1.528)를 만들었고 감사에서 실제 위반(1.4646)으로 뒤집혔다.</p></div>
+
+<h2>Ⅳ. 리스크 심사 — 3관점</h2>
+<details class="deb"><summary>관점 A — 공격형 (기회비용 중시)</summary><p class="thesis-p">직전 사이클 공격형이 스스로 발견한 사실을 승계 검증한다: 누적 기회비용 +2.0504%p의 103%가 7/30 단일 사이클에서, 그 절반이 AMZN 실적갭 하나에서 나왔고, 7/30을 제외하면 -0.0687%p로 미체결이 오히려 이득이었다. 따라서 &#x27;평균 기회비용이 크다&#x27;는 형태의 논거는 이번에도 쓰지 않는다. 대신 구조를 뒤집어 쓴다 — 초과수익이 소수의 극단 이벤트(임상 촉매·실적 서프라이즈)에서만 나온다는 사실은, 8사이클 연속 0% 체결이 &#x27;평균적으로 손해가 없었다&#x27;는 뜻이 아니라 &#x27;그런 극단 이벤트를 단 한 번도 포착하지 못했다&#x27;는 뜻이기도 하다. 진입하지 않으면 우호적 우측 꼬리도 원천 차단된다. 다만 이 논거는 VRTX 1종목에만 온전히 적용되며, AMZN·AVGO는 하드 수치 규칙 위반이 확인되어 기회비용 논거로도 정당화하지 않는다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>VRTX</b></td><td><span class="badge good">찬성</span></td><td class="n">12.0%</td><td class="rat">유일하게 하드체크를 통과한 종목이자 종목 고유 촉매가 살아있는 후보. 우측 꼬리를 잡으려면 애초에 포지션을 잡아야 한다.</td></tr><tr><td><b>AMZN</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">기회비용으로 진입을 정당화하고 싶으나 R/R 1.111&lt;1.5는 재량이 아닌 하드 임계치 위반이다. 기회비용 논거로 명시적 수치 규칙을 뒤집으면 규율 체계 전체가 무의미해진다.<div class="flag">⚠ R/R 1.111 하드 위반</div></td></tr><tr><td><b>AVGO</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">컨센서스 상승여력 +25%로 기회비용 관점에서 가장 아까운 종목이나, 강제청산일이 8/28로 12거래일에 불과해 &#x27;기회&#x27;를 누릴 시간 자체가 부족하고 손절÷ATR 1.4646으로 하드 규칙에 실제 저촉된다.<div class="flag">⚠ 보유창 12거래일로 단축</div><div class="flag">⚠ 손절÷ATR 1.4646</div></td></tr></tbody></table></details><details class="deb"><summary>관점 B — 중립형 (규칙 정합성·계산 감사)</summary><p class="thesis-p">트레이더 좌표 5개 지표를 전부 파이썬으로 재계산했다. 이번 감사의 핵심 성과는 트레이더의 손절÷ATR 산식이 &#x27;진입가 기준 손절폭%&#x27;를 &#x27;종가 기준 ATR%&#x27;로 나누는 분모 혼용 구조 오류를 갖고 있음을 발견한 것이다. 진입가가 종가보다 크게 낮은 AVGO에서 이 오류의 영향이 가장 커, 겉보기 1.528(통과)이 실제로는 1.4646(위반)으로 판정이 뒤집혔다. VRTX(1.576→1.5188)·AMZN(1.551→1.5060)도 같은 오류가 있었으나 임계치 위아래를 넘지 않아 결과는 바뀌지 않았다. 포트폴리오 수준에서는 승인 후보가 VRTX 1종목(비반도체)뿐이라 섹터·반도체 상한 규칙은 여유 있게 충족되고 현금은 95%다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>VRTX</b></td><td><span class="badge good">찬성</span></td><td class="n">8.0%</td><td class="rat">R/R 1.6468 통과 · 기대값 +2.3872% 양수 통과 · 손절÷ATR 1.5188 통과(여유 매우 얇음) · 손절폭 -4.95%로 -8% 이내.<div class="flag">⚠ 진입가 505 ~ 2차 저항 530 거리 4.9505%로 &#x27;&lt;5%&#x27; 규칙 형식상 저촉 소지 — 530의 저항 신뢰도가 546.17만큼 확고하지 않아 감사 플래그로만 기록</div></td></tr><tr><td><b>AMZN</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">R/R 1.1111&lt;1.5 강등규칙 1호 하드 위반 확정. 진입가를 278.09→270.00으로 낮춰 52주 최고 거리를 3.28%→6.37%로 만든 것은 문언은 통과하나 취지를 회피하는 &#x27;규칙 회피(gaming)&#x27;로 판정한다 — 되돌림이 오지 않으면 체결되지 않고, 되돌림이 오면 그 하락 자체가 신고가 근접 모멘텀의 약화를 반증하므로 저항 리스크는 사라지지 않고 형태만 바뀐다.<div class="flag">⚠ R/R 1.1111 하드 위반</div><div class="flag">⚠ 진입가 조정에 의한 근접성 배제사유 무력화 = 규칙 회피</div></td></tr><tr><td><b>AVGO</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">재계산 손절÷ATR 1.4646&lt;1.5 하드 위반 신규 확인. 트레이더 제시치 1.528은 산식 분모 불일치로 인한 과대평가였다. Facilitator 원배제사유(9/2 실적)도 이 설계로 해소되지 않는다.<div class="flag">⚠ 손절÷ATR 1.4646 하드 위반(감사에서 신규 검출)</div><div class="flag">⚠ 9/2 실적 미해소</div></td></tr></tbody></table></details><details class="deb"><summary>관점 C — 보수형 (하방·꼬리 리스크)</summary><p class="thesis-p">CPI 타이밍, VRTX 고유의 촉매 후 갭 리스크, 단일종목 집중이라는 세 겹의 리스크가 누적되어 VRTX에도 반대표를 던진다. 다만 정량화 불가능한 항목은 억지로 확률을 지어내지 않고 &#x27;확인실패&#x27;로 명시했다 — 보수적 판단이 근거 없는 공포가 아니라 데이터 한계를 정직하게 반영한 것임을 뜻한다. VRTX 단일종목 집중에 대한 판정은 &#x27;허용 가능하나 이상적이지 않다&#x27;이며, 강행할 경우 표준 상단 12%가 아닌 하단부 4~6%와 넉넉한 현금을 권고한다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>VRTX</b></td><td><span class="badge crit">반대</span></td><td class="n">5.0%</td><td class="rat">① 8/12 CPI가 진입 후 2거래일 이내인데 상회 시 정밀 손실액·확률은 확인실패(모델 부재). ② 3상 톱라인 직후라 FDA·경쟁사·후속 보도 갭 리스크가 구조적으로 크고, 갭이 손절 480을 관통하면 실현 손절폭이 -4.95%를 초과한다 — 관통확률 확인실패. ③ 진출 후보가 1종목뿐이라 분산이 0이어서 위 두 리스크를 완충할 수단이 없다. 다른 두 관점이 찬성하므로 강행 시 4~6% 권고.<div class="flag">⚠ CPI 진입 2거래일 이내</div><div class="flag">⚠ 촉매 후 뉴스 갭 — 손절 관통 확률 확인실패</div><div class="flag">⚠ 분산 0</div></td></tr><tr><td><b>AMZN</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">베타 1.45로 CPI 서프라이즈에 상대적으로 크게 반응할 것으로 예상되나 정밀 수치는 확인실패. 유가 급등의 물류비 역풍도 정량화 확인실패. R/R 자체가 하드 위반이라 애초에 리스크 대비 보상이 부적절.<div class="flag">⚠ 베타 1.45</div><div class="flag">⚠ R/R 1.111</div></td></tr><tr><td><b>AVGO</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">트레일링 PER 약 71배 성장주로 10년물 4.71%·9/16 인상 50:50 국면에서 금리 민감도가 높다(정밀 수치 확인실패). 8/10 하락이 NVDA와 동일 서사여서 매크로 충격 시 동반 낙폭이 커질 수 있다.<div class="flag">⚠ PER 71배 + 금리 상승</div><div class="flag">⚠ 손절÷ATR 1.4646</div></td></tr></tbody></table></details>
+
+<h2>숨기지 않는 하방 리스크</h2>
+<div class="panel"><div class="rk-item"><div class="rk-h"><span class="rk-n">1</span><b>이 승인의 부호가 승률 가정 하나에 걸려 있다 — 초과엣지 +18.22%p는 시스템 사상 최대의 알파 주장</b><span class="badge warn">확률 해당 없음(방법론)</span></div><div class="rk-q"><b>정량</b> 마팅게일 손익분기승률 37.78%에서 기대값은 정의상 정확히 0이고, 현금 허들·슬리피지 차감 후 -0.0086%p로 음수가 된다. p=42%면 +0.0066%p, p=45%면 +0.0174%p, p=56%(확정치)면 +0.0570%p.</div><div class="rk-e"><b>근거</b> 선택적 정지 정리에 의한 산술 마팅게일 이중장벽 목표 선도달 확률 (S−L)/(U−L) = 25/66.17. 펀드매니저 직접 재계산(verify_and_build.py 1회 실행).</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">2</span><b>8/12(수) CPI가 진입 2거래일 이내 — 주문 생존 기간 대부분이 매크로 지뢰밭</b><span class="badge warn">확률 확인실패(상방 서프라이즈 확률 미확보)</span></div><div class="rk-q"><b>정량</b> 종목별 정밀 손실액·확률 전부 확인실패. 정성적으로는 VRTX 베타 0.30으로 후보 중 노출이 가장 낮다는 점만 확인됨.</div><div class="rk-e"><b>근거</b> 컨센 헤드라인 +3.4% YoY(전월 3.5%) / 코어 +2.5%(전월 2.6%). 주문 유효기간 10거래일 중 8/12 CPI·8/13 PPI·8/14 소매판매가 첫 3일에 몰려 있다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">3</span><b>단일 종목 배정 — 유효 베팅수 1.00, 분산 0</b><span class="badge warn">확률 확정</span></div><div class="rk-q"><b>정량</b> 현금 포함 허핀달 기준으로도 1.105. VRTX 개별 이벤트(FDA·경쟁사 데이터·부작용 보고)가 그대로 포트폴리오 전체 손익이 된다.</div><div class="rk-e"><b>근거</b> Facilitator 깔때기가 6종목 중 5종목을 배제한 결과. 보수형은 &#x27;허용 가능하나 이상적이지 않다&#x27;로 판정하고 비중 하단부를 권고했다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">4</span><b>촉매 발표 직후 진입 — 오버나이트 갭이 손절 480을 관통할 위험</b><span class="badge warn">확률 확인실패(과거 갭 통계 부재)</span></div><div class="rk-q"><b>정량</b> 관통 시 실현 손절폭이 설계치 -4.95%를 초과한다. 이번 사이클은 갭조정 R/R 자체를 산출하지 못했다 — 최대손실 표기의 &#x27;갭조정&#x27; 값은 정상치와 동일하게 표기된 미산출 상태다.</div><div class="rk-e"><b>근거</b> 보수형 심사. 45거래일 실측 갭 통계는 이번 사이클에서 재수집되지 않았다(웹 조사 예산 배분 결과).</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">5</span><b>손절÷ATR 1.5188 — 문턱 1.5 대비 여유 0.019의 면도날</b><span class="badge warn">확률 확정</span></div><div class="rk-q"><b>정량</b> ATR14가 8/10 촉매성 급등일 레인지(519.82~546.17 = 26.35, TR 최대치)에 의해 끌어올려졌을 가능성이 있으며(트레이더 자기고지), ATR이 조금이라도 크면 이 지표는 즉시 문턱 아래로 내려간다.</div><div class="rk-e"><b>근거</b> 트레이더 자기고지 + 중립형 재계산. 직전 사이클 AVGO 1.4999 면도날과 같은 유형의 취약성이다.</div></div></div>
+
+<h2>파이프라인 품질 기록 — 이번 실행에서 검출한 오류</h2>
+<table><thead><tr><th>검출자</th><th>내용</th><th>중대도</th></tr></thead><tbody><tr><td class="sub">중립형 리스크 감사</td><td class="rat">트레이더의 손절÷ATR 산식이 &#x27;진입가 기준 손절폭%&#x27;를 &#x27;종가 기준 ATR%&#x27;로 나누는 분모 혼용 구조 오류. AVGO에서 1.528(통과)→1.4646(위반)으로 판정이 실제로 뒤집혔다. VRTX 1.576→1.5188, AMZN 1.551→1.5060도 같은 오류이나 임계치를 넘지 않아 결과는 불변.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">트레이더 자기고지</td><td class="rat">진입가를 낮춰 잡으면 &#x27;52주 최고 근접&#x27; 유형의 배제사유가 산술적으로 무력화되는 구조적 허점을 설계자 스스로 신고. 중립형이 이를 받아 &#x27;규칙 회피(gaming)&#x27;로 정식 판정했다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">펀드매니저 시세 검증</td><td class="rat">slickcharts가 4사이클 연속 장중 스냅샷 오류. NVDA 223.18(정본 217.55) / AAPL 309.38(308.26) / DDOG 243.45(260.78, -6.6% 오차). 이번 사이클은 가격 소스에서 완전 배제했다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">Facilitator</td><td class="rat">AVGO 실적일이 공통 브리핑(&#x27;9월초 추정&#x27;)과 애널리스트 산출물(&#x27;9/2 확정&#x27;)로 불일치. 웹조사 1회로 stocktitan·Yahoo 공식 보도자료를 확인해 9/2 확정으로 해소.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">펀드매니저</td><td class="rat">GOOGL 8/10 종가를 끝내 정본으로 확보하지 못했다(stockanalysis 페이지가 8/7 캐시 반환). GOOG 355.84(+0.67%)로 교차추정한 약 356.50을 사용하고 신뢰도 &#x27;낮음&#x27;으로 표기 — 종합 11위라 판정에 영향은 없었다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">펀드매니저</td><td class="rat">러셀2000 8/10 종가와 VIX 종가 정밀치를 확보하지 못했다(장중 소스 상충: +1.10% vs -0.28%). 브리핑에 &#x27;미확정&#x27;으로 병기했다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">애널리스트 ②</td><td class="rat">확인실패 8건 — 전 종목 당일 실거래량, 전 종목 MACD, DDOG 옵션 데이터(4개월 전 자료로 사용 불가), GOOGL 애널 목표가 등. 지어내지 않고 전부 &#x27;확인실패&#x27;로 기록.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">애널리스트 ①</td><td class="rat">확인실패 6건 — 전 종목 PSR, REGN 최근 2주 신규 촉매, AMZN 가을 AWS 이벤트 일정, DDOG 차기 실적일 등.</td><td><span class="badge warn">경미</span></td></tr></tbody></table>
+
+<h2>다음 사이클 개선 권고</h2>
+<table><thead><tr><th>우선순위</th><th>항목</th><th>상태</th></tr></thead><tbody><tr><td><span class="badge crit">최우선</span></td><td class="rat">손절÷ATR 산식 문언을 &#x27;달러 기준 (진입가−손절가) ÷ ATR14(달러)&#x27;로 설계문서 6절에 명문화. 이번 사이클에 판정을 실제로 뒤집은 오류이며, 문언이 &#x27;손절폭 ÷ ATR%&#x27;로 비율끼리 나누는 것처럼 읽히는 것이 원인이다.</td><td class="sub">신규 (즉시 반영 필요)</td></tr><tr><td><span class="badge crit">최우선</span></td><td class="rat">&#x27;진입가를 낮추면 근접성 기반 배제사유가 무력화되는&#x27; 규칙 회피 경로를 차단. 52주 최고·저항 근접 판정의 기준가를 진입가가 아니라 &#x27;기준일 종가&#x27;로 고정하는 안을 상신.</td><td class="sub">신규</td></tr><tr><td><span class="badge crit">최우선</span></td><td class="rat">승률 산정의 기준선을 마팅게일 손익분기승률 (S−L)/(U−L)로 명시하고, 초과엣지가 10%p를 넘으면 그 근거를 별도 소명하도록 의무화. 이번 사이클 VRTX는 +18.22%p로 시스템 사상 최대 주장이다.</td><td class="sub">신규</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">갭조정 R/R을 5사이클째 산출하지 못했다. 실측 오버나이트 갭 통계(90거래일 이상) 수집을 웹 조사 예산에 고정 배분하거나, 산출 불가 시 리포트에 &#x27;미산출&#x27;로 명시 표기하는 규약을 둘 것.</td><td class="sub">이월 (5사이클째)</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">slickcharts를 데이터 소스 목록에서 공식 삭제. 4사이클 연속 장중 스냅샷 오류이며 이번엔 DDOG에서 -6.6% 오차가 났다. 설계문서 5절 소스 목록 개정 필요.</td><td class="sub">신규</td></tr></tbody></table>
+
+<div class="disc">
+<b>⚠ 투자 유의사항 (반드시 확인)</b>
+본 리포트는 TradingAgents 멀티에이전트 프레임워크를 이용한 <b>LLM 기반 분석 결과물이며, 투자 조언이 아닙니다.</b>
+기재된 승률·기대값·목표가는 모델의 추정치로 실현 수익을 전혀 보장하지 않으며,
+일부 수치는 공개 정보 기반 추정치가 포함되어 있습니다. 이번 사이클은 승인 1종의 기대값 부호가 전적으로 승률 56% 가정에 의존하며, 마팅게일 무드리프트 귀무가설에서는 비용 후 -0.0086%p로 음수가 됩니다. 러셀2000·VIX 종가와 GOOGL 8/10 종가는 확보 실패로 미확정 표기했습니다.
+최종 투자 판단과 그 결과에 대한 책임은 전적으로 투자자 본인에게 있습니다.
+</div>
+<div class="backfoot"><a href="../index.html#reports">← 리포트 목록으로 돌아가기</a></div>
+<div class="foot">TradingAgents (arXiv:2412.20138) 프레임워크 기반 · 경량판 v2 7역할 파이프라인 · 웹 조사 약 126회(상한 200) ·
+데이터 기준 2026-08-10 미국장 마감</div>
+</div></body></html>
