@@ -1,0 +1,471 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>모형평가 2026-08</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f9f9f7;--surface:#fcfcfb;--ink:#0b0b0b;--accent:#2a78d6;--up:#006300;--dn:#d03b3b;
+--mut:#6b6a66;--line:rgba(11,11,11,.11);--amber:#b8860b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:'Noto Sans KR','Noto Sans CJK KR',system-ui,-apple-system,sans-serif;
+ font-size:15px;line-height:1.75;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1180px;margin:0 auto;padding:34px 22px 90px}
+h1{font-size:31px;font-weight:900;letter-spacing:-.03em;margin:6px 0 6px;line-height:1.25}
+h2{font-size:20px;font-weight:800;letter-spacing:-.02em;margin:48px 0 14px;padding-bottom:9px;
+ border-bottom:2px solid var(--ink)}
+h3{font-size:16px;font-weight:800;margin:28px 0 9px;letter-spacing:-.01em}
+p{margin:11px 0}
+.lede{color:var(--mut);font-size:13.5px;margin:0 0 22px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:20px 22px;margin:16px 0}
+.card.warn{border-color:rgba(208,59,59,.35);background:#fdf7f6}
+.card.note{background:#f4f6f9;border-color:rgba(42,120,214,.25)}
+.grade{display:flex;flex-wrap:wrap;align-items:center;gap:16px;background:var(--ink);color:#fff;
+ border-radius:13px;padding:20px 24px;margin:18px 0 8px}
+.grade .big{font-size:34px;font-weight:900;letter-spacing:-.03em;color:#ff8b8b}
+.grade .txt{font-size:13.5px;line-height:1.6;opacity:.92}
+.tally{display:flex;gap:8px;flex-wrap:wrap;margin:14px 0 0}
+.tally span{font-size:12.5px;font-weight:700;padding:5px 13px;border-radius:99px;border:1px solid var(--line);background:#fff}
+.scroll{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0;border:1px solid var(--line);border-radius:11px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;font-size:13.5px;min-width:640px}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+th{background:#f2f1ed;font-weight:800;font-size:12.5px;white-space:nowrap;position:sticky;top:0}
+td.num{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+td.ctr{text-align:center;white-space:nowrap}
+td.blk{font-weight:800;font-size:12.5px;white-space:nowrap;color:var(--mut)}
+td.tk{font-weight:800}
+tr:last-child td{border-bottom:none}
+.f{font-size:11.5px;color:var(--mut);font-family:ui-monospace,SFMono-Regular,Menlo,monospace;margin-top:3px;line-height:1.5}
+.sub{font-size:11.5px;color:var(--mut);font-weight:400}
+.up{color:var(--up);font-weight:700} .dn{color:var(--dn);font-weight:700}
+.bd{display:inline-block;font-size:11.5px;font-weight:800;padding:2px 10px;border-radius:99px;color:#fff}
+.bd.g{background:var(--up)} .bd.a{background:var(--amber)} .bd.r{background:var(--dn)}
+.kpi{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));gap:11px;margin:16px 0}
+.kpi div{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.kpi .l{font-size:11.5px;color:var(--mut);font-weight:700;letter-spacing:.01em}
+.kpi .v{font-size:22px;font-weight:900;letter-spacing:-.02em;margin-top:3px;font-variant-numeric:tabular-nums}
+.kpi .n{font-size:11px;color:var(--mut);margin-top:2px;line-height:1.45}
+ol,ul{padding-left:21px;margin:11px 0} li{margin:7px 0}
+.find{border-left:3px solid var(--accent);padding:2px 0 2px 16px;margin:22px 0}
+.find h3{margin:0 0 6px}
+code{font-family:ui-monospace,SFMono-Regular,Menlo,monospace;font-size:12.5px;background:#f2f1ed;padding:1px 5px;border-radius:4px}
+footer{margin-top:56px;padding-top:18px;border-top:1px solid var(--line);font-size:12px;color:var(--mut)}
+@media(max-width:640px){.wrap{padding:24px 14px 70px} h1{font-size:25px} h2{font-size:18px} .grade .big{font-size:28px}}
+</style>
+<!-- ═══ 데이터스테이션 공통 상단바 — index 헤더 이식 + 뒤로가기 (공통 삽입 블록) ═══ -->
+<style>
+.ds-topbar{position:sticky;top:0;z-index:900;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+ border-bottom:1px solid rgba(11,11,11,.10);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif}
+.ds-topbar *{box-sizing:border-box}
+.ds-topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px;height:60px}
+.ds-brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;
+ font-size:15.5px;color:#0b0b0b;text-decoration:none;min-width:0;white-space:nowrap}
+.ds-logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.ds-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.ds-logo .ds-fb{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.ds-logo .ds-fb svg{width:17px;height:17px}
+.ds-nav{display:flex;gap:4px;align-items:center;margin-left:auto;overflow-x:auto;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ds-nav::-webkit-scrollbar{display:none}
+a.ds-tab{font-size:13px;font-weight:700;color:#52514e;border:1px solid transparent;
+ padding:6px 15px;border-radius:99px;text-decoration:none;white-space:nowrap;
+ transition:background .15s,color .15s,border-color .15s}
+a.ds-tab:hover{background:#f2f1ed;color:#0b0b0b}
+a.ds-tab[aria-current="true"]{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+a.ds-back{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:#2a78d6;color:#fff;
+ font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:99px;border:1px solid #2a78d6;
+ text-decoration:none;white-space:nowrap;transition:opacity .15s}
+a.ds-back:hover{opacity:.85}
+@media(max-width:640px){
+  .ds-topbar-in{height:56px;gap:10px;padding:0 15px}
+  .ds-brand{font-size:13px;gap:8px}
+  .ds-logo{width:26px;height:26px;flex:0 0 26px}
+  .ds-full{display:none}
+  a.ds-tab{font-size:12px;padding:6px 11px}
+  a.ds-back{font-size:12px;padding:7px 13px}
+}
+@media(max-width:540px){
+  .ds-txt{display:none}
+  .ds-nav{gap:2px}
+  a.ds-tab{font-size:11.5px;padding:6px 9px}
+}
+@media print{.ds-topbar{display:none}}
+</style>
+<div class="ds-topbar" id="ds-topbar">
+  <div class="ds-topbar-in">
+    <a class="ds-brand" href="../index.html" data-ds-home="">
+      <span class="ds-logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고" id="ds-logo-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="ds-fb"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="ds-txt">데이터스테이션 나스닥<span class="ds-full"> 분석 리포트</span></span>
+    </a>
+    <nav class="ds-nav">
+      <a class="ds-tab" href="../index.html#reports" data-ds-home="#reports">일일 리포트</a>
+      <a class="ds-tab" href="../index.html#eval" data-ds-home="#eval" aria-current="true">모형 안정성 평가</a>
+      <a class="ds-tab" href="../index.html#about" data-ds-home="#about">시스템 개요</a>
+    </nav>
+    <a class="ds-back" id="ds-back" href="../index.html#eval" data-ds-home="#eval">← 목록으로</a>
+  </div>
+</div>
+<script>
+(function(){
+  if(!/\/(reports|eval)\/[^\/]*$/i.test(location.pathname)){
+    document.querySelectorAll('#ds-topbar [data-ds-home]').forEach(function(a){
+      a.setAttribute('href','index.html'+a.getAttribute('data-ds-home'));
+    });
+    var im=document.getElementById('ds-logo-img'); if(im) im.src='image/logo.png';
+  }
+  var bk=document.getElementById('ds-back');
+  if(bk) bk.addEventListener('click',function(e){
+    try{
+      if(document.referrer && new URL(document.referrer).origin===location.origin && history.length>1){
+        e.preventDefault(); history.back();
+      }
+    }catch(err){}
+  });
+})();
+</script>
+<!-- ═══ /공통 상단바 ═══ -->
+
+<div class="wrap">
+
+<h1>월간 모형평가 — 2026년 8월</h1>
+<p class="lede">평가기준일 2026-08-27 미국장 마감 · 생성 2026-08-28 KST · 증권사 모델리스크관리(MRM) 검증 체계 준용<br>
+평가 대상 20개 코호트 · 62개 포지션 (성숙 32 / 미성숙 30) · 고유 티커 26종</p>
+
+<div class="grade">
+  <div class="big">Red</div>
+  <div class="txt"><b>종합 모형위험등급 Red — 재보정 필요</b><br>
+  확정지표 17개 중 Green 3 / Amber 6 / Red 8. 판정 규칙상 Red 3개 이상 → Red.<br>
+  <b>단, 8개 Red는 서로 독립이 아니라 3개 근본원인으로 수렴한다</b> — ① 승률 추정의 구조적 과소, ② 진입 지정가의 체계적 저가 제시, ③ 유니버스·비중 정책의 급격한 이동.</div>
+</div>
+<div class="tally"><span>직전월(7월) 등급: Amber</span><span>확정 성숙 코호트: 0건 → 4건</span><span>첫 완전 평가 회차</span></div>
+
+<h2>0. 성숙도 고지 — 무엇이 확정이고 무엇이 잠정인가</h2>
+
+<div class="card warn">
+<p style="margin-top:0"><b>이번 회차는 이 시스템의 첫 "확정 성과평가"다.</b> 보유기간 20영업일 설계상 7월 코호트는 8월 하순에야 관측창이 닫힌다.
+2026-08-27 종가 기준으로 <b>7월 코호트 4건(32 포지션)이 20영업일을 통과</b>했고, 이들만이 성과계열(B·C·D·F) 등급 산정에 들어간다.</p>
+<p><b>8월에 발행된 15개 코호트(29 포지션)는 전부 미성숙</b>(경과 0~18영업일)이다. 이들의 승률·Brier·Gini·수익률은 <b>잠정치로만 표기하고 등급 산정에서 제외</b>했다.
+2026-07-31 코호트(REGN 1건)는 19/20영업일로 <b>단 1영업일 차이로 미성숙</b>이다 — 창 종료일 2026-08-28의 정규장 종가가 아직 존재하지 않기 때문이며, 값을 지어내지 않고 미성숙으로 분류했다.</p>
+<p style="margin-bottom:0">집행가능성(A)·모형안정성(E)·운영품질(G)은 성숙도와 무관한 사전·프로세스 지표이므로 전 코호트에서 확정 산출했다.</p>
+</div>
+
+<div class="scroll"><table>
+<tr><th>코호트 기준일</th><th>포지션</th><th>경과/창</th><th>성숙도</th><th>구분</th><th>평균 진입가 괴리</th><th>체결</th></tr>
+<tr><td>2026-07-24</td><td class='ctr'>10</td><td class='ctr'>20/20</td><td class='ctr'>100%</td><td class='ctr'><b>성숙</b></td><td class='num up'>+1.61%</td><td class='ctr'>4/10</td></tr>
+<tr><td>2026-07-27</td><td class='ctr'>6</td><td class='ctr'>20/20</td><td class='ctr'>100%</td><td class='ctr'><b>성숙</b></td><td class='num up'>+2.86%</td><td class='ctr'>2/6</td></tr>
+<tr><td>2026-07-28</td><td class='ctr'>6</td><td class='ctr'>20/20</td><td class='ctr'>100%</td><td class='ctr'><b>성숙</b></td><td class='num up'>+3.90%</td><td class='ctr'>4/6</td></tr>
+<tr><td>2026-07-30</td><td class='ctr'>10</td><td class='ctr'>20/20</td><td class='ctr'>100%</td><td class='ctr'><b>성숙</b></td><td class='num up'>+5.34%</td><td class='ctr'>1/10</td></tr>
+<tr><td>2026-07-31</td><td class='ctr'>1</td><td class='ctr'>19/20</td><td class='ctr'>95%</td><td class='ctr'>미성숙</td><td class='num up'>+5.63%</td><td class='ctr'>0/1</td></tr>
+<tr><td>2026-08-03</td><td class='ctr'>2</td><td class='ctr'>18/20</td><td class='ctr'>90%</td><td class='ctr'>미성숙</td><td class='num up'>+5.79%</td><td class='ctr'>1/2</td></tr>
+<tr><td>2026-08-04</td><td class='ctr'>4</td><td class='ctr'>17/20</td><td class='ctr'>85%</td><td class='ctr'>미성숙</td><td class='num up'>+7.47%</td><td class='ctr'>1/4</td></tr>
+<tr><td>2026-08-06</td><td class='ctr'>2</td><td class='ctr'>15/20</td><td class='ctr'>75%</td><td class='ctr'>미성숙</td><td class='num up'>+6.42%</td><td class='ctr'>0/2</td></tr>
+<tr><td>2026-08-07</td><td class='ctr'>2</td><td class='ctr'>14/20</td><td class='ctr'>70%</td><td class='ctr'>미성숙</td><td class='num up'>+2.86%</td><td class='ctr'>2/2</td></tr>
+<tr><td>2026-08-10</td><td class='ctr'>1</td><td class='ctr'>13/20</td><td class='ctr'>65%</td><td class='ctr'>미성숙</td><td class='num up'>+3.74%</td><td class='ctr'>1/1</td></tr>
+<tr><td>2026-08-11</td><td class='ctr'>1</td><td class='ctr'>12/20</td><td class='ctr'>60%</td><td class='ctr'>미성숙</td><td class='num up'>+1.84%</td><td class='ctr'>1/1</td></tr>
+<tr><td>2026-08-12</td><td class='ctr'>1</td><td class='ctr'>11/20</td><td class='ctr'>55%</td><td class='ctr'>미성숙</td><td class='num up'>+2.09%</td><td class='ctr'>1/1</td></tr>
+<tr><td>2026-08-13</td><td class='ctr'>1</td><td class='ctr'>10/20</td><td class='ctr'>50%</td><td class='ctr'>미성숙</td><td class='num up'>+2.95%</td><td class='ctr'>1/1</td></tr>
+<tr><td>2026-08-17</td><td class='ctr'>2</td><td class='ctr'>8/20</td><td class='ctr'>40%</td><td class='ctr'>미성숙</td><td class='num up'>+0.17%</td><td class='ctr'>1/2</td></tr>
+<tr><td>2026-08-18</td><td class='ctr'>2</td><td class='ctr'>7/20</td><td class='ctr'>35%</td><td class='ctr'>미성숙</td><td class='num up'>+0.96%</td><td class='ctr'>1/2</td></tr>
+<tr><td>2026-08-19</td><td class='ctr'>2</td><td class='ctr'>6/20</td><td class='ctr'>30%</td><td class='ctr'>미성숙</td><td class='num up'>+3.80%</td><td class='ctr'>1/2</td></tr>
+<tr><td>2026-08-20</td><td class='ctr'>2</td><td class='ctr'>5/20</td><td class='ctr'>25%</td><td class='ctr'>미성숙</td><td class='num up'>+2.65%</td><td class='ctr'>1/2</td></tr>
+<tr><td>2026-08-25</td><td class='ctr'>2</td><td class='ctr'>2/20</td><td class='ctr'>10%</td><td class='ctr'>미성숙</td><td class='num up'>+0.41%</td><td class='ctr'>2/2</td></tr>
+<tr><td>2026-08-26</td><td class='ctr'>4</td><td class='ctr'>1/20</td><td class='ctr'>5%</td><td class='ctr'>미성숙</td><td class='num dn'>-1.08%</td><td class='ctr'>1/4</td></tr>
+<tr><td>2026-08-27</td><td class='ctr'>1</td><td class='ctr'>0/20</td><td class='ctr'>0%</td><td class='ctr'>미성숙</td><td class='num up'>+2.03%</td><td class='ctr'>0/1</td></tr>
+</table></div>
+<p class="sub">진입가 괴리 = (기준일 종가 − 제시 진입가) / 제시 진입가 × 100. 양수 = 제시 진입가가 종가보다 낮음(눌림목 대기).</p>
+
+<h2>1. 종합 스코어카드 — 확정 지표</h2>
+<div class="scroll"><table>
+<tr><th>블록</th><th>지표 · 산출식</th><th>값</th><th>판정</th></tr>
+<tr><td class='blk'>A 집행가능성</td><td>체결률 (성숙 코호트)<div class='f'>체결건수 / 경과보유건수 × 100</div></td><td class='num'>34.4% <span class='sub'>(32건 중 11건)</span></td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'></td><td>진입가 절대괴리<div class='f'>mean(|(기준일 종가 − 제시 진입가)/제시 진입가|) × 100</div></td><td class='num'>3.70%</td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+<tr><td class='blk'></td><td>괴리 드리프트 (8월내)<div class='f'>최신 코호트 평균 괴리 − 최초 코호트 평균 괴리</div></td><td class='num'>-3.76%p</td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+<tr><td class='blk'>B 예측정확도</td><td>방향적중률<div class='f'>P(실현수익률 > 0) × 100</div></td><td class='num'>84.4%</td><td class='ctr'><span class="bd g">Green</span></td></tr>
+<tr><td class='blk'></td><td>예측편의 Bias<div class='f'>mean(경과보정 예측 − 실현), 경과보정 = 예측 × (경과/20)</div></td><td class='num'>+3.51%p</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'>C 캘리브레이션</td><td>Brier Score<div class='f'>(1/N) Σ (pᵢ − oᵢ)²</div></td><td class='num'>0.273</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'></td><td>ECE<div class='f'>Σₖ (nₖ/N) × |실현정확도ₖ − 평균예측확률ₖ|</div></td><td class='num'>38.1%p</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'></td><td>과신비율<div class='f'>평균 예측승률 / 실현 승률 (＜1 = 과소신뢰)</div></td><td class='num'>0.552</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'>D 변별력</td><td>Rank IC<div class='f'>corr(기대값 순위, 실현수익률 순위) — Spearman</div></td><td class='num'>+0.193</td><td class='ctr'><span class="bd g">Green</span></td></tr>
+<tr><td class='blk'></td><td>Gini<div class='f'>2 × AUROC − 1</div></td><td class='num'>-0.065 <span class='sub'>(AUROC 0.467)</span></td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'>E 모형안정성</td><td>종합 PSI<div class='f'>7개 특성 PSI의 평균, PSI = Σ (Aᵢ − Eᵢ) ln(Aᵢ/Eᵢ)</div></td><td class='num'>0.563</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'></td><td>섹터 PSI<div class='f'>섹터 구성비에 대한 PSI</div></td><td class='num'>0.676</td><td class='ctr'><span class="bd r">Red</span></td></tr>
+<tr><td class='blk'>F 성과·리스크</td><td>손절 초과 (트래픽라이트)<div class='f'>기대초과 = Σ(1 − 승률ᵢ) × (경과ᵢ/20), Green: 실제 ≤ 기대+1</div></td><td class='num'>실제 4건 / 기대 17.1건</td><td class='ctr'><span class="bd g">Green</span></td></tr>
+<tr><td class='blk'>G 운영품질</td><td>리포트 발행률<div class='f'>발행 회차 / 예정 회차 × 100 (8/10부터 주 2회 체제 분모)</div></td><td class='num'>81.8% <span class='sub'>(예정 11회 중 9회)</span></td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+<tr><td class='blk'></td><td>파이프라인 완주율<div class='f'>단계 Ⅰ~Ⅴ 전부 완료 회차 / 발행 회차 × 100</div></td><td class='num'>93.3% <span class='sub'>(15회 중 14회)</span></td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+<tr><td class='blk'></td><td>회차당 사고건수<div class='f'>자기기록 데이터·프로세스 사고 총건수 / 발행 회차</div></td><td class='num'>2.33건 <span class='sub'>(총 35건)</span></td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+<tr><td class='blk'></td><td>산식 무결성<div class='f'>예상수익률·손익비·기대값 재계산 대조 (허용오차 ±0.06)</div></td><td class='num'>위반 2건 <span class='sub'>(186개 검증 중)</span></td><td class='ctr'><span class="bd a">Amber</span></td></tr>
+</table></div>
+<p class="sub">판정 기준은 프로토콜 3절 그대로. 산식 무결성은 프로토콜이 Green 조건(0건)만 정의하므로, 비영(非零)이나 단일 회차에 국한된 2건은 Amber로 처리했다.</p>
+
+<h3>잠정 지표 — 8월 코호트 (등급 산정 제외)</h3>
+<div class="kpi">
+<div><div class="l">신호트랙 평균 실현</div><div class="v dn">-0.50%</div><div class="n">28건 · 확정승 11·확정패 17 포함 미결</div></div>
+<div><div class="l">Profit Factor</div><div class="v">0.76</div><div class="n">Σ이익 / |Σ손실| · 1 미만</div></div>
+<div><div class="l">실집행 체결률</div><div class="v">53.6%</div><div class="n">28건 중 15건 체결</div></div>
+<div><div class="l">실집행 평균 실현</div><div class="v dn">-1.32%</div><div class="n">15건 · 3승 12패(MTM 포함)</div></div>
+<div><div class="l">승률 구간 (우측절단)</div><div class="v">6.9~79.3%</div><div class="n">확정승 2 / 확정패 6 / 미결 21</div></div>
+</div>
+<p>7월 코호트가 강한 상승장에서 성과를 낸 것과 대조적으로, <b>8월 코호트는 잠정 기준 마이너스</b>다. 다만 평균 경과가 9.4영업일에 불과해 이 수치는 확정이 아니며, 다음 회차(2026-09-01 이후)에 뒤집힐 수 있다.</p>
+
+<h2>2. 블록 A — 집행가능성</h2>
+<div class="kpi">
+<div><div class="l">체결률 (성숙 코호트)</div><div class="v dn">34.4%</div><div class="n">32건 중 11건 · 직전월 53.3%</div></div>
+<div><div class="l">체결률 (8월, 잠정)</div><div class="v">53.6%</div><div class="n">28건 중 15건</div></div>
+<div><div class="l">진입가 절대괴리</div><div class="v">3.70%</div><div class="n">전 62건 · 직전월 3.35%</div></div>
+<div><div class="l">평균 괴리 (부호)</div><div class="v up">+3.23%</div><div class="n">체계적으로 종가보다 낮게 제시</div></div>
+<div><div class="l">괴리 드리프트 (8월내)</div><div class="v">-3.76%p</div><div class="n">08-03 +5.79% → 08-27 +2.03%</div></div>
+</div>
+<p><b>7월 코호트 체결률 34.4%는 직전월 잠정치(53.3%)에서 크게 악화됐고 Amber 하한(40%)도 밑돈다.</b>
+원인은 명확하다 — 평균 괴리가 <b>+3.23%로 일관되게 양수</b>다. 즉 진입 지정가를 기준일 종가보다 체계적으로 낮게 제시했고,
+7월 말~8월 초 시장이 되돌림 없이 상승하면서 지정가가 한 번도 닿지 않은 종목이 21건 발생했다.</p>
+<p>결정적 사례는 2026-07-30 코호트다. 평균 괴리 <b>+5.34%</b>, 10건 중 <b>단 1건만 체결</b>됐다.
+AMAT는 진입 $453 대비 종가 $501.77(괴리 +10.77%), ADBE는 $225 대비 $247.90(+10.18%)로 제시됐고 두 종목 모두 20영업일 내내 지정가에 닿지 않았다.
+신호트랙에서 ADBE는 목표를 달성해 +14.67%를 냈지만, <b>실집행 트랙에서는 수익이 0이다.</b></p>
+<div class="card note"><p style="margin:0"><b>직전월 미해결 질문에 대한 답.</b> 7월 평가는 "진입가 괴리 확대가 <i>의도된 보수화</i>인지 <i>가격 기준일 오염</i>인지 판별 불가"라며,
+07-30 코호트 체결률이 30% 미만이면 후자를 의심하라고 적었다. <b>실측 결과 10% (10건 중 1건)</b>다.
+다만 8월 들어 괴리가 +5.79% → +2.03%로 축소된 것은 오염이 지속되지 않았음을 시사하므로, <b>7월 말의 일시적 가격 기준일 문제 + 상승장 미체결의 결합</b>으로 판정한다.
+8월 체결률 53.6%는 이 해석과 일치한다.</p></div>
+
+<h2>3. 블록 E — 모형안정성 (PSI · CSI)</h2>
+<div class="kpi">
+<div><div class="l">종합 PSI</div><div class="v dn">0.563</div><div class="n">7특성 평균 · 0.25 이상 재보정</div></div>
+<div><div class="l">섹터 PSI</div><div class="v dn">0.676</div><div class="n">직전월 0.936</div></div>
+<div><div class="l">종목 회전율</div><div class="v">69.2%</div><div class="n">직전월 55.8% · 등급 미산정</div></div>
+<div><div class="l">유니버스 크기</div><div class="v">23 → 11</div><div class="n">7월 고유티커 → 8월 고유티커</div></div>
+<div><div class="l">평균 비중</div><div class="v">5.85 → 4.62%</div><div class="n">회차당 투자비중 29~58% → 4~18%</div></div>
+</div>
+<p class="sub">Expected = 7월 전 코호트 풀(33 포지션), Actual = 8월 전 코호트 풀(29 포지션).
+프로토콜은 "전전월 마지막 코호트 vs 당월 마지막 코호트"를 규정하나, 해당 코호트가 각각 1건(07-31 REGN)·1건(08-27 MSFT)이라 PSI가 정의되지 않는다. <b>월 풀 대 월 풀로 대체했고 그 사실을 여기 명시한다.</b></p>
+<div class="scroll"><table>
+<tr><th>특성 (CSI)</th><th>PSI</th><th>7월 평균</th><th>8월 평균</th><th>Δ 이동폭</th><th>해석</th></tr>
+<tr><td>예상수익률(%)</td><td class='num'>0.175</td><td class='num'>10.23</td><td class='num'>10.21</td><td class='num dn'>-0.02</td><td class='ctr'>안정</td></tr>
+<tr><td>손절폭 절대값(%)</td><td class='num'>0.278</td><td class='num'>5.63</td><td class='num'>5.40</td><td class='num dn'>-0.23</td><td class='ctr'>분포만 이동</td></tr>
+<tr><td>손익비 R/R</td><td class='num'>0.065</td><td class='num'>1.84</td><td class='num'>1.89</td><td class='num up'>+0.05</td><td class='ctr'>안정</td></tr>
+<tr><td>승률(%)</td><td class='num'>1.131</td><td class='num'>46.33</td><td class='num'>45.83</td><td class='num dn'>-0.51</td><td class='ctr'>드리프트</td></tr>
+<tr><td>기대값(%)</td><td class='num'>0.552</td><td class='num'>1.69</td><td class='num'>1.64</td><td class='num dn'>-0.05</td><td class='ctr'>분포만 이동</td></tr>
+<tr><td>비중(%)</td><td class='num'>1.063</td><td class='num'>5.85</td><td class='num'>4.62</td><td class='num dn'>-1.23</td><td class='ctr'>드리프트</td></tr>
+<tr><td>섹터 (범주형)</td><td class='num'>0.676</td><td colspan='3' class='sub'>소프트웨어 33.3%→13.8% · 인터넷/미디어 21.2%→58.6% · 반도체/장비 24.2%→13.8%</td><td class='ctr'>드리프트</td></tr>
+</table></div>
+<p class="sub">프로토콜 소표본 규칙: <b>PSI와 Δ가 같은 방향을 가리킬 때만 드리프트로 판정</b>한다. PSI만 크고 Δ가 0에 가까우면 "평균은 그대로인데 분포만 벌어진 것" — 양극화 신호다.</p>
+
+<div class="find">
+<h3>승률 CSI 1.131 — 평균은 그대로, 분포는 붕괴</h3>
+<p>평균 승률은 46.33% → 45.83%로 <b>0.5%p밖에 움직이지 않았다.</b> 그런데 PSI는 1.131로 재보정 임계(0.25)의 4.5배다.
+구간별로 보면 이유가 드러난다 — <code>[0,42)</code> 구간이 3.0% → <b>31.0%</b>로 10배 늘고, <code>[45,48)</code> 중간 구간은 36.4% → <b>10.3%</b>로 붕괴했다. <code>[50,∞)</code>는 27.3% → 37.9%로 늘었다.
+<b>모형이 "대체로 45~48%"라고 말하던 것을 그만두고, "아주 낮음" 또는 "높음"으로 갈라 말하기 시작했다.</b>
+직전월 승률 CSI는 0.110이었다 — 한 달 만에 10배다.</p>
+</div>
+<div class="find">
+<h3>비중 CSI 1.063 · 섹터 PSI 0.676 — 정책 자체가 바뀌었다</h3>
+<p>비중은 PSI와 Δ가 <b>둘 다 유의</b>한 유일한 특성이다(Δ −1.23%p). <code>[7,∞)</code> 고비중 구간이 36.4% → <b>3.4%</b>로 사라졌고, <code>(0,4)</code> 최소비중 구간이 27.3% → 62.1%로 늘었다.
+회차당 총 투자비중은 7월 29~58%에서 8월 <b>4~18%</b>로 내려갔다. 섹터에서는 소프트웨어 33.3% → 13.8%, 인터넷/미디어 21.2% → <b>58.6%</b>로 이동했다.
+<b>이것은 예측의 드리프트가 아니라 리스크 정책의 전환이다.</b> 의도된 것이라면 설계문서에 기록돼야 하고, 의도되지 않았다면 그 자체가 사고다.</p>
+</div>
+<div class="find">
+<h3>회전율 69.2%가 감추고 있는 정반대의 문제</h3>
+<p>월간 티커 집합 기준 회전율은 55.8% → 69.2%로 악화됐다(7월 23종목, 8월 11종목, 공통 8종목).
+그런데 <b>8월 내부를 보면 정반대다</b> — 29개 포지션 중 <b>15개가 동일 티커·동일 진입가의 재게시</b>다.
+AMZN $260.50이 6개 코호트에, NFLX $76.00이 5개 코호트에 그대로 반복 등재됐다. 실질적인 신규 추천은 14건뿐이다.
+즉 <b>월 단위로는 종목 풀을 통째로 갈아치우면서, 주 단위로는 같은 포지션을 복사하고 있다.</b>
+7월 평가의 권고 4("회전율 상한 도입")는 표면적으로 이행된 것처럼 보이지만, 실제로는 유니버스를 절반으로 줄여 회전할 종목 자체를 없앤 결과다.</p>
+</div>
+
+<h2>4. 블록 G — 운영·프로세스 품질</h2>
+<div class="kpi">
+<div><div class="l">발행률 (주2회 체제)</div><div class="v">81.8%</div><div class="n">예정 11회 중 9회</div></div>
+<div><div class="l">발행률 (영업일 기준)</div><div class="v">78.9%</div><div class="n">19영업일 중 15회</div></div>
+<div><div class="l">파이프라인 완주율</div><div class="v">93.3%</div><div class="n">15회 중 14회 (08-10 미완주)</div></div>
+<div><div class="l">회차당 사고</div><div class="v">2.33건</div><div class="n">총 35건 · 직전월 4.2건</div></div>
+<div><div class="l">산식 위반</div><div class="v dn">2건</div><div class="n">186개 검증 · 직전월 0건</div></div>
+<div><div class="l">규칙 위반</div><div class="v up">0건</div><div class="n">R/R·기대값·손절폭 전건 충족</div></div>
+</div>
+<p><b>회차당 사고가 4.2건 → 2.33건으로 거의 반감</b>했다. 7월 평가가 "모형의 취약점은 추론이 아니라 입력"이라고 지적한 데 대한 실질적 개선이다. 미발행일은 08-05·08-14·08-21·08-24 4일이다.</p>
+<p><b>그러나 산식 무결성이 처음으로 깨졌다.</b> 2026-08-07 코호트의 AMZN과 AVGO 두 건에서 기대값 기재치가 재계산치와 어긋난다.</p>
+<div class="scroll"><table>
+<tr><th>코호트</th><th>종목</th><th>항목</th><th>리포트 기재</th><th>재계산</th><th>차이</th><th>검증식</th></tr>
+<tr><td>2026-08-07</td><td class="tk">AMZN</td><td>기대값</td><td class="num">+0.182%</td><td class="num">+0.623%</td><td class="num dn">0.441</td><td class="f">0.389×10.94 + 0.611×(−5.946)</td></tr>
+<tr><td>2026-08-07</td><td class="tk">AVGO</td><td>기대값</td><td class="num">+0.137%</td><td class="num">+0.614%</td><td class="num dn">0.477</td><td class="f">0.390×13.21 + 0.610×(−7.439)</td></tr>
+</table></div>
+<p>두 건 모두 <b>같은 회차·같은 항목</b>이며 방향도 같다(기재치가 재계산치보다 낮음). 무작위 반올림 오차가 아니라 <b>그 회차에서 기대값 산출 경로가 한 번 달라진 것</b>으로 보인다.
+예상수익률·손익비는 62건 전부 일치했으므로 결함은 기대값 산출 단계에 국한된다. 규칙 위반(비중&gt;0인데 R/R&lt;1.5, 기대값&lt;0, 손절&lt;−8%)은 0건이다 — 2026-07-30 META의 손절 −8.000%는 상한 정확히 경계로 위반이 아니다.</p>
+
+<h2>5. 종목별 예측 대비 실제 — 성숙 코호트 32건 (확정)</h2>
+<p class="sub"><b>실집행 트랙</b>: 제시 지정가에 저가≤진입가≤고가인 날 체결로 간주, 미체결이면 성과 없음.
+<b>신호 트랙</b>: 기준일 종가 진입 가정, 목표·손절을 그 종가에 모형 제시 수익률·손실률로 재설정. 같은 봉에서 목표·손절 동시 터치는 손절 우선(보수적).</p>
+<div class="scroll"><table>
+<tr><th>기준일</th><th>종목</th><th>진입</th><th>목표</th><th>손절</th><th>예측</th><th>승률</th><th>비중</th><th>기준일 종가</th><th>괴리</th><th>실집행</th><th>실현</th><th>신호</th><th>실현</th></tr>
+<tr><td>07-24</td><td class='tk'>ADBE</td><td class='num'>218.00</td><td class='num'>236.00</td><td class='num'>207.50</td><td class='num'>+8.26%</td><td class='num'>52%</td><td class='num'>10%</td><td class='num'>225.11</td><td class='num up'>+3.26%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+8.26%</td></tr>
+<tr><td>07-24</td><td class='tk'>GOOGL</td><td class='num'>313.00</td><td class='num'>335.00</td><td class='num'>300.50</td><td class='num'>+7.03%</td><td class='num'>50%</td><td class='num'>8%</td><td class='num'>319.74</td><td class='num up'>+2.15%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+7.03%</td></tr>
+<tr><td>07-24</td><td class='tk'>TMUS</td><td class='num'>176.00</td><td class='num'>190.00</td><td class='num'>167.50</td><td class='num'>+7.95%</td><td class='num'>50%</td><td class='num'>7%</td><td class='num'>180.09</td><td class='num up'>+2.32%</td><td class='ctr'>보유중</td><td class='num up'>+4.00%</td><td class='ctr'>손절</td><td class='num dn'>-4.83%</td></tr>
+<tr><td>07-24</td><td class='tk'>ROP</td><td class='num'>356.00</td><td class='num'>380.00</td><td class='num'>345.00</td><td class='num'>+6.74%</td><td class='num'>48%</td><td class='num'>6%</td><td class='num'>367.34</td><td class='num up'>+3.19%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+6.74%</td></tr>
+<tr><td>07-24</td><td class='tk'>MSFT</td><td class='num'>392.00</td><td class='num'>424.00</td><td class='num'>373.50</td><td class='num'>+8.16%</td><td class='num'>46%</td><td class='num'>5%</td><td class='num'>381.70</td><td class='num dn'>-2.63%</td><td class='ctr'>목표달성</td><td class='num up'>+8.16%</td><td class='ctr'>목표달성</td><td class='num up'>+8.16%</td></tr>
+<tr><td>07-24</td><td class='tk'>INTU</td><td class='num'>292.00</td><td class='num'>312.00</td><td class='num'>283.00</td><td class='num'>+6.85%</td><td class='num'>45%</td><td class='num'>5%</td><td class='num'>296.33</td><td class='num up'>+1.48%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+6.85%</td></tr>
+<tr><td>07-24</td><td class='tk'>AVGO</td><td class='num'>385.00</td><td class='num'>425.00</td><td class='num'>366.00</td><td class='num'>+10.39%</td><td class='num'>42%</td><td class='num'>5%</td><td class='num'>381.92</td><td class='num dn'>-0.80%</td><td class='ctr'>목표달성</td><td class='num up'>+10.39%</td><td class='ctr'>목표달성</td><td class='num up'>+10.39%</td></tr>
+<tr><td>07-24</td><td class='tk'>WDAY</td><td class='num'>133.00</td><td class='num'>146.70</td><td class='num'>126.50</td><td class='num'>+10.30%</td><td class='num'>42%</td><td class='num'>4%</td><td class='num'>135.34</td><td class='num up'>+1.76%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+10.30%</td></tr>
+<tr><td>07-24</td><td class='tk'>DDOG</td><td class='num'>240.00</td><td class='num'>260.00</td><td class='num'>228.50</td><td class='num'>+8.33%</td><td class='num'>42%</td><td class='num'>4%</td><td class='num'>246.86</td><td class='num up'>+2.86%</td><td class='ctr'>목표달성</td><td class='num up'>+8.33%</td><td class='ctr'>목표달성</td><td class='num up'>+8.33%</td></tr>
+<tr><td>07-24</td><td class='tk'>AAPL</td><td class='num'>325.00</td><td class='num'>348.00</td><td class='num'>311.00</td><td class='num'>+7.08%</td><td class='num'>45%</td><td class='num'>4%</td><td class='num'>333.02</td><td class='num up'>+2.47%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>손절</td><td class='num dn'>-4.31%</td></tr>
+<tr><td>07-27</td><td class='tk'>GOOGL</td><td class='num'>324.00</td><td class='num'>355.00</td><td class='num'>306.00</td><td class='num'>+9.57%</td><td class='num'>50%</td><td class='num'>9%</td><td class='num'>326.56</td><td class='num up'>+0.79%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+9.57%</td></tr>
+<tr><td>07-27</td><td class='tk'>ADBE</td><td class='num'>227.00</td><td class='num'>252.00</td><td class='num'>211.00</td><td class='num'>+11.01%</td><td class='num'>52%</td><td class='num'>9%</td><td class='num'>237.75</td><td class='num up'>+4.74%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+11.01%</td></tr>
+<tr><td>07-27</td><td class='tk'>GILD</td><td class='num'>128.00</td><td class='num'>139.00</td><td class='num'>122.00</td><td class='num'>+8.59%</td><td class='num'>46%</td><td class='num'>8%</td><td class='num'>130.52</td><td class='num up'>+1.97%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+8.59%</td></tr>
+<tr><td>07-27</td><td class='tk'>NOW</td><td class='num'>102.00</td><td class='num'>115.00</td><td class='num'>94.00</td><td class='num'>+12.75%</td><td class='num'>50%</td><td class='num'>7%</td><td class='num'>105.56</td><td class='num up'>+3.49%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+12.75%</td></tr>
+<tr><td>07-27</td><td class='tk'>CDNS</td><td class='num'>330.00</td><td class='num'>372.00</td><td class='num'>308.00</td><td class='num'>+12.73%</td><td class='num'>46%</td><td class='num'>7%</td><td class='num'>338.61</td><td class='num up'>+2.61%</td><td class='ctr'>보유중</td><td class='num dn'>-4.27%</td><td class='ctr'>손절</td><td class='num dn'>-6.67%</td></tr>
+<tr><td>07-27</td><td class='tk'>AVGO</td><td class='num'>370.00</td><td class='num'>405.00</td><td class='num'>348.00</td><td class='num'>+9.46%</td><td class='num'>45%</td><td class='num'>4%</td><td class='num'>383.22</td><td class='num up'>+3.57%</td><td class='ctr'>목표달성</td><td class='num up'>+9.46%</td><td class='ctr'>목표달성</td><td class='num up'>+9.46%</td></tr>
+<tr><td>07-28</td><td class='tk'>GOOGL</td><td class='num'>326.00</td><td class='num'>356.00</td><td class='num'>310.00</td><td class='num'>+9.20%</td><td class='num'>52%</td><td class='num'>7%</td><td class='num'>333.71</td><td class='num up'>+2.37%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+9.20%</td></tr>
+<tr><td>07-28</td><td class='tk'>AVGO</td><td class='num'>368.00</td><td class='num'>405.00</td><td class='num'>345.00</td><td class='num'>+10.05%</td><td class='num'>45%</td><td class='num'>5%</td><td class='num'>380.91</td><td class='num up'>+3.51%</td><td class='ctr'>보유중</td><td class='num dn'>-3.06%</td><td class='ctr'>목표달성</td><td class='num up'>+10.05%</td></tr>
+<tr><td>07-28</td><td class='tk'>GILD</td><td class='num'>129.50</td><td class='num'>139.30</td><td class='num'>123.10</td><td class='num'>+7.57%</td><td class='num'>48%</td><td class='num'>5%</td><td class='num'>134.32</td><td class='num up'>+3.72%</td><td class='ctr'>목표달성</td><td class='num up'>+7.57%</td><td class='ctr'>목표달성</td><td class='num up'>+7.57%</td></tr>
+<tr><td>07-28</td><td class='tk'>ADSK</td><td class='num'>225.00</td><td class='num'>248.00</td><td class='num'>214.00</td><td class='num'>+10.22%</td><td class='num'>47%</td><td class='num'>4%</td><td class='num'>237.38</td><td class='num up'>+5.50%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+5.83%</td></tr>
+<tr><td>07-28</td><td class='tk'>BKNG</td><td class='num'>191.00</td><td class='num'>208.00</td><td class='num'>181.50</td><td class='num'>+8.90%</td><td class='num'>45%</td><td class='num'>4%</td><td class='num'>199.31</td><td class='num up'>+4.35%</td><td class='ctr'>목표달성</td><td class='num up'>+8.90%</td><td class='ctr'>목표달성</td><td class='num up'>+8.90%</td></tr>
+<tr><td>07-28</td><td class='tk'>ISRG</td><td class='num'>348.00</td><td class='num'>390.00</td><td class='num'>321.00</td><td class='num'>+12.07%</td><td class='num'>44%</td><td class='num'>4%</td><td class='num'>361.80</td><td class='num up'>+3.97%</td><td class='ctr'>목표달성</td><td class='num up'>+12.07%</td><td class='ctr'>보유중</td><td class='num up'>+2.78%</td></tr>
+<tr><td>07-30</td><td class='tk'>MSFT</td><td class='num'>425.00</td><td class='num'>470.00</td><td class='num'>403.75</td><td class='num'>+10.59%</td><td class='num'>50%</td><td class='num'>8%</td><td class='num'>451.10</td><td class='num up'>+6.14%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+10.59%</td></tr>
+<tr><td>07-30</td><td class='tk'>AMZN</td><td class='num'>251.00</td><td class='num'>278.70</td><td class='num'>238.45</td><td class='num'>+11.04%</td><td class='num'>50%</td><td class='num'>7%</td><td class='num'>235.50</td><td class='num dn'>-6.18%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+11.04%</td></tr>
+<tr><td>07-30</td><td class='tk'>GOOGL</td><td class='num'>312.00</td><td class='num'>345.00</td><td class='num'>296.40</td><td class='num'>+10.58%</td><td class='num'>45%</td><td class='num'>6%</td><td class='num'>333.66</td><td class='num up'>+6.94%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+10.58%</td></tr>
+<tr><td>07-30</td><td class='tk'>NVDA</td><td class='num'>186.00</td><td class='num'>204.00</td><td class='num'>174.84</td><td class='num'>+9.68%</td><td class='num'>48%</td><td class='num'>6%</td><td class='num'>195.04</td><td class='num up'>+4.86%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+9.68%</td></tr>
+<tr><td>07-30</td><td class='tk'>AMAT</td><td class='num'>453.00</td><td class='num'>530.00</td><td class='num'>421.29</td><td class='num'>+17.00%</td><td class='num'>42%</td><td class='num'>5%</td><td class='num'>501.77</td><td class='num up'>+10.77%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-3.87%</td></tr>
+<tr><td>07-30</td><td class='tk'>AVGO</td><td class='num'>362.00</td><td class='num'>410.00</td><td class='num'>333.04</td><td class='num'>+13.26%</td><td class='num'>48%</td><td class='num'>5%</td><td class='num'>387.84</td><td class='num up'>+7.14%</td><td class='ctr'>보유중</td><td class='num up'>+2.64%</td><td class='ctr'>손절</td><td class='num dn'>-8.00%</td></tr>
+<tr><td>07-30</td><td class='tk'>ADBE</td><td class='num'>225.00</td><td class='num'>258.00</td><td class='num'>208.13</td><td class='num'>+14.67%</td><td class='num'>42%</td><td class='num'>5%</td><td class='num'>247.90</td><td class='num up'>+10.18%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+14.67%</td></tr>
+<tr><td>07-30</td><td class='tk'>META</td><td class='num'>520.00</td><td class='num'>598.00</td><td class='num'>478.40</td><td class='num'>+15.00%</td><td class='num'>42%</td><td class='num'>5%</td><td class='num'>539.03</td><td class='num up'>+3.66%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+5.95%</td></tr>
+<tr><td>07-30</td><td class='tk'>ASML</td><td class='num'>1,550.00</td><td class='num'>1,750.00</td><td class='num'>1,426.00</td><td class='num'>+12.90%</td><td class='num'>46%</td><td class='num'>4%</td><td class='num'>1,651.44</td><td class='num up'>+6.54%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+12.90%</td></tr>
+<tr><td>07-30</td><td class='tk'>CEG</td><td class='num'>255.00</td><td class='num'>283.00</td><td class='num'>238.43</td><td class='num'>+10.98%</td><td class='num'>45%</td><td class='num'>4%</td><td class='num'>263.56</td><td class='num up'>+3.36%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+7.15%</td></tr>
+</table></div>
+
+<h3>미성숙 코호트 29건 (8월 · 잠정)</h3>
+<div class="scroll"><table>
+<tr><th>기준일</th><th>종목</th><th>진입</th><th>목표</th><th>손절</th><th>예측</th><th>승률</th><th>비중</th><th>기준일 종가</th><th>괴리</th><th>실집행</th><th>실현</th><th>신호</th><th>실현</th><th>경과</th></tr>
+<tr><td>08-03</td><td class='tk'>MSFT</td><td class='num'>467.37</td><td class='num'>537.48</td><td class='num'>442.00</td><td class='num'>+15.00%</td><td class='num'>29%</td><td class='num'>5%</td><td class='num'>487.65</td><td class='num up'>+4.34%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+3.57%</td><td class='ctr'>18</td></tr>
+<tr><td>08-03</td><td class='tk'>GOOGL</td><td class='num'>348.28</td><td class='num'>382.84</td><td class='num'>326.68</td><td class='num'>+9.92%</td><td class='num'>40%</td><td class='num'>4%</td><td class='num'>373.51</td><td class='num up'>+7.24%</td><td class='ctr'>보유중</td><td class='num dn'>-2.19%</td><td class='ctr'>손절</td><td class='num dn'>-6.20%</td><td class='ctr'>18</td></tr>
+<tr><td>08-04</td><td class='tk'>REGN</td><td class='num'>685.99</td><td class='num'>788.89</td><td class='num'>648.66</td><td class='num'>+15.00%</td><td class='num'>40%</td><td class='num'>6%</td><td class='num'>760.66</td><td class='num up'>+10.88%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+6.19%</td><td class='ctr'>17</td></tr>
+<tr><td>08-04</td><td class='tk'>MSFT</td><td class='num'>475.00</td><td class='num'>546.25</td><td class='num'>446.50</td><td class='num'>+15.00%</td><td class='num'>43%</td><td class='num'>4%</td><td class='num'>492.81</td><td class='num up'>+3.75%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+2.49%</td><td class='ctr'>17</td></tr>
+<tr><td>08-04</td><td class='tk'>AMZN</td><td class='num'>262.01</td><td class='num'>287.20</td><td class='num'>247.00</td><td class='num'>+9.61%</td><td class='num'>41%</td><td class='num'>4%</td><td class='num'>277.42</td><td class='num up'>+5.88%</td><td class='ctr'>보유중</td><td class='num dn'>-2.19%</td><td class='ctr'>손절</td><td class='num dn'>-5.73%</td><td class='ctr'>17</td></tr>
+<tr><td>08-04</td><td class='tk'>DXCM</td><td class='num'>79.50</td><td class='num'>87.85</td><td class='num'>74.50</td><td class='num'>+10.50%</td><td class='num'>41%</td><td class='num'>4%</td><td class='num'>86.94</td><td class='num up'>+9.36%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+2.70%</td><td class='ctr'>17</td></tr>
+<tr><td>08-06</td><td class='tk'>REGN</td><td class='num'>724.79</td><td class='num'>805.00</td><td class='num'>686.00</td><td class='num'>+11.07%</td><td class='num'>53%</td><td class='num'>6%</td><td class='num'>772.11</td><td class='num up'>+6.53%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+4.61%</td><td class='ctr'>15</td></tr>
+<tr><td>08-06</td><td class='tk'>GOOGL</td><td class='num'>336.51</td><td class='num'>380.00</td><td class='num'>312.00</td><td class='num'>+12.92%</td><td class='num'>50%</td><td class='num'>4%</td><td class='num'>357.75</td><td class='num up'>+6.31%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-4.78%</td><td class='ctr'>15</td></tr>
+<tr><td>08-07</td><td class='tk'>AMZN</td><td class='num'>264.87</td><td class='num'>293.85</td><td class='num'>249.12</td><td class='num'>+10.94%</td><td class='num'>39%</td><td class='num'>4%</td><td class='num'>274.48</td><td class='num up'>+3.63%</td><td class='ctr'>보유중</td><td class='num dn'>-3.25%</td><td class='ctr'>손절</td><td class='num dn'>-5.95%</td><td class='ctr'>14</td></tr>
+<tr><td>08-07</td><td class='tk'>AVGO</td><td class='num'>419.00</td><td class='num'>474.35</td><td class='num'>387.83</td><td class='num'>+13.21%</td><td class='num'>39%</td><td class='num'>4%</td><td class='num'>427.76</td><td class='num up'>+2.09%</td><td class='ctr'>손절</td><td class='num dn'>-7.44%</td><td class='ctr'>손절</td><td class='num dn'>-7.44%</td><td class='ctr'>14</td></tr>
+<tr><td>08-10</td><td class='tk'>VRTX</td><td class='num'>505.00</td><td class='num'>546.17</td><td class='num'>480.00</td><td class='num'>+8.15%</td><td class='num'>56%</td><td class='num'>5%</td><td class='num'>523.91</td><td class='num up'>+3.74%</td><td class='ctr'>목표달성</td><td class='num up'>+8.15%</td><td class='ctr'>보유중</td><td class='num up'>+4.51%</td><td class='ctr'>13</td></tr>
+<tr><td>08-11</td><td class='tk'>ASML</td><td class='num'>1,766.87</td><td class='num'>1,999.96</td><td class='num'>1,645.00</td><td class='num'>+13.19%</td><td class='num'>51%</td><td class='num'>8%</td><td class='num'>1,799.38</td><td class='num up'>+1.84%</td><td class='ctr'>보유중</td><td class='num dn'>-1.80%</td><td class='ctr'>보유중</td><td class='num dn'>-3.58%</td><td class='ctr'>12</td></tr>
+<tr><td>08-12</td><td class='tk'>NVDA</td><td class='num'>219.51</td><td class='num'>236.54</td><td class='num'>208.32</td><td class='num'>+7.76%</td><td class='num'>50%</td><td class='num'>6%</td><td class='num'>224.09</td><td class='num up'>+2.09%</td><td class='ctr'>손절</td><td class='num dn'>-5.10%</td><td class='ctr'>손절</td><td class='num dn'>-5.10%</td><td class='ctr'>11</td></tr>
+<tr><td>08-13</td><td class='tk'>NFLX</td><td class='num'>76.00</td><td class='num'>84.00</td><td class='num'>72.00</td><td class='num'>+10.53%</td><td class='num'>54%</td><td class='num'>5%</td><td class='num'>78.24</td><td class='num up'>+2.95%</td><td class='ctr'>보유중</td><td class='num up'>+5.05%</td><td class='ctr'>보유중</td><td class='num up'>+2.04%</td><td class='ctr'>10</td></tr>
+<tr><td>08-17</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>45%</td><td class='num'>6%</td><td class='num'>261.31</td><td class='num up'>+0.31%</td><td class='ctr'>보유중</td><td class='num dn'>-1.63%</td><td class='ctr'>보유중</td><td class='num dn'>-1.93%</td><td class='ctr'>8</td></tr>
+<tr><td>08-17</td><td class='tk'>NFLX</td><td class='num'>76.00</td><td class='num'>84.00</td><td class='num'>72.18</td><td class='num'>+10.53%</td><td class='num'>43%</td><td class='num'>5%</td><td class='num'>76.02</td><td class='num up'>+0.03%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+5.02%</td><td class='ctr'>8</td></tr>
+<tr><td>08-18</td><td class='tk'>NFLX</td><td class='num'>76.00</td><td class='num'>84.00</td><td class='num'>72.18</td><td class='num'>+10.53%</td><td class='num'>46%</td><td class='num'>5%</td><td class='num'>77.77</td><td class='num up'>+2.33%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num up'>+2.66%</td><td class='ctr'>7</td></tr>
+<tr><td>08-18</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>44%</td><td class='num'>4%</td><td class='num'>259.45</td><td class='num dn'>-0.40%</td><td class='ctr'>보유중</td><td class='num dn'>-1.63%</td><td class='ctr'>보유중</td><td class='num dn'>-1.23%</td><td class='ctr'>7</td></tr>
+<tr><td>08-19</td><td class='tk'>NFLX</td><td class='num'>76.00</td><td class='num'>84.00</td><td class='num'>72.18</td><td class='num'>+10.53%</td><td class='num'>54%</td><td class='num'>4%</td><td class='num'>80.22</td><td class='num up'>+5.55%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-0.47%</td><td class='ctr'>6</td></tr>
+<tr><td>08-19</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>55%</td><td class='num'>4%</td><td class='num'>265.84</td><td class='num up'>+2.05%</td><td class='ctr'>보유중</td><td class='num dn'>-1.63%</td><td class='ctr'>보유중</td><td class='num dn'>-3.60%</td><td class='ctr'>6</td></tr>
+<tr><td>08-20</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>50%</td><td class='num'>4%</td><td class='num'>260.11</td><td class='num dn'>-0.15%</td><td class='ctr'>보유중</td><td class='num dn'>-1.63%</td><td class='ctr'>보유중</td><td class='num dn'>-1.48%</td><td class='ctr'>5</td></tr>
+<tr><td>08-20</td><td class='tk'>NFLX</td><td class='num'>76.00</td><td class='num'>82.00</td><td class='num'>72.18</td><td class='num'>+7.89%</td><td class='num'>50%</td><td class='num'>4%</td><td class='num'>80.14</td><td class='num up'>+5.45%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-0.37%</td><td class='ctr'>5</td></tr>
+<tr><td>08-25</td><td class='tk'>BKNG</td><td class='num'>212.50</td><td class='num'>229.00</td><td class='num'>201.88</td><td class='num'>+7.76%</td><td class='num'>57%</td><td class='num'>5%</td><td class='num'>213.78</td><td class='num up'>+0.60%</td><td class='ctr'>손절</td><td class='num dn'>-5.00%</td><td class='ctr'>손절</td><td class='num dn'>-5.00%</td><td class='ctr'>2</td></tr>
+<tr><td>08-25</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>44%</td><td class='num'>4%</td><td class='num'>261.06</td><td class='num up'>+0.21%</td><td class='ctr'>보유중</td><td class='num dn'>-1.63%</td><td class='ctr'>보유중</td><td class='num dn'>-1.84%</td><td class='ctr'>2</td></tr>
+<tr><td>08-26</td><td class='tk'>NVDA</td><td class='num'>215.69</td><td class='num'>236.54</td><td class='num'>204.91</td><td class='num'>+9.67%</td><td class='num'>40%</td><td class='num'>4%</td><td class='num'>209.66</td><td class='num dn'>-2.80%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>목표달성</td><td class='num up'>+9.67%</td><td class='ctr'>1</td></tr>
+<tr><td>08-26</td><td class='tk'>MSFT</td><td class='num'>495.00</td><td class='num'>553.72</td><td class='num'>471.55</td><td class='num'>+11.86%</td><td class='num'>40%</td><td class='num'>4%</td><td class='num'>496.37</td><td class='num up'>+0.28%</td><td class='ctr'>보유중</td><td class='num up'>+2.03%</td><td class='ctr'>보유중</td><td class='num up'>+1.75%</td><td class='ctr'>1</td></tr>
+<tr><td>08-26</td><td class='tk'>AMZN</td><td class='num'>260.50</td><td class='num'>280.00</td><td class='num'>248.00</td><td class='num'>+7.49%</td><td class='num'>48%</td><td class='num'>4%</td><td class='num'>260.28</td><td class='num dn'>-0.08%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-1.54%</td><td class='ctr'>1</td></tr>
+<tr><td>08-26</td><td class='tk'>BKNG</td><td class='num'>212.50</td><td class='num'>229.00</td><td class='num'>201.88</td><td class='num'>+7.76%</td><td class='num'>45%</td><td class='num'>4%</td><td class='num'>208.89</td><td class='num dn'>-1.70%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>보유중</td><td class='num dn'>-3.03%</td><td class='ctr'>1</td></tr>
+<tr><td>08-27</td><td class='tk'>MSFT</td><td class='num'>495.00</td><td class='num'>553.72</td><td class='num'>471.55</td><td class='num'>+11.86%</td><td class='num'>42%</td><td class='num'>4%</td><td class='num'>505.06</td><td class='num up'>+2.03%</td><td class='ctr'>미체결</td><td class='num '>—</td><td class='ctr'>—</td><td class='num '>—</td><td class='ctr'>0</td></tr>
+</table></div>
+<p class="sub">예측 열의 값 중 8월 상당수는 리포트에 예상수익률 열이 없어 <code>(목표−진입)/진입</code>으로 유도했다. 손익비·기대값 기재치와의 대조에서 두 건(08-07 AMZN·AVGO)을 제외하고 전부 일치했다.</p>
+
+<h2>6. 블록 B·C·D·F — 성과·정확도·변별력 (성숙 코호트 확정)</h2>
+
+<h3>B. 예측정확도</h3>
+<div class="kpi">
+<div><div class="l">방향적중률</div><div class="v up">84.4%</div><div class="n">32건 중 27건 양(+) · Green</div></div>
+<div><div class="l">예측편의 Bias</div><div class="v dn">+3.51%p</div><div class="n">낙관편의 · Red(|·|≤2.5 Amber)</div></div>
+<div><div class="l">MAE / RMSE</div><div class="v">3.51 / 7.41</div><div class="n">%p</div></div>
+<div><div class="l">Theil's U</div><div class="v up">0.833</div><div class="n">&lt;1 = 무변화 예측 대비 우수</div></div>
+<div><div class="l">진척률</div><div class="v">69.6%</div><div class="n">실현 / 경과보정 예측</div></div>
+<div><div class="l">승률 구간</div><div class="v">71.9~87.5%</div><div class="n">확정승 23 / 확정패 4 / 미결 5</div></div>
+</div>
+<p>방향은 압도적으로 맞았다(84.4%). <b>틀린 것은 폭이다</b> — 경과보정 예측 평균 10.28%에 대해 실현 평균은 6.77%로,
+3.51%p의 낙관편의가 남았다. 목표에 닿지 못한 5건(ADSK·ISRG·AMAT·META·CEG)이 편의의 대부분을 만든다.
+Theil's U 0.833은 "아무 변화 없음"이라는 나이브 예측보다는 낫다는 뜻이지만, 1에서 크게 떨어지지 않았다.</p>
+
+<h3>C. 캘리브레이션 — 이번 평가의 핵심 발견</h3>
+<div class="kpi">
+<div><div class="l">평균 예측 승률</div><div class="v">47.0%</div><div class="n">32건 가중평균</div></div>
+<div><div class="l">실현 승률 (확정분)</div><div class="v up">85.2%</div><div class="n">확정 27건 중 23승</div></div>
+<div><div class="l">과신비율</div><div class="v dn">0.552</div><div class="n">&lt;1 = <b>과소신뢰</b> · Red</div></div>
+<div><div class="l">Brier Score</div><div class="v dn">0.273</div><div class="n">0.25 = 무정보 · Red</div></div>
+<div><div class="l">BSS</div><div class="v dn">-1.166</div><div class="n">&lt;0 = 기저율보다 못함</div></div>
+<div><div class="l">ECE</div><div class="v dn">38.1%p</div><div class="n">Red (≤10%p Amber)</div></div>
+</div>
+<div class="scroll"><table>
+<tr><th>예측승률 구간</th><th>건수</th><th>평균 예측승률</th><th>실현 정확도</th><th>격차</th></tr>
+<tr><td>[0.42,0.45)</td><td class='ctr'>4</td><td class='num'>42.0%</td><td class='num'>100.0%</td><td class='num up'>+58.0%p</td></tr>
+<tr><td>[0.45,0.48)</td><td class='ctr'>10</td><td class='num'>45.4%</td><td class='num'>80.0%</td><td class='num up'>+34.6%p</td></tr>
+<tr><td>[0.48,0.50)</td><td class='ctr'>4</td><td class='num'>48.0%</td><td class='num'>75.0%</td><td class='num up'>+27.0%p</td></tr>
+<tr><td>[0.50,1.01)</td><td class='ctr'>9</td><td class='num'>50.7%</td><td class='num'>88.9%</td><td class='num up'>+38.2%p</td></tr>
+</table></div>
+<div class="card warn">
+<p style="margin-top:0"><b>모형은 과신하고 있지 않다. 정반대로, 심각하게 과소신뢰하고 있다.</b>
+전 구간에서 실현 정확도가 예측 승률을 <b>27~58%p 상회</b>한다. 승률 42%라고 말한 4건은 4건 모두 목표를 달성했다.</p>
+<p><b>Kupiec POF 검정</b>: 기대 손절 17.1건에 대해 실제 손절은 <b>4건</b>이었다.
+LR<sub>uc</sub> = 23.70 ≫ 3.841(95%) → <b>"손실빈도 추정이 적정하다"는 귀무가설을 기각</b>한다. 손실빈도를 4배 이상 과대추정했다.</p>
+<p style="margin-bottom:0"><b>단, 이것을 모형의 미덕으로 읽어서는 안 된다.</b> 평가창인 2026-07-24~08-27은 나스닥 소프트웨어·헬스케어가 강하게 반등한 구간이다
+(ADBE $225→$289, MSFT $382→$505, REGN $656→$808). 상승장에서는 어떤 롱 포트폴리오도 승률이 높다.
+<b>승률 과소추정이 보수성인지 무능력인지를 가르는 것은 캘리브레이션이 아니라 변별력(D)이다</b> — 그리고 D는 실패했다.</p>
+</div>
+
+<h3>D. 변별력</h3>
+<div class="kpi">
+<div><div class="l">Rank IC</div><div class="v up">+0.193</div><div class="n">Spearman · Green(≥0.05)</div></div>
+<div><div class="l">IC (Pearson)</div><div class="v dn">-0.038</div><div class="n">사실상 0</div></div>
+<div><div class="l">AUROC</div><div class="v dn">0.467</div><div class="n">0.5 = 무작위</div></div>
+<div><div class="l">Gini</div><div class="v dn">-0.065</div><div class="n">Red (≥0 Amber)</div></div>
+<div><div class="l">KS</div><div class="v">28.3</div><div class="n">≥20 유의</div></div>
+<div><div class="l">IC IR</div><div class="v dn">-0.007</div><div class="n">4개 코호트 시계열</div></div>
+</div>
+<p><b>AUROC 0.467은 동전 던지기다.</b> 모형이 매긴 기대값 순위로 승자와 패자를 구분할 수 없다는 뜻이며, 직전월 잠정치 0.490에서 개선되지 않았다.
+Rank IC +0.193이 Green인 것과 모순처럼 보이지만 서로 다른 것을 재고 있다 — Rank IC는 <b>수익률 크기</b> 순위와의 상관이고, AUROC는 <b>승/패 이분</b>의 판별력이다.
+코호트별 IC는 +0.243, −0.127, +0.173, −0.296으로 부호가 번갈아 IC IR이 -0.007이다. <b>변별력은 코호트마다 우연히 결정되고 있다.</b></p>
+
+<h3>F. 성과·리스크</h3>
+<div class="kpi">
+<div><div class="l">신호트랙 평균 실현</div><div class="v up">+6.77%</div><div class="n">32건 · 27익 5손</div></div>
+<div><div class="l">실집행 평균 실현</div><div class="v up">+5.84%</div><div class="n">체결 11건 · 7승 0패 4미결</div></div>
+<div><div class="l">실현 손익비</div><div class="v">1.64</div><div class="n">mean(이익)/|mean(손실)|</div></div>
+<div><div class="l">Profit Factor</div><div class="v up">8.83</div><div class="n">Σ이익 / |Σ손실|</div></div>
+<div><div class="l">MDD (동일가중 곡선)</div><div class="v dn">-3.43%p</div><div class="n">24영업일 누적 +14.15%p</div></div>
+<div><div class="l">EV 격차</div><div class="v up">+5.04%p</div><div class="n">실현 − 경과보정 기대값</div></div>
+</div>
+<p>Sharpe 8.06 · Sortino 21.11(연율화)는 <b>보고하되 신뢰해서는 안 되는 수치</b>다 —
+관측 24영업일, 중복 보유 구간이 겹친 동일가중 합성 곡선이고, 표본 구간이 일방적 상승장이다. 프로토콜의 소표본 경고를 그대로 적용한다.</p>
+<p>실집행 트랙은 <b>7승 0패 4미결로 무패</b>다. 그러나 체결이 11건뿐이었으므로 비중가중 기여는 +2.82%p에 그친다.
+신호트랙 기여 +12.94%p와의 차이 10.12%p가 <b>미체결로 잃은 수익</b>이다.
+손절 초과는 실제 4건 vs 기대 17.1건으로 바젤 트래픽라이트 Green이지만, 이 "여유"는 리스크 관리의 성공이 아니라 C블록에서 확인한 손실빈도 과대추정의 다른 얼굴이다.</p>
+
+<h2>7. 판정 · 권고</h2>
+<p><b>종합 모형위험등급 Red.</b> Red 8 · Amber 6 · Green 3. 직전월 Amber에서 한 단계 악화했지만, 악화의 상당 부분은 <b>7월에는 측정할 수 없었던 성과계열 지표가 이번에 처음 확정된 데</b> 기인한다.
+같은 잣대로 다시 말하면 — 이 시스템은 <b>돈은 벌었으나, 왜 벌었는지를 설명하지 못한다.</b>
+신호트랙 +6.77%, 실집행 무패라는 결과와 AUROC 0.467, Brier 0.273이라는 진단은 모순이 아니라 같은 사실의 양면이다: <b>상승장이 벌어준 것이지 종목 선별이 벌어준 것이 아니다.</b></p>
+
+<div class="scroll"><table>
+<tr><th>우선순위</th><th>조치</th><th>근거 지표</th><th>7월 권고와의 관계</th></tr>
+<tr><td class="ctr"><b>1 필수</b></td><td><b>승률 추정치를 실현 기저율로 재보정한다.</b> 현행 42~52% 고정 밴드를 폐기하고, 성숙 코호트 실현 승률(85.2%)과 시장국면 변수를 반영한 사후 보정 계수를 설계문서 6절에 추가. 최소한 승률 밴드 하한을 올려야 한다.</td><td>과신비율 0.552 · ECE 38.1%p · Kupiec LR 23.7</td><td>7월 권고 1의 <b>방향 수정</b> — "변동성 함수화"가 아니라 우선 <b>수준 자체</b>가 틀렸다</td></tr>
+<tr><td class="ctr"><b>2 필수</b></td><td><b>진입 지정가 괴리 상한을 도입한다.</b> 기준일 종가 대비 −5% 초과로 낮게 잡힌 진입가는 자동 관망 또는 종가 진입으로 전환. 07-30 코호트 체결률 10%는 예측이 아니라 집행 설계의 실패다.</td><td>체결률 34.4% · 평균 괴리 +3.23% · 미체결 21건</td><td>7월 권고 3 <b>미이행</b> — 재상정하며 임계를 −8%에서 −5%로 강화</td></tr>
+<tr><td class="ctr"><b>3 필수</b></td><td><b>기대값 산출 경로를 단일화하고 발행 전 자동 검증을 건다.</b> 08-07 두 건은 산식 계층이 처음으로 뚫린 사례다. <code>EV = p×수익 + (1−p)×손실</code> 재계산과 기재치 대조를 발행 게이트로 만든다.</td><td>산식 위반 2건 / 186 검증</td><td><b>신규</b> — 7월에는 0건이었다</td></tr>
+<tr><td class="ctr">4</td><td><b>변별력을 목표로 삼는다.</b> 기대값 순위가 승패를 가르지 못하므로, 후보 스코어에 승률 외 판별 변수(모멘텀·리비전·상대강도)를 추가하고 매월 AUROC를 추적한다. AUROC 0.55 미만이 3개월 연속이면 스코어 체계를 교체한다.</td><td>AUROC 0.467 · Gini −0.065 · IC IR −0.007</td><td>7월 권고 1의 미해결 잔여</td></tr>
+<tr><td class="ctr">5</td><td><b>유니버스 축소와 포지션 반복을 설계 결정으로 명시한다.</b> 8월 29 포지션 중 15건이 동일 진입가 재게시였다. 재게시는 "신규 추천"이 아니라 "보유 유지"로 분류해 코호트 집계에서 분리한다.</td><td>회전율 69.2% · 유니버스 23→11 · 재게시 15/29</td><td>7월 권고 4가 <b>의도치 않은 방식으로</b> 달성됨</td></tr>
+<tr><td class="ctr">6</td><td><b>비중·섹터 정책 변경을 설계문서에 기록한다.</b> 총 투자비중 29~58% → 4~18%, 인터넷/미디어 21%→59%는 모형 드리프트가 아니라 정책 전환으로 보이며, 기록되지 않은 정책 전환은 그 자체가 모형위험이다.</td><td>비중 CSI 1.063(Δ −1.23%p) · 섹터 PSI 0.676</td><td><b>신규</b></td></tr>
+</table></div>
+
+<h3>다음 회차(2026-09-01) 확인 사항</h3>
+<ul>
+<li><b>07-31 코호트</b> 창 종료(08-28)로 성숙 → 성숙 코호트 5건 완성</li>
+<li><b>08-03~08-06 코호트</b> 성숙 → <b>하락 국면이 섞인 첫 표본</b>. 승률 과소추정이 보수성이었는지 상승장 착시였는지가 여기서 갈린다. 실현 승률이 60% 아래로 내려오면 "과소신뢰" 판정을 완화해야 한다.</li>
+<li><b>AUROC 추세</b>: 2개월 연속 0.5 부근이면 기대값 스코어는 순위 정보를 담고 있지 않다는 결론을 확정하고 권고 4를 즉시 발동한다.</li>
+<li><b>체결률</b>: 8월 코호트 최종 체결률이 60%를 넘으면 진입가 문제는 7월 말 국지적 사건으로 종결, 40% 아래면 권고 2를 최우선으로 올린다.</li>
+<li><b>산식 무결성</b>: 9월에도 위반이 나오면 계산 계층 신뢰가 무너진다 — 이번 2건이 일회성인지 확인이 최우선이다.</li>
+</ul>
+
+<footer>
+산출식 정본은 <code>claude/모형평가-프로토콜.md</code> 참조 · 시세 정본 stockanalysis.com 일별 정규장 OHLC (2026-07-24~08-27, 26종목 650행)<br>
+예측치는 <code>claude/일일리포트/YYYY-MM-DD.md</code> 원문을 재계산 없이 전사 · 미확보 값은 null 처리, 추정·보간 없음<br>
+본 평가는 LLM 기반 시스템의 자기평가이며 투자 조언이 아니다.
+</footer>
+</div>
