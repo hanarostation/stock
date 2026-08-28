@@ -261,6 +261,45 @@ pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:1
 .gdot.amber{color:#8a6000}.gdot.amber i{background:var(--gold)}
 .gdot.red{color:var(--dn)}.gdot.red i{background:var(--dn)}
 .gdot.green{color:var(--up)}.gdot.green i{background:var(--up)}
+/* ── 평가 개선 결과 ── */
+.h2sub{font-size:12.5px;color:var(--ink2);line-height:1.6;margin:-6px 0 16px}
+.igrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:13px}
+.icard{display:flex;flex-direction:column;background:var(--surface);border:1px solid var(--line);
+ border-radius:13px;padding:16px 18px 14px;text-decoration:none;color:inherit;
+ transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s}
+.icard:hover{transform:translateY(-2px);border-color:rgba(74,58,167,.45);background:#f7f6fd;
+ box-shadow:0 12px 30px -18px rgba(11,11,11,.45)}
+.ic-r1{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:7px}
+.ic-m{font-size:12px;font-weight:800;color:var(--ink3);letter-spacing:.02em}
+.ic-m b{color:var(--ink);font-size:15px;letter-spacing:-.02em}
+.ic-hd{font-size:14.5px;font-weight:800;letter-spacing:-.015em;line-height:1.45;margin:0 0 11px}
+.ic-mt{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin:0 0 11px}
+.ic-mt>div{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+.ic-mt .k{font-size:10px;color:var(--ink3);letter-spacing:.03em;white-space:nowrap;
+ overflow:hidden;text-overflow:ellipsis}
+.ic-mt .v{font-size:15px;font-weight:800;letter-spacing:-.02em;margin-top:1px;
+ font-variant-numeric:tabular-nums;line-height:1.25}
+.ilist{display:flex;flex-direction:column;gap:5px;margin:0;padding:0;list-style:none}
+.ilist li{font-size:11.8px;color:var(--ink2);line-height:1.5;padding-left:13px;position:relative}
+.ilist li::before{content:"";position:absolute;left:1px;top:6px;width:5px;height:5px;
+ border-radius:50%;background:var(--violet);opacity:.65}
+.ic-ef{margin:10px 0 0;padding:9px 11px;background:#f1eefb;border-radius:9px;
+ font-size:11.6px;color:#3a2c86;line-height:1.5}
+.ic-ef b{font-weight:800}
+.ic-ft{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-top:auto;
+ padding-top:11px;border-top:1px dotted var(--line2);font-size:11.5px;color:var(--ink3)}
+.ic-ft .go{font-weight:700;color:var(--violet)}
+.ic-badge{flex:0 0 auto;font-size:10.5px;font-weight:800;padding:3px 10px;border-radius:99px;
+ white-space:nowrap;letter-spacing:.02em}
+.ic-badge.green{background:#e8f7e8;color:#0a5a0a;border:1px solid rgba(0,99,0,.3)}
+.ic-badge.amber{background:#fdf0cf;color:#7a5400;border:1px solid rgba(237,161,0,.45)}
+.ic-badge.violet{background:#efeafc;color:#3a2c86;border:1px solid rgba(74,58,167,.35)}
+.ac{color:var(--accent)}
+@media(max-width:640px){
+  .igrid{grid-template-columns:1fr}
+  .ic-mt{grid-template-columns:repeat(3,1fr);gap:6px}
+  .ic-mt .v{font-size:14px}
+}
 @media(max-width:640px){
   .ev-h{padding:17px 18px}
   .ev-b{padding:16px 18px 18px}
@@ -419,6 +458,15 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
       <div class="skel"></div><div class="skel"></div><div class="skel"></div>
     </div></div>
     <p class="note" id="eval-status"></p>
+
+    <h2 id="improves">평가 개선 결과 <span class="cnt" id="improve-count"></span></h2>
+    <p class="h2sub">월간 평가 리포트에서 지적된 항목을 실제 시스템에 반영해 수정한 결과입니다.
+      매월 평가 회차와 짝을 이루어 발행하며, 조치 내역과 재검증 결과를 담습니다.</p>
+
+    <div id="improve-list"><div class="igrid">
+      <div class="skel" style="height:250px"></div><div class="skel" style="height:250px"></div>
+    </div></div>
+    <p class="note" id="improve-status"></p>
 
     <h2>면책</h2>
     <div class="disc">
@@ -1131,6 +1179,134 @@ function evalCardHTML(m){
   document.getElementById('eval-latest').innerHTML = evalLatestHTML(months[0]);
   listEl.innerHTML = `<div class="grid">${months.map(evalCardHTML).join('')}</div>`;
   cntEl.textContent = `총 ${months.length}건`;
+  stEl.innerHTML = '';
+})();
+
+/* ═══════════════════════════════════════════════════════════
+   평가 개선 결과 (월간)
+   · 파일 : improve/YYYY-MM.html  또는  improve/YYYYMM.html
+     (improve-2026-08.html 형태도 인식)
+   · 새 회차 발행 시 아래 IMPROVE.summary 에 해당 월 블록만 추가하면
+     카드에 핵심 내용이 표시됩니다. (파일 목록은 자동 인식)
+       status  : 카드 우측 상단 뱃지 (반영 완료 / 부분 반영 / 진행 중)
+       grade   : 해당 월 평가 등급 (Red / Amber / Green) — 헤드라인 앞에 표기
+       headline: 한 줄 요약
+       metrics : 3칸 지표 (k=이름, v=값, tone= up|dn|ac|neutral)
+       items   : 핵심 변경 3줄
+       effect  : 산출물이 어떻게 달라졌는지 한 줄
+       file    : 파일명이 규칙과 다를 때만 지정
+   ═══════════════════════════════════════════════════════════ */
+const IMPROVE = {
+  dir:   "improve",
+  title: "평가 개선 결과",
+  summary: {
+    "2026-08": {
+      file:     "202608.html",
+      status:   "반영 완료 5/6",
+      grade:    "Red",
+      headline: "필수 권고 3건 전량 반영 · 08-28 리포트부터 적용",
+      metrics: [
+        {k:"권고 이행",   v:"5 / 6",  tone:"up"},
+        {k:"최초 반영",   v:"08-28",  tone:"ac"},
+        {k:"발행 게이트", v:"PASS",   tone:"up"}
+      ],
+      items: [
+        "승률 산정 — 42~52% 고정밴드 → 기저율 앵커 β_base 68.2%",
+        "진입 지정가 괴리 상한 5% · 체결확률 40% 하한 신설",
+        "발행 게이트 신설 — 재계산 대조 FAIL 시 발행 차단"
+      ],
+      effect: "MSFT 좌표는 그대로인데 기대값 <b>+2.235% → +5.754%</b> (승률 규약 교체 효과)"
+    }
+  }
+};
+
+const impDefaultFile = m => `${m}.html`;
+function impStatusCls(t){
+  const s = String(t || '');
+  if(/완료/.test(s))          return 'green';
+  if(/부분|진행|예정/.test(s)) return 'amber';
+  return 'violet';
+}
+function impGradeCls(g){ return gradeCls(g); }
+
+/* 파일명 → 'YYYY-MM' (2026-08.html / 202608.html / improve-2026-08.html 모두 인식) */
+function impMonthOf(name){
+  const m = /(\d{4})-?(\d{2})\.html?$/i.exec(name);
+  return m ? `${m[1]}-${m[2]}` : null;
+}
+
+async function impListFromGitHub(){
+  const out = [];
+  for(const n of ghFilesIn(await ghPaths(), IMPROVE.dir)){   // 기존 트리 캐시 재사용 (추가 호출 없음)
+    const m = impMonthOf(n);
+    if(m && !out.some(x => x.m === m)) out.push({m, file:n});
+  }
+  return out.sort((a,b) => b.m.localeCompare(a.m));
+}
+
+function impCardHTML(it){
+  const m = it.m, s = IMPROVE.summary[m] || {};
+  const [y, mm] = m.split('-');
+  const href = `${IMPROVE.dir}/${it.file || s.file || impDefaultFile(m)}`;
+
+  const badge = s.status
+    ? `<span class="ic-badge ${impStatusCls(s.status)}">${esc(s.status)}</span>`
+    : '<span class="ic-badge violet">IMPROVED</span>';
+
+  const grade = s.grade
+    ? `<span class="gdot ${impGradeCls(s.grade)}" style="margin-right:6px"><i></i>${esc(s.grade)} 평가</span>`
+    : '';
+
+  const head = s.headline
+    ? `<p class="ic-hd">${grade}${esc(s.headline)}</p>`
+    : `<p class="ic-hd">${grade}${esc(IMPROVE.title)}</p>`;
+
+  const mt = (s.metrics && s.metrics.length)
+    ? `<div class="ic-mt">${s.metrics.slice(0,3).map(x =>
+        `<div><div class="k">${esc(x.k)}</div>
+           <div class="v ${esc(x.tone || 'neutral')}">${esc(x.v)}</div></div>`).join('')}</div>`
+    : '';
+
+  const items = (s.items && s.items.length)
+    ? `<ul class="ilist">${s.items.slice(0,3).map(t => `<li>${esc(t)}</li>`).join('')}</ul>`
+    : '';
+
+  // effect 는 강조용 <b> 태그만 허용 (그 외 태그는 이스케이프)
+  const effect = s.effect
+    ? `<p class="ic-ef">${esc(s.effect).replace(/&lt;(\/?b)&gt;/g, '<$1>')}</p>`
+    : '';
+
+  return `<a class="icard" href="${esc(href)}">
+    <div class="ic-r1"><span class="ic-m"><b>${y}년 ${Number(mm)}월</b> · 개선 결과</span>${badge}</div>
+    ${head}${mt}${items}${effect}
+    <div class="ic-ft"><span>${evalRel(m)}</span><span class="go">반영 결과 전체 보기 →</span></div>
+  </a>`;
+}
+
+(async function initImprove(){
+  let list = [];
+  try { list = await impListFromGitHub(); } catch(e){ /* 로컬/실패 시 폴백 */ }
+  if(!list.length){
+    list = Object.keys(IMPROVE.summary).sort().reverse()
+      .map(m => ({m, file: IMPROVE.summary[m].file || impDefaultFile(m)}));
+  }
+
+  const listEl = document.getElementById('improve-list');
+  const cntEl  = document.getElementById('improve-count');
+  const stEl   = document.getElementById('improve-status');
+  if(!listEl) return;
+
+  if(!list.length){
+    listEl.innerHTML = `<div class="state"><b>아직 등록된 개선 결과가 없습니다</b>
+      <p><code>${IMPROVE.dir}/YYYY-MM.html</code> 파일을 올리면 자동으로 나열됩니다.
+         (예: <code>${IMPROVE.dir}/2026-08.html</code>)</p></div>`;
+    cntEl.textContent = '';
+    stEl.innerHTML = '';
+    return;
+  }
+
+  listEl.innerHTML = `<div class="igrid">${list.map(impCardHTML).join('')}</div>`;
+  cntEl.textContent = `총 ${list.length}건`;
   stEl.innerHTML = '';
 })();
 
