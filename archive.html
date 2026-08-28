@@ -1,0 +1,622 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>리포트 전체 목록 · 데이터스테이션 나스닥 분석 리포트</title>
+<meta name="description" content="데이터스테이션 나스닥 분석 리포트 전체 목록 — 날짜 검색·월별 필터로 전체 아카이브를 확인하세요">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232a78d6'/><path d='M22 66 L40 46 L54 58 L78 32' stroke='white' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<style>
+/* ─────────────────────────────────────────────
+   리포트 HTML과 동일한 디자인 토큰
+   ───────────────────────────────────────────── */
+:root{
+  --bg:#f9f9f7; --surface:#fcfcfb; --surface2:#fdfdfc;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#898781;
+  --line:rgba(11,11,11,0.10); --line2:#e1e0d9; --line3:#c3c2b7;
+  --accent:#2a78d6; --gold:#eda100; --up:#006300; --dn:#d03b3b; --violet:#4a3aa7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px}
+
+/* ── 상단 바 ── */
+.topbar{position:sticky;top:0;z-index:50;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid var(--line)}
+.topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;
+ justify-content:space-between;gap:18px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.brand .logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand .logo .fallback{width:100%;height:100%;border-radius:8px;background:var(--accent);
+ display:none;align-items:center;justify-content:center}
+.brand .logo .fallback svg{width:17px;height:17px}
+.nav{display:flex;gap:4px}
+.nav button{font:inherit;font-size:13px;font-weight:700;color:var(--ink2);background:none;
+ border:1px solid transparent;padding:6px 15px;border-radius:99px;cursor:pointer;
+ transition:background .15s,color .15s,border-color .15s}
+.nav button:hover{background:#f2f1ed;color:var(--ink)}
+.nav button[aria-current="true"]{background:var(--ink);color:#fff;border-color:var(--ink)}
+
+/* ── 히어로 ── */
+.hero{padding:42px 0 8px}
+.pill{display:inline-block;background:var(--accent);color:#fff;font-size:11px;font-weight:700;
+ padding:3px 11px;border-radius:99px;letter-spacing:.03em;margin-bottom:14px}
+.pill.gray{background:var(--ink2)}
+.pill.gold{background:var(--gold);color:#3d2a00}
+h1{font-size:32px;margin:0 0 8px;letter-spacing:-.03em;line-height:1.25}
+.lede{color:var(--ink2);font-size:14.5px;max-width:660px;margin:0}
+h2{font-size:19px;margin:44px 0 16px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+ letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px}
+h2 .cnt{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:0}
+h3{font-size:15.5px;margin:0 0 9px;letter-spacing:-.01em}
+h4{font-size:11.5px;margin:0 0 9px;color:var(--ink2);text-transform:uppercase;letter-spacing:.07em}
+
+/* ── 최신 리포트 배너 ── */
+.latest{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ padding:20px 24px;margin-top:26px;transition:box-shadow .18s,border-color .18s}
+.latest:hover{border-color:rgba(42,120,214,.4);box-shadow:0 6px 22px -12px rgba(11,11,11,.28)}
+.latest .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.latest .l-sub{font-size:12.5px;color:var(--ink3)}
+.btn{display:inline-flex;align-items:center;gap:8px;background:var(--ink);color:#fff;
+ font-size:13px;font-weight:700;padding:11px 20px;border-radius:99px;white-space:nowrap;
+ border:1px solid var(--ink);cursor:pointer;font-family:inherit;transition:opacity .15s}
+.btn:hover{opacity:.85}
+.btn.ghost{background:transparent;color:var(--ink2);border-color:var(--line3)}
+.btn.ghost:hover{background:#f2f1ed;opacity:1}
+
+/* ── 최신 리포트 요약 카드 ── */
+.sumcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;margin-top:26px}
+.sum-h{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ padding:20px 24px}
+.sum-h .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.sum-h .l-sub{font-size:12.5px;color:var(--ink3)}
+.sum-b{border-top:1px solid var(--line2);background:var(--surface2);padding:17px 24px 19px}
+.sum-load{padding:22px 24px;border-top:1px solid var(--line2);background:var(--surface2);
+ font-size:12.5px;color:var(--ink3)}
+.stiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 15px}
+.stile{background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:11px 14px}
+.stile .k{font-size:11px;color:var(--ink3);letter-spacing:.03em}
+.stile .v{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:2px 0 1px;
+ font-variant-numeric:tabular-nums}
+.stile .s{font-size:11px;color:var(--ink3)}
+.up{color:var(--up)}.dn{color:var(--dn)}.neutral{color:var(--ink)}
+.tscroll{overflow-x:auto;border-radius:11px;border:1px solid var(--line)}
+table.sum{border:none;border-radius:0;font-size:12.5px;min-width:640px}
+table.sum th{padding:9px 11px;background:var(--bg)}
+table.sum td{padding:9px 11px}
+table.sum .tk{font-weight:800;font-size:13.5px;letter-spacing:-.01em}
+table.sum .kr{font-size:11px;color:var(--ink3);display:block;margin-top:1px}
+table.sum td.n{font-weight:400}
+table.sum td.n b{font-weight:800}
+.badge{display:inline-block;font-size:10.5px;font-weight:700;padding:2px 9px;border-radius:99px;
+ white-space:nowrap}
+.badge.sig{background:var(--accent);color:#fff}
+.badge.sigc{background:#fdf0cf;color:#7a5400}
+.badge.crit{background:#f2f1ed;color:var(--ink3)}
+.wbar{display:flex;align-items:center;gap:7px;min-width:76px}
+.wbar i{display:block;height:7px;border-radius:4px;background:var(--accent);min-width:2px}
+.sum-f{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;
+ margin-top:13px;font-size:11.5px;color:var(--ink3)}
+.linkbtn{font:inherit;font-size:12px;font-weight:700;color:var(--ink2);background:var(--surface);
+ border:1px solid var(--line3);padding:6px 13px;border-radius:99px;cursor:pointer}
+.linkbtn:hover{background:#f2f1ed}
+.watchrow{margin-top:11px;font-size:12px;color:var(--ink3);display:none}
+.watchrow.on{display:block}
+.watchrow b{color:var(--ink2)}
+.swipe{display:none;font-size:11px;color:var(--ink3);margin:7px 0 0;text-align:right}
+
+/* ── 필터 ── */
+.toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.morebar{display:flex;justify-content:center;margin:16px 0 4px}
+.morebar:empty{display:none}
+.btn.more{font-size:13px;padding:11px 22px;border-radius:11px}
+.btn.more .more-n{font-weight:700;color:var(--ink3);font-size:12px}
+.btn.more:hover .more-n{color:var(--ink2)}
+.search{flex:1;min-width:200px;position:relative}
+.search input{width:100%;font:inherit;font-size:13.5px;padding:9px 13px 9px 34px;
+ background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--ink)}
+.search input:focus{outline:2px solid rgba(42,120,214,.35);outline-offset:-1px;border-color:var(--accent)}
+.search svg{position:absolute;left:11px;top:50%;transform:translateY(-50%);
+ width:15px;height:15px;opacity:.4;pointer-events:none}
+.chips{display:flex;gap:6px;flex-wrap:wrap}
+.chip{font:inherit;font-size:12px;font-weight:700;color:var(--ink2);background:var(--surface);
+ border:1px solid var(--line);padding:7px 13px;border-radius:99px;cursor:pointer;
+ transition:background .15s,color .15s,border-color .15s}
+.chip:hover{background:#f2f1ed}
+.chip[aria-pressed="true"]{background:var(--accent);color:#fff;border-color:var(--accent)}
+
+/* ── 리포트 카드 그리드 ── */
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(238px,1fr));gap:13px}
+.rcard{display:block;background:var(--surface);border:1px solid var(--line);border-radius:13px;
+ padding:17px 19px 16px;position:relative;overflow:hidden;
+ transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease}
+.rcard::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;background:var(--accent);
+ opacity:0;transition:opacity .16s}
+.rcard:hover{transform:translateY(-2px);border-color:rgba(42,120,214,.45);
+ box-shadow:0 10px 26px -16px rgba(11,11,11,.4)}
+.rcard:hover::before{opacity:1}
+.rcard .row1{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:9px}
+.rcard .dow{font-size:11px;font-weight:700;color:var(--ink3);letter-spacing:.06em}
+.rcard .dow.sat{color:var(--accent)}
+.rcard .dow.sun{color:var(--dn)}
+.rcard .date{font-size:21px;font-weight:800;letter-spacing:-.03em;
+ font-variant-numeric:tabular-nums;margin:0 0 4px}
+.rcard .title{font-size:12.5px;color:var(--ink2);line-height:1.5;margin:0 0 12px;
+ display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.rcard .foot{display:flex;align-items:center;justify-content:space-between;gap:8px;
+ padding-top:10px;border-top:1px dotted var(--line2);font-size:11.5px;color:var(--ink3)}
+.rcard .go{font-weight:700;color:var(--accent);display:inline-flex;align-items:center;gap:3px}
+.tag{display:inline-block;font-size:10px;font-weight:800;padding:2.5px 8px;border-radius:99px;
+ letter-spacing:.04em;white-space:nowrap}
+.tag.new{background:#e8f7e8;color:var(--up)}
+.tag.today{background:var(--accent);color:#fff}
+
+/* ── 상태 표시 ── */
+.state{background:var(--surface);border:1px dashed var(--line3);border-radius:13px;
+ padding:38px 24px;text-align:center;color:var(--ink2)}
+.state b{display:block;font-size:15px;color:var(--ink);margin-bottom:7px}
+.state p{margin:0 0 4px;font-size:13px}
+.state code{background:#f2f1ed;border:1px solid var(--line);border-radius:5px;
+ padding:1px 6px;font-size:12px}
+.skel{background:var(--surface);border:1px solid var(--line);border-radius:13px;height:148px;
+ position:relative;overflow:hidden}
+.skel::after{content:"";position:absolute;inset:0;
+ background:linear-gradient(90deg,transparent,rgba(11,11,11,.045),transparent);
+ animation:sh 1.25s infinite}
+@keyframes sh{0%{transform:translateX(-100%)}100%{transform:translateX(100%)}}
+.note{font-size:12px;color:var(--ink3);margin:12px 0 0;display:flex;align-items:center;gap:7px}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--up);flex:0 0 7px}
+.dot.warn{background:var(--gold)}
+.dot.err{background:var(--dn)}
+
+/* ── 개요 페이지 ── */
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:22px 24px}
+.panel p:first-child{margin-top:0}
+.panel p:last-child{margin-bottom:0}
+.cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:13px}
+.stat{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:15px 17px}
+.stat .k{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+.stat .v{font-size:22px;font-weight:800;letter-spacing:-.03em;margin:3px 0 1px}
+.stat .s{font-size:11.5px;color:var(--ink3)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden;font-size:13px}
+th{background:var(--bg);text-align:left;padding:10px 13px;font-size:11px;color:var(--ink2);
+ border-bottom:1px solid var(--line3);letter-spacing:.04em;white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+
+/* 파이프라인 */
+.pipe{display:flex;flex-direction:column;gap:11px}
+.stage{background:var(--surface);border:1px solid var(--line);border-radius:12px;
+ padding:15px 18px;position:relative}
+.stage-h{display:flex;align-items:center;gap:10px;margin-bottom:9px}
+.stage-n{width:25px;height:25px;flex:0 0 25px;border-radius:7px;background:var(--accent);color:#fff;
+ font-size:12px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.stage-t{font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.stage-m{font-size:11px;color:var(--ink3);margin-left:auto;white-space:nowrap}
+.agents{display:flex;gap:8px;flex-wrap:wrap}
+.ag{background:var(--bg);border:1px solid var(--line);border-radius:9px;padding:8px 12px;
+ font-size:12px;flex:1 1 190px;min-width:170px}
+.ag b{display:block;font-size:12.5px;margin-bottom:2px}
+.ag span{color:var(--ink3);font-size:11.5px;line-height:1.45;display:block}
+.arrow{text-align:center;color:var(--line3);font-size:15px;line-height:1;margin:-3px 0}
+.seq{display:flex;align-items:center;gap:7px;flex-wrap:wrap;font-size:12px}
+.seq .s{background:var(--bg);border:1px solid var(--line);border-radius:99px;padding:5px 12px;font-weight:700}
+.seq .s.bull{border-color:rgba(0,99,0,.35);color:var(--up)}
+.seq .s.bear{border-color:rgba(208,59,59,.35);color:var(--dn)}
+.seq .s.fac{border-color:rgba(74,58,167,.4);color:var(--violet)}
+.seq .a{color:var(--ink3)}
+.rules{margin:0;padding-left:19px;font-size:13px;color:var(--ink2)}
+.rules li{margin-bottom:7px}
+.rules b{color:var(--ink)}
+pre{background:#f4f4f1;border:1px solid var(--line);border-radius:10px;padding:15px 17px;
+ overflow-x:auto;font-size:12.3px;line-height:1.75;margin:0;
+ font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;color:var(--ink2)}
+.srcs{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:11px}
+.src{display:block;background:var(--surface);border:1px solid var(--line);border-radius:11px;
+ padding:13px 16px;transition:border-color .15s,background .15s}
+.src:hover{border-color:rgba(42,120,214,.5);background:#f5f8fd}
+.src b{display:block;font-size:13px;margin-bottom:2px}
+.src span{font-size:11.5px;color:var(--ink3);word-break:break-all}
+.src .u{color:var(--accent)}
+.warnbox{background:#fef9ec;border:1px solid rgba(237,161,0,.4);border-left:3px solid var(--gold);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:13px;color:var(--ink2)}
+.warnbox b{color:var(--ink)}
+.disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2)}
+
+/* ── 모형 안정성 평가 ── */
+.pill.violet{background:var(--violet)}
+.evalcard{background:var(--surface);border:1px solid var(--line);border-radius:14px;
+ overflow:hidden;margin-top:26px}
+.ev-h{display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap;
+ padding:20px 24px}
+.ev-h .l-date{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:2px 0 3px}
+.ev-h .l-sub{font-size:12.5px;color:var(--ink3)}
+.ev-b{border-top:1px solid var(--line2);background:var(--surface2);padding:18px 24px 20px}
+.ev-grade{display:flex;align-items:flex-start;gap:14px;margin:0 0 16px}
+.gbadge{flex:0 0 auto;font-size:13px;font-weight:800;letter-spacing:.02em;
+ padding:7px 16px;border-radius:99px;white-space:nowrap}
+.gbadge.amber{background:#fdf0cf;color:#7a5400;border:1px solid rgba(237,161,0,.55)}
+.gbadge.red{background:#fdecec;color:#a12020;border:1px solid rgba(208,59,59,.5)}
+.gbadge.green{background:#e8f7e8;color:#0a5a0a;border:1px solid rgba(0,99,0,.35)}
+.ev-gt b{display:block;font-size:14.5px;letter-spacing:-.01em;margin-bottom:3px}
+.ev-gt span{font-size:12.5px;color:var(--ink2);line-height:1.6}
+.ev-b .stiles{grid-template-columns:repeat(4,1fr);margin:0}
+.ev-b .stile .v{font-size:20px}
+.ev-b .stile .s{line-height:1.5;margin-top:2px}
+.ecard .date{font-size:21px;font-weight:800;letter-spacing:-.03em;margin:0 0 4px}
+.gdot{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800}
+.gdot i{width:8px;height:8px;border-radius:50%;display:block}
+.gdot.amber{color:#8a6000}.gdot.amber i{background:var(--gold)}
+.gdot.red{color:var(--dn)}.gdot.red i{background:var(--dn)}
+.gdot.green{color:var(--up)}.gdot.green i{background:var(--up)}
+@media(max-width:640px){
+  .ev-h{padding:17px 18px}
+  .ev-b{padding:16px 18px 18px}
+  .ev-h .l-date{font-size:21px}
+  .ev-b .stiles{grid-template-columns:repeat(2,1fr)}
+  .ev-grade{gap:10px}
+}
+
+/* ── 하단 링크 ── */
+.links{margin-top:10px}
+.linkgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(258px,1fr));gap:12px}
+.lcard{display:flex;flex-direction:column;gap:4px;background:var(--surface);
+ border:1px solid var(--line);border-radius:13px;padding:16px 18px 14px;
+ transition:transform .16s ease,box-shadow .16s ease,border-color .16s ease,background .16s}
+.lcard:hover{transform:translateY(-2px);border-color:rgba(42,120,214,.45);background:#f5f8fd;
+ box-shadow:0 10px 26px -16px rgba(11,11,11,.4)}
+.lcard b{font-size:14px;letter-spacing:-.01em}
+.lcard span{font-size:12.5px;color:var(--ink2);line-height:1.55}
+.lcard .u{font-size:11.5px;font-weight:700;color:var(--accent);margin-top:5px;word-break:break-all}
+
+/* ── 후원 계좌 ── */
+.donate{margin-top:12px;background:var(--surface);border:1px solid var(--line);
+ border-left:3px solid var(--gold);border-radius:0 13px 13px 0;padding:17px 20px;
+ display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+.d-txt{flex:1 1 300px;max-width:560px}
+.d-txt>b{display:block;font-size:14px;letter-spacing:-.01em;margin-bottom:3px}
+.d-txt span{font-size:12.5px;color:var(--ink3);line-height:1.55}
+.d-txt span b{font-weight:700;color:var(--ink2)}
+.d-acc{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.d-bank{font-size:11px;font-weight:800;color:#3d2a00;background:var(--gold);
+ padding:3px 10px;border-radius:99px;letter-spacing:.02em}
+.d-no{font-size:16.5px;font-weight:800;letter-spacing:-.01em;font-variant-numeric:tabular-nums;
+ font-family:'SF Mono',ui-monospace,Menlo,Consolas,monospace;user-select:all}
+.d-name{font-size:12.5px;color:var(--ink2)}
+.btn.copy{font-size:12px;padding:8px 15px}
+.btn.copy.done{background:var(--up);border-color:var(--up)}
+@media(max-width:640px){
+  .donate{padding:15px 16px}
+  .d-acc{width:100%}
+  .d-no{font-size:15px}
+  .btn.copy{margin-left:auto}
+}
+
+footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
+ font-size:12px;color:var(--ink3)}
+.foot-row{display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap;width:100%}
+
+/* ── 방문자 카운터 ── */
+.visits{display:flex;align-items:center;justify-content:center;gap:0;flex-wrap:wrap;
+ margin:0 0 18px;padding:13px 18px;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px}
+.visits[hidden]{display:none}
+.v-item{display:flex;align-items:baseline;gap:8px;padding:0 18px}
+.v-item+.v-item{border-left:1px solid var(--line2)}
+.v-k{font-size:11px;color:var(--ink3);letter-spacing:.04em}
+.v-v{font-size:18px;font-weight:800;color:var(--ink);letter-spacing:-.02em;
+ font-variant-numeric:tabular-nums}
+.v-note{width:100%;text-align:center;font-size:11px;color:var(--ink3);margin:7px 0 0}
+
+.view[hidden]{display:none}
+@media(max-width:640px){
+  h1{font-size:25px}
+  .hero{padding:30px 0 4px}
+  .topbar-in{height:56px;gap:10px}
+  .brand{font-size:13px;white-space:nowrap;gap:8px}
+  .brand .logo{width:26px;height:26px;flex:0 0 26px}
+  .brand span.full{display:none}
+  .nav{flex:0 0 auto;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch;
+   scrollbar-width:none}
+  .nav::-webkit-scrollbar{display:none}
+  .nav button{font-size:12px;padding:6px 11px;white-space:nowrap}
+  .grid{grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+  .rcard{padding:14px 15px}
+  .rcard .date{font-size:18px}
+  .latest{padding:17px 18px}
+  .wrap,.topbar-in{padding:0 15px}
+  .sum-h{padding:17px 18px}
+  .sum-b{padding:15px 18px 17px}
+  .sum-h .l-date{font-size:21px}
+  .stiles{grid-template-columns:repeat(2,1fr);gap:8px}
+  .stile .v{font-size:19px}
+  .swipe{display:block}
+}
+@media(max-width:540px){
+  .brand span.txt{display:none}          /* 탭 3개 확보 — 로고만 표시 */
+  .nav{gap:2px}
+  .nav button{font-size:11.5px;padding:6px 9px}
+}
+</style>
+</head><body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="index.html#reports">
+      <span class="logo">
+        <img src="image/logo.png" alt="데이터스테이션 로고"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fallback"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="txt">데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
+    </a>
+    <nav class="nav">
+      <button data-go="reports" aria-current="true">일일 리포트</button>
+      <button data-go="eval">모형 안정성 평가</button>
+      <button data-go="about">시스템 개요</button>
+    </nav>
+  </div>
+</div>
+
+<!-- ══════════════ 리포트 전체 목록 ══════════════ -->
+<section class="view">
+  <div class="wrap">
+    <div class="hero">
+      <span class="pill">ALL REPORTS</span>
+      <h1>리포트 전체 목록</h1>
+      <p class="lede">지금까지 발행한 일일 분석 리포트 전체입니다. 날짜로 검색하거나 월별로 걸러
+        볼 수 있습니다. 카드를 클릭하면 해당 일자 리포트로 이동합니다.</p>
+      <p style="margin:14px 0 0"><a class="btn ghost" href="index.html#reports">← 메인으로 돌아가기</a></p>
+    </div>
+
+    <h2 id="reports">리포트 목록 <span class="cnt" id="count"></span></h2>
+
+    <div class="toolbar">
+      <label class="search">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6" stroke-linecap="round"/></svg>
+        <input id="q" type="search" placeholder="날짜 검색 (예: 2026-07 또는 07-27)" autocomplete="off">
+      </label>
+      <div class="chips" id="months"></div>
+    </div>
+
+    <div id="list"><div class="grid">
+      <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
+    </div></div>
+    <p class="note" id="status"></p>
+
+    <h2>면책</h2>
+    <div class="disc">
+      본 시스템의 산출물은 LLM 기반 분석 결과이며 <b>투자 조언이 아닙니다</b>.
+      승률·기대값은 모델 추정치로 실현 수익을 보장하지 않습니다.
+      리포트에 포함된 시세·재무 수치는 오류를 포함할 수 있으며, 투자 판단 전 반드시 원본 데이터를
+      직접 확인하시기 바랍니다. 실제 투자 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+    </div>
+  </div>
+</section>
+
+<footer><div class="wrap">
+  <div class="foot-row">
+    <span>나스닥 멀티에이전트 추천 시스템 · TradingAgents 프레임워크 기반</span>
+    <span id="foot-meta"></span>
+  </div>
+</div></footer>
+<script>
+/* ═══════════════════════════════════════════════════════════
+   리포트 전체 목록 (archive.html)
+   · index.html 과 동일한 CONFIG / 목록 수집 로직을 사용한다.
+   · GitHub 트리 캐시(localStorage 'ds-gh-tree')를 index 와 공유하므로
+     추가 API 호출이 발생하지 않는다.
+   ═══════════════════════════════════════════════════════════ */
+const CONFIG = {
+  owner:  null,        // 예: "myname"  (null = 자동 인식)
+  repo:   null,        // 예: "stock-reports" (null = 자동 인식)
+  branch: "main",      // 기본 브랜치명 (master면 "master"로 변경)
+  dir:    "reports",   // 리포트 HTML을 올리는 폴더
+  title:  "나스닥 데이터 분석 추천 시스템"
+};
+
+/* ── 상단 탭 → 메인으로 이동 ── */
+document.querySelectorAll('.nav button').forEach(b =>
+  b.addEventListener('click', () => { location.href = 'index.html#' + b.dataset.go; }));
+
+/* ── 유틸 ── */
+const DOW = ['일','월','화','수','목','금','토'];
+const pad = n => String(n).padStart(2,'0');
+const todayStr = (() => { const d = new Date(); return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}`; })();
+function daysAgo(ds){
+  const [y,m,d] = ds.split('-').map(Number);
+  const a = new Date(y, m-1, d), b = new Date();
+  return Math.round((new Date(b.getFullYear(),b.getMonth(),b.getDate()) - a) / 86400000);
+}
+function relLabel(n){
+  if(n <= 0) return '오늘';
+  if(n === 1) return '어제';
+  if(n < 7)  return n + '일 전';
+  if(n < 31) return Math.floor(n/7) + '주 전';
+  return Math.floor(n/30) + '개월 전';
+}
+const esc = s => String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+
+/* ── owner/repo 자동 인식 ── */
+function detectRepo(){
+  if(CONFIG.owner && CONFIG.repo) return {owner:CONFIG.owner, repo:CONFIG.repo};
+  const h = location.hostname, segs = location.pathname.split('/').filter(Boolean);
+  if(h.endsWith('.github.io')){
+    const owner = CONFIG.owner || h.replace('.github.io','');
+    const hasFile = segs.length && /\.html?$/i.test(segs[segs.length-1]);
+    const dirs = hasFile ? segs.slice(0,-1) : segs;
+    const repo = CONFIG.repo || (dirs.length ? dirs[0] : h);
+    return {owner, repo};
+  }
+  return null;
+}
+
+/* ── GitHub 파일 목록 (index.html 과 동일 · 캐시 공유) ── */
+const GH = {ttl: 10*60*1000, stale: 24*60*60*1000, key:'ds-gh-tree', p:null};
+function ghCacheRead(){
+  try{
+    const o = JSON.parse(localStorage.getItem(GH.key) || 'null');
+    return (o && Array.isArray(o.paths) && typeof o.t === 'number') ? o : null;
+  }catch(e){ return null; }
+}
+function ghPaths(){
+  if(GH.p) return GH.p;
+  GH.p = (async () => {
+    const r = detectRepo();
+    if(!r) throw new Error('local');
+    const cached = ghCacheRead();
+    if(cached && Date.now() - cached.t < GH.ttl) return cached.paths;
+    try{
+      const url = `https://api.github.com/repos/${r.owner}/${r.repo}/git/trees/${CONFIG.branch}?recursive=1`;
+      const res = await fetch(url, {headers:{'Accept':'application/vnd.github+json'}});
+      if(!res.ok) throw new Error(res.status === 403 || res.status === 429 ? 'ratelimit' : 'github ' + res.status);
+      const j = await res.json();
+      const paths = (j.tree || []).filter(x => x.type === 'blob').map(x => x.path);
+      try{ localStorage.setItem(GH.key, JSON.stringify({t:Date.now(), paths})); }catch(e){}
+      return paths;
+    }catch(e){
+      if(cached && Date.now() - cached.t < GH.stale) return cached.paths;
+      throw e;
+    }
+  })();
+  return GH.p;
+}
+function ghFilesIn(paths, dir){
+  const pre = (dir + '/').toLowerCase();
+  return paths.filter(p => p.toLowerCase().startsWith(pre))
+              .map(p => p.slice(dir.length + 1))
+              .filter(n => n && !n.includes('/'));
+}
+
+/* ── 리포트 목록 수집 ── */
+async function fromGitHub(){
+  const items = parseNames(ghFilesIn(await ghPaths(), CONFIG.dir));
+  if(!items.length) throw new Error('empty');
+  return {items, src:'github'};
+}
+async function fromJson(){
+  const res = await fetch(CONFIG.dir + '/reports.json?t=' + Date.now(), {cache:'no-store'});
+  if(!res.ok) throw new Error('json ' + res.status);
+  const data = await res.json();
+  const arr = Array.isArray(data) ? data : (data.reports || []);
+  const items = arr.map(x => typeof x === 'string' ? {date:x} : x)
+    .filter(x => /^\d{4}-\d{2}-\d{2}$/.test(x.date))
+    .map(x => ({date:x.date, file:x.file || (x.date + '.html'), title:x.title || ''}));
+  items.sort((a,b) => b.date.localeCompare(a.date));
+  return {items, src:'json'};
+}
+function parseNames(names){
+  const items = [];
+  for(const name of names){
+    const m = name.match(/(\d{4}-\d{2}-\d{2})/);
+    if(m && /\.html?$/i.test(name)) items.push({date:m[1], file:name, title:''});
+  }
+  items.sort((a,b) => b.date.localeCompare(a.date));
+  return items;
+}
+
+/* ── 렌더링 (전체 노출) ── */
+let ALL = [], monthFilter = '', query = '';
+
+function cardHTML(it){
+  const [y,m,d] = it.date.split('-').map(Number);
+  const dow = new Date(y, m-1, d).getDay();
+  const n = daysAgo(it.date);
+  let tag = '';
+  if(it.date === todayStr) tag = '<span class="tag today">TODAY</span>';
+  else if(n <= 2 && n >= 0) tag = '<span class="tag new">NEW</span>';
+  const href = CONFIG.dir + '/' + (it.file || (it.date + '.html'));
+  return `<a class="rcard" href="${esc(href)}">
+    <div class="row1"><span class="dow${dow===0?' sun':dow===6?' sat':''}">${y}년 ${m}월 · ${DOW[dow]}요일</span>${tag}</div>
+    <p class="date">${pad(m)}월 ${pad(d)}일</p>
+    <p class="title">${esc(it.title || CONFIG.title)}</p>
+    <div class="foot"><span>${relLabel(n)}</span><span class="go">리포트 열기 →</span></div>
+  </a>`;
+}
+
+function render(){
+  const list = document.getElementById('list');
+  let items = ALL;
+  if(monthFilter) items = items.filter(i => i.date.startsWith(monthFilter));
+  if(query){ const q = query.trim().toLowerCase(); items = items.filter(i => i.date.includes(q) || (i.title||'').toLowerCase().includes(q)); }
+
+  document.getElementById('count').textContent =
+    ALL.length ? (items.length === ALL.length ? `총 ${ALL.length}건` : `${items.length} / ${ALL.length}건`) : '';
+
+  if(!items.length){
+    list.innerHTML = ALL.length
+      ? `<div class="state"><b>조건에 맞는 리포트가 없습니다</b><p>검색어나 월 필터를 바꿔보세요.</p></div>`
+      : '';
+    return;
+  }
+  list.innerHTML = `<div class="grid">${items.map(cardHTML).join('')}</div>`;
+}
+
+function renderMonths(){
+  const box = document.getElementById('months');
+  const ms = [...new Set(ALL.map(i => i.date.slice(0,7)))].sort().reverse();
+  if(ms.length < 2){ box.innerHTML = ''; return; }
+  box.innerHTML = `<button class="chip" data-m="" aria-pressed="true">전체</button>` +
+    ms.map(m => `<button class="chip" data-m="${m}" aria-pressed="false">${m.replace('-','년 ')}월</button>`).join('');
+  box.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
+    monthFilter = c.dataset.m;
+    box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === c)));
+    render();
+  }));
+}
+
+function setStatus(kind, text){
+  const el = document.getElementById('status');
+  el.innerHTML = `<span class="dot ${kind}"></span><span>${text}</span>`;
+}
+
+/* ── 부팅 ── */
+(async function init(){
+  let res = null, err1 = null;
+  try { res = await fromGitHub(); }
+  catch(e){ err1 = e; try { res = await fromJson(); } catch(e2){ /* both failed */ } }
+
+  if(res && res.items.length){
+    ALL = res.items;
+    renderMonths(); render();
+    document.getElementById('status').innerHTML = '';
+    document.getElementById('foot-meta').textContent = `총 ${ALL.length}건 · 최신 ${ALL[0].date}`;
+    return;
+  }
+
+  const isLocal  = location.protocol === 'file:';
+  const isLimit  = err1 && /ratelimit|403|429/.test(err1.message);
+  document.getElementById('list').innerHTML = `<div class="state">
+    <b>${isLocal ? '로컬에서 연 파일입니다'
+        : isLimit ? 'GitHub API 호출 한도에 걸렸습니다'
+        : '아직 리포트 목록을 불러오지 못했습니다'}</b>
+    <p>${isLocal
+      ? 'GitHub에 올린 뒤 <code>github.io</code> 주소로 접속하면 <code>reports/</code> 폴더의 파일이 자동으로 나열됩니다.'
+      : isLimit
+        ? '비로그인 GitHub API는 <b>IP당 시간당 60회</b>로 제한됩니다. 잠시 뒤 새로고침하면 다시 표시되며, <code>' + CONFIG.dir + '/reports.json</code> 을 만들어 두면 한도와 무관하게 항상 나옵니다.'
+        : '저장소가 <b>Public</b> 인지, <code>' + CONFIG.dir + '/</code> 폴더에 <code>YYYY-MM-DD.html</code> 파일이 있는지 확인해주세요.'}</p>
+    <p style="margin-top:12px"><a class="btn ghost" href="${CONFIG.dir}/">${CONFIG.dir}/ 폴더 열어보기</a></p>
+  </div>`;
+  setStatus('warn', isLocal
+    ? '로컬 미리보기 모드 — 목록 자동 인식은 배포 후 동작합니다.'
+    : isLimit
+      ? 'GitHub API 한도 초과 — 약 1시간 뒤 자동 복구됩니다.'
+      : `자동 인식 실패${err1 ? ' (' + esc(err1.message) + ')' : ''} — CONFIG의 owner/repo/branch 값을 직접 지정해보세요.`);
+})();
+
+document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
+</script>
+</body>
+</html>
