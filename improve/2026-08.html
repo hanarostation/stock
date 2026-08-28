@@ -1,0 +1,721 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>월간 모형평가 반영 결과 — 2026년 8월 | 데이터스테이션</title>
+<meta name="description" content="2026년 8월 월간 모형평가(Red)가 나스닥 멀티에이전트 추천에 실제로 반영된 내용 — As-Is/To-Be 대조, 최초 반영 회차, 산출값 변화">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232a78d6'/><path d='M22 66 L40 46 L54 58 L78 32' stroke='white' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<style>
+:root{
+  --bg:#f9f9f7; --surface:#fcfcfb; --surface2:#fdfdfc;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#898781;
+  --line:rgba(11,11,11,0.10); --line2:#e1e0d9; --line3:#c3c2b7;
+  --accent:#2a78d6; --gold:#eda100; --up:#006300; --dn:#d03b3b; --violet:#4a3aa7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 70px}
+.hero{padding:42px 0 4px}
+.pill{display:inline-block;background:var(--violet);color:#fff;font-size:11px;font-weight:700;
+ padding:3px 11px;border-radius:99px;letter-spacing:.03em;margin-bottom:14px}
+h1{font-size:31px;margin:0 0 10px;letter-spacing:-.03em;line-height:1.25}
+.lede{color:var(--ink2);font-size:14.5px;max-width:760px;margin:0}
+.meta{margin:15px 0 0;font-size:12.5px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:6px 16px}
+.meta b{color:var(--ink2);font-weight:700}
+h2{font-size:19px;margin:46px 0 16px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+ letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 .cnt{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:0}
+h3{font-size:15px;margin:26px 0 10px;letter-spacing:-.01em}
+h4{font-size:11.5px;margin:0 0 9px;color:var(--ink2);text-transform:uppercase;letter-spacing:.07em}
+p{margin:0 0 12px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:20px 22px}
+.panel p:last-child{margin-bottom:0}
+.stiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0 0}
+.stile{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.stile .k{font-size:11px;color:var(--ink3);letter-spacing:.03em}
+.stile .v{font-size:21px;font-weight:800;letter-spacing:-.03em;margin:3px 0 2px;
+ font-variant-numeric:tabular-nums;line-height:1.2}
+.stile .s{font-size:11px;color:var(--ink3);line-height:1.5}
+.up{color:var(--up)}.dn{color:var(--dn)}.ac{color:var(--accent)}.neutral{color:var(--ink)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden;font-size:13px}
+th{background:var(--bg);text-align:left;padding:10px 13px;font-size:11px;color:var(--ink2);
+ border-bottom:1px solid var(--line3);letter-spacing:.04em;white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+.tscroll{overflow-x:auto;border-radius:12px}
+.tscroll table{min-width:660px}
+.badge{display:inline-block;font-size:10.5px;font-weight:800;padding:2.5px 9px;border-radius:99px;
+ white-space:nowrap;letter-spacing:.02em}
+.badge.done{background:#e8f7e8;color:#0a5a0a}
+.badge.part{background:#fdf0cf;color:#7a5400}
+.badge.open{background:#f2f1ed;color:var(--ink3)}
+.badge.new{background:var(--accent);color:#fff}
+
+/* 타임라인 */
+.tl{position:relative;margin:6px 0 0;padding:26px 0 4px}
+.tl-line{position:absolute;left:0;right:0;top:44px;height:3px;background:var(--line2);border-radius:3px}
+.tl-line i{position:absolute;left:0;width:56%;top:0;bottom:0;background:var(--ink3);border-radius:3px}
+.tl-line b{position:absolute;left:56%;right:0;top:0;bottom:0;background:var(--accent);border-radius:3px}
+.tl-nodes{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tl-n{position:relative;padding-top:38px;text-align:left}
+.tl-n::before{content:"";position:absolute;top:11px;left:0;width:13px;height:13px;border-radius:50%;
+ background:var(--surface);border:3px solid var(--ink3)}
+.tl-n.on::before{border-color:var(--accent);background:var(--accent);
+ box-shadow:0 0 0 4px rgba(42,120,214,.18)}
+.tl-n .d{font-size:12.5px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tl-n .t{font-size:11.5px;color:var(--ink2);line-height:1.5;margin-top:2px}
+.tl-n.on .d{color:var(--accent)}
+.cut{margin:16px 0 0;background:#eaf2fc;border:1px solid rgba(42,120,214,.35);
+ border-left:3px solid var(--accent);border-radius:0 11px 11px 0;padding:14px 17px;font-size:13.2px;color:var(--ink2)}
+.cut b{color:var(--ink)}
+
+/* 도식 */
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 8px 10px;margin:0}
+.figscroll{overflow-x:auto}
+.figure svg{display:block;min-width:940px;width:100%;height:auto}
+.figcap{font-size:11.5px;color:var(--ink3);padding:8px 14px 4px;margin:0;line-height:1.6}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);padding:2px 14px 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:3px;display:block;border:1.5px solid var(--line3);background:var(--surface2)}
+.legend i.ch{border-color:var(--accent);background:#eaf2fc}
+.legend i.no{border-color:var(--dn);background:#fdecec;border-style:dashed}
+
+/* As-Is / To-Be 카드 */
+.abgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:13px}
+.ab{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.ab-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 17px 12px}
+.ab-h .ti{font-size:14.5px;font-weight:800;letter-spacing:-.01em;line-height:1.4}
+.ab-h .src{font-size:11px;color:var(--ink3);margin-top:2px}
+.ab-b{border-top:1px solid var(--line2);background:var(--surface2);padding:0}
+.ab-row{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:12px 17px;border-bottom:1px solid var(--line2);
+ font-size:12.8px;line-height:1.6}
+.ab-row:last-child{border-bottom:none}
+.ab-row .lb{font-size:10.5px;font-weight:800;letter-spacing:.05em;padding-top:2px}
+.ab-row.as .lb{color:var(--ink3)}
+.ab-row.to .lb{color:var(--accent)}
+.ab-row.as{color:var(--ink3)}
+.ab-row.as .tx{text-decoration:line-through;text-decoration-color:rgba(137,135,129,.5)}
+.ab-row.to{background:#f4f8fe;color:var(--ink2)}
+.ab-row.to b{color:var(--ink)}
+.ab-ev{padding:11px 17px;border-top:1px dotted var(--line2);font-size:11.8px;color:var(--ink2);background:var(--surface)}
+.ab-ev b{color:var(--accent)}
+
+/* 콜아웃 */
+.callout{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin:16px 0 0}
+.callout .ttl{font-size:14.5px;font-weight:800;letter-spacing:-.01em;margin:0 0 4px}
+.callout .sub{font-size:12.2px;color:var(--ink3);margin:0 0 15px}
+.cc{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.cbox{border:1px solid var(--line2);border-radius:11px;padding:13px 15px;background:var(--surface2)}
+.cbox.tgt{border-color:rgba(42,120,214,.45);background:#eaf2fc}
+.cbox .cl{font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--ink3);margin-bottom:7px}
+.cbox.tgt .cl{color:var(--accent)}
+.cbox dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px}
+.cbox dt{color:var(--ink3)}
+.cbox dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.carrow{font-size:22px;color:var(--accent);font-weight:800}
+.callout .note{font-size:12px;color:var(--ink2);margin:14px 0 0;line-height:1.6}
+.warnbox{background:#fef9ec;border:1px solid rgba(237,161,0,.4);border-left:3px solid var(--gold);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:13px;color:var(--ink2)}
+.warnbox b{color:var(--ink)}
+.disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2);margin-top:14px}
+ul.tight{margin:0;padding-left:19px}
+ul.tight li{margin-bottom:7px}
+ul.tight li:last-child{margin-bottom:0}
+code{background:#f2f1ed;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12px}
+@media(max-width:820px){
+  .stiles{grid-template-columns:repeat(2,1fr)}
+  .tl-nodes{grid-template-columns:repeat(2,1fr);gap:18px 10px}
+  .tl-line{display:none}
+  .cc{grid-template-columns:1fr;gap:9px}
+  .carrow{text-align:center;transform:rotate(90deg)}
+  h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<!-- ═══ 데이터스테이션 공통 상단바 — index 헤더 이식 + 뒤로가기 (공통 삽입 블록) ═══ -->
+<style>
+.ds-topbar{position:sticky;top:0;z-index:900;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+ border-bottom:1px solid rgba(11,11,11,.10);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif}
+.ds-topbar *{box-sizing:border-box}
+.ds-topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px;height:60px}
+.ds-brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;
+ font-size:15.5px;color:#0b0b0b;text-decoration:none;min-width:0;white-space:nowrap}
+.ds-logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.ds-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.ds-logo .ds-fb{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.ds-logo .ds-fb svg{width:17px;height:17px}
+.ds-nav{display:flex;gap:4px;align-items:center;margin-left:auto;overflow-x:auto;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ds-nav::-webkit-scrollbar{display:none}
+a.ds-tab{font-size:13px;font-weight:700;color:#52514e;border:1px solid transparent;
+ padding:6px 15px;border-radius:99px;text-decoration:none;white-space:nowrap;
+ transition:background .15s,color .15s,border-color .15s}
+a.ds-tab:hover{background:#f2f1ed;color:#0b0b0b}
+a.ds-tab[aria-current="true"]{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+a.ds-back{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:#2a78d6;color:#fff;
+ font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:99px;border:1px solid #2a78d6;
+ text-decoration:none;white-space:nowrap;transition:opacity .15s}
+a.ds-back:hover{opacity:.85}
+@media(max-width:640px){
+  .ds-topbar-in{height:56px;gap:10px;padding:0 15px}
+  .ds-brand{font-size:13px;gap:8px}
+  .ds-logo{width:26px;height:26px;flex:0 0 26px}
+  .ds-full{display:none}
+  a.ds-tab{font-size:12px;padding:6px 11px}
+  a.ds-back{font-size:12px;padding:7px 13px}
+}
+@media(max-width:540px){
+  .ds-txt{display:none}
+  .ds-nav{gap:2px}
+  a.ds-tab{font-size:11.5px;padding:6px 9px}
+}
+@media print{.ds-topbar{display:none}}
+</style>
+<div class="ds-topbar" id="ds-topbar">
+  <div class="ds-topbar-in">
+    <a class="ds-brand" href="../index.html" data-ds-home="">
+      <span class="ds-logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고" id="ds-logo-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="ds-fb"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="ds-txt">데이터스테이션 나스닥<span class="ds-full"> 분석 리포트</span></span>
+    </a>
+    <nav class="ds-nav">
+      <a class="ds-tab" href="../index.html#reports" data-ds-home="#reports">일일 리포트</a>
+      <a class="ds-tab" href="../index.html#eval" data-ds-home="#eval" aria-current="true">모형 안정성 평가</a>
+      <a class="ds-tab" href="../index.html#about" data-ds-home="#about">시스템 개요</a>
+    </nav>
+    <a class="ds-back" id="ds-back" href="../index.html#eval" data-ds-home="#eval">← 목록으로</a>
+  </div>
+</div>
+<script>
+(function(){
+  if(!/\/(reports|eval)\/[^\/]*$/i.test(location.pathname)){
+    document.querySelectorAll('#ds-topbar [data-ds-home]').forEach(function(a){
+      a.setAttribute('href','index.html'+a.getAttribute('data-ds-home'));
+    });
+    var im=document.getElementById('ds-logo-img'); if(im) im.src='image/logo.png';
+  }
+  var bk=document.getElementById('ds-back');
+  if(bk) bk.addEventListener('click',function(e){
+    try{
+      if(document.referrer && new URL(document.referrer).origin===location.origin && history.length>1){
+        e.preventDefault(); history.back();
+      }
+    }catch(err){}
+  });
+})();
+</script>
+<!-- ═══ /공통 상단바 ═══ -->
+
+<div class="wrap">
+
+<div class="hero">
+  <span class="pill">MONTHLY EVAL → APPLIED CHANGES</span>
+  <h1>월간 모형평가 반영 결과 — 2026년 8월</h1>
+  <p class="lede">2026년 8월 모형 안정성 평가(종합 모형위험등급 <b>Red</b>)의 필수 권고 3건·일반 권고 3건이
+    나스닥 멀티에이전트 추천 시스템에 실제로 어떻게 반영됐는지, 그리고 그 결과 <b>추천 산출물이 어떻게 달라졌는지</b>를
+    As-Is / To-Be로 대조한 문서입니다.</p>
+  <p class="meta">
+    <span><b>평가기준일</b> 2026-08-27 미국장 마감</span>
+    <span><b>설계문서 개정</b> 경량판 v3 · 2026-08-28</span>
+    <span><b>최초 반영 회차</b> 2026-08-28(금) 일일 리포트</span>
+    <span><b>다음 검증</b> 2026-09-01 월간평가</span>
+  </p>
+</div>
+
+<div class="stiles">
+  <div class="stile"><div class="k">평가 권고 이행</div><div class="v up">5 / 6</div>
+    <div class="s">필수 3건 전부 완료 · 권고 1건(변별력)은 부분 반영</div></div>
+  <div class="stile"><div class="k">평가 입력 리포트</div><div class="v neutral">07-24 → 08-27</div>
+    <div class="s">20개 코호트 62 포지션 · 그중 성숙 4코호트 32 포지션이 등급 확정</div></div>
+  <div class="stile"><div class="k">규칙 반영 시작</div><div class="v ac">08-28 리포트</div>
+    <div class="s">08-27 리포트까지는 v2(미반영) · 08-28부터 v3 전 규칙 작동</div></div>
+  <div class="stile"><div class="k">발행 게이트</div><div class="v up">PASS</div>
+    <div class="s">신설 후 첫 가동 · WARN 1건(판별변수 null 10개)</div></div>
+</div>
+
+<!-- ══════════ 1 ══════════ -->
+<h2>1. 어디까지 평가에 들어갔고, 어디부터 반영됐나 <span class="cnt">반영 경계</span></h2>
+
+<div class="panel">
+  <p>이 절은 <b>“평가 결과가 몇 일 자 리포트까지 반영됐는가”</b>에 대한 답입니다. 두 개의 서로 다른 날짜를
+    구분해서 읽어야 합니다 — <b>평가가 입력으로 삼은 리포트의 범위</b>와, <b>평가 결과가 처음 적용된 리포트</b>는
+    다른 날짜입니다.</p>
+
+  <div class="tl">
+    <div class="tl-line"><i></i><b></b></div>
+    <div class="tl-nodes">
+      <div class="tl-n">
+        <div class="d">2026-07-24 → 08-27</div>
+        <div class="t"><b>평가 입력 구간.</b> 이 기간에 발행된 일일 리포트 전부가 평가 표본이다.
+          20개 코호트·62 포지션이 수집됐고, 20영업일 관측창을 통과한 <b>4개 코호트(07-24·07-27·07-28·07-30, 32 포지션)</b>만
+          등급 산정에 쓰였다. 8월 15개 코호트와 07-31은 미성숙으로 잠정 표기·등급 제외.</div>
+      </div>
+      <div class="tl-n">
+        <div class="d">2026-08-27 마감</div>
+        <div class="t"><b>평가기준일.</b> 이 날짜의 종가까지가 성과 계산의 종점이다.
+          <b>2026-08-27 일일 리포트는 평가의 입력이었고, 평가 결과가 반영되지 않은 마지막 회차</b>다(경량판 v2로 발행).</div>
+      </div>
+      <div class="tl-n">
+        <div class="d">2026-08-28 (KST)</div>
+        <div class="t"><b>평가 확정 · 설계 개정.</b> 종합 모형위험등급 Red 확정(확정지표 17개 중 Green 3 / Amber 6 / Red 8),
+          같은 날 설계문서를 <b>경량판 v3</b>로 개정해 필수 권고 3건 + 권고 3건 + 자체 이월 안건 3건을 일괄 반영.</div>
+      </div>
+      <div class="tl-n on">
+        <div class="d">2026-08-28 리포트</div>
+        <div class="t"><b>★ 최초 반영 회차.</b> 평가 결과가 실제 추천에 적용된 첫 리포트.
+          승률 산정·진입가 괴리 상한·확장 목표 예외·발행 게이트 <b>신규 규칙 4개가 모두 실제로 작동</b>했고,
+          그 사실이 리포트 총평에 기재됐다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <b>한 줄 정리 —</b> 8월 평가는 <b>2026-07-24부터 2026-08-27까지의 일일 리포트</b>를 입력으로 삼았고,
+    그 평가 결과는 <b>2026-08-28(금) 일일 리포트부터</b> 추천에 반영됐습니다.
+    즉 <b>2026-08-27 리포트까지가 반영 이전(v2), 2026-08-28 리포트부터가 반영 이후(v3)</b>이며,
+    이 문서의 모든 As-Is / To-Be 대조는 이 두 회차를 직접 비교한 것입니다.
+  </div>
+</div>
+
+<div class="warnbox" style="margin-top:14px">
+  <b>다만 성과 검증은 아직 끝나지 않았습니다.</b> 8월 평가의 실현 승률 85.2%(성숙 32 포지션)는
+  <b>2026-07-24~08-27의 일방적 상승장 표본</b>에서 나온 값이고, v3의 승률 앵커 β_base = 68.2%는 여기에 전적으로 의존합니다.
+  하락 국면이 섞인 코호트(07-31, 08-03~08-06)는 <b>2026-09-01 월간평가에서 처음 성숙</b>합니다.
+  그 시점에 실현 승률이 60% 아래로 내려오면 R이 자동으로 낮아져 β_base도 따라 내려갑니다(4-1절 상승장 착시 방어).
+</div>
+
+<!-- ══════════ 2 ══════════ -->
+<h2>2. 파이프라인 As-Is → To-Be <span class="cnt">구조가 어떻게 바뀌었나</span></h2>
+
+<div class="figure">
+ <div class="figscroll">
+  <svg viewBox="0 0 1160 336" role="img" aria-label="As-Is(v2)와 To-Be(v3) 파이프라인 대조 도식"
+       font-family="'Noto Sans CJK KR','Noto Sans KR',system-ui,sans-serif">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#c3c2b7"/>
+      </marker>
+      <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/>
+      </marker>
+    </defs>
+
+    <!-- 레인 배경 -->
+    <rect x="0" y="26" width="1160" height="122" rx="12" fill="#f4f3ef"/>
+    <rect x="0" y="164" width="1160" height="152" rx="12" fill="#eef4fc"/>
+
+    <!-- 레인 라벨 -->
+    <text x="16" y="50" font-size="11.5" font-weight="800" fill="#898781" letter-spacing="1">AS-IS · 경량판 v2</text>
+    <text x="16" y="66" font-size="11" fill="#898781">~ 2026-08-27 리포트</text>
+    <text x="16" y="188" font-size="11.5" font-weight="800" fill="#2a78d6" letter-spacing="1">TO-BE · 경량판 v3</text>
+    <text x="16" y="204" font-size="11" fill="#2a78d6">2026-08-28 리포트 ~</text>
+
+    <!-- ===== AS-IS 박스 8개 ===== -->
+    <g font-size="10.5">
+      <!-- 1 -->
+      <rect x="176" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="228" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">후보 12종</text>
+      <text x="228" y="111" text-anchor="middle" fill="#898781">판별변수 미기록</text>
+      <!-- 2 -->
+      <rect x="296" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="348" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">종합점수 4축</text>
+      <text x="348" y="111" text-anchor="middle" fill="#898781">35/25/22/18</text>
+      <!-- 3 -->
+      <rect x="416" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="468" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">승률 산정</text>
+      <text x="468" y="111" text-anchor="middle" fill="#d03b3b">42~52% 고정밴드</text>
+      <!-- 4 -->
+      <rect x="536" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="588" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">좌표 설계</text>
+      <text x="588" y="111" text-anchor="middle" fill="#d03b3b">괴리 상한 없음</text>
+      <!-- 5 -->
+      <rect x="656" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="708" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">리스크 3관점</text>
+      <text x="708" y="111" text-anchor="middle" fill="#898781">하한충돌 미해소</text>
+      <!-- 6 -->
+      <rect x="776" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="828" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">펀드매니저</text>
+      <text x="828" y="111" text-anchor="middle" fill="#898781">등급·비중 확정</text>
+      <!-- 7 (없음) -->
+      <rect x="896" y="74" width="104" height="52" rx="9" fill="#fdecec" stroke="#d03b3b" stroke-dasharray="5 4"/>
+      <text x="948" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#a12020">발행 게이트</text>
+      <text x="948" y="111" text-anchor="middle" fill="#a12020">없음 — 직행</text>
+      <!-- 8 -->
+      <rect x="1016" y="74" width="104" height="52" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="1068" y="95" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">발행</text>
+      <text x="1068" y="111" text-anchor="middle" fill="#898781">HTML · PDF</text>
+    </g>
+    <g stroke="#c3c2b7" stroke-width="1.6" marker-end="url(#ar)">
+      <line x1="280" y1="100" x2="292" y2="100"/><line x1="400" y1="100" x2="412" y2="100"/>
+      <line x1="520" y1="100" x2="532" y2="100"/><line x1="640" y1="100" x2="652" y2="100"/>
+      <line x1="760" y1="100" x2="772" y2="100"/><line x1="880" y1="100" x2="892" y2="100"/>
+      <line x1="1000" y1="100" x2="1012" y2="100"/>
+    </g>
+
+    <!-- ===== TO-BE 박스 8개 ===== -->
+    <g font-size="10">
+      <!-- 1 -->
+      <rect x="176" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="228" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">후보 12종</text>
+      <text x="228" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★판별 3변수</text>
+      <text x="228" y="262" text-anchor="middle" fill="#52514e">mom·rs·eps</text>
+      <text x="228" y="275" text-anchor="middle" fill="#52514e">전수 기록 의무</text>
+      <!-- 2 -->
+      <rect x="296" y="212" width="104" height="72" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="348" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">종합점수 4축</text>
+      <text x="348" y="248" text-anchor="middle" fill="#898781">35/25/22/18</text>
+      <text x="348" y="262" text-anchor="middle" fill="#898781">가중치 불변</text>
+      <text x="348" y="275" text-anchor="middle" fill="#52514e">AUROC 월간 추적</text>
+      <!-- 3 -->
+      <rect x="416" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="468" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">승률 산정</text>
+      <text x="468" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★β_base 68.2%</text>
+      <text x="468" y="262" text-anchor="middle" fill="#52514e">국면 −8 · 종목 ±10</text>
+      <text x="468" y="275" text-anchor="middle" fill="#52514e">clip 35~75%</text>
+      <!-- 4 -->
+      <rect x="536" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="588" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">좌표 설계</text>
+      <text x="588" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★괴리 상한 5%</text>
+      <text x="588" y="262" text-anchor="middle" fill="#52514e">진입 ≥ 종가×0.95</text>
+      <text x="588" y="275" text-anchor="middle" fill="#52514e">체결확률 ≥ 40%</text>
+      <!-- 5 -->
+      <rect x="656" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="708" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">리스크 3관점</text>
+      <text x="708" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★분기 규칙</text>
+      <text x="708" y="262" text-anchor="middle" fill="#52514e">2관점↓ = 미진입</text>
+      <text x="708" y="275" text-anchor="middle" fill="#52514e">1관점↓ = 하한 유지</text>
+      <!-- 6 -->
+      <rect x="776" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="828" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">펀드매니저</text>
+      <text x="828" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★signal_type</text>
+      <text x="828" y="262" text-anchor="middle" fill="#52514e">신규 / 보유유지</text>
+      <text x="828" y="275" text-anchor="middle" fill="#52514e">재진입 / 청산</text>
+      <!-- 7 -->
+      <rect x="896" y="212" width="104" height="72" rx="9" fill="#eaf2fc" stroke="#2a78d6" stroke-width="2"/>
+      <text x="948" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">발행 게이트</text>
+      <text x="948" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★신설 · 자동</text>
+      <text x="948" y="262" text-anchor="middle" fill="#52514e">재계산 대조 ±0.06</text>
+      <text x="948" y="275" text-anchor="middle" fill="#52514e">FAIL 7종 = 발행 차단</text>
+      <!-- 8 -->
+      <rect x="1016" y="212" width="104" height="72" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="1068" y="232" text-anchor="middle" font-size="11" font-weight="800" fill="#0b0b0b">발행</text>
+      <text x="1068" y="248" text-anchor="middle" fill="#898781">HTML · PDF</text>
+      <text x="1068" y="266" text-anchor="middle" fill="#006300" font-weight="700">PASS 시에만</text>
+    </g>
+    <g stroke="#2a78d6" stroke-width="1.8" marker-end="url(#arb)">
+      <line x1="280" y1="248" x2="292" y2="248"/><line x1="400" y1="248" x2="412" y2="248"/>
+      <line x1="520" y1="248" x2="532" y2="248"/><line x1="640" y1="248" x2="652" y2="248"/>
+      <line x1="760" y1="248" x2="772" y2="248"/><line x1="880" y1="248" x2="892" y2="248"/>
+      <line x1="1000" y1="248" x2="1012" y2="248"/>
+    </g>
+
+    <!-- 하단 회귀 화살표: 게이트 FAIL 시 -->
+    <path d="M948 284 L948 302 L588 302 L588 288" fill="none" stroke="#d03b3b" stroke-width="1.6"
+          stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <text x="768" y="315" text-anchor="middle" font-size="10" fill="#a12020" font-weight="700">FAIL → 해당 항목 수정 후 재검사 (게이트 우회·임계 완화 금지)</text>
+  </svg>
+ </div>
+ <div class="legend">
+   <span><i class="ch"></i> v3에서 신설·변경된 단계</span>
+   <span><i></i> 변경 없음</span>
+   <span><i class="no"></i> As-Is에 존재하지 않던 통제</span>
+ </div>
+ <p class="figcap">7역할 파이프라인의 골격(후보 12종 → 상위 6종 리서치 → 트레이더 → 리스크 → 펀드매니저)과
+   점수 가중치(테크니컬 35 / 센티먼트 25 / 뉴스 22 / 펀더멘털 18), 산출물 형식, 주 2회 발행주기는 <b>바뀌지 않았습니다.</b>
+   바뀐 것은 <b>각 단계에 붙은 제약</b>과, 파이프라인 끝에 <b>발행 게이트라는 통제 단계가 하나 추가</b>된 것입니다.</p>
+</div>
+
+<!-- ══════════ 3 ══════════ -->
+<h2>3. 규칙별 As-Is / To-Be 대조 <span class="cnt">평가 권고 6건 + 이월 안건 3건</span></h2>
+
+<div class="abgrid">
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">① 승률 산정</div><div class="src">필수 권고 1 · 설계 4-1절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">“스윙 현실 승률 40~60%”, 사실상 <b>42~52% 고정 밴드</b>. 70% 초과는 극히 예외. 손익분기승률 +10%p 초과 시 소명.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>기저율 앵커 방식. <b>β_base = w·R + (1−w)·50</b>, w = n/(n+30) → R 85.2%·n 32 → <b>β_base 68.2%</b>.
+        여기에 국면 조정(강세 0 / 중립 −8 / 약세 −16%p) + 종목 조정(±10%p, 판별 3변수·저항여력·이벤트 근거 필수) → <b>clip 35~75%</b>.
+        소명 기준은 β_base ± 12%p로 교체.</span></div>
+    </div>
+    <div class="ab-ev">근거: 평균 예측승률 47.0% vs 실현 85.2%, 과신비율 0.552, ECE 38.1%p, Kupiec LR 23.70 →
+      <b>과신이 아니라 심각한 과소신뢰</b>. 08-28 실제 산출: MSFT 63.2% · NFLX 65.2%.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">② 진입 지정가 괴리 상한</div><div class="src">필수 권고 2 · 설계 4-2절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">진입가와 종가의 괴리에 <b>상한 없음</b>. 체결확률 하한도 없음(08-26 NVDA 35% 발행 사례).</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><b>진입 지정가 ≥ 기준일 종가 × 0.95</b> 하드 상한.
+        위반 시 ① 종가×0.95로 끌어올려 재계산 → ② 종가 진입 전환 → ③ 그래도 안 되면 관망.
+        <b>추정 체결확률 40% 미만이면 관망.</b> 전 후보 <code>entry_gap_pct</code> 기록 의무.</span></div>
+    </div>
+    <div class="ab-ev">근거: 성숙 코호트 체결률 <b>34.4%</b>, 미체결 21건, 07-30 코호트는 10건 중 1건만 체결.
+      ADBE는 신호트랙 +14.67%였으나 <b>실집행 수익 0</b>. 08-28 실제: NFLX 괴리 +3.00%(상한 내)·체결확률 45%(하한 통과).</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">③ 기대값 경로 단일화 + 발행 게이트</div><div class="src">필수 권고 3 · 설계 6-1절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">기대값 산출 경로가 사실상 복수. 발행 전 <b>자동 검증 단계 없음</b> — 펀드매니저 확정 후 바로 HTML·PDF.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>기대값은 <code>expected_value_pct</code> 식 <b>단 하나</b>로만 산출.
+        발행 직전 <code>publish_gate.py</code> 1회 실행 → 재계산 대조 <b>±0.06 초과 시 FAIL</b>,
+        그 외 R/R·기대값·손절폭·괴리·승률밴드·손절÷ATR·signal_type·판별변수·현금비중 등 <b>7종 차단 조건</b>.
+        FAIL이면 HTML·PDF를 만들지 않는다.</span></div>
+    </div>
+    <div class="ab-ev">근거: 08-07 AMZN·AVGO 기대값 기재치가 재계산치와 0.44~0.48 어긋남(186건 중 2건, 같은 회차·같은 방향 → 무작위 아님).
+      08-28 실제: <b>게이트 첫 가동, 전 종목 대조 통과 · PASS(WARN 1건)</b>.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">④ 변별력(AUROC) 대응</div><div class="src">권고 4 · 설계 3절 개정</div></div>
+      <span class="badge part">부분 반영</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">종합점수의 <b>변별력을 측정할 입력 자체가 없음</b>. 판별 변수 미기록, AUROC 추적 없음.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>후보 <b>12종 전수</b>에 <code>mom_20d</code>·<code>rs_vs_qqq</code>·<code>eps_revision</code> 기록 의무
+        (확보 실패 시 <b>null + “확인 실패”</b>, 지어내기 금지). 테크니컬·뉴스 축의 필수 하위항목으로 명문화.
+        <b>AUROC 0.55 미만 3개월 연속이면 종합점수 체계 자체를 교체.</b></span></div>
+    </div>
+    <div class="ab-ev">근거: AUROC <b>0.467</b>·Gini −0.065, 코호트 IC 부호가 +0.243/−0.127/+0.173/−0.296으로 번갈아 IC IR −0.007.
+      <b>부분 반영인 이유</b> — 08-28 리포트에서 <code>eps_revision</code> 12종 중 10종이 null. AUROC 재산출은 9월 평가에서 처음 가능.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑤ 재게시 분리 집계</div><div class="src">권고 5 · 설계 4-5절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">동일 티커·동일 진입가 재게시가 <b>신규 추천과 구분 없이</b> 코호트에 계상.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>등급 행에 <code>signal_type</code> 필수 — <b>신규 / 보유유지 / 재진입 / 청산 / 미발주</b>.
+        등급표에 열로 노출하고 <b>총평 첫 줄에 “신규 N건 / 보유유지 M건”</b> 명시. 월간평가는 보유유지를 코호트 집계에서 분리.</span></div>
+    </div>
+    <div class="ab-ev">근거: 8월 29 포지션 중 <b>15건이 동일 진입가 재게시</b>(AMZN $260.50 6회, NFLX $76.00 5회) — 실질 신규는 14건.
+      08-28 실제: <b>“신규 1건(NFLX) / 보유유지 1건(MSFT)”</b>이 총평 첫 줄에 기재됨.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑥ 비중·섹터 정책의 기록</div><div class="src">권고 6 · 설계 4-4절 + 7절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">명시 밴드 없음. 총 투자비중이 29~58% → 4~18%로 바뀌고 섹터가 인터넷/미디어 21%→59%로 이동했는데
+        <b>어디에도 기록되지 않음</b>.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>정책 밴드 명시 — <b>평시 30~60% / 방어 10~30% / 극단방어 0~10%</b>(강제 배정 아님, 기록·소명 기준).
+        <b>회차 간 총비중 ±15%p</b> 또는 <b>섹터 구성비 ±25%p</b> 이동 시 사유 필수 기재.
+        7절 <b>정책 이력 표</b> 신설 — 여기 없는 정책 변경은 무효.</span></div>
+    </div>
+    <div class="ab-ev">근거: 승률 CSI 1.131·비중 CSI 1.063·섹터 PSI 0.676 — <b>기록되지 않은 리스크 정책 전환</b>.
+      08-28 실제: 총 투자비중 4%→8%(+4%p, 임계 미달)인데도 <b>“유효 베팅수 1.00 → 2.00 복원”이라는 사유를 자발 기재</b>.</div>
+  </div>
+
+</div>
+
+<h3>함께 종결된 자체 이월 안건 3건</h3>
+<div class="tscroll">
+<table>
+  <thead><tr><th>이월 안건</th><th>As-Is</th><th>To-Be (v3)</th><th style="width:88px">이월 기간</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>손절÷ATR 1.5 적용 시점</b></td>
+      <td>보유 중 종목에도 매 회차 재판정 → 가격이 움직였을 뿐인데 강등이 발생</td>
+      <td><b>진입 시점에만 판정.</b> 보유 중 종목은 가격 트리거로만 관리하고 재판정하지 않음(4절). 게이트도 <b>신규·재진입만</b> 검사, 보유유지 면제</td>
+      <td class="n">5사이클</td>
+    </tr>
+    <tr>
+      <td><b>신고가 종목의 저항 산정</b></td>
+      <td>52주 최고를 무조건 저항으로 계산 → 돌파 종목이 구조적으로 영구 배제(08-27 12종 중 8종 탈락)</td>
+      <td>측정 저항 우선순위 <b>① 직전 스윙 고점 → ② 52주 최고 → ③ 라운드 넘버</b>.
+        <b>확장 목표 예외</b>(4-3절): 완전 정배열 <i>and</i> 최근 3거래일 누적 +6% 미만이면 목표를 52주 최고 + 1.0×ATR14까지 허용</td>
+      <td class="n">2사이클</td>
+    </tr>
+    <tr>
+      <td><b>비중 하한 4% vs 축소 권고 충돌</b></td>
+      <td>매 회차 “하한 4%로 절충 vs 전량 청산”이 재논쟁 — 결론 없이 이월</td>
+      <td>분기 규칙 확정(4-4절): <b>2관점 이상</b>이 하한 미만을 권고하면 <b>전량 청산·미진입</b>,
+        <b>1관점만</b>이면 하한 4% 유지 + 반대 논거를 리포트에 기재</td>
+      <td class="n">2사이클</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="figcap" style="padding-left:2px">이 밖에 5-1절 <b>ATR 소스 우선순위</b>(stockanalysis 일별 OHLC 직접 계산 1순위, barchart 상시 기각),
+  5-2절 <b>지수 확보 실패 시 QQQ 대체 앵커</b> 고정, 0-3절 <b>단계별 웹조사 배분에 구속력 부여</b>가 함께 명문화됐습니다.</p>
+
+<!-- ══════════ 4 ══════════ -->
+<h2>4. 숫자로 본 반영 효과 <span class="cnt">2026-08-27(v2) vs 2026-08-28(v3) 실제 산출</span></h2>
+
+<div class="callout">
+  <p class="ttl">MSFT — 좌표는 한 글자도 바뀌지 않았는데, 기대값이 2.6배가 됐다</p>
+  <p class="sub">두 회차 모두 진입 495.00 / 목표 553.72 / 손절 471.55. 달라진 것은 <b>승률 산정 규약 하나</b>뿐입니다.</p>
+  <div class="cc">
+    <div class="cbox">
+      <div class="cl">AS-IS · 2026-08-27 리포트 (v2)</div>
+      <dl>
+        <dt>진입 / 목표 / 손절</dt><dd>495.00 / 553.72 / 471.55</dd>
+        <dt>손익비 R/R</dt><dd>2.504</dd>
+        <dt>승률</dt><dd>42%</dd>
+        <dt>기대값</dt><dd>+2.235%</dd>
+        <dt>비중</dt><dd>4%</dd>
+      </dl>
+    </div>
+    <div class="carrow">→</div>
+    <div class="cbox tgt">
+      <div class="cl">TO-BE · 2026-08-28 리포트 (v3)</div>
+      <dl>
+        <dt>진입 / 목표 / 손절</dt><dd>495.00 / 553.72 / 471.55</dd>
+        <dt>손익비 R/R</dt><dd>2.504</dd>
+        <dt>승률</dt><dd class="ac">63.2%</dd>
+        <dt>기대값</dt><dd class="ac">+5.754%</dd>
+        <dt>비중</dt><dd>4%</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="note"><b>산출 경로:</b> β_base 68.2% → 국면 중립 −8%p → 60.2% → 종목 조정 +3%p → <b>63.2%</b>.
+    42~52% 고정 밴드에서는 나올 수 없는 숫자입니다. 8월 평가가 지적한 “과소신뢰”(실현 85.2% vs 예측 47.0%)를
+    그대로 되돌린 결과이며, <b>모형이 좋아져서 기대값이 오른 것이 아니라 승률 기저율을 실현값에 맞춰 다시 앵커링한 결과</b>입니다.
+    이 점은 08-28 리포트 하단 면책에도 명시돼 있습니다.</p>
+</div>
+
+<div class="tscroll" style="margin-top:16px">
+<table>
+  <thead><tr>
+    <th>항목</th><th>As-Is · 08-27 리포트 (v2)</th><th>To-Be · 08-28 리포트 (v3)</th><th>반영 규칙</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><b>승률 표기 범위</b></td><td>25% ~ 42% (후보 12종)</td><td><b>53.2% ~ 68.2%</b> (후보 12종)</td><td>4-1절</td></tr>
+    <tr><td><b>승인 종목 기대값</b></td><td>MSFT +2.235% (1종)</td><td><b>NFLX +5.008% · MSFT +5.754%</b> (2종)</td><td>4-1절</td></tr>
+    <tr><td><b>진입가 괴리 열</b></td><td>등급표에 열 없음 — 미기록</td><td><b>전 후보 기록</b> · NFLX +3.00% · MSFT +3.74%</td><td>4-2절</td></tr>
+    <tr><td><b>체결확률 하한</b></td><td>없음 (08-26 NVDA 35%로 발행)</td><td><b>40% 하한</b> · NFLX 45%로 통과</td><td>4-2절</td></tr>
+    <tr><td><b>signal_type</b></td><td>없음</td><td><b>신규 1(NFLX) / 보유유지 1(MSFT)</b> — 총평 첫 줄 명시</td><td>4-5절</td></tr>
+    <tr><td><b>판별 3변수</b></td><td>미기록</td><td><b>12종 전수 기록</b> (eps_revision 10종 null → WARN)</td><td>3절</td></tr>
+    <tr><td><b>발행 전 검증</b></td><td>파이썬 1회 재검증(수동) · 명문규칙 불일치 0건</td><td><b>발행 게이트 자동 실행 → PASS</b>(WARN 1건)</td><td>6-1절</td></tr>
+    <tr><td>총 투자비중</td><td>4.0% (현금 96%)</td><td>8.0% (현금 92%) · <b>변동 사유 기재</b></td><td>4-4절</td></tr>
+    <tr><td>유효 베팅수</td><td class="dn">1.00</td><td class="up">2.00</td><td>—</td></tr>
+    <tr><td>비용 8bp 후 초과수익</td><td>+0.0862%p</td><td><b>+0.4241%p</b></td><td>—</td></tr>
+    <tr><td>부호 유지 하한 승률</td><td>29.02%</td><td>29.85%</td><td>—</td></tr>
+    <tr><td>웹조사</td><td>약 108회 · <b>매크로 단계 8회 초과</b></td><td>124회 · <b>전 단계 배분 상한 준수</b></td><td>0-3절</td></tr>
+  </tbody>
+</table>
+</div>
+
+<!-- ══════════ 5 ══════════ -->
+<h2>5. 새 규칙이 실제로 바꾼 판정 3건 <span class="cnt">08-28 리포트에서 관측</span></h2>
+
+<div class="tscroll">
+<table>
+  <thead><tr><th style="width:96px">종목</th><th>판정</th><th>어느 규칙이 작동했나</th><th>v2였다면</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>MU</b><br><span style="font-size:11px;color:var(--ink3)">종합 1위 86.20</span></td>
+      <td><span class="badge open">관망</span> 좌표 설계 불가</td>
+      <td>ATR $51.27(종가의 5.50%)이 과대해 <b>−8% 손절 상한 안에서 손절÷ATR ≥ 1.5를 만족하는 진입가가 존재하지 않음</b>
+        (최유리 케이스 1.4517). 4축 전 항목 최상위·반도체 급락장에서 −0.27%로 방어한 유일 종목이었으나 산술로 배제.</td>
+      <td>같은 규칙이 v2에도 있었으나 <b>보유 중 재판정까지 적용</b>돼 판정이 흔들렸다. v3에서 진입 시점 한정으로 확정되며 이 사례가 첫 적용.</td>
+    </tr>
+    <tr>
+      <td><b>AMZN · GOOGL</b><br><span style="font-size:11px;color:var(--ink3)">63.11 · 61.75</span></td>
+      <td><span class="badge open">관망 강등</span></td>
+      <td><b>판별 3변수 미달</b> — AMZN mom_20d −1.90·rs_vs_qqq −6.03, GOOGL −2.68·−6.81.
+        당일 각각 +3.97%·+1.74%로 강세였으나 20거래일로는 QQQ에 6%p 넘게 열세.</td>
+      <td>판별 변수가 <b>기록조차 되지 않았으므로</b> 당일 강세와 종합점수만 보고 승인 가능성이 있었다. 하루짜리 로테이션을 사는 결과.</td>
+    </tr>
+    <tr>
+      <td><b>NFLX</b><br><span style="font-size:11px;color:var(--ink3)">70.47</span></td>
+      <td><span class="badge new">매수 승인 · 신규</span></td>
+      <td>괴리 <b>+3.00%</b>(상한 +5% 이내)·체결확률 <b>45%</b>(하한 40% 통과)·승률 <b>65.2%</b>(β 68.2 → 중립 −8 → 종목 +5)·
+        손절÷ATR 1.524·R/R 2.305 — <b>신규 규칙 4개를 모두 통과한 첫 승인 건</b>.</td>
+      <td>괴리 상한이 없어 더 낮은 지정가가 제시됐을 가능성이 크고, 승률은 42~52% 밴드에 묶여 기대값이 절반 수준으로 계산됐을 것.</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<p style="margin-top:14px;color:var(--ink2)">한편 <b>4-3절 확장 목표 예외는 적용 가능 종목이 0개</b>였습니다(12종 전부 완전 정배열 미충족).
+  예외 규칙이 신설 첫 회차에 남용되지 않았다는 점이 함께 확인됐습니다.</p>
+
+<!-- ══════════ 6 ══════════ -->
+<h2>6. 아직 반영되지 않은 것과 다음 확인 사항 <span class="cnt">2026-09-01 월간평가 입력</span></h2>
+
+<div class="abgrid">
+  <div class="ab">
+    <div class="ab-h"><div><div class="ti">미완 · 부분 반영</div><div class="src">v3에서 해소되지 않은 항목</div></div>
+      <span class="badge part">진행 중</span></div>
+    <div class="ab-b" style="padding:15px 17px">
+      <ul class="tight">
+        <li><b>eps_revision 확보 경로 미확립</b> — 08-28 기준 12종 중 2종만 확보(10종 null).
+          권고 4의 AUROC 재산출 입력이 <b>2사이클 연속 불완전</b>. 안정적 소스를 지정하거나 3번째 판별변수를 교체할지 결정 필요.</li>
+        <li><b>고변동성(ATR/종가 ≥ 5%) 종목 처리 규칙 부재</b> — −8% 손절 상한과 손절÷ATR 1.5가 충돌해 <b>자동 배제</b>가 발생(MU).
+          설계 1절 문언은 “고변동성은 최대 −8%, <b>대신 비중 축소</b>”로 배제를 의도하지 않았다.</li>
+        <li><b>손절÷ATR 1.5 하한의 타당성 미검증</b> — 도입 후 사후 검증된 적이 없다. 종합 1위가 0.05 차이로 탈락한 만큼
+          구간별 실현 손절률을 9월 평가에서 산출해야 한다.</li>
+        <li><b>체결확률 추정이 정성적</b> — 현재는 과거 2건과 비교하는 추정. 괴리/ATR 비율을 누적해 로지스틱으로 전환 필요.</li>
+        <li><b>지수 종가 레벨 확보</b> — 4사이클 중 3회 실패(QQQ 대체 앵커로 파이프라인은 정상). 이월 2사이클.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h"><div><div class="ti">9월 평가에서 판가름 날 것</div><div class="src">반영 효과의 검증 조건</div></div>
+      <span class="badge open">대기</span></div>
+    <div class="ab-b" style="padding:15px 17px">
+      <ul class="tight">
+        <li><b>승률 앵커의 진위</b> — 07-31 및 08-03~08-06 코호트가 성숙하며 <b>하락 국면이 섞인 첫 표본</b>이 나온다.
+          실현 승률이 60% 미만이면 “과소신뢰” 판정이 완화되고 β_base가 자동 하향된다.</li>
+        <li><b>변별력</b> — AUROC가 2개월 연속 0.5 부근이면 기대값 스코어에 순위 정보가 없음이 확정되고,
+          권고 4(스코어 교체)가 즉시 발동한다.</li>
+        <li><b>진입가 문제의 종결 여부</b> — 8월 최종 체결률 <b>60% 초과면 종결</b>, <b>40% 미만이면</b> 진입가 규칙이 최우선 과제로 유지된다.
+          08-28 NFLX는 미체결 확률 55%로 제시됐다.</li>
+        <li><b>계산 계층 신뢰</b> — 9월에도 산식 위반이 나오면 발행 게이트로도 막지 못했다는 뜻이 된다.
+          8월 2건의 일회성 여부 확인이 최우선.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h2>면책</h2>
+<div class="disc">
+  본 문서는 2026년 8월 모형 안정성 평가의 권고가 나스닥 멀티에이전트 추천 시스템에 반영된 내역을 정리한
+  <b>시스템 변경 기록</b>이며, <b>투자 조언이 아닙니다</b>. 대조에 사용한 수치는 2026-08-27 및 2026-08-28 일일 리포트의
+  기재값과 <code>claude/월간평가/2026-08.md</code>, 설계문서 경량판 v3의 원문을 옮긴 것입니다.
+  승률·기대값은 모델 추정치로 실현 수익을 보장하지 않으며, 특히 <b>승률 앵커 β_base 68.2%는 일방적 상승장 표본에서 도출된 값</b>으로
+  하락 국면이 섞인 표본이 확보되면 크게 낮아질 수 있습니다. 규칙이 반영됐다는 사실이 성과 개선을 의미하지 않습니다.
+  최종 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+</div>
+
+<p class="figcap" style="margin-top:20px">정본 · <code>claude/월간평가/2026-08.md</code> ·
+  <code>claude/나스닥-멀티에이전트-시스템-설계.md</code>(경량판 v3, 2026-08-28 개정) ·
+  <code>claude/일일리포트/2026-08-27.md</code> · <code>claude/일일리포트/2026-08-28.md</code></p>
+
+</div>
+</body>
+</html>
