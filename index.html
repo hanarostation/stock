@@ -115,6 +115,11 @@ table.sum td.n b{font-weight:800}
 
 /* ── 필터 ── */
 .toolbar{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:0 0 16px}
+.morebar{display:flex;justify-content:center;margin:16px 0 4px}
+.morebar:empty{display:none}
+.btn.more{font-size:13px;padding:11px 22px;border-radius:11px}
+.btn.more .more-n{font-weight:700;color:var(--ink3);font-size:12px}
+.btn.more:hover .more-n{color:var(--ink2)}
 .search{flex:1;min-width:200px;position:relative}
 .search input{width:100%;font:inherit;font-size:13.5px;padding:9px 13px 9px 34px;
  background:var(--surface);border:1px solid var(--line);border-radius:9px;color:var(--ink)}
@@ -380,18 +385,11 @@ footer{margin-top:40px;padding:26px 0 44px;border-top:1px solid var(--line2);
 
     <h2 id="reports">리포트 목록 <span class="cnt" id="count"></span></h2>
 
-    <div class="toolbar">
-      <label class="search">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.6-3.6" stroke-linecap="round"/></svg>
-        <input id="q" type="search" placeholder="날짜 검색 (예: 2026-07 또는 07-27)" autocomplete="off">
-      </label>
-      <div class="chips" id="months"></div>
-    </div>
-
     <div id="list"><div class="grid">
       <div class="skel"></div><div class="skel"></div><div class="skel"></div><div class="skel"></div>
     </div></div>
     <p class="note" id="status"></p>
+    <div class="morebar" id="more-slot"></div>
 
     <h2>면책</h2>
     <div class="disc">
@@ -777,7 +775,11 @@ function parseNames(names){
 }
 
 /* ── 렌더링 ── */
-let ALL = [], monthFilter = '', query = '';
+let ALL = [];
+
+/* 메인에는 최근 2줄만 노출한다. 전체 목록은 archive.html 로 분리.
+   그리드가 반응형(auto-fill)이라 실제 열 수를 계산해 2줄 분량을 자른다. */
+const HOME_ROWS = 2;
 
 function cardHTML(it){
   const [y,m,d] = it.date.split('-').map(Number);
@@ -795,23 +797,40 @@ function cardHTML(it){
   </a>`;
 }
 
+function gridHTML(items){ return `<div class="grid">${items.map(cardHTML).join('')}</div>`; }
+
+/* 실제 렌더된 그리드의 열 개수 (반응형 대응) */
+function gridCols(box){
+  const g = box.querySelector('.grid');
+  if(!g) return 1;
+  const cols = getComputedStyle(g).gridTemplateColumns.split(' ').filter(Boolean).length;
+  return Math.max(1, cols);
+}
+
 function render(){
   const list = document.getElementById('list');
-  let items = ALL;
-  if(monthFilter) items = items.filter(i => i.date.startsWith(monthFilter));
-  if(query){ const q = query.trim().toLowerCase(); items = items.filter(i => i.date.includes(q) || (i.title||'').toLowerCase().includes(q)); }
+  const more = document.getElementById('more-slot');
+  document.getElementById('count').textContent = ALL.length ? `총 ${ALL.length}건` : '';
+  if(!ALL.length){ list.innerHTML = ''; if(more) more.innerHTML = ''; return; }
 
-  document.getElementById('count').textContent =
-    ALL.length ? (items.length === ALL.length ? `총 ${ALL.length}건` : `${items.length} / ${ALL.length}건`) : '';
+  list.innerHTML = gridHTML(ALL);                       // ① 전체를 그려 열 수를 측정
+  const shown = Math.min(gridCols(list) * HOME_ROWS, ALL.length);
+  if(shown < ALL.length) list.innerHTML = gridHTML(ALL.slice(0, shown));   // ② 2줄만 남김
 
-  if(!items.length){
-    list.innerHTML = ALL.length
-      ? `<div class="state"><b>조건에 맞는 리포트가 없습니다</b><p>검색어나 월 필터를 바꿔보세요.</p></div>`
+  if(more){
+    const rest = ALL.length - shown;
+    more.innerHTML = rest > 0
+      ? `<a class="btn ghost more" href="archive.html">더보기 <span class="more-n">+${rest}건</span></a>`
       : '';
-    return;
   }
-  list.innerHTML = `<div class="grid">${items.map(cardHTML).join('')}</div>`;
 }
+
+/* 창 크기가 바뀌면 열 수가 달라지므로 다시 계산 */
+let rzT = null;
+window.addEventListener('resize', () => {
+  clearTimeout(rzT);
+  rzT = setTimeout(() => { if(ALL.length) render(); }, 160);
+});
 
 function renderLatest(){
   const slot = document.getElementById('latest-slot');
@@ -967,19 +986,6 @@ async function loadSummary(item, href){
   }
 }
 
-function renderMonths(){
-  const box = document.getElementById('months');
-  const ms = [...new Set(ALL.map(i => i.date.slice(0,7)))].sort().reverse().slice(0,8);
-  if(ms.length < 2){ box.innerHTML = ''; return; }
-  box.innerHTML = `<button class="chip" data-m="" aria-pressed="true">전체</button>` +
-    ms.map(m => `<button class="chip" data-m="${m}" aria-pressed="false">${m.replace('-','년 ')}월</button>`).join('');
-  box.querySelectorAll('.chip').forEach(c => c.addEventListener('click', () => {
-    monthFilter = c.dataset.m;
-    box.querySelectorAll('.chip').forEach(x => x.setAttribute('aria-pressed', String(x === c)));
-    render();
-  }));
-}
-
 function setStatus(kind, text){
   const el = document.getElementById('status');
   el.innerHTML = `<span class="dot ${kind}"></span><span>${text}</span>`;
@@ -993,7 +999,7 @@ function setStatus(kind, text){
 
   if(res && res.items.length){
     ALL = res.items;
-    renderLatest(); renderMonths(); render();
+    renderLatest(); render();
     document.getElementById('status').innerHTML = '';
     document.getElementById('foot-meta').textContent = `총 ${ALL.length}건 · 최신 ${ALL[0].date}`;
     return;
@@ -1020,7 +1026,6 @@ function setStatus(kind, text){
       : `자동 인식 실패${err1 ? ' (' + esc(err1.message) + ')' : ''} — CONFIG의 owner/repo/branch 값을 직접 지정해보세요.`);
 })();
 
-document.getElementById('q').addEventListener('input', e => { query = e.target.value; render(); });
 
 /* ═══════════════════════════════════════════════════════════
    모형 안정성 평가 (월간)
