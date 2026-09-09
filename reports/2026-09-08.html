@@ -1,0 +1,598 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나스닥 멀티에이전트 추천 리포트 — 2026-09-08</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f9f9f7;color:#0b0b0b;
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:28px 22px 60px}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(11,11,11,0.10)}
+.topbar-in{max-width:1320px;margin:0 auto;padding:0 22px;display:flex;align-items:center;
+ justify-content:space-between;gap:18px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.brand .logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand .logo .fallback{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{font:inherit;font-size:13px;font-weight:700;color:#52514e;background:none;
+ border:1px solid transparent;padding:6px 15px;border-radius:99px;cursor:pointer;
+ display:inline-flex;align-items:center;gap:6px;
+ transition:background .15s,color .15s,border-color .15s}
+.nav a:hover{background:#f2f1ed;color:#0b0b0b}
+.nav a.back{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+.nav a.back:hover{background:#000;color:#fff}
+.backfoot{display:flex;justify-content:center;margin:38px 0 0}
+.backfoot a{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;
+ background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:99px;padding:10px 22px;
+ color:#52514e}
+.backfoot a:hover{background:#f2f1ed;color:#0b0b0b}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:17px;margin:38px 0 14px;padding-bottom:8px;
+ border-bottom:2px solid #0b0b0b;letter-spacing:-.01em}
+h3{font-size:16px;margin:0}
+h4{font-size:12px;margin:0 0 8px;color:#52514e;text-transform:uppercase;letter-spacing:.06em}
+.hero{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;
+ padding:22px 24px;margin-bottom:22px}
+.hero .sub{color:#52514e;font-size:13px}
+.pill{display:inline-block;background:#2a78d6;color:#fff;font-size:11px;font-weight:700;
+ padding:3px 10px;border-radius:99px;margin-right:8px;letter-spacing:.03em}
+.pill.gray{background:#52514e}
+.macro{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mk{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:8px;
+ padding:6px 11px;font-size:12px}
+.mk b{color:#0b0b0b}.mk span{color:#898781}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 8px}
+.tile{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:15px 17px}
+.t-l{font-size:11.5px;color:#898781;letter-spacing:.03em}
+.t-v{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:4px 0 2px}
+.t-s{font-size:11px;color:#898781}
+.up{color:#006300}.dn{color:#d03b3b}.neutral{color:#0b0b0b}
+.panel{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:20px 22px}
+.panel p{margin:0 0 10px}
+.dualbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.dualbox>div{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:10px;padding:13px 15px;font-size:13px}
+.dualbox h4{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;background:#fcfcfb;
+ border:1px solid rgba(11,11,11,0.10);border-radius:12px;overflow:hidden;font-size:12.6px}
+th{background:#f9f9f7;text-align:left;padding:9px 7px;font-size:10.5px;color:#52514e;
+ border-bottom:1px solid #c3c2b7;white-space:nowrap;letter-spacing:.03em}
+td{padding:9px 7px;border-bottom:1px solid #e1e0d9;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rk{font-weight:800;color:#898781;text-align:center;width:26px}
+.tk{font-size:13.5px;letter-spacing:-.01em}
+.sub{font-size:11.5px;color:#898781}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;
+ padding:2px 8px;border-radius:99px;white-space:nowrap}
+.badge.good{background:#e8f7e8;color:#0a6b0a}
+.badge.warn{background:#fef4dd;color:#8a6100}
+.badge.crit{background:#fbe9e9;color:#a32020}
+.badge.sig{background:#2a78d6;color:#fff}
+.badge.sigc{background:#eda100;color:#3d2a00}
+.rrbar{display:flex;align-items:center;width:210px}
+.rr-l{width:100px;display:flex;justify-content:flex-end}
+.rr-r{width:100px}
+.rr-mid{width:1px;height:16px;background:#c3c2b7;
+ box-shadow:-2px 0 0 #fcfcfb,2px 0 0 #fcfcfb;z-index:1}
+.rr-fill{height:9px;display:block;border-radius:4px}
+.rr-fill.up{background:#2a78d6;border-radius:0 4px 4px 0}
+.rr-fill.dn{background:#e34948;border-radius:4px 0 0 4px}
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;overflow:hidden;
+ break-inside:avoid;page-break-inside:avoid}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:14px 20px;background:#f9f9f7;border-bottom:1px solid #e1e0d9}
+.ch-left{display:flex;align-items:center;gap:14px}
+.ch-right{display:flex;gap:7px;align-items:center}
+.rank{font-size:19px;font-weight:800;color:#2a78d6;min-width:64px}
+.meta{font-size:11.5px;color:#898781;margin-top:2px}
+.card-b{display:flex;gap:20px;padding:18px 20px;align-items:flex-start}
+.radar{flex:0 0 176px}
+.card-main{flex:1;min-width:0}
+.prices{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:13px}
+.pz{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:8px 10px}
+.pz span{display:block;font-size:10.5px;color:#898781}
+.pz b{font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pz i{display:block;font-size:11px;font-style:normal;font-weight:700}
+.pz.up b,.pz.up i{color:#006300}.pz.dn b,.pz.dn i{color:#d03b3b}
+.thesis{margin:0 0 10px;font-size:13.5px}
+.cat,.adj{font-size:12.5px;background:#f9f9f7;border-left:3px solid #eda100;
+ padding:7px 11px;border-radius:0 7px 7px 0;margin-top:7px}
+.adj{border-left-color:#4a3aa7}
+.cat b,.adj b{color:#52514e;margin-right:6px;font-size:11px}
+.card-f{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;padding:15px 20px 18px;
+ border-top:1px solid #e1e0d9;background:#fdfdfc}
+.ch{display:flex;gap:9px;font-size:12.3px;padding:4px 0;border-bottom:1px dotted #e1e0d9}
+.ch:last-child{border-bottom:none}
+.ch-k{flex:0 0 78px;font-weight:700;color:#2a78d6;font-size:11.5px}
+.ch-v{color:#52514e}
+.risks ul{margin:0;padding-left:17px;font-size:12.3px;color:#52514e}
+.risks li{margin-bottom:5px}
+.srow{display:flex;align-items:center;gap:12px;padding:6px 0}
+.sname{flex:0 0 210px;font-size:13px}
+.sbar{flex:1;height:12px;background:#e1e0d9;border-radius:6px;overflow:hidden}
+.sbar i{display:block;height:100%;border-radius:6px}
+.spct{flex:0 0 52px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:13px}
+.anx{padding:13px 0;border-bottom:1px solid #e1e0d9}
+.anx:last-child{border-bottom:none}
+.anx p{margin:0;font-size:13px;color:#52514e}
+details.deb{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:11px;
+ margin-bottom:9px;overflow:hidden}
+details.deb>summary{padding:12px 18px;cursor:pointer;font-weight:700;font-size:13.5px;
+ background:#f9f9f7;list-style:none}
+details.deb.bull>summary{border-left:4px solid #2a78d6}
+details.deb.bear>summary{border-left:4px solid #e34948}
+details.deb[open]>summary{border-bottom:1px solid #e1e0d9}
+.thesis-p{padding:14px 18px 4px;margin:0;font-size:13px;color:#52514e;
+ background:#fdfdfc;border-bottom:1px solid #e1e0d9}
+.dbi{padding:11px 18px;border-bottom:1px dotted #e1e0d9;font-size:12.8px}
+.dbt{font-weight:800;margin-right:8px}
+.dbc{font-size:11px;color:#898781;background:#f9f9f7;padding:1px 8px;border-radius:99px}
+.dbi p{margin:6px 0 0}
+.rebut{color:#52514e;border-left:2px solid #c3c2b7;padding-left:9px;font-size:12.3px}
+table.mini{border:none;border-radius:0;font-size:12.3px}
+.rat{font-size:12.2px;color:#52514e}
+.flag{font-size:11.5px;color:#d03b3b;margin-top:3px}
+.rk-item{padding:12px 0;border-bottom:1px solid #e1e0d9}
+.rk-item:last-child{border-bottom:none}
+.rk-h{display:flex;align-items:center;gap:9px;font-size:13.5px}
+.rk-n{background:#e34948;color:#fff;font-weight:800;width:21px;height:21px;border-radius:50%;
+ display:inline-flex;align-items:center;justify-content:center;font-size:11.5px}
+.rk-q,.rk-e{font-size:12.4px;color:#52514e;margin-top:4px;padding-left:30px}
+.rk-q b,.rk-e b{color:#898781;font-size:11px;margin-right:6px}
+.disc{margin-top:34px;background:#fbe9e9;border:1px solid #f0c9c9;border-radius:11px;
+ padding:16px 19px;font-size:12.3px;color:#7d2020}
+.disc b{display:block;margin-bottom:6px;font-size:13px}
+.foot{margin-top:20px;font-size:11.5px;color:#898781;text-align:center}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:11.5px}
+.fl{background:#2a78d6;color:#fff;padding:4px 11px;border-radius:7px;font-weight:700}
+.fl.g{background:#52514e}
+.ar{color:#898781;font-weight:700}
+
+/* ═══ [일반] 파트 — 기본 노출 ═══ */
+.general{margin-bottom:26px}
+.gtop{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-left:5px solid #2a78d6;
+ border-radius:14px;padding:24px 26px;margin-bottom:16px}
+.gtag{display:inline-block;background:#2a78d6;color:#fff;font-size:11px;font-weight:800;
+ padding:4px 12px;border-radius:99px;letter-spacing:.04em;margin-bottom:12px}
+.gh1{font-size:23px;line-height:1.45;margin:0 0 12px;border:none;padding:0;letter-spacing:-.02em}
+.glead-top{font-size:16px;font-weight:700;line-height:1.7;margin:0 0 8px;letter-spacing:-.01em}
+.gsub{font-size:15px;color:#52514e;margin:0;line-height:1.75}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.gchip{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:99px;
+ padding:4px 12px;font-size:12px;color:#52514e}
+.gsec{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;
+ padding:20px 24px;margin-bottom:14px}
+.gsec h3{font-size:16.5px;margin:0 0 14px;letter-spacing:-.01em}
+.gsec.warn{background:#fffaf0;border-color:#f3e2c0}
+.gnote{font-size:14.5px;line-height:1.8;color:#52514e;margin:0}
+.gsmall{font-size:12px;color:#898781;margin:10px 0 0}
+.gcards{display:flex;flex-direction:column;gap:14px}
+.gcard{border:1px solid rgba(11,11,11,0.10);border-radius:12px;overflow:hidden;background:#f9f9f7}
+.gcard.buy{border-left:5px solid #2a78d6}
+.gcard.cancel{border-left:5px solid #e34948}
+.gcard.hold{border-left:5px solid #eda100}
+.gcard-h{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:14px 18px;background:#fcfcfb;border-bottom:1px solid #e1e0d9}
+.gtk{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-right:9px}
+.gnm{font-size:14px;color:#52514e}
+.gbadge{background:#0b0b0b;color:#fff;font-size:12.5px;font-weight:800;
+ padding:6px 14px;border-radius:8px;white-space:nowrap}
+.gcard.cancel .gbadge{background:#d03b3b}
+.gcard.hold .gbadge{background:#eda100;color:#3d2a00}
+.glead{margin:0;padding:15px 18px 4px;font-size:15px;line-height:1.8}
+.gnums{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+ gap:9px;padding:13px 18px}
+.grow{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:10px 13px}
+.gk{display:block;font-size:11.5px;color:#898781;margin-bottom:3px}
+.gv{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.gwhy,.gcare{padding:11px 18px;border-top:1px dotted #e1e0d9}
+.gwhy b,.gcare b{display:block;font-size:11.5px;color:#2a78d6;margin-bottom:5px;letter-spacing:.03em}
+.gcare b{color:#d03b3b}
+.gwhy p,.gcare p{margin:0;font-size:14px;line-height:1.8;color:#52514e}
+.gqa{padding:13px 0;border-bottom:1px dotted #e1e0d9}
+.gqa:last-child{border-bottom:none;padding-bottom:0}
+.gq{font-size:14.5px;font-weight:700;margin-bottom:6px}
+.gq::before{content:"Q. ";color:#2a78d6}
+.ga{font-size:14.5px;line-height:1.85;color:#52514e}
+.gtodo{margin:0;padding-left:22px;font-size:14.5px;line-height:1.9}
+.gtodo li{margin-bottom:7px}
+.glimit{margin:0;padding-left:20px;font-size:14px;line-height:1.85;color:#6b4a12}
+.glimit li{margin-bottom:8px}
+.gterms{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:10px}
+.gterm{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:11px 14px}
+.gterm b{display:block;font-size:13.5px;margin-bottom:4px}
+.gterm span{font-size:13px;color:#52514e;line-height:1.7}
+.mbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(192px,1fr));gap:10px}
+.mrow{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:12px 14px;
+ display:flex;flex-direction:column;gap:4px}
+.mrow span{font-size:12px;color:#898781}
+.mrow b{font-size:16px;letter-spacing:-.02em}
+
+/* ═══ [전문가] 파트 — 기본 접힘 ═══ */
+details.expert{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);
+ border-radius:14px;overflow:hidden;margin-bottom:8px}
+details.expert>summary{list-style:none;cursor:pointer;padding:18px 24px;
+ display:flex;justify-content:space-between;align-items:center;gap:14px;
+ background:#0b0b0b;color:#fff}
+details.expert>summary::-webkit-details-marker{display:none}
+details.expert>summary:hover{background:#000}
+.ex-l b{font-size:15.5px;display:block;letter-spacing:-.01em}
+.ex-l i{font-style:normal;font-size:12px;opacity:.72;display:block;margin-top:3px}
+.ex-r{font-size:12.5px;font-weight:700;background:rgba(255,255,255,.16);
+ padding:7px 15px;border-radius:99px;white-space:nowrap}
+details.expert[open]>summary .ex-r::after{content:""}
+details.expert[open]>summary .ex-r{font-size:0}
+details.expert[open]>summary .ex-r::before{content:"접기 ▴";font-size:12.5px}
+.expert-body{padding:4px 24px 26px}
+.expert-body>h2:first-of-type{margin-top:26px}
+@media print{
+ body{background:#fff} .wrap{max-width:none;padding:0}
+ .topbar,.backfoot{display:none !important}
+ h2{page-break-after:avoid} .card{page-break-inside:avoid}
+ details.deb{page-break-inside:avoid} summary{list-style:none}
+ .tiles{page-break-inside:avoid}
+ .gcard,.gsec,.gterm,.mrow{page-break-inside:avoid}
+ details.expert{page-break-before:always;border:none}
+ details.expert>summary{background:#0b0b0b !important;-webkit-print-color-adjust:exact;
+  print-color-adjust:exact}
+ .ex-r{display:none}
+ .expert-body{padding:4px 0 0}
+}
+@media(max-width:900px){
+ .tiles{grid-template-columns:repeat(2,1fr)}
+ .card-b{flex-direction:column} .card-f{grid-template-columns:1fr}
+ .prices{grid-template-columns:repeat(3,1fr)} .dualbox{grid-template-columns:1fr}
+ .gtop{padding:20px} .gsec{padding:18px} .gh1{font-size:20px}
+ .expert-body{padding:4px 14px 22px}
+}
+@media(max-width:640px){
+ .topbar-in{height:56px;gap:10px;padding:0 14px}
+ .brand{font-size:13px;white-space:nowrap;gap:8px}
+ .brand .logo{width:26px;height:26px;flex:0 0 26px}
+ .brand span.full{display:none}
+ .nav a{font-size:12px;padding:6px 11px;white-space:nowrap}
+}
+@media(max-width:540px){
+ .brand span.txt{display:none}
+ .nav a{font-size:11.5px;padding:6px 9px}
+}
+</style></head><body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="../index.html">
+      <span class="logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fallback"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="txt">데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
+    </a>
+    <nav class="nav">
+      <a class="back" href="../index.html#reports" aria-label="리포트 목록으로 돌아가기">← 목록으로</a>
+      <a href="../index.html#about">시스템 개요</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <span class="pill">TradingAgents 멀티에이전트</span>
+  <span class="pill gray">단기 스윙 · 공격형</span>
+  <h1>나스닥 종목 추천 리포트</h1>
+  <div class="sub">데이터 기준 <b>2026-09-08 미국장 정규장 마감 (4:00 PM EDT)</b> · 생성 2026-09-09 10:17 KST ·
+   유니버스 나스닥 시총 상위 200 → 후보 12 → 리서치 6 → 트레이더 3 → 배정 3(신규 1·보유유지 2)</div>
+  <div class="flow">
+    <span class="fl">Ⅰ 애널리스트 2인</span><span class="ar">→</span><span class="fl">Ⅱ 리서치 2인</span><span class="ar">→</span><span class="fl">Ⅲ 트레이더</span><span class="ar">→</span><span class="fl">Ⅳ 리스크 3관점</span><span class="ar">→</span><span class="fl">Ⅴ 펀드매니저</span><span class="ar">→</span><span class="fl g">Ⅵ 발행 게이트</span>
+  </div>
+  <div class="macro">
+    <div class="mk"><span>QQQ</span> <b>718.36 (−0.08%) · MA20 717.385 상회</b></div><div class="mk"><span>나스닥종합</span> <b>26,421.41 (−0.3%)</b></div><div class="mk"><span>S&amp;P500</span> <b>7,673.52 (−0.6%)</b></div><div class="mk"><span>다우</span> <b>52,786.07 (−1.2%, −628pt)</b></div><div class="mk"><span>10년물</span> <b>4.794% (2023년 10월 이후 최고)</b></div><div class="mk"><span>2년/5년물</span> <b>4.40% / 4.57% 동반 상승</b></div><div class="mk"><span>브렌트유</span> <b>~$98 (장중 99.45)</b></div><div class="mk"><span>WTI</span> <b>~$93 (6월 초 이후 최고)</b></div><div class="mk"><span>VIX</span> <b>확인 실패</b></div><div class="mk"><span>국면</span> <b>강세 (승률 국면조정 0%p)</b></div><div class="mk"><span>캘린더</span> <b>9/10 PPI · 9/11 CPI · 9/15~16 FOMC · 9/30 MU 실적</b></div>
+  </div>
+</div>
+
+
+<div class="general">
+  <div class="gtop">
+    <span class="gtag">일반용</span>
+    <h2 class="gh1">오늘의 트레이딩 요약</h2>
+    <p class="glead-top">오늘 새로 사는 것 1건(마이크론), 계속 들고 가는 것 2건(엔비디아·길리어드), 파는 것 1건(마이크로소프트)입니다.</p>
+    <p class="gsub">어제 걸어둔 AMD 주문은 주가가 5.9% 뛰어오르는 바람에 체결되지 않았고, 규칙상 같은 주문을 다시 내지 않습니다. 대신 마이크론을 지금보다 2.07% 싼 980달러에 사도록 주문을 겁니다. 100만 원 중 16만 원만 쓰고 84만 원은 현금으로 둡니다.</p>
+    <div class="gchips"><span class="gchip">신규 1건</span><span class="gchip">보유 2건</span><span class="gchip">청산 1건</span><span class="gchip">현금 84%</span><span class="gchip">유가 급등</span><span class="gchip">금리 4.79%</span></div>
+  </div>
+
+  <section class="gsec"><h3>오늘의 추천</h3>
+    <div class="gcards">
+<div class="gcard buy">
+  <div class="gcard-h">
+    <div><span class="gtk">MU</span>
+      <span class="gnm">마이크론 테크놀로지 — 컴퓨터·AI 서버에 들어가는 메모리 반도체를 만드는 회사</span></div>
+    <span class="gbadge">사기</span>
+  </div>
+  <p class="glead">오늘 유일하게 새로 사는 종목입니다. 다만 지금 값(1,000.26달러)에 바로 사는 게 아니라, 980달러까지 내려오면 그때만 사도록 주문을 걸어둡니다. 내려오지 않으면 안 삽니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">$1,000.26</span></div><div class="grow"><span class="gk">얼마에 살까</span><span class="gv">$980.00 (지정가)</span></div><div class="grow"><span class="gk">지금보다 얼마나 싼가</span><span class="gv">2.07% 쌉니다 (5%보다 더 싸게 거는 것은 규칙상 금지입니다)</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">$1,097.60 (사는 값보다 12% 위)</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">$911.40 (사는 값보다 7% 아래)</span></div><div class="grow"><span class="gk">얼마나 살까</span><span class="gv">전체 돈의 5% (100만 원 중 5만 원)</span></div><div class="grow"><span class="gk">언제까지 들고 있나</span><span class="gv">10월 7일까지</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 일곱 번 (70.2%)</span></div><div class="grow"><span class="gk">주문이 걸릴 확률</span><span class="gv">열 번에 예닐곱 번 (65%)</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>최근 20거래일 동안 16.17% 올라 후보 12개 중 가장 많이 올랐고, 같은 기간 나스닥100(QQQ)보다 16.52%포인트 더 잘했습니다. 20일·50일·200일 평균선을 모두 위로 뚫은 상태이고, 회사 이익 전망도 최근 4주 사이 위로 올라갔습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>이 종목은 하루 평균 4.37%씩 움직이는, 후보 중 가장 출렁이는 주식입니다. 그래서 손절선을 보통의 5%가 아니라 7%로 넓게 잡았고 대신 사는 금액을 줄였습니다. 9월 30일에 실적 발표가 있어 그날 크게 흔들릴 수 있습니다. 또 9월 8일 장중에 1,041달러까지 올랐다가 1,000달러로 밀려 마감한 &#x27;위꼬리 긴 음봉&#x27;이 나왔는데, 이는 위에서 파는 힘이 있었다는 신호입니다.</p></div>
+</div>
+<div class="gcard cancel">
+  <div class="gcard-h">
+    <div><span class="gtk">AMD</span>
+      <span class="gnm">AMD — CPU와 AI 가속기를 만드는 반도체 회사</span></div>
+    <span class="gbadge">어제 주문 취소</span>
+  </div>
+  <p class="glead">어제 464.63달러에 사겠다고 걸어둔 주문이 체결되지 않았습니다. 주가가 오히려 5.90% 뛰어 505.74달러로 마감했고, 하루 중 가장 싼 값도 486.57달러라 주문 가격까지 내려오지 않았습니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">$505.74 (하루에 +5.90%)</span></div><div class="grow"><span class="gk">걸어뒀던 주문가</span><span class="gv">$464.63</span></div><div class="grow"><span class="gk">하루 중 최저가</span><span class="gv">$486.57</span></div><div class="grow"><span class="gk">얼마 차이로 못 샀나</span><span class="gv">21.94달러 (4.5%)</span></div><div class="grow"><span class="gk">지금 어떻게 하나</span><span class="gv">주문 취소하고 다시 걸지 않음</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>이 시스템의 규칙은 &#x27;하루짜리 주문이 안 걸리면 그날로 끝내고 같은 주문을 다시 만들지 않는다&#x27;입니다. 못 산 것이 아쉬워서 더 비싸게 쫓아 사는 일을 막으려고 만든 규칙입니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>지난 회차에도 마이크론에서 똑같은 일이 있었습니다(주문 미체결 후 그날 +6.10% 급등). 두 번 연속 &#x27;싸게 사려다 놓친&#x27; 셈이라, 주문 가격을 얼마나 낮게 거는지는 다음 달 점검에서 다시 따져봐야 합니다.</p></div>
+</div>
+<div class="gcard cancel">
+  <div class="gcard-h">
+    <div><span class="gtk">MSFT</span>
+      <span class="gnm">마이크로소프트 — 윈도우·오피스·클라우드(Azure)를 하는 회사</span></div>
+    <span class="gbadge">전량 팔기</span>
+  </div>
+  <p class="glead">9월 9일 개장 때 시장가로 전부 팝니다. 산 값 498.60달러 대비 −0.93%, 거의 본전 수준에서 정리합니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">산 값</span><span class="gv">$498.60</span></div><div class="grow"><span class="gk">지금 주가</span><span class="gv">$493.95</span></div><div class="grow"><span class="gk">실현 손익</span><span class="gv">−0.93% (100만 원 중 4만 원어치였으므로 약 −372원)</span></div><div class="grow"><span class="gk">왜 지금 파나</span><span class="gv">목표가를 규칙대로 517.78달러로 낮추면 &#x27;먹을 것 대비 잃을 것&#x27;의 비율이 0.77로, 최소 기준 1.5에 크게 미달합니다</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>9월 8일 종가가 20일 평균선(495.10달러) 아래로 내려갔습니다. 이 시스템은 그 경우 목표가를 &#x27;최근 고점(517.78달러)&#x27;까지만 잡도록 정해두었는데, 그러면 기대 수익이 3.85%인데 손절은 5%라 계산이 맞지 않습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>손절선(473.67달러)에는 아직 닿지 않았으므로 &#x27;손해를 확정하는 손절&#x27;이 아니라 &#x27;기대값이 나빠져서 자리를 비우는&#x27; 정리입니다. 팔고 난 뒤 주가가 오를 수도 있습니다.</p></div>
+</div>
+<div class="gcard hold">
+  <div class="gcard-h">
+    <div><span class="gtk">NVDA</span>
+      <span class="gnm">엔비디아 — AI 학습·추론용 GPU를 만드는 회사</span></div>
+    <span class="gbadge">그대로 보유</span>
+  </div>
+  <p class="glead">새로 사는 것이 아니라 이미 가지고 있는 것을 그대로 둡니다. 218.74달러에 산 것이 현재 225.73달러로 +3.20% 상태입니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">산 값</span><span class="gv">$218.74</span></div><div class="grow"><span class="gk">지금 주가</span><span class="gv">$225.73 (+3.20%)</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">$243.35</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">$208.52</span></div><div class="grow"><span class="gk">얼마나 들고 있나</span><span class="gv">전체 돈의 5%</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 일곱 번 (69.2%)</span></div><div class="grow"><span class="gk">중간 점검</span><span class="gv">236.54달러에 닿으면 절반만 팝니다</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>20일·50일·200일 평균선을 모두 위로 뚫은 상태를 유지하고 있고, 목표가 243.35달러가 규칙상 허용 상한(244.34달러) 안에 있어 좌표를 바꿀 이유가 없습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>9월 8일 하루에만 −2.01% 내렸습니다. 마이크론과 같은 반도체라, 반도체 업종이 흔들리면 두 종목이 같이 흔들립니다(둘이 합쳐 전체의 10%).</p></div>
+</div>
+<div class="gcard hold">
+  <div class="gcard-h">
+    <div><span class="gtk">GILD</span>
+      <span class="gnm">길리어드 사이언스 — HIV·간염 치료제를 만드는 제약회사</span></div>
+    <span class="gbadge">그대로 보유</span>
+  </div>
+  <p class="glead">9월 8일에 148.41달러 주문이 실제로 체결됐습니다. 지금은 146.71달러로 −1.15% 상태이고, 그대로 둡니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">산 값</span><span class="gv">$148.41 (9월 8일 체결)</span></div><div class="grow"><span class="gk">지금 주가</span><span class="gv">$146.71 (−1.15%)</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">$160.99</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">$140.99</span></div><div class="grow"><span class="gk">얼마나 들고 있나</span><span class="gv">전체 돈의 6%</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 일곱 번 (70.2%)</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>후보 중 가장 덜 출렁이는 종목(하루 평균 2.55%)이라 포트폴리오의 안전판 역할을 합니다. 20일·50일·200일 평균선 위를 유지하고 있습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>같은 날 암젠이 −10.08% 급락했습니다. 다른 회사(노바티스)의 임상 실패 때문인데, 제약·바이오 업종 전체의 투자 심리가 위축되면 길리어드도 영향을 받을 수 있습니다.</p></div>
+</div></div>
+  </section>
+
+  <section class="gsec"><h3>어제 낸 주문은 어떻게 됐나요?</h3><div class="gnote">네 가지를 지시했었습니다. ①길리어드 148.41달러 매수 주문 → 하루 중 최저가가 145.45달러여서 정상 체결됐습니다. ②AMD 464.63달러 매수 주문 → 주가가 오히려 5.90% 올라 최저가가 486.57달러였고, 주문 가격까지 내려오지 않아 체결 실패했습니다(규칙에 따라 오늘 폐기). ③마이크로소프트 1%p 축소 매도 → 집행됐습니다(5%→4%). ④엔비디아는 236.54달러에 닿으면 절반 팔기로 했는데 하루 최고가가 233.71달러라 닿지 않아 그대로 보유 중입니다. 결과적으로 어제 계획했던 투자 비중 19% 중 AMD 4%가 빠져 실제로는 15%가 투자돼 있었습니다.</div></section>
+  <section class="gsec"><h3>100만 원이 있다면 어떻게 되나요?</h3><div class="mbox"><div class="mrow"><span>투자금 예시</span><b>100만 원</b></div><div class="mrow"><span>MU에 넣는 돈</span><b>5만 원 (980달러에 걸어둠, 안 걸리면 0원)</b></div><div class="mrow"><span>NVDA에 넣는 돈</span><b>5만 원 (이미 보유 중)</b></div><div class="mrow"><span>GILD에 넣는 돈</span><b>6만 원 (이미 보유 중)</b></div><div class="mrow"><span>MSFT에서 빼는 돈</span><b>4만 원 전액 회수 (약 −372원 손실 확정)</b></div><div class="mrow"><span>현금으로 두는 돈</span><b>84만 원</b></div><div class="mrow"><span>목표 달성 시</span><b>약 +16,711원 (세 종목 목표가 모두 도달 가정)</b></div><div class="mrow"><span>손절 시</span><b>약 −8,836원 (갑작스러운 급락이면 −13,254원까지)</b></div><div class="mrow"><span>주문이 안 걸릴 확률</span><b>마이크론 열 번에 서너 번(35%)</b></div></div><p class="gsmall">※ 100만 원은 이해를 돕기 위한 예시 금액입니다. 실제 투자 금액과 무관하며, 비율만 같습니다.</p></section>
+
+  <section class="gsec"><h3>오늘 시장에 무슨 일이 있었나요?</h3><div class="gqa"><div class="gq">9월 8일 시장에 무슨 일이 있었나요?</div><div class="ga">중동에서 사우디 석유 시설이 공격받고 이란 수출 거점에도 문제가 생겼다는 소식에 기름값이 크게 올랐습니다. 브렌트유가 배럴당 98달러 근처, 장중에는 99.45달러까지 갔습니다. 기름값이 오르면 물가가 다시 오를 수 있다는 걱정이 커지고, 그러면 중앙은행이 금리를 오래 높게 유지하게 됩니다. 그래서 다우지수는 628포인트(−1.2%) 내렸습니다.</div></div><div class="gqa"><div class="gq">그런데 왜 &#x27;강세장&#x27;이라고 판단했나요?</div><div class="ga">이 시스템은 나스닥100 ETF(QQQ)가 20일 평균선과 50일 평균선 위에 있으면 강세라고 기계적으로 판단합니다. 9월 8일 QQQ는 718.36으로 20일선(717.385)을 0.975포인트 웃돌아 간신히 강세 판정이 나왔습니다. 하지만 같은 날 다우·S&amp;P500·나스닥종합 세 지수는 모두 내렸습니다. 판정과 실제 분위기가 어긋나 있다는 뜻이고, 이 점을 아래 &#x27;한계&#x27;에 적어두었습니다.</div></div><div class="gqa"><div class="gq">암젠이 왜 10% 넘게 떨어졌나요?</div><div class="ga">노바티스라는 다른 제약회사가 심혈관 치료제 임상시험에 실패했는데, 암젠이 개발 중인 약이 같은 계열이어서 &#x27;그럼 암젠 것도 안 되는 것 아니냐&#x27;는 걱정이 퍼졌습니다. 여기에 증권사 한 곳이 투자의견을 내리면서 하루에 10.08% 빠졌습니다. 암젠은 이번 후보 12개 중 꼴찌(28.75점)라 애초에 사지 않습니다.</div></div><div class="gqa"><div class="gq">금리가 오르면 왜 주식이 안 좋나요?</div><div class="ga">미국 10년 만기 국채 금리가 4.794%로 2023년 10월 이후 가장 높습니다. 은행에 돈을 맡기듯 안전하게 4.8%를 받을 수 있으면, 위험한 주식에 돈을 넣을 이유가 줄어듭니다. 특히 &#x27;앞으로 크게 성장할 것&#x27;이라는 기대로 비싸게 거래되는 기술주가 더 불리합니다.</div></div></section>
+
+  <section class="gsec"><h3>내일 무엇을 하면 되나요?</h3>
+    <ol class="gtodo"><li>9월 9일 개장하면 먼저 마이크로소프트를 시장가로 전량 팝니다(약 −0.93% 확정).</li><li>마이크론을 980.00달러 지정가로 매수 주문을 겁니다. 당일에만 유효한 주문으로 넣습니다.</li><li>마이크론이 체결되면 곧바로 911.40달러에 손절 주문을 함께 걸어둡니다.</li><li>엔비디아와 길리어드는 아무것도 하지 않습니다. 다만 엔비디아가 236.54달러에 닿으면 절반만 팝니다.</li><li>마이크론 주문이 9월 9일 안에 안 걸리면 그대로 취소하고, 더 비싼 값에 쫓아 사지 않습니다.</li><li>9월 10일 PPI, 9월 11일 CPI 발표일에는 새 주문을 늘리지 말고 지켜봅니다.</li></ol></section>
+
+  <section class="gsec warn"><h3>솔직하게 말하면 — 이 추천의 한계</h3>
+    <ul class="glimit"><li>성공 확률 69~70%가 높아 보이는 것은 모형이 좋아져서가 아닙니다. 지난 한 달(7월 24일~8월 27일) 실제 성적이 32건 중 승률 85.2%로 매우 좋았고 그 숫자를 그대로 반영했기 때문인데, 그 한 달은 시장이 거의 계속 오르기만 한 기간이었습니다. 내리는 장이 섞이면 이 숫자는 내려갑니다.</li><li>후보 12종목 중 6종목(META·GOOGL·AMGN·AMZN·CSCO·AVGO)은 &#x27;이익 전망이 올라갔는지 내려갔는지&#x27;를 끝내 확인하지 못했습니다. 모른다고 솔직히 적어둡니다. 직전 회차에는 12개 전부 확인했으므로 이번은 후퇴입니다.</li><li>추세의 강도를 재는 ADX라는 지표는 12종목 전부 확보에 실패했습니다(3회차 연속). 변동성 지수(VIX)도 이번엔 확인하지 못했습니다.</li><li>이틀 연속으로 &#x27;싸게 사려고 걸어둔 주문&#x27;이 안 걸렸습니다(직전 회차 마이크론, 이번 회차 AMD). 두 번 다 그날 주가가 크게 올랐습니다. 주문 가격을 너무 낮게 거는 습관이 남아 있을 가능성이 있습니다.</li><li>마이크로소프트를 파는 근거가 된 &#x27;목표가를 최근 고점까지만 잡는다&#x27;는 규칙은, 직전 회차에는 다르게 적용됐습니다(그때는 52주 최고가를 썼습니다). 같은 규칙을 회차마다 다르게 쓴 셈이라 이 점을 기록으로 남깁니다.</li><li>9월 10일 PPI, 9월 11일 CPI, 9월 15~16일 FOMC가 모두 보유 기간 안에 있습니다. 손절 주문은 갑자기 크게 벌어져 시작하는 하락(갭 하락)을 막지 못합니다.</li><li>이 리포트는 사람이 아니라 AI가 만든 분석이며 투자 조언이 아닙니다. 최종 판단과 그 결과의 책임은 투자자 본인에게 있습니다.</li></ul></section>
+
+  <section class="gsec"><h3>용어 사전</h3>
+    <div class="gterms"><div class="gterm"><b>지정가 주문</b><span>&#x27;이 값 이하로 내려오면 사겠다&#x27;고 미리 걸어두는 주문입니다. 오늘은 마이크론을 980.00달러에 걸었습니다. 안 내려오면 안 사집니다.</span></div><div class="gterm"><b>당일유효 주문</b><span>그날 장이 끝나면 자동으로 취소되는 주문입니다. AMD 464.63달러 주문이 그래서 9월 8일로 끝났습니다.</span></div><div class="gterm"><b>손절</b><span>손해가 정해진 선을 넘으면 더 버티지 않고 파는 것입니다. 마이크론은 911.40달러(산 값보다 7% 아래)입니다.</span></div><div class="gterm"><b>20일 평균선</b><span>최근 20거래일 종가의 평균값입니다. 오늘 QQQ는 718.36으로 20일선 717.385를 0.975포인트 웃돌았고, 이 때문에 &#x27;강세&#x27;로 판정됐습니다.</span></div><div class="gterm"><b>ATR</b><span>하루에 평균 얼마나 움직이는지를 재는 값입니다. 마이크론은 43.70달러(주가의 4.37%)로 후보 중 가장 큽니다. 그래서 손절 폭을 7%로 넓게 잡았습니다.</span></div><div class="gterm"><b>손익비(R/R)</b><span>벌 수 있는 폭을 잃을 수 있는 폭으로 나눈 값입니다. 1.5 이상이어야 삽니다. 마이크로소프트는 0.77로 미달이라 팔기로 했습니다.</span></div><div class="gterm"><b>손익분기 승률</b><span>손해도 이익도 아니게 되는 최소 승률입니다. 마이크론은 36.84%, 엔비디아 29.34%, 길리어드 37.10%입니다. 실제 추정 승률이 이보다 높아야 기대값이 플러스가 됩니다.</span></div></div></section>
+</div>
+
+<details class="expert">
+<summary class="expert-sum">
+  <span class="ex-l"><b>전문가용 상세 리포트</b>
+    <i>7역할 에이전트 원문 · 등급표 전수 · 산식 검증 · 리스크 3관점 · 품질 기록</i></span>
+  <span class="ex-r">펼치기 ▾</span>
+</summary>
+<div class="expert-body">
+
+<div class="tiles"><div class="tile"><div class="t-l">비중가중 예상수익률</div><div class="t-v up">+1.7%</div><div class="t-s">목표가 전량 도달 가정</div></div><div class="tile"><div class="t-l">비중가중 기대값</div><div class="t-v neutral">+0.9%</div><div class="t-s">승률 반영 (알파 주장 없음)</div></div><div class="tile"><div class="t-l">최대손실 (정상 / 갭조정)</div><div class="t-v dn">-0.9% / -1.3%</div><div class="t-s">전 종목 손절 동시 발동</div></div><div class="tile"><div class="t-l">투자비중 / 현금</div><div class="t-v neutral">16% / 84%</div><div class="t-s">유효 베팅수 2.98</div></div></div>
+
+<h2>펀드매니저 총평</h2>
+<div class="panel">
+  <p>신규 1건 / 보유유지 2건 / 청산 1건 / 미발주 1건 / 관망 7건. MU 5%(신규·지정가 980.00) · NVDA 5%(보유유지) · GILD 6%(보유유지·9/8 148.41 체결 완료) · MSFT 전량 청산 · 총 투자 16% / 현금 84%. ★이번 회차의 세 가지 축은 (1) 이틀 연속 발생한 지정가 미체결, (2) 규칙 하나가 직전 회차와 반대 방향으로 작동해 MU를 복권시킨 것, (3) 4사이클 이월된 규정 공백이 MSFT에서 실제 결론에 도달한 것이다. AMD는 9/8 지정가 464.63이 당일 저가 486.57에 21.94달러 차이로 비껴가 미체결됐고 4-2절에 따라 자동 종결·재설계 금지로 미발주 처리했다 — 직전 회차 MU(925.24 미체결 후 당일 +6.10%)와 정확히 같은 패턴이 이틀 연속 반복됐다. 반대로 MU는 직전 회차에 3거래일 누적 +6.04%로 4-3절 확장목표 (b)조건(+6% 미만)을 0.04%p 차이로 위반해 탈락했었는데, 이번엔 +4.62%로 자격을 회복해 목표 상한 1298.70을 확보했다. 같은 규칙이 닷새 만에 정반대로 작동한 것이므로 규칙의 임계 근접 민감도를 품질기록에 남긴다. MSFT는 9/8 종가 493.95가 MA20 495.10을 하회하며 완전 정배열이 붕괴돼 확장목표 자격을 잃었고, 4-3절 측정저항 우선순위 ①직전 스윙 고점 517.78을 적용하면 기존 목표 553.72가 무효 좌표가 된다. 517.78로 정정하면 기대수익 +3.85% / 손절 −5.00% → R/R 0.769로 하드 기준 1.5에 미달해 강등 규칙이 발동하고, 손절 미도달 상태이므로 손절이 아니라 &#x27;기대값 소멸에 따른 정리&#x27;로 전량 청산했다(실현 −0.93%). 총 투자비중 16%는 정책 밴드 방어(10~30%) 구간이고 직전 계획치 19% 대비 −3%p로 소명 임계(±15%p) 이내다. 반도체 합산 10%(≤30%)·종목당 4~12%·현금 84%(≥15%) 전항 준수. 리스크 3관점에서 MU에 보수 관점 1건만이 하한 미달(0%)을 권고했으므로 4-4절 분기 규칙상 탈락이 아니라 중앙값 5%로 절충했고 그 사실을 여기 기재한다. 조건 미달 종목을 억지로 채우지 않아 현금 84%를 유지했다.</p>
+  <h4 style="margin-top:16px">시장 국면 진단</h4>
+  <p>QQQ 718.36이 MA20 717.385를 +0.975포인트, MA50 약 711.1을 +7.3포인트 상회해 4-1절 국면 판정은 강세이며 승률 국면조정은 0%p다. 그러나 판정과 시장 내부는 어긋나 있다 — 같은 날 다우 −1.2%(−628pt) · S&amp;P500 −0.6% · 나스닥종합 −0.3%로 지수 3개가 모두 내렸고 QQQ만 −0.08%로 버텼다. 하락의 원인은 기업 실적이 아니라 원자재다. 후티의 사우디 에너지 인프라 공격과 이란 카르그섬 수출허브 관련 보도로 브렌트유가 장중 99.45달러까지 올라 100달러에 근접했고(WTI ~93달러, 6월 초 이후 최고), 이것이 인플레 재점화 경로로 곧장 연결되면서 10년물이 장중 4.8%를 넘어 4.794%로 마감했다 — 2023년 10월 이후 최고치다. 2년물 4.40%·5년물 4.57%도 동반 상승했다. 즉 이번 강세 판정은 지수 레벨의 산술적 결과이며, 금리·유가라는 두 개의 외생 충격이 보유기간 초입(9/10 PPI·9/11 CPI·9/15~16 FOMC)에 그대로 노출돼 있다. 시장 폭 지표는 설계상 수집 금지 항목이라 교차 확인이 불가능하다는 점을 함께 기록한다.</p>
+  <h4 style="margin-top:16px">두 결과 병기 — 승률 가정의 규범적 지위</h4>
+  <div class="dualbox">
+    <div><h4>파이프라인 확정 승률 적용 (MU 70.2% · NVDA 69.2% · GILD 70.2%)</h4>비중가중 예상수익률 +1.6711%p · 비중가중 기대값 +0.9019%p · 최대손실 추정 −0.8836%p(갭 조정 −1.3254%p). 유효 베팅수 2.977(직전 3.882에서 하락 — 3종목으로 축소된 결과).</div>
+    <div><h4>마팅게일 귀무가설(무드리프트) 적용 — 승률 = 손익분기승률</h4>MU 36.8421% · NVDA 29.3425% · GILD 37.1000%를 각각 대입하면 세 종목의 기대값이 정확히 0이 되고 포트폴리오 기대값도 0%p가 된다. 즉 표에 적힌 +0.9019%p는 전적으로 &#x27;승률이 손익분기보다 높다&#x27;는 가정에서만 나온다.</div>
+  </div>
+  <p style="margin-top:12px">승률 69.2~70.2%는 손익분기승률(29.3~37.1%)을 32~40%p 상회하지만 이 초과분을 알파의 크기로 해석하지 않는다(4-1절 명문). R:R 비대칭의 산술적 결과일 뿐이다. 세 종목 모두 β_base 68.2% ± 12%p(56.2~80.2%) 이내여서 소명 대상은 0건이다. 다만 β_base 자체가 2026-07-24~08-27의 일방적 상승장 표본(성숙 32포지션·실현 승률 85.2%)에서 도출됐고, 이번 회차가 강세 국면으로 판정돼 차감 조정이 0%p였다는 점이 승률 수준을 그대로 유지시킨 유일한 이유다. 약세 판정이 나오는 순간 −16%p가 적용돼 밴드는 52~54%대로 내려간다.</p>
+</div>
+
+<h2>최종 승인 등급표 — 후보 12종목 전수</h2>
+<table>
+<thead><tr>
+<th>#</th><th>종목</th><th>섹터</th><th>승인 등급</th><th>명문규칙</th><th class="n">진입</th><th class="n">목표</th><th class="n">손절</th>
+<th class="n">예상수익</th><th class="n">손실</th><th class="n">손익비</th><th class="n">손절÷ATR</th><th class="n">승률</th>
+<th class="n">손익분기</th><th class="n">기대값</th><th class="n">비중</th><th>손실 ← → 수익</th>
+</tr></thead><tbody><tr><td class="rk">1</td><td><b class="tk">MU</b><div class="sub">마이크론 테크놀로지</div></td><td class="sub">반도체(메모리·HBM)</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과(8개 전항) · 확장목표 적용</span></td><td class="n">$980.00</td><td class="n up">$1,097.60</td><td class="n dn">$911.40</td><td class="n up"><b>+12.0%</b></td><td class="n dn">-7.0%</td><td class="n">1.71</td><td class="n">1.57</td><td class="n">70%</td><td class="n">36.8%</td><td class="n up"><b>+6.3%</b></td><td class="n"><b>5.0%</b></td><td class="bar"><div class="rrbar" title="목표 +12.0% / 손절 -7.0%"><div class="rr-l"><span class="rr-fill dn" style="width:68.8px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:118.0px"></span></div></div></td></tr><tr><td class="rk">2</td><td><b class="tk">NVDA</b><div class="sub">엔비디아</div></td><td class="sub">반도체(AI 가속기)</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과(보유) · 확장목표 상한 244.34 이내</span></td><td class="n">$218.74</td><td class="n up">$243.35</td><td class="n dn">$208.52</td><td class="n up"><b>+11.3%</b></td><td class="n dn">-4.7%</td><td class="n">2.41</td><td class="n">1.31</td><td class="n">69%</td><td class="n">29.3%</td><td class="n up"><b>+6.3%</b></td><td class="n"><b>5.0%</b></td><td class="bar"><div class="rrbar" title="목표 +11.2% / 손절 -4.7%"><div class="rr-l"><span class="rr-fill dn" style="width:45.9px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:110.6px"></span></div></div></td></tr><tr><td class="rk">3</td><td><b class="tk">AMD</b><div class="sub">AMD</div></td><td class="sub">반도체(CPU·AI)</td><td><span class="badge warn">관망</span></td><td><span class="badge crit">4-2절 미체결 자동종결·재설계 금지 · 저항여력 2.30%&lt;5% · 3일 +10.65%로 확장목표(b) 위반</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">4</td><td><b class="tk">GILD</b><div class="sub">길리어드 사이언스</div></td><td class="sub">바이오테크</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과(보유) · 확장목표 상한 161.03 이내</span></td><td class="n">$148.41</td><td class="n up">$160.99</td><td class="n dn">$140.99</td><td class="n up"><b>+8.5%</b></td><td class="n dn">-5.0%</td><td class="n">1.70</td><td class="n">1.99</td><td class="n">70%</td><td class="n">37.1%</td><td class="n up"><b>+4.5%</b></td><td class="n"><b>6.0%</b></td><td class="bar"><div class="rrbar" title="목표 +8.5% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:49.2px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:83.4px"></span></div></div></td></tr><tr><td class="rk">5</td><td><b class="tk">AAPL</b><div class="sub">애플</div></td><td class="sub">하드웨어·소비자테크</td><td><span class="badge warn">관망</span></td><td><span class="badge crit">미달 저항여력 4.61%&lt;5% · 목표주가 상승여력 +2.63% 최저 · 9/9 이벤트 첫날</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">6</td><td><b class="tk">META</b><div class="sub">메타 플랫폼스</div></td><td class="sub">인터넷·미디어</td><td><span class="badge warn">관망</span></td><td><span class="badge crit">미달 저항여력 1.85%&lt;5% · MA200 하회로 확장목표 자격 없음 · eps null</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">7</td><td><b class="tk">MSFT</b><div class="sub">마이크로소프트</div></td><td class="sub">소프트웨어·클라우드</td><td><span class="badge crit">청산</span></td><td><span class="badge warn">★무효좌표 정정: 목표 553.72 &gt; 측정저항 517.78 → 517.78로 하향 시 R/R 0.769&lt;1.5 → 청산</span></td><td class="n">$498.60</td><td class="n up">$517.78</td><td class="n dn">$473.67</td><td class="n up"><b>+3.8%</b></td><td class="n dn">-5.0%</td><td class="n">0.77</td><td class="n">2.43</td><td class="n">62%</td><td class="n">56.5%</td><td class="n up"><b>+0.5%</b></td><td class="n"><b>0.0%</b></td><td class="bar"><div class="rrbar" title="목표 +3.9% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:49.2px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:37.9px"></span></div></div></td></tr><tr><td class="rk">8</td><td><b class="tk">GOOGL</b><div class="sub">알파벳 A</div></td><td class="sub">인터넷·미디어</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">테크니컬 38점·mom −5.36 · 9/22 반독점 재판 · MA20 하회</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">9</td><td><b class="tk">AMZN</b><div class="sub">아마존</div></td><td class="sub">인터넷·이커머스</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">mom −7.59·정배열 이탈·테크니컬 35점</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">10</td><td><b class="tk">AVGO</b><div class="sub">브로드컴</div></td><td class="sub">반도체(맞춤형 ASIC)</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">완전 역배열 · mom −12.75(최하위) · 테크니컬 28점</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">11</td><td><b class="tk">CSCO</b><div class="sub">시스코 시스템즈</div></td><td class="sub">네트워크 장비</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">mom −10.93 · MA20·MA50 동시 하회 · 테크니컬 30점</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">12</td><td><b class="tk">AMGN</b><div class="sub">암젠</div></td><td class="sub">바이오테크</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">9/8 −10.08% 급락 · 종합 28.75 최하위 · 센티먼트 22점(목표주가가 현재가 하회)</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr></tbody></table>
+
+<h2>배정·조건부 종목 상세</h2>
+<div class="cards">
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">MU</span>
+      <div>
+        <h3>마이크론 테크놀로지</h3>
+        <div class="meta">반도체(메모리·HBM) · 비중 5.0% · 통과(8개 전항) · 확장목표 적용</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> </span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,45.9 133.2,73.3 112.8,122.1 61.0,125.1 45.9,74.3" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="45.9" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 78점</title></circle><circle cx="133.2" cy="73.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 88점</title></circle><circle cx="112.8" cy="122.1" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 78점</title></circle><circle cx="61.0" cy="125.1" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 85점</title></circle><circle cx="45.9" cy="74.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 82점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">88</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">78</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">85</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">82</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$980.00</b></div>
+        <div class="pz up"><span>목표</span><b>$1,097.60</b><i>+12.0%</i></div>
+        <div class="pz dn"><span>손절</span><b>$911.40</b><i>-7.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>1.71</b><i>1.57</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>70%</b><i>36.8%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+6.3%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">NVDA</span>
+      <div>
+        <h3>엔비디아</h3>
+        <div class="meta">반도체(AI 가속기) · 비중 5.0% · 통과(보유) · 확장목표 상한 244.34 이내</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> </span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,51.3 130.1,74.3 110.9,119.5 60.1,126.4 49.0,75.3" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="51.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 68점</title></circle><circle cx="130.1" cy="74.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 82점</title></circle><circle cx="110.9" cy="119.5" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 72점</title></circle><circle cx="60.1" cy="126.4" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 88점</title></circle><circle cx="49.0" cy="75.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 76점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">68</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">82</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">72</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">88</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">76</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$218.74</b></div>
+        <div class="pz up"><span>목표</span><b>$243.35</b><i>+11.3%</i></div>
+        <div class="pz dn"><span>손절</span><b>$208.52</b><i>-4.7%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>2.41</b><i>1.31</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>69%</b><i>29.3%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+6.3%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">GILD</span>
+      <div>
+        <h3>길리어드 사이언스</h3>
+        <div class="meta">바이오테크 · 비중 6.0% · 통과(보유) · 확장목표 상한 161.03 이내</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> </span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 118.8,78.0 105.5,112.0 69.6,113.3 55.1,77.3" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="47.5" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 75점</title></circle><circle cx="118.8" cy="78.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 60점</title></circle><circle cx="105.5" cy="112.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 55점</title></circle><circle cx="69.6" cy="113.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 58점</title></circle><circle cx="55.1" cy="77.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 64점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">75</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">60</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">55</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">58</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">64</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$148.41</b></div>
+        <div class="pz up"><span>목표</span><b>$160.99</b><i>+8.5%</i></div>
+        <div class="pz dn"><span>손절</span><b>$140.99</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>1.70</b><i>1.99</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>70%</b><i>37.1%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+4.5%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">MSFT</span>
+      <div>
+        <h3>마이크로소프트</h3>
+        <div class="meta">소프트웨어·클라우드 · 비중 0.0% · ★무효좌표 정정: 목표 553.72 &gt; 측정저항 517.78 → 517.78로 하향 시 R/R 0.769&lt;1.5 → 청산</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> </span>
+      <span class="badge crit">청산</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,65.3 117.8,78.3 103.9,109.8 66.4,117.7 61.3,79.3" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="65.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 42점</title></circle><circle cx="117.8" cy="78.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 58점</title></circle><circle cx="103.9" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 50점</title></circle><circle cx="66.4" cy="117.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 68점</title></circle><circle cx="61.3" cy="79.3" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 52점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">42</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">58</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">68</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">52</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$498.60</b></div>
+        <div class="pz up"><span>목표</span><b>$517.78</b><i>+3.8%</i></div>
+        <div class="pz dn"><span>손절</span><b>$473.67</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>0.77</b><i>2.43</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>62%</b><i>56.5%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+0.5%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article></div>
+
+<h2>집행 지침</h2>
+<table><thead><tr><th>티커</th><th class="n">지정가</th><th class="n">체결 하한</th><th>주문 취소일</th>
+<th>축소 규칙</th><th>강제 청산</th><th>진입 근거</th></tr></thead><tbody><tr><td><b>MU</b></td><td class="n">$980.00</td><td class="n">$911.40</td><td class="sub">2026-09-09 장 마감(당일유효)</td><td class="sub">체결 즉시 손절 911.40 동시 설정. 직전 스윙 고점 1041.07 3회 돌파 실패 시 절반 축소</td><td class="sub">2026-10-07 (또는 9/30 실적 발표 전일 절반 축소 검토)</td><td class="rat">종가 1000.26 대비 −2.07% 지정가. ATR 43.70의 0.46배 되돌림이면 체결되므로 체결확률 65% 추정. 4-2절 하한(종가×0.95=950.25)을 30달러 상회</td></tr><tr><td><b>NVDA</b></td><td class="n">$218.74</td><td class="n">$208.52</td><td class="sub">해당 없음(보유 중)</td><td class="sub">236.54(52주 최고) 도달 시 절반 익절</td><td class="sub">2026-10-07</td><td class="rat">보유유지 — 좌표 불변. 목표 243.35가 확장목표 상한 244.34 이내로 여전히 유효</td></tr><tr><td><b>GILD</b></td><td class="n">$148.41</td><td class="n">$140.99</td><td class="sub">해당 없음(9/8 체결 완료)</td><td class="sub">152.55(직전 스윙 고점) 돌파 실패 시 절반 축소</td><td class="sub">2026-10-07</td><td class="rat">9/8 지정가 148.41 체결(당일 저가 145.45·시가 146.98). 좌표 불변, 목표 160.99는 상한 161.03 이내</td></tr><tr><td><b>MSFT</b></td><td class="n">$0.00</td><td class="n">$0.00</td><td class="sub">2026-09-09 개장 시장가 청산</td><td class="sub">전량 청산(부분 축소 아님)</td><td class="sub">2026-09-09</td><td class="rat">측정저항을 4-3절 우선순위 ①직전 스윙 고점 517.78로 정정하면 R/R 0.769로 1.5 미달 → 강등 규칙 발동</td></tr></tbody></table>
+
+<h2>포트폴리오 섹터 배분</h2>
+<div class="panel"><div class="srow"><span class="sname">반도체(메모리·HBM) — MU</span><span class="sbar"><i style="width:6.0%;background:#3987e5"></i></span><span class="spct">5.0%</span></div><div class="srow"><span class="sname">반도체(AI 가속기) — NVDA</span><span class="sbar"><i style="width:6.0%;background:#2a78d6"></i></span><span class="spct">5.0%</span></div><div class="srow"><span class="sname">바이오테크 — GILD</span><span class="sbar"><i style="width:7.1%;background:#256abf"></i></span><span class="spct">6.0%</span></div><div class="srow"><span class="sname">현금</span><span class="sbar"><i style="width:100.0%;background:#1c5cab"></i></span><span class="spct">84.0%</span></div></div>
+
+<h2>Ⅰ. 애널리스트 — 4축 시장 진단</h2>
+<div class="panel"><div class="anx"><h4>① 펀더멘털 (18%)</h4><p>NVDA 88점·MU 85점이 최상위, AMGN 50점이 최하위. eps_revision은 확보된 6종(MU·AMD·GILD·NVDA·AAPL·MSFT) 전부 +1(상향)이었고 하향(−1)은 0건이었다. 나머지 6종(META·GOOGL·AMGN·AMZN·CSCO·AVGO)은 웹조사 상한 45회를 소진해 확인 실패(null)로 남겼다 — 직전 회차 전수 확보에서 후퇴한 지점이다.</p></div><div class="anx"><h4>② 뉴스 (22%)</h4><p>AMD 80점(9/8 +5.90% 급등 — CFO의 &#x27;AI 주소지정가능시장 3조 달러&#x27; 발언과 MI450/Helios 서버 수요 기대), MU 78점(HBM 슈퍼사이클·9/30 실적), AMGN 25점(노바티스 pelacarsen 3상 실패로 Lp(a) 계열 전반 재평가 + BMO의 Outperform→Market Perform 하향). 암젠 올포시란 자체 결과는 2028년 중반이라 보유기간 내 직접 이벤트는 없으나 업종 심리 위축은 지속 가능. GOOGL은 9/22 반독점 구제방안 재판 재개(사업분할 쟁점), AAPL은 9/9 iPhone 18 Pro·첫 폴더블 공개가 보유기간 첫날에 잡혀 있다.</p></div><div class="anx"><h4>③ 테크니컬 (35%)</h4><p>완전 정배열 5종(MU·AMD·GILD·NVDA·AAPL). MSFT·GOOGL·AMGN·AMZN·CSCO·AVGO 6종은 종가가 MA20을 하회했고, META는 MA20·MA50 위이나 MA200(622.37)을 하회해 정배열에서 제외됐다. mom_20d는 MU +16.17%가 압도적 1위, AVGO −12.75%가 최하위. 상대강도(rs_vs_qqq)도 같은 순서다. ADX(14)는 12종 전수 확보 실패로 3사이클 연속 null이다.</p></div><div class="anx"><h4>④ 센티먼트 (25%)</h4><p>MU 88점(애널리스트 평균 목표가 1513.11, 상승여력 +51.3%)·NVDA 82점(+44.4%)이 최상위. 반대로 AAPL은 48점으로, 평균 목표가 324.53이 종가 대비 +2.63%에 그쳐 후보 중 상승여력이 가장 낮다. AMGN은 22점으로 평균 목표가(388.48)가 종가(393.17)를 오히려 하회한다.</p></div></div>
+
+<h2>Ⅱ. 리서치 — Bull vs Bear 변증 공방</h2>
+<details class="deb bull"><summary>🐂 강세 논거 (Bull)</summary><p class="thesis-p">강세 측 총론 — 강세 국면(QQQ&gt;MA20&gt;MA50) 아래 판별 3변수 우위 종목에 집중</p><div class="dbi"><span class="dbt">MU</span><span class="dbc">상</span><p>판별3변수 6종목 중 압도적 1위: mom_20d +16.17%, rs_vs_qqq +16.52%p / 완전 정배열(종가&gt;MA20&gt;MA50&gt;MA200) 유지 + eps_revision +1로 펀더멘털 리비전도 우호적</p></div><div class="dbi"><span class="dbt">NVDA</span><span class="dbc">상</span><p>저항여력 +4.00%로 52주 최고(236.54)·직전 스윙고점(234.76) 재도전 구간, eps_revision +1 / 완전 정배열 유지 + 3일 누적 +0.59%(&lt;6%)로 확장목표 자격 충족 → 목표 상한 244.34까지 허용</p></div><div class="dbi"><span class="dbt">AMD</span><span class="dbc">중</span><p>mom_20d +7.71%/rs +8.05%p로 판별3변수 3위, eps_revision +1 / 완전 정배열 유지, 9/8 +5.90% 급등은 시장 전반 대비 강한 개별 모멘텀을 반영</p></div><div class="dbi"><span class="dbt">GILD</span><span class="dbc">상</span><p>mom_20d +10.26%/rs +10.61%p로 판별3변수 2위, eps_revision +1 / 완전 정배열 유지 + 3일 누적 -1.94%(&lt;6%)로 확장목표 자격 충족 → 목표 상한 161.03까지 허용</p></div><div class="dbi"><span class="dbt">AAPL</span><span class="dbc">중</span><p>완전 정배열 유지 + eps_revision +1, 3일 누적 -2.69%(&lt;6%)로 확장목표 자격 충족 → 목표 상한 351.99까지 허용 / 저항여력 +4.61%로 6종목 중 가장 넉넉 — 스윙고점(330.81) 재도전 여력 존재</p></div><div class="dbi"><span class="dbt">META</span><span class="dbc">중</span><p>종합점수 6위(60.80)로 상위 6 마지노선 편입, 3일 누적 +3.48%로 최근 반등 흐름 / mom_20d +3.12%/rs +3.47%p로 완만하나마 시장 대비 상대강도 유지</p></div></details><details class="deb bear"><summary>🐻 약세 반박 (Bear)</summary><p class="thesis-p">약세 측 총론 — 유가 급등발 금리 재상승과 매크로 이벤트 3연속이 보유기간 초입에 집중</p><div class="dbi"><span class="dbt">MU</span><span class="dbc">상</span><p>9/8 장중 1041.07 고점 기록 후 종가 1000.26 마감 — 고점 대비 -3.92% 밀린 장대 음봉 반전, 단기 과열 해소 국면 가능 / 9/30 실적(Micron IR 확정)이 보유기간(9/9~10/7) 내 위치 — 메모리 업종 특성상 실적 서프라이즈/가이던스發 갭 변동성 노출</p></div><div class="dbi"><span class="dbt">NVDA</span><span class="dbc">상</span><p>mom_20d +3.76%/rs +4.11%p로 6종목 중 중하위권 — 상대강도 모멘텀은 상대적으로 약함 / 10년물 4.794% 급등은 고밸류에이션 AI 반도체 전반에 할인율 압박, NVDA도 예외 아님</p></div><div class="dbi"><span class="dbt">AMD</span><span class="dbc">중</span><p>3거래일 누적 +10.65%로 4-3절 (b) 요건(3일 누적 +6% 미만) 위반 → 확장목표 자격 상실(N) / 저항여력 +2.30%로 6종목 중 최소 — 직전 스윙고점(517.35)까지 여유가 가장 좁음</p></div><div class="dbi"><span class="dbt">GILD</span><span class="dbc">상</span><p>9/8 -2.84% 하락 + 3일 누적 -1.94%로 최근 단기 모멘텀은 6종목 중 유일하게 음전환 / 저가 145.45까지 밀린 뒤 반등 — 현재가 대비 손절(140.99)까지 거리 약 3.9%로 넉넉하지 않음</p></div><div class="dbi"><span class="dbt">AAPL</span><span class="dbc">중</span><p>애널리스트 평균목표가 상승여력이 +2.63%에 불과 — 6종목 중 최저, 컨센서스가 이미 주가에 대부분 반영 / 9/9 &#x27;Surprise and Shine&#x27; 이벤트(iPhone 18 Pro·폴더블 iPhone Ultra 공개, 웹조사로 확인) 당일 — KeyBanc는 메모리 원가 상승發 마진 우려로 &#x27;주가에 부정적 촉매&#x27; 가능성을 경고, 전형적 &#x27;뉴스에 팔기&#x27; 위험</p></div><div class="dbi"><span class="dbt">META</span><span class="dbc">중</span><p>MA200(622.37) 하회로 6종목 중 유일하게 완전 정배열 붕괴(N) → 4-3절 확장목표 자격 상실(N) / 저항여력 +1.85%로 6종목 중 최소 — 직전 스윙고점(624.80)까지 여유가 가장 좁음</p></div></details><details class="deb bull"><summary>🐂 재반박 · 인정 (Bull rebuttal)</summary><p class="thesis-p">강세 측 총론 — 강세 국면(QQQ&gt;MA20&gt;MA50) 아래 판별 3변수 우위 종목에 집중</p><div class="dbi"><span class="dbt">MU</span><span class="dbc">상</span><p>3일 누적 +4.62%(&lt;6%)로 4-3절 확장목표 자격 충족 → 목표 상한 1298.70까지 허용, 저항여력 +4.08%(스윙고점 1041.07) / 종합점수 1위(81.76)로 반도체/HBM 슈퍼사이클 내러티브 최선호주</p><p class="rebut"><b>↳ 반박</b> 판별3변수 최고 우위(mom·rs 6종목 중 1위)가 강한 가산 근거이나, 9/30 실적(보유기간 내 이벤트, GlobeNewswire로 재확인)과 9/8 음봉 반전으로 상쇄해 순가산 +2%p로 제한</p></div><div class="dbi"><span class="dbt">NVDA</span><span class="dbc">상</span><p>보유기간(9/9~10/7) 내 확인된 이벤트 없음 — 6종목 중 유일하게 매크로 캘린더발 개별 리스크 최소 / 기존 보유(5%, +3.20%) 검증 포지션으로 손절(208.52) 대비 여유 충분</p><p class="rebut"><b>↳ 반박</b> 보유기간 내 확인된 이벤트가 없다는 점이 유일한 명확한 가산 근거이나 mom/rs가 6종목 중 중하위권이라 가산 폭을 제한</p></div><div class="dbi"><span class="dbt">AMD</span><span class="dbc">중</span><p>종합점수 3위(73.81)로 AI 반도체 대안 수혜주 프리미엄 지속 가능성</p><p class="rebut"><b>↳ 반박</b> 저항여력 최소(+2.30%)와 3일 누적 +10.65% 과열에 따른 확장목표 자격 상실(4-3절 (b) 위반)을 구체 근거로 감산</p></div><div class="dbi"><span class="dbt">GILD</span><span class="dbc">상</span><p>9/8 지정가 148.41 체결로 기존 보유(6%) — 목표 160.99/손절 140.99 구조 유효, 저항여력 +3.98% / 웹조사 결과 8/27 PDUFA(BIC/LEN HIV)는 이미 통과, 9월~10월 구간 내 확인되는 부정적 FDA 카탈리스트 없음</p><p class="rebut"><b>↳ 반박</b> 판별3변수 2위 강세와 확장목표 자격 충족을 근거로 가산하되, 단기 음전환(3일 -1.94%)과 이벤트 정보공백을 반영해 가산폭 제한</p></div><div class="dbi"><span class="dbt">AAPL</span><span class="dbc">중</span><p>종합점수 5위(62.06)로 상위권 유지, 신제품 사이클 진입에 따른 중장기 매출 모멘텀 기대</p><p class="rebut"><b>↳ 반박</b> 판별3변수 최저 + 애널리스트 상승여력 극히 제한(+2.63%) + 9/9 당일 이벤트發 마진 우려(KeyBanc, 웹조사 확인) 3가지 구체 근거로 감산</p></div><div class="dbi"><span class="dbt">META</span><span class="dbc">중</span><p>애널리스트 평균목표가 상승여력 +22.9%로 GILD·AMD보다 양호한 수준</p><p class="rebut"><b>↳ 반박</b> 완전 정배열 붕괴(MA200 하회)+저항여력 최소(+1.85%)+eps_revision 미확인 3가지 구체 근거로 감산</p></div></details><details class="deb bear"><summary>🐻 잔여 쟁점</summary><p class="thesis-p">약세 측 총론 — 유가 급등발 금리 재상승과 매크로 이벤트 3연속이 보유기간 초입에 집중</p><div class="dbi"><span class="dbt">MU</span><span class="dbc">상</span><p>10년물 4.794%(2023년 10월래 최고)+유가 급등발 인플레 재점화 우려 → 고베타 성장주인 MU에 할인율 상승 압력 / 9/10 PPI·9/11 CPI·9/15~16 FOMC 3연속 매크로 이벤트가 보유기간 초입에 집중 — 단기 변동성 확대 위험</p><p class="rebut"><b>↳ 반박</b> 판별3변수 최고 우위(mom·rs 6종목 중 1위)가 강한 가산 근거이나, 9/30 실적(보유기간 내 이벤트, GlobeNewswire로 재확인)과 9/8 음봉 반전으로 상쇄해 순가산 +2%p로 제한</p></div><div class="dbi"><span class="dbt">NVDA</span><span class="dbc">상</span><p>9/10 PPI·9/11 CPI·9/15~16 FOMC 3연속 이벤트로 위험자산 전반 변동성 확대 가능 / 9/8 고가 233.71로 저항대(234.76~236.54) 재시험 실패 반복 시 상단 매물 부담</p><p class="rebut"><b>↳ 반박</b> 보유기간 내 확인된 이벤트가 없다는 점이 유일한 명확한 가산 근거이나 mom/rs가 6종목 중 중하위권이라 가산 폭을 제한</p></div><div class="dbi"><span class="dbt">AMD</span><span class="dbc">중</span><p>9/8 +5.90% 갭업 포함 3일 급등 뒤 추격매수 위험 — 되돌림(차익실현) 가능성 확대 / 10년물 4.794%·인플레 재점화 우려는 밸류에이션 부담이 큰 성장 반도체주에 부정적이며, 9/10~9/16 매크로 이벤트 3연속에도 노출</p><p class="rebut"><b>↳ 반박</b> 저항여력 최소(+2.30%)와 3일 누적 +10.65% 과열에 따른 확장목표 자격 상실(4-3절 (b) 위반)을 구체 근거로 감산</p></div><div class="dbi"><span class="dbt">GILD</span><span class="dbc">상</span><p>보유기간 내 구체적 추가 이벤트를 특정하지 못함(GS-1179는 4분기 예정, 날짜 불명) — 정보 공백 자체가 불확실성 / 10년물 4.794% 급등에 따른 인플레 우려는 바이오텍 섹터 전반 밸류에이션에도 부담</p><p class="rebut"><b>↳ 반박</b> 판별3변수 2위 강세와 확장목표 자격 충족을 근거로 가산하되, 단기 음전환(3일 -1.94%)과 이벤트 정보공백을 반영해 가산폭 제한</p></div><div class="dbi"><span class="dbt">AAPL</span><span class="dbc">중</span><p>mom_20d +2.58%/rs +2.93%p로 6종목 중 최저 — 상대강도 모멘텀이 가장 약함 / 3거래일 누적 -2.69%로 이벤트 직전 이미 매물 출회 조짐</p><p class="rebut"><b>↳ 반박</b> 판별3변수 최저 + 애널리스트 상승여력 극히 제한(+2.63%) + 9/9 당일 이벤트發 마진 우려(KeyBanc, 웹조사 확인) 3가지 구체 근거로 감산</p></div><div class="dbi"><span class="dbt">META</span><span class="dbc">중</span><p>eps_revision 확인 실패(null) — 판별3변수 중 1개가 공백 상태로 판단 근거 불완전 / 10년물 급등에 따른 할인율 상승은 MA200 하회로 이미 추세 훼손된 종목에 추가 하방 압력으로 작용 가능</p><p class="rebut"><b>↳ 반박</b> 완전 정배열 붕괴(MA200 하회)+저항여력 최소(+1.85%)+eps_revision 미확인 3가지 구체 근거로 감산</p></div></details>
+<h2 style="font-size:15px;border-bottom-width:1px">Facilitator 판정</h2>
+<div class="panel"><p>β_base 68.2%(R=85.2·n=32·w=0.516, 2026-08 월간평가 확정치)에 강세 국면조정 0%p를 적용한 뒤 종목조정을 부여했다. 매수 진출 3종의 종목조정은 MU +2 · NVDA +1 · GILD +2로 모두 소폭 가산이며, 관망 3종은 AMD −4 · AAPL −5 · META −6으로 감산했다. 감산은 전부 구체 근거(저항여력·확장목표 자격·목표주가 상승여력·eps 미확인)에 기반했고 근거 없는 일괄 하향은 하지 않았다 — 과소신뢰(과신비율 0.552·ECE 38.1%p)가 2026-08 Red 판정의 최대 원인이었기 때문이다. 최종 승률 62.2~70.2%는 전부 β_base ±12%p(56.2~80.2%) 이내여서 소명 대상 0건이다.</p>
+<h4 style="margin-top:14px">핵심 쟁점</h4><ul style="margin:0;padding-left:18px;font-size:13px;color:#52514e"><li>MU: Bull은 판별3변수 압도적 1위(mom +16.17·rs +16.52)를, Bear는 9/8 장중 1041.07 고점 후 1000.26 마감의 장대 음봉 반전과 9/30 실적을 들었다. Facilitator는 가산을 +2%p로 제한하는 절충을 택했다.</li><li>AAPL: 완전 정배열·확장목표 자격을 모두 갖췄는데도 관망이 됐다. 애널리스트 평균 목표가 상승여력이 +2.63%로 후보 최저이고, 9/9 신제품 발표가 보유기간 첫날이라 &#x27;뉴스에 팔기&#x27; 위험이 겹쳤기 때문이다.</li><li>MSFT: Bull은 손절 미도달·메가캡 AI 인프라 구조적 유효성을, Bear는 무효 좌표 정정 시 R/R 0.769와 판별3변수 음전환을 들었다. &#x27;목표하향 유지&#x27;는 R/R&lt;1.5 위반 상태를 그대로 보유하는 셈이 되어 기각됐다.</li></ul></div>
+<table style="margin-top:12px"><thead><tr><th>티커</th><th>승자</th><th>명문규칙</th>
+<th>판정 근거</th></tr></thead><tbody><tr><td><b>MU</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">통과</span></td><td class="rat">판별3변수 최상위지만 실적 이벤트·음봉 반전으로 가산 제한, 매수 진출 (종목조정 +2%p → 승률 70.2%)</td></tr><tr><td><b>NVDA</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">통과</span></td><td class="rat">이벤트 리스크 최소가 강점이나 모멘텀은 평범, 매수 진출 (종목조정 +1%p → 승률 69.2%)</td></tr><tr><td><b>AMD</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달</span></td><td class="rat">판별3변수는 준수하나 저항여력 협소+추격매수 위험으로 관망(직전 지정가 미체결·재설계 금지 상태와도 정합) (종목조정 -4%p → 승률 64.2%)</td></tr><tr><td><b>GILD</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">통과</span></td><td class="rat">판별3변수 2위+확장목표 자격, 기존 체결 포지션 유지 관점에서 매수 진출 (종목조정 +2%p → 승률 70.2%)</td></tr><tr><td><b>AAPL</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달</span></td><td class="rat">이벤트 결과 미확인 상태에서 상승여력 협소+모멘텀 최저로 관망, 이벤트 통과 후 재평가 권고 (종목조정 -5%p → 승률 63.2%)</td></tr><tr><td><b>META</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge crit">미달</span></td><td class="rat">기술적 구조 훼손(MA200 하회)+저항여력 최소로 관망 (종목조정 -6%p → 승률 62.2%)</td></tr></tbody></table>
+
+<h2>Ⅲ. 트레이더 — 시장 포지셔닝</h2>
+<div class="panel"><p>이번 회차의 신규 좌표 설계는 MU 단 1건이다. NVDA·GILD는 보유유지로 좌표 불변, MSFT는 청산, AMD는 4-2절 재설계 금지로 좌표를 만들지 않았다. MU 좌표는 7개 제약을 동시에 만족시켜야 했다 — ATR14가 43.702달러(종가의 4.37%)로 후보 중 가장 커서, 기본 손절 −5%로는 손절÷ATR이 1.14에 그쳐 하한 1.5를 통과하지 못한다. 설계 1절의 &#x27;고변동성 종목 최대 −8%, 대신 비중 축소&#x27; 규정에 따라 손절폭을 −7.00%로 넓혀 손절÷ATR 1.5697을 확보하고 비중을 5%로 제한했다. 진입 980.00은 종가 대비 −2.07%로 4-2절 하한(종가×0.95=950.25)을 30달러 상회하며, 필요한 되돌림이 ATR의 0.46배에 불과해 체결확률을 65%로 추정했다. 목표 1097.60은 직전 스윙 고점 1041.07을 넘어서므로 4-3절 확장목표를 적용했고(완전 정배열 + 3일 누적 +4.62% &lt; 6%), 확장 상한 1298.70의 절반 수준에서 끊어 예상수익률을 +12.00%로 목표 밴드(+5~15%) 안에 두었다.</p></div>
+
+<h2>Ⅳ. 리스크 심사 — 3관점</h2>
+<details class="deb"><summary>공격 관점 (총투자 30% 권고)</summary><p class="thesis-p">국면은 QQQ 종가&gt;MA20&gt;MA50의 강세로 판정된다(①금리·유가발 재료는 인정하되, 다우-1.2%·S&amp;P-0.6%·나스닥종합-0.3% 등 지수 3개 동반 하락은 국면 지속성의 조기 경고로만 기록④). MU는 종합점수 1위(81.76)·mom_20d(+16.17%)·rs_vs_qqq(+16.52%p) 등 판별3변수 전 항목 최상위이며 EV +6.338%로 확장목표(1097.60 ≤ 상한 1298.70) 요건도 충족한다. ATR 4.37%(후보 중 최대)·손절폭-7%(기본-5% 초과)·9/30 실적이 보유기간 내라는 점②은 인지하되, 승률 70.2%가 β_base(68.2%, 2026-08 월간평가 확정치)에서 산출된 값이라는 점⑤을 근거로 상한(12%) 배정을 유지한다. NVDA(EV 최고 +6.347%, RR 최고 2.408)도 10%로 확대하되 반도체 합산(MU+NVDA=22%)을 30% 캡 이내로 관리한다③. GILD는 ATR 최저(2.55%)로 포트폴리오 안전판 역할을 살려 8%로 배정. 손절이 갭다운을 막지 못해 갭조정 최대손실이 MU 기준 -10.50%에 달한다는 점⑥은 인정하나, 국면·판별변수 우위가 이를 상쇄한다고 판단한다. 총투자 30%는 평시 밴드(30~60%) 하단에서 시작.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>MU</b></td><td><span class="badge good">찬성</span></td><td class="n">12.0%</td><td class="rat"></td></tr><tr><td><b>NVDA</b></td><td><span class="badge good">찬성</span></td><td class="n">10.0%</td><td class="rat"></td></tr><tr><td><b>GILD</b></td><td><span class="badge good">찬성</span></td><td class="n">8.0%</td><td class="rat"></td></tr></tbody></table></details><details class="deb"><summary>중립 관점 (총투자 16% 권고)</summary><p class="thesis-p">R/R·손절÷ATR·이벤트 캘린더의 균형을 기준으로 표준 배정한다. MU는 RR 1.714(세 종목 중 최저)·손절폭-7%(기본-5% 초과)·ATR% 4.37(최대)·9/30 실적이 보유기간 내에 위치해②(9/8 장중 1041.07 고점 후 음봉 반전 포함) 표준 배정 하단인 5%로 제한한다. NVDA는 RR 2.408(최고)·stop/ATR 1.310(보유유지로 면제)이나 반도체 섹터로 MU와 합산 위험이 있어③(합산 10%, 30% 캡 이내) 현 수준 5%를 유지한다. GILD는 ATR 최저(2.55%)·stop/ATR 2.008(면제)로 현 수준 6%를 유지한다. 국면은 강세로 판정되나 다우-1.2%·S&amp;P-0.6%·나스닥종합-0.3% 등 3개 지수 동반 하락과 괴리되어 있어④ 판정 신뢰도를 100% 반영하지 않았다. 승률 68.2%는 07/24~08/27 일방적 상승장 표본(실현승률 85.2%, n=32)에서 산출되어⑤ 하향 여지를 열어둔다. 10년물 4.794%·브렌트 ~$98 급등 및 9/10 PPI·9/11 CPI·9/15~16 FOMC 3연속 이벤트가 보유기간 내라는 점①과, 갭조정 최대손실(MU -10.50%·NVDA -7.01%·GILD -7.50%)⑥을 감안해 총투자비중을 16%로 제한한다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>MU</b></td><td><span class="badge good">찬성</span></td><td class="n">5.0%</td><td class="rat"></td></tr><tr><td><b>NVDA</b></td><td><span class="badge good">찬성</span></td><td class="n">5.0%</td><td class="rat"></td></tr><tr><td><b>GILD</b></td><td><span class="badge good">찬성</span></td><td class="n">6.0%</td><td class="rat"></td></tr></tbody></table></details><details class="deb"><summary>보수 관점 (총투자 9% 권고)</summary><p class="thesis-p">금리(10년물 4.794%, 2023년 10월 이후 최고)·유가(브렌트 ~$98, 후티의 사우디 에너지 인프라 공격·이란 카르그섬 리스크) 동반 충격과 9/10 PPI·9/11 CPI·9/15~16 FOMC 3연속 이벤트가 전부 보유기간(9/9~10/7) 내에 위치한다는 점을 최우선으로 반영한다①. MU는 ATR 4.37%(후보 중 최대)·손절폭-7%(기본-5% 초과)·9/30 실적 보유기간 내·9/8 장중 1041.07 고점 후 종가 1000.26 음봉 반전·52주 최고(1255.00) 대비 약 -20% 수준이 동시에 겹치는 다중 리스크 종목으로 판단해 신규 미진입(0%)을 권고한다②. NVDA는 MU와 동일 반도체 섹터로 집중 위험이 있으나③ 이미 보유 중이며 +3.2% 수익 구간이므로 전량 청산이 아닌 하한(4%)으로 축소 배정한다. GILD는 헬스케어로 반도체와 비상관이고 ATR 최저(2.55%)이나, 금리·유가발 전반적 리스크오프 국면을 감안해 완만히 축소한 5%를 제시한다. 국면판정(QQQ가 MA20을 +0.975pt 상회)이 다우-1.2%·S&amp;P-0.6%·나스닥종합-0.3% 등 지수 3개 동반 하락과 괴리되어 판정 자체가 취약하다는 점④, 승률 68.2%가 일방적 상승장 표본(실현승률 85.2%, 07/24~08/27)에서 산출되어 현재와 같은 충격 국면에서는 과대평가될 소지가 있다는 점⑤, 손절이 갭다운을 막지 못해 갭조정 최대손실이 MU -10.50%·GILD -7.50%·NVDA -7.01%에 달한다는 점⑥을 종합해 총투자비중을 극단방어 밴드(0~10%) 수준인 9%로 제한한다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>MU</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat"></td></tr><tr><td><b>NVDA</b></td><td><span class="badge warn">조건부 찬성</span></td><td class="n">4.0%</td><td class="rat"></td></tr><tr><td><b>GILD</b></td><td><span class="badge good">찬성</span></td><td class="n">5.0%</td><td class="rat"></td></tr></tbody></table></details>
+
+<h2>숨기지 않는 하방 리스크</h2>
+<div class="panel"><div class="rk-item"><div class="rk-h"><span class="rk-n">1</span><b>유가발 인플레 재점화 + 매크로 이벤트 3연속이 보유기간 초입에 집중</b><span class="badge warn">확률 높음</span></div><div class="rk-q"><b>정량</b> 갭 조정 최대손실 −1.3254%p (100만 원 기준 13,254원). 정상 손절 시 −0.8836%p</div><div class="rk-e"><b>근거</b> 브렌트 장중 99.45달러·10년물 4.794%(2023년 10월 이후 최고). 9/10 PPI → 9/11 CPI → 9/15~16 FOMC가 보유기간(9/9~10/7) 첫 8일에 몰려 있다. 손절 주문은 갭다운을 막지 못한다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">2</span><b>MU 단일 종목에 다중 리스크가 중첩 — 보수 관점은 사실상 탈락표를 던졌다</b><span class="badge warn">확률 보통</span></div><div class="rk-q"><b>정량</b> ATR 4.37%(후보 최대) · 손절폭 −7.00%(기본 −5% 초과) · 갭 조정 최대손실 −10.50% · 배정 5%</div><div class="rk-e"><b>근거</b> 9/30 실적이 보유기간 내, 9/8 장중 1041.07 → 종가 1000.26 장대 음봉 반전, 52주 최고 1255.00 대비 −20.3% 수준. 리스크 3관점이 12%/5%/0%로 극단 분열됐다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">3</span><b>이틀 연속 지정가 미체결 — 진입가 설계 결함 재발 가능성</b><span class="badge warn">확률 보통</span></div><div class="rk-q"><b>정량</b> 직전 회차 MU 925.24 미체결 후 당일 +6.10% · 이번 회차 AMD 464.63 미체결 후 당일 +5.90%. 2회차 연속 미체결 종목이 모두 그날 급등</div><div class="rk-e"><b>근거</b> 2026-08 월간평가에서 성숙 코호트 체결률 34.4%(Amber 하한 40% 미달)가 Red 항목이었다. 4-2절 하드 상한 도입 후에도 상한 이내(괴리 +2~3%)에서 미체결이 반복되고 있어, 상한만으로는 해결되지 않는 구간이 있음을 시사한다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">4</span><b>강세 국면 판정과 시장 내부의 괴리</b><span class="badge warn">확률 보통</span></div><div class="rk-q"><b>정량</b> QQQ가 MA20을 +0.975포인트 상회해 강세. 같은 날 다우 −1.2% · S&amp;P500 −0.6% · 나스닥종합 −0.3%</div><div class="rk-e"><b>근거</b> 국면 판정 앵커가 QQQ 단일 지표이고 임계에서 1포인트 미만 차이로 갈린다. 직전 회차도 +1.449포인트 상회의 경계값이었다. 시장 폭 지표는 설계상 수집 금지라 교차 확인이 불가능하다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">5</span><b>승률 수준이 전적으로 상승장 표본과 강세 판정에 의존</b><span class="badge warn">확률 구조적</span></div><div class="rk-q"><b>정량</b> β_base 68.2%는 2026-07-24~08-27 성숙 32포지션(실현 승률 85.2%)에서 도출. 약세 판정 시 −16%p → 밴드 52~54%대로 하락</div><div class="rk-e"><b>근거</b> 손익분기승률(MU 36.84 · NVDA 29.34 · GILD 37.10%)을 대입하면 세 종목 기대값이 전부 정확히 0이 된다. 즉 기대값 +0.9019%p는 승률 가정에 100% 의존한다.</div></div></div>
+
+<h2>파이프라인 품질 기록 — 이번 실행에서 검출한 오류</h2>
+<table><thead><tr><th>검출자</th><th>내용</th><th>중대도</th></tr></thead><tbody><tr><td class="sub">애널리스트①</td><td class="rat">eps_revision 12종 중 6종(META·GOOGL·AMGN·AMZN·CSCO·AVGO) 확인 실패(null). 웹조사 상한 45회를 전량 소진하고도 미확보. 직전 회차는 12/12 전수 확보였으므로 명백한 후퇴다. 발행 게이트 WARN 1건의 원인.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">펀드매니저(메인)</td><td class="rat">★측정저항 우선순위 적용이 회차 간 불일치. 직전 회차는 MSFT 저항을 ②52주 최고(553.72)로 잡았으나, 4-3절 명문 우선순위는 ①직전 스윙 고점이다. 이번 회차는 ①(517.78)을 적용했고 그 결과 목표가 무효화돼 청산 판정으로 이어졌다. 같은 규칙의 해석이 회차마다 달라진 사례로 기록한다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">펀드매니저(메인)</td><td class="rat">4-3절 확장목표 (b)조건(3일 누적 +6% 미만)이 임계 근접에서 정반대로 작동. MU는 직전 회차 +6.04%로 0.04%p 차이 탈락, 이번 회차 +4.62%로 자격 회복. 규칙 자체는 의도대로 작동했으나 임계 근접 민감도가 높다는 사실을 기록한다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">애널리스트②</td><td class="rat">ADX(14) 12종 전수 확보 실패 — 3사이클 연속. stockanalysis 통계 페이지에 항목 자체가 없고 barchart는 상시 기각 대상이다. 4-3절의 &#x27;완전 정배열+ADX≥25면 라운드 넘버는 저항 아님&#x27; 조항이 3사이클째 적용 불가 상태다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">애널리스트②</td><td class="rat">직전 스윙 고점을 12종 전수에서 20일 고가로 대체. 3개월 정밀 스윙 고점을 텍스트 소스에서 추출하지 못해 예산 내 대체값을 사용했고, 52주 최고 이하임은 개별 확인했다. MSFT 청산 판정의 근거값(517.78)도 이 대체값이다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">메인 세션</td><td class="rat">VIX 확인 실패 — stockanalysis 인덱스 경로가 404를 반환. 직전 회차는 휴장일 타임스탬프 반환으로 잠정치였다. 2사이클 연속 확정 종가 미확보.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">발행 게이트</td><td class="rat">웹조사 총 84회(상한 200). 단계별: 시세·매크로·캘린더 25/60 · 애널리스트 2인 69/80 · 리서치+트레이더+리스크 8/40 · 펀드매니저 0/20. 전 단계 상한 준수, 사고 없음.</td><td><span class="badge warn">경미</span></td></tr></tbody></table>
+
+<h2>다음 사이클 개선 권고</h2>
+<table><thead><tr><th>우선순위</th><th>항목</th><th>상태</th></tr></thead><tbody><tr><td><span class="badge crit">최우선</span></td><td class="rat">★측정저항 우선순위(①직전 스윙 고점 → ②52주 최고)의 기계적 적용을 트레이더·펀드매니저 단계에 강제하고, 보유 중 종목의 목표가 유효 저항을 초과하면 발행 게이트가 자동 FAIL을 내도록 6-1절에 조항 추가. 이번 회차 MSFT에서 회차 간 해석 불일치가 실제로 발생했고, 그 차이가 &#x27;유지&#x27;와 &#x27;청산&#x27;을 갈랐다.</td><td class="sub">이월 5사이클 → ★해결안 도출(규정화 필요)</td></tr><tr><td><span class="badge crit">최우선</span></td><td class="rat">★진입 지정가 미체결이 2회차 연속 발생했고 두 번 다 해당 종목이 당일 5~6% 급등했다. 4-2절 하드 상한(종가×0.95)만으로는 부족하다 — 괴리 상한을 ATR 배수로 재정의(예: 진입가 ≥ 종가 − 0.5×ATR14)하는 안을 다음 월간평가에서 체결률 데이터와 함께 검토할 것.</td><td class="sub">신규·2회차 연속 발생</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">ADX 확보 경로 부재 — 3사이클 연속 12종 전수 null. stockanalysis 일별 OHLC로 +DM/−DM/TR을 14일 와일더 평활해 직접 계산하는 루틴을 애널리스트② 프롬프트에 내장할지 확정할 것(ATR을 이미 같은 방식으로 계산 중이므로 추가 웹조사 0회로 가능).</td><td class="sub">이월 3사이클</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">eps_revision 확보율이 12/12 → 6/12로 후퇴. 애널리스트① 웹조사 45회가 전부 소진됐으므로, 종목당 조회를 1회로 고정하는 표준 경로(예: stockanalysis forecast 페이지 단일 조회)를 지정해 12회 내에 전수 확보되도록 프롬프트를 표준화할 것.</td><td class="sub">신규(직전 해소분 재발)</td></tr><tr><td><span class="badge good">보통</span></td><td class="rat">국면 판정 앵커가 QQQ 단일 지표이고 2사이클 연속 MA20 대비 1.5포인트 이내 경계값에서 결정됐다. 승률 밴드가 8~16%p 움직이는 판정을 단일 지표의 소수점에 맡기는 구조이므로, 완충대(예: MA20 ±0.3% 이내는 직전 국면 유지) 도입을 검토할 것.</td><td class="sub">신규</td></tr></tbody></table>
+
+</div>
+</details>
+
+<div class="disc">
+<b>⚠ 투자 유의사항 (반드시 확인)</b>
+본 리포트는 TradingAgents 멀티에이전트 프레임워크를 이용한 <b>LLM 기반 분석 결과물이며, 투자 조언이 아닙니다.</b>
+기재된 승률·기대값·목표가는 모델의 추정치로 실현 수익을 전혀 보장하지 않으며,
+일부 수치는 공개 정보 기반 추정치가 포함되어 있습니다. 본 회차는 판별 3변수 중 eps_revision이 6종목에서 확인 실패(null)이며 ADX·VIX는 전량 미확보 상태입니다.
+최종 투자 판단과 그 결과에 대한 책임은 전적으로 투자자 본인에게 있습니다.
+</div>
+<div class="backfoot"><a href="../index.html#reports">← 리포트 목록으로 돌아가기</a></div>
+<div class="foot">TradingAgents (arXiv:2412.20138) 프레임워크 기반 · 경량판 v3 7역할 + 발행 게이트 ·
+데이터 기준 2026-09-08 미국장 마감</div>
+</div></body></html>
