@@ -1,0 +1,554 @@
+<!doctype html>
+<html lang="ko"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나스닥 멀티에이전트 추천 리포트 — 2026-09-14</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#f9f9f7;color:#0b0b0b;
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65}
+.wrap{max-width:1320px;margin:0 auto;padding:28px 22px 60px}
+a{color:inherit;text-decoration:none}
+.topbar{position:sticky;top:0;z-index:50;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);border-bottom:1px solid rgba(11,11,11,0.10)}
+.topbar-in{max-width:1320px;margin:0 auto;padding:0 22px;display:flex;align-items:center;
+ justify-content:space-between;gap:18px;height:60px}
+.brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;font-size:15.5px}
+.brand .logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.brand .logo img{width:100%;height:100%;object-fit:contain;display:block}
+.brand .logo .fallback{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.nav{display:flex;gap:4px;align-items:center}
+.nav a{font:inherit;font-size:13px;font-weight:700;color:#52514e;background:none;
+ border:1px solid transparent;padding:6px 15px;border-radius:99px;cursor:pointer;
+ display:inline-flex;align-items:center;gap:6px;
+ transition:background .15s,color .15s,border-color .15s}
+.nav a:hover{background:#f2f1ed;color:#0b0b0b}
+.nav a.back{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+.nav a.back:hover{background:#000;color:#fff}
+.backfoot{display:flex;justify-content:center;margin:38px 0 0}
+.backfoot a{display:inline-flex;align-items:center;gap:8px;font-size:13.5px;font-weight:700;
+ background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:99px;padding:10px 22px;
+ color:#52514e}
+.backfoot a:hover{background:#f2f1ed;color:#0b0b0b}
+h1{font-size:26px;margin:0 0 6px;letter-spacing:-.02em}
+h2{font-size:17px;margin:38px 0 14px;padding-bottom:8px;
+ border-bottom:2px solid #0b0b0b;letter-spacing:-.01em}
+h3{font-size:16px;margin:0}
+h4{font-size:12px;margin:0 0 8px;color:#52514e;text-transform:uppercase;letter-spacing:.06em}
+.hero{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;
+ padding:22px 24px;margin-bottom:22px}
+.hero .sub{color:#52514e;font-size:13px}
+.pill{display:inline-block;background:#2a78d6;color:#fff;font-size:11px;font-weight:700;
+ padding:3px 10px;border-radius:99px;margin-right:8px;letter-spacing:.03em}
+.pill.gray{background:#52514e}
+.macro{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}
+.mk{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:8px;
+ padding:6px 11px;font-size:12px}
+.mk b{color:#0b0b0b}.mk span{color:#898781}
+.tiles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:18px 0 8px}
+.tile{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:15px 17px}
+.t-l{font-size:11.5px;color:#898781;letter-spacing:.03em}
+.t-v{font-size:25px;font-weight:800;letter-spacing:-.03em;margin:4px 0 2px}
+.t-s{font-size:11px;color:#898781}
+.up{color:#006300}.dn{color:#d03b3b}.neutral{color:#0b0b0b}
+.panel{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:12px;padding:20px 22px}
+.panel p{margin:0 0 10px}
+.dualbox{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:12px}
+.dualbox>div{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:10px;padding:13px 15px;font-size:13px}
+.dualbox h4{margin-bottom:5px}
+table{width:100%;border-collapse:collapse;background:#fcfcfb;
+ border:1px solid rgba(11,11,11,0.10);border-radius:12px;overflow:hidden;font-size:12.6px}
+th{background:#f9f9f7;text-align:left;padding:9px 7px;font-size:10.5px;color:#52514e;
+ border-bottom:1px solid #c3c2b7;white-space:nowrap;letter-spacing:.03em}
+td{padding:9px 7px;border-bottom:1px solid #e1e0d9;vertical-align:middle}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+.rk{font-weight:800;color:#898781;text-align:center;width:26px}
+.tk{font-size:13.5px;letter-spacing:-.01em}
+.sub{font-size:11.5px;color:#898781}
+.badge{display:inline-flex;align-items:center;gap:4px;font-size:10.5px;font-weight:700;
+ padding:2px 8px;border-radius:99px;white-space:nowrap}
+.badge.good{background:#e8f7e8;color:#0a6b0a}
+.badge.warn{background:#fef4dd;color:#8a6100}
+.badge.crit{background:#fbe9e9;color:#a32020}
+.badge.sig{background:#2a78d6;color:#fff}
+.badge.sigc{background:#eda100;color:#3d2a00}
+.rrbar{display:flex;align-items:center;width:210px}
+.rr-l{width:100px;display:flex;justify-content:flex-end}
+.rr-r{width:100px}
+.rr-mid{width:1px;height:16px;background:#c3c2b7;
+ box-shadow:-2px 0 0 #fcfcfb,2px 0 0 #fcfcfb;z-index:1}
+.rr-fill{height:9px;display:block;border-radius:4px}
+.rr-fill.up{background:#2a78d6;border-radius:0 4px 4px 0}
+.rr-fill.dn{background:#e34948;border-radius:4px 0 0 4px}
+.cards{display:flex;flex-direction:column;gap:14px}
+.card{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;overflow:hidden;
+ break-inside:avoid;page-break-inside:avoid}
+.card-h{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:14px 20px;background:#f9f9f7;border-bottom:1px solid #e1e0d9}
+.ch-left{display:flex;align-items:center;gap:14px}
+.ch-right{display:flex;gap:7px;align-items:center}
+.rank{font-size:19px;font-weight:800;color:#2a78d6;min-width:64px}
+.meta{font-size:11.5px;color:#898781;margin-top:2px}
+.card-b{display:flex;gap:20px;padding:18px 20px;align-items:flex-start}
+.radar{flex:0 0 176px}
+.card-main{flex:1;min-width:0}
+.prices{display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin-bottom:13px}
+.pz{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:8px 10px}
+.pz span{display:block;font-size:10.5px;color:#898781}
+.pz b{font-size:15px;font-variant-numeric:tabular-nums;letter-spacing:-.02em}
+.pz i{display:block;font-size:11px;font-style:normal;font-weight:700}
+.pz.up b,.pz.up i{color:#006300}.pz.dn b,.pz.dn i{color:#d03b3b}
+.thesis{margin:0 0 10px;font-size:13.5px}
+.cat,.adj{font-size:12.5px;background:#f9f9f7;border-left:3px solid #eda100;
+ padding:7px 11px;border-radius:0 7px 7px 0;margin-top:7px}
+.adj{border-left-color:#4a3aa7}
+.cat b,.adj b{color:#52514e;margin-right:6px;font-size:11px}
+.card-f{display:grid;grid-template-columns:1.6fr 1fr;gap:20px;padding:15px 20px 18px;
+ border-top:1px solid #e1e0d9;background:#fdfdfc}
+.ch{display:flex;gap:9px;font-size:12.3px;padding:4px 0;border-bottom:1px dotted #e1e0d9}
+.ch:last-child{border-bottom:none}
+.ch-k{flex:0 0 78px;font-weight:700;color:#2a78d6;font-size:11.5px}
+.ch-v{color:#52514e}
+.risks ul{margin:0;padding-left:17px;font-size:12.3px;color:#52514e}
+.risks li{margin-bottom:5px}
+.srow{display:flex;align-items:center;gap:12px;padding:6px 0}
+.sname{flex:0 0 210px;font-size:13px}
+.sbar{flex:1;height:12px;background:#e1e0d9;border-radius:6px;overflow:hidden}
+.sbar i{display:block;height:100%;border-radius:6px}
+.spct{flex:0 0 52px;text-align:right;font-variant-numeric:tabular-nums;font-weight:700;font-size:13px}
+.anx{padding:13px 0;border-bottom:1px solid #e1e0d9}
+.anx:last-child{border-bottom:none}
+.anx p{margin:0;font-size:13px;color:#52514e}
+details.deb{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:11px;
+ margin-bottom:9px;overflow:hidden}
+details.deb>summary{padding:12px 18px;cursor:pointer;font-weight:700;font-size:13.5px;
+ background:#f9f9f7;list-style:none}
+details.deb.bull>summary{border-left:4px solid #2a78d6}
+details.deb.bear>summary{border-left:4px solid #e34948}
+details.deb[open]>summary{border-bottom:1px solid #e1e0d9}
+.thesis-p{padding:14px 18px 4px;margin:0;font-size:13px;color:#52514e;
+ background:#fdfdfc;border-bottom:1px solid #e1e0d9}
+.dbi{padding:11px 18px;border-bottom:1px dotted #e1e0d9;font-size:12.8px}
+.dbt{font-weight:800;margin-right:8px}
+.dbc{font-size:11px;color:#898781;background:#f9f9f7;padding:1px 8px;border-radius:99px}
+.dbi p{margin:6px 0 0}
+.rebut{color:#52514e;border-left:2px solid #c3c2b7;padding-left:9px;font-size:12.3px}
+table.mini{border:none;border-radius:0;font-size:12.3px}
+.rat{font-size:12.2px;color:#52514e}
+.flag{font-size:11.5px;color:#d03b3b;margin-top:3px}
+.rk-item{padding:12px 0;border-bottom:1px solid #e1e0d9}
+.rk-item:last-child{border-bottom:none}
+.rk-h{display:flex;align-items:center;gap:9px;font-size:13.5px}
+.rk-n{background:#e34948;color:#fff;font-weight:800;width:21px;height:21px;border-radius:50%;
+ display:inline-flex;align-items:center;justify-content:center;font-size:11.5px}
+.rk-q,.rk-e{font-size:12.4px;color:#52514e;margin-top:4px;padding-left:30px}
+.rk-q b,.rk-e b{color:#898781;font-size:11px;margin-right:6px}
+.disc{margin-top:34px;background:#fbe9e9;border:1px solid #f0c9c9;border-radius:11px;
+ padding:16px 19px;font-size:12.3px;color:#7d2020}
+.disc b{display:block;margin-bottom:6px;font-size:13px}
+.foot{margin-top:20px;font-size:11.5px;color:#898781;text-align:center}
+.flow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:12px;font-size:11.5px}
+.fl{background:#2a78d6;color:#fff;padding:4px 11px;border-radius:7px;font-weight:700}
+.fl.g{background:#52514e}
+.ar{color:#898781;font-weight:700}
+
+/* ═══ [일반] 파트 — 기본 노출 ═══ */
+.general{margin-bottom:26px}
+.gtop{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-left:5px solid #2a78d6;
+ border-radius:14px;padding:24px 26px;margin-bottom:16px}
+.gtag{display:inline-block;background:#2a78d6;color:#fff;font-size:11px;font-weight:800;
+ padding:4px 12px;border-radius:99px;letter-spacing:.04em;margin-bottom:12px}
+.gh1{font-size:23px;line-height:1.45;margin:0 0 12px;border:none;padding:0;letter-spacing:-.02em}
+.glead-top{font-size:16px;font-weight:700;line-height:1.7;margin:0 0 8px;letter-spacing:-.01em}
+.gsub{font-size:15px;color:#52514e;margin:0;line-height:1.75}
+.gchips{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.gchip{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:99px;
+ padding:4px 12px;font-size:12px;color:#52514e}
+.gsec{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:14px;
+ padding:20px 24px;margin-bottom:14px}
+.gsec h3{font-size:16.5px;margin:0 0 14px;letter-spacing:-.01em}
+.gsec.warn{background:#fffaf0;border-color:#f3e2c0}
+.gnote{font-size:14.5px;line-height:1.8;color:#52514e;margin:0}
+.gsmall{font-size:12px;color:#898781;margin:10px 0 0}
+.gcards{display:flex;flex-direction:column;gap:14px}
+.gcard{border:1px solid rgba(11,11,11,0.10);border-radius:12px;overflow:hidden;background:#f9f9f7}
+.gcard.buy{border-left:5px solid #2a78d6}
+.gcard.cancel{border-left:5px solid #e34948}
+.gcard.hold{border-left:5px solid #eda100}
+.gcard-h{display:flex;justify-content:space-between;align-items:center;gap:12px;
+ padding:14px 18px;background:#fcfcfb;border-bottom:1px solid #e1e0d9}
+.gtk{font-size:18px;font-weight:800;letter-spacing:-.02em;margin-right:9px}
+.gnm{font-size:14px;color:#52514e}
+.gbadge{background:#0b0b0b;color:#fff;font-size:12.5px;font-weight:800;
+ padding:6px 14px;border-radius:8px;white-space:nowrap}
+.gcard.cancel .gbadge{background:#d03b3b}
+.gcard.hold .gbadge{background:#eda100;color:#3d2a00}
+.glead{margin:0;padding:15px 18px 4px;font-size:15px;line-height:1.8}
+.gnums{display:grid;grid-template-columns:repeat(auto-fit,minmax(158px,1fr));
+ gap:9px;padding:13px 18px}
+.grow{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:10px 13px}
+.gk{display:block;font-size:11.5px;color:#898781;margin-bottom:3px}
+.gv{display:block;font-size:14.5px;font-weight:700;letter-spacing:-.01em}
+.gwhy,.gcare{padding:11px 18px;border-top:1px dotted #e1e0d9}
+.gwhy b,.gcare b{display:block;font-size:11.5px;color:#2a78d6;margin-bottom:5px;letter-spacing:.03em}
+.gcare b{color:#d03b3b}
+.gwhy p,.gcare p{margin:0;font-size:14px;line-height:1.8;color:#52514e}
+.gqa{padding:13px 0;border-bottom:1px dotted #e1e0d9}
+.gqa:last-child{border-bottom:none;padding-bottom:0}
+.gq{font-size:14.5px;font-weight:700;margin-bottom:6px}
+.gq::before{content:"Q. ";color:#2a78d6}
+.ga{font-size:14.5px;line-height:1.85;color:#52514e}
+.gtodo{margin:0;padding-left:22px;font-size:14.5px;line-height:1.9}
+.gtodo li{margin-bottom:7px}
+.glimit{margin:0;padding-left:20px;font-size:14px;line-height:1.85;color:#6b4a12}
+.glimit li{margin-bottom:8px}
+.gterms{display:grid;grid-template-columns:repeat(auto-fit,minmax(268px,1fr));gap:10px}
+.gterm{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:11px 14px}
+.gterm b{display:block;font-size:13.5px;margin-bottom:4px}
+.gterm span{font-size:13px;color:#52514e;line-height:1.7}
+.mbox{display:grid;grid-template-columns:repeat(auto-fit,minmax(192px,1fr));gap:10px}
+.mrow{background:#f9f9f7;border:1px solid rgba(11,11,11,0.10);border-radius:9px;padding:12px 14px;
+ display:flex;flex-direction:column;gap:4px}
+.mrow span{font-size:12px;color:#898781}
+.mrow b{font-size:16px;letter-spacing:-.02em}
+
+/* ═══ [전문가] 파트 — 기본 접힘 ═══ */
+details.expert{background:#fcfcfb;border:1px solid rgba(11,11,11,0.10);
+ border-radius:14px;overflow:hidden;margin-bottom:8px}
+details.expert>summary{list-style:none;cursor:pointer;padding:18px 24px;
+ display:flex;justify-content:space-between;align-items:center;gap:14px;
+ background:#0b0b0b;color:#fff}
+details.expert>summary::-webkit-details-marker{display:none}
+details.expert>summary:hover{background:#000}
+.ex-l b{font-size:15.5px;display:block;letter-spacing:-.01em}
+.ex-l i{font-style:normal;font-size:12px;opacity:.72;display:block;margin-top:3px}
+.ex-r{font-size:12.5px;font-weight:700;background:rgba(255,255,255,.16);
+ padding:7px 15px;border-radius:99px;white-space:nowrap}
+details.expert[open]>summary .ex-r::after{content:""}
+details.expert[open]>summary .ex-r{font-size:0}
+details.expert[open]>summary .ex-r::before{content:"접기 ▴";font-size:12.5px}
+.expert-body{padding:4px 24px 26px}
+.expert-body>h2:first-of-type{margin-top:26px}
+@media print{
+ body{background:#fff} .wrap{max-width:none;padding:0}
+ .topbar,.backfoot{display:none !important}
+ h2{page-break-after:avoid} .card{page-break-inside:avoid}
+ details.deb{page-break-inside:avoid} summary{list-style:none}
+ .tiles{page-break-inside:avoid}
+ .gcard,.gsec,.gterm,.mrow{page-break-inside:avoid}
+ details.expert{page-break-before:always;border:none}
+ details.expert>summary{background:#0b0b0b !important;-webkit-print-color-adjust:exact;
+  print-color-adjust:exact}
+ .ex-r{display:none}
+ .expert-body{padding:4px 0 0}
+}
+@media(max-width:900px){
+ .tiles{grid-template-columns:repeat(2,1fr)}
+ .card-b{flex-direction:column} .card-f{grid-template-columns:1fr}
+ .prices{grid-template-columns:repeat(3,1fr)} .dualbox{grid-template-columns:1fr}
+ .gtop{padding:20px} .gsec{padding:18px} .gh1{font-size:20px}
+ .expert-body{padding:4px 14px 22px}
+}
+@media(max-width:640px){
+ .topbar-in{height:56px;gap:10px;padding:0 14px}
+ .brand{font-size:13px;white-space:nowrap;gap:8px}
+ .brand .logo{width:26px;height:26px;flex:0 0 26px}
+ .brand span.full{display:none}
+ .nav a{font-size:12px;padding:6px 11px;white-space:nowrap}
+}
+@media(max-width:540px){
+ .brand span.txt{display:none}
+ .nav a{font-size:11.5px;padding:6px 9px}
+}
+</style></head><body>
+
+<div class="topbar">
+  <div class="topbar-in">
+    <a class="brand" href="../index.html">
+      <span class="logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="fallback"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="txt">데이터스테이션 나스닥<span class="full"> 분석 리포트</span></span>
+    </a>
+    <nav class="nav">
+      <a class="back" href="../index.html#reports" aria-label="리포트 목록으로 돌아가기">← 목록으로</a>
+      <a href="../index.html#about">시스템 개요</a>
+    </nav>
+  </div>
+</div>
+
+<div class="wrap">
+
+<div class="hero">
+  <span class="pill">TradingAgents 멀티에이전트</span>
+  <span class="pill gray">단기 스윙 · 공격형</span>
+  <h1>나스닥 종목 추천 리포트</h1>
+  <div class="sub">데이터 기준 <b>2026-09-14 미국장 정규장 마감 (4:00 PM EDT)</b> · 생성 2026-09-15 10:41 KST ·
+   유니버스 나스닥 시총 상위 200 → 후보 12 → 리서치 6 → 트레이더 3 → 배정 2</div>
+  <div class="flow">
+    <span class="fl">Ⅰ 애널리스트 2인</span><span class="ar">→</span><span class="fl">Ⅱ 리서치 2인</span><span class="ar">→</span><span class="fl">Ⅲ 트레이더</span><span class="ar">→</span><span class="fl">Ⅳ 리스크 3관점</span><span class="ar">→</span><span class="fl">Ⅴ 펀드매니저(Opus)</span><span class="ar">→</span><span class="fl g">Ⅵ 발행 게이트</span>
+  </div>
+  <div class="macro">
+    <div class="mk"><span>QQQ</span> <b>709.18 (−0.80%) · MA20 714.57·MA50 710.34·MA60 712.35 전부 하회</b></div><div class="mk"><span>국면</span> <b>약세 (β_base 68.2% → 52.2%)</b></div><div class="mk"><span>나스닥종합</span> <b>29,168.20 (−0.69%)</b></div><div class="mk"><span>S&amp;P500 / 다우</span> <b>7,621.54 (−0.46%) / 52,440.90 (−0.23%)</b></div><div class="mk"><span>10년물</span> <b>4.96% (장중 5.01% — 19년래 최고)</b></div><div class="mk"><span>2년물 / DXY</span> <b>4.68% / 99.45</b></div><div class="mk"><span>WTI</span> <b>$103.61 (+3.57%) — 사우디 송유관 피격</b></div><div class="mk"><span>VIX</span> <b>17.80 (+12.37%)</b></div><div class="mk"><span>★FOMC</span> <b>9/15~16 · 금리 인상 확률 86~88% (집행일 = FOMC 첫날)</b></div><div class="mk"><span>캘린더</span> <b>9/22 GOOGL 반독점 · 9/30 MU 실적 (보유기간 9/15~10/13 내)</b></div>
+  </div>
+</div>
+
+
+<div class="general">
+  <div class="gtop">
+    <span class="gtag">일반용</span>
+    <h2 class="gh1">오늘의 트레이딩 요약</h2>
+    <p class="glead-top">오늘 새로 사는 것 1건(마이크로소프트), 계속 들고 가는 것 1건(메타). 나머지 돈 90%는 현금으로 둡니다.</p>
+    <p class="gsub">지난주 주문 3건 중 마이크론은 손절로 팔렸고(−3.6%), 넷플릭스 주문은 값이 안 맞아 그냥 취소됐습니다. 메타만 살아남았습니다. 그리고 내일(9/15)부터 미국 중앙은행 회의가 열리는데 시장은 금리를 올릴 확률을 86~88%로 봅니다. 결과는 모레(9/16) 나옵니다. 그래서 오늘은 조금만 사고 대부분 현금으로 둡니다.</p>
+    <div class="gchips"><span class="gchip">새로 사는 것 1건</span><span class="gchip">계속 보유 1건</span><span class="gchip">현금 90%</span><span class="gchip">내일 FOMC</span><span class="gchip">금리 인상 확률 86~88%</span></div>
+  </div>
+
+  <section class="gsec"><h3>오늘의 추천</h3>
+    <div class="gcards">
+<div class="gcard buy">
+  <div class="gcard-h">
+    <div><span class="gtk">MSFT</span>
+      <span class="gnm">마이크로소프트 — 윈도우·오피스·클라우드(애저)·AI를 파는 회사</span></div>
+    <span class="gbadge">사기</span>
+  </div>
+  <p class="glead">오늘 문 닫은 값 그대로 삽니다. 12종목 중 주가 흐름이 가장 튼튼한 유일한 종목이라서, 100만 원 중 4만 원만 넣습니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">505.41달러</span></div><div class="grow"><span class="gk">얼마에 살까</span><span class="gv">505.41달러 (오늘 종가 그대로)</span></div><div class="grow"><span class="gk">지금보다 얼마나 싼가</span><span class="gv">0.0% — 안 싸게 삽니다. 지난 네 번 중 세 번은 &#x27;조금 싸게 사겠다&#x27;고 값을 낮춰 걸었다가 아예 못 샀습니다. 그래서 이번엔 그냥 지금 값에 삽니다.</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">564.20달러 (+11.6%)</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">480.14달러 (−5.0%)</span></div><div class="grow"><span class="gk">얼마나 살까</span><span class="gv">100만 원 중 4만 원 (4%)</span></div><div class="grow"><span class="gk">언제까지 들고 있나</span><span class="gv">늦어도 10월 13일</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 다섯 번 조금 넘게 (53%)</span></div><div class="grow"><span class="gk">주문이 걸릴 확률</span><span class="gv">열 번에 아홉 번 넘게 (95%)</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>주가가 20일·50일·200일 평균선 위에 다 있습니다. 쉽게 말해 짧게 봐도 길게 봐도 오르는 흐름이라는 뜻이고, 12종목 중 이런 종목은 4개뿐입니다. 게다가 시장 전체가 내린 날(나스닥 −0.69%)에 마이크로소프트는 +1.97% 올랐습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>내일부터 열리는 중앙은행 회의 결과가 모레 나옵니다. 금리를 올리면 주식은 대체로 내립니다. 즉 결과를 보기 하루 전에 사는 셈입니다. 손절선을 걸어두지만 나쁜 소식에 아침부터 확 빠지면 손절선보다 더 낮은 값에 팔릴 수 있습니다. ★그리고 이 종목은 &#x27;증권사들이 이익 전망을 올리고 있는지 내리고 있는지&#x27;를 끝내 확인하지 못했습니다. 모른다고 솔직히 적어둡니다. 또 목표 564.20달러는 1년 중 최고가(553.72달러)를 넘어서야 닿는 값입니다.</p></div>
+</div>
+<div class="gcard hold">
+  <div class="gcard-h">
+    <div><span class="gtk">META</span>
+      <span class="gnm">메타 플랫폼스 — 페이스북·인스타그램을 운영하는 회사</span></div>
+    <span class="gbadge">그대로 보유</span>
+  </div>
+  <p class="glead">지난주 647.22달러에 샀고 지금 665.60달러입니다. 2.84% 올라 있습니다. 아무것도 하지 않고 그대로 둡니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">665.60달러</span></div><div class="grow"><span class="gk">얼마에 살까</span><span class="gv">이미 샀습니다 (647.22달러)</span></div><div class="grow"><span class="gk">지금보다 얼마나 싼가</span><span class="gv">해당 없음 — 새로 사는 게 아닙니다</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">711.94달러 (산 값 대비 +10.0%)</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">614.86달러 (산 값 대비 −5.0%)</span></div><div class="grow"><span class="gk">얼마나 살까</span><span class="gv">100만 원 중 6만 원 (6%, 이미 들어가 있음)</span></div><div class="grow"><span class="gk">언제까지 들고 있나</span><span class="gv">늦어도 10월 7일</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 여섯 번 (60%)</span></div><div class="grow"><span class="gk">주문이 걸릴 확률</span><span class="gv">해당 없음 (이미 샀음)</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>12종목 중 최근 20일 성적이 가장 좋습니다. 시장 평균(QQQ)보다 15.83%p 더 올랐습니다. 팔 목표로 잡은 711.94달러 위로는 막히는 구간이 812.51달러까지 없어서, 목표까지 길이 비어 있습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>금리가 4.96%까지 올랐습니다(장중엔 19년 만의 최고치인 5.01%까지 갔습니다). 금리가 오르면 메타처럼 &#x27;미래 이익을 비싸게 쳐주는&#x27; 주식이 먼저 눌립니다. 이 종목도 증권사 이익 전망 방향을 확인하지 못했습니다.</p></div>
+</div>
+<div class="gcard cancel">
+  <div class="gcard-h">
+    <div><span class="gtk">MU</span>
+      <span class="gnm">마이크론 — 메모리 반도체를 만드는 회사</span></div>
+    <span class="gbadge">어제 주문 취소</span>
+  </div>
+  <p class="glead">손절선에 걸려 팔렸습니다. 997.00달러에 샀는데 960.97달러에 정리됐습니다. 3.6% 손실입니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">924.03달러 (오늘 하루만 −5.25%)</span></div><div class="grow"><span class="gk">얼마에 살까</span><span class="gv">사지 않습니다</span></div><div class="grow"><span class="gk">지금보다 얼마나 싼가</span><span class="gv">해당 없음</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">해당 없음</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">이미 팔렸습니다</span></div><div class="grow"><span class="gk">얼마나 살까</span><span class="gv">0원</span></div><div class="grow"><span class="gk">언제까지 들고 있나</span><span class="gv">종결</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">다시 산다면 열 번에 네 번 정도 (42%) — 그래서 사지 않습니다</span></div><div class="grow"><span class="gk">주문이 걸릴 확률</span><span class="gv">해당 없음</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>손절은 계획대로 작동했습니다. 손실을 3.6%에서 끊었고, 그 뒤로도 주가는 더 내려 지금은 924.03달러입니다. 안 팔았으면 −7.3%였습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>다시 사고 싶은 유혹이 생기는 자리입니다. 사지 않는 이유는 세 가지입니다 — 최근 3거래일 동안 10.09% 빠졌고, 20일·50일 평균선을 모두 밑돌고, 9월 30일에 실적 발표가 있어 결과에 따라 크게 뛰거나 크게 빠집니다.</p></div>
+</div>
+<div class="gcard cancel">
+  <div class="gcard-h">
+    <div><span class="gtk">GOOGL</span>
+      <span class="gnm">알파벳 — 구글·유튜브를 운영하는 회사</span></div>
+    <span class="gbadge">사지 않음</span>
+  </div>
+  <p class="glead">숫자만 보면 오늘 후보 중 가장 좋았는데(기대수익 세 종목 중 1위) 사지 않습니다. 위험 점검에서 셋 중 둘이 반대했기 때문입니다.</p>
+  <div class="gnums"><div class="grow"><span class="gk">지금 주가</span><span class="gv">349.39달러</span></div><div class="grow"><span class="gk">얼마에 살까</span><span class="gv">사지 않습니다 (설계값은 349.39달러였음)</span></div><div class="grow"><span class="gk">지금보다 얼마나 싼가</span><span class="gv">0.0%였습니다 (종가 그대로 살 계획이었음)</span></div><div class="grow"><span class="gk">얼마에 팔까</span><span class="gv">계획값 401.50달러였음</span></div><div class="grow"><span class="gk">언제 손절할까</span><span class="gv">계획값 331.92달러였음</span></div><div class="grow"><span class="gk">얼마나 살까</span><span class="gv">0원</span></div><div class="grow"><span class="gk">언제까지 들고 있나</span><span class="gv">해당 없음</span></div><div class="grow"><span class="gk">성공 확률 추정</span><span class="gv">열 번에 다섯 번 (50%)</span></div><div class="grow"><span class="gk">주문이 걸릴 확률</span><span class="gv">해당 없음</span></div></div>
+  <div class="gwhy"><b>왜 이 종목인가</b><p>주가 흐름은 좋았습니다(20일·50일·200일 평균선 위). 목표까지 막히는 구간도 넉넉했습니다.</p></div>
+  <div class="gcare"><b>주의할 점</b><p>9월 16일 금리 결정과 9월 22일 구글 반독점 관련 일정이 둘 다 보유 기간 안에 있습니다. 큰 이벤트가 두 개 겹칩니다. 게다가 최근 3거래일에 이미 5.67% 올라 단기 과열 구간입니다. 규칙상 위험 관점 세 개 중 두 개가 반대하면 &#x27;조금만 사기&#x27;로 타협하지 않고 아예 사지 않습니다.</p></div>
+</div></div>
+  </section>
+
+  <section class="gsec"><h3>어제 낸 주문은 어떻게 됐나요?</h3><div class="gnote">① 메타 — 647.22달러 지정가가 걸렸고 지금 665.60달러(+2.84%)입니다. 계속 들고 갑니다. ② 마이크론 — 9월 14일에 손절선 960.97달러에 걸려 팔렸습니다. −3.6%입니다. ③ 넷플릭스 — 75.50달러에 사겠다고 걸어뒀는데 그날 가장 싼 값이 76.15달러였습니다. 0.65달러 차이로 못 샀고, 규칙에 따라 그 주문은 그냥 취소됐습니다. ④ 지난주에 팔기로 했던 엔비디아(+1.14%)와 길리어드(−2.14%)는 9월 11일 아침에 정리됐습니다. ★네 번 중 세 번은 &#x27;조금 싸게 사겠다&#x27;고 값을 낮춰 걸었다가 아예 못 샀습니다. 그래서 이번엔 지금 값 그대로 사는 방식으로 바꿨습니다.</div></section>
+  <section class="gsec"><h3>100만 원이 있다면 어떻게 되나요?</h3><div class="mbox"><div class="mrow"><span>투자금 예시</span><b>100만 원</b></div><div class="mrow"><span>MSFT에 넣는 돈</span><b>40,000원 (새로 삼)</b></div><div class="mrow"><span>META에 넣는 돈</span><b>60,000원 (이미 들어가 있음)</b></div><div class="mrow"><span>현금으로 두는 돈</span><b>900,000원</b></div><div class="mrow"><span>목표 달성 시</span><b>+10,653원</b></div><div class="mrow"><span>손절 시</span><b>−5,000원 (금리 결정 충격으로 벌어지면 −8,000원)</b></div><div class="mrow"><span>주문이 안 걸릴 확률</span><b>약 5% (이번엔 종가 그대로 사므로 거의 걸립니다)</b></div></div><p class="gsmall">※ 100만 원은 이해를 돕기 위한 예시 금액입니다. 실제 투자 금액과 무관하며, 비율만 같습니다.</p></section>
+
+  <section class="gsec"><h3>오늘 시장에 무슨 일이 있었나요?</h3><div class="gqa"><div class="gq">오늘 시장은 왜 내렸나요?</div><div class="ga">AI 회사 경영진들이 &#x27;AI 발전 속도를 좀 늦춰야 한다&#x27;고 경고한 데다 오픈AI 상장이 미뤄진다는 이야기가 돌면서 기술주가 밀렸습니다. 나스닥이 0.69% 내렸습니다.</div></div><div class="gqa"><div class="gq">내일 뭐가 있나요?</div><div class="ga">미국 중앙은행(연준) 회의가 9월 15~16일 열립니다. 시장은 금리를 올릴 확률을 86~88%로 봅니다. 결과는 9월 16일에 나옵니다. 금리가 오르면 주식은 대체로 내립니다.</div></div><div class="gqa"><div class="gq">기름값과 금리는요?</div><div class="ga">사우디 송유관이 공격받아 기름값이 하루에 3.57% 올랐습니다(103.61달러). 미국 10년 만기 국채 금리는 4.96%인데, 장중에는 19년 만의 최고치인 5.01%까지 갔습니다. 둘 다 주식에는 부담입니다.</div></div><div class="gqa"><div class="gq">왜 90%나 현금으로 두나요?</div><div class="ga">이 시스템은 &#x27;조건에 맞는 종목이 적으면 억지로 채우지 않는다&#x27;는 규칙을 씁니다. 오늘 12종목 중 규칙을 전부 통과한 건 2개뿐이었고, 그중 하나는 위험 점검에서 걸러졌습니다.</div></div><div class="gqa"><div class="gq">성공 확률 50~60%는 믿을 만한가요?</div><div class="ga">★조심해서 보셔야 합니다. 이 확률이 높아 보이는 건 지난 한 달 실제 성적(열 번에 여덟 번 반 성공)을 그대로 반영했기 때문인데, 그 한 달은 시장이 계속 오르기만 한 기간이었습니다. 내리는 장이 섞이면 이 숫자는 내려갑니다. 이번엔 시장이 약해져서 이미 16%포인트를 깎은 값입니다.</div></div></section>
+
+  <section class="gsec"><h3>내일 무엇을 하면 되나요?</h3>
+    <ol class="gtodo"><li>① 9월 15일(화) 장 시작 전 — 마이크로소프트 매수 주문을 넣을지 결정합니다. 사기로 했다면 시장가 또는 505.41달러 지정가.</li><li>② 마이크로소프트가 시가 515.52달러(+2%)보다 높게 출발하면 사지 않습니다. 너무 비싸게 사는 것이기 때문입니다.</li><li>③ 샀다면 그 자리에서 480.14달러 손절 주문을 함께 걸어둡니다.</li><li>④ 메타는 아무것도 하지 않습니다. 손절 614.86달러만 그대로 두고, 711.94달러에 닿으면 절반 팝니다.</li><li>⑤ 9월 16일(수) 금리 결정 발표 — 이날 아침에 주가가 크게 빠질 수 있습니다. 미리 알고 계세요.</li><li>⑥ 마이크론·넷플릭스·엔비디아·길리어드는 전부 정리됐습니다. 다시 주문을 넣지 않습니다.</li></ol></section>
+
+  <section class="gsec warn"><h3>솔직하게 말하면 — 이 추천의 한계</h3>
+    <ul class="glimit"><li>★오늘 사는 두 종목(마이크로소프트·메타) 모두 &#x27;증권사들이 이익 전망을 올리는 중인지 내리는 중인지&#x27;를 확인하지 못했습니다. 12종목 중 6종목이 확인 실패입니다. 모른다고 그대로 적어둡니다.</li><li>★성공 확률 53%가 기준선(68.2%)에서 15%포인트나 떨어져 있어 설명이 필요한 항목으로 걸렸습니다. 이유는 시장이 약세로 판정돼 16%포인트를 깎았기 때문입니다. 규칙대로 나온 값이지 임의로 낮춘 게 아닙니다.</li><li>★추세 강도를 재는 지표(ADX)는 12종목 전부 확인 실패했습니다. 자료 날짜가 오늘과 맞지 않아 전부 버렸습니다.</li><li>마이크론이 정확히 얼마에 팔렸는지는 9월 14일 시가를 확인하지 못해 확정하지 못했습니다. 손절선(960.97달러)에 팔렸다고 계산했지만, 아침부터 확 빠졌다면 더 싸게 팔렸을 수 있습니다.</li><li>마이크로소프트 목표가 564.20달러는 1년 중 최고가(553.72달러)를 넘어야 닿습니다. 시장이 약한 지금 신고가를 뚫기는 쉽지 않습니다.</li><li>성공 확률 50~60%가 높아 보이는 건 모형이 좋아져서가 아니라 지난 한 달 성적을 반영했기 때문이고, 그 한 달은 일방적인 상승장이었습니다. 내리는 장이 섞이면 이 숫자는 내려갑니다.</li><li>이 리포트는 AI가 만든 분석이며 투자 조언이 아닙니다. 확률과 기대값은 추정치일 뿐 실제 수익을 보장하지 않습니다. 최종 판단과 그 결과의 책임은 전적으로 이용자에게 있습니다.</li></ul></section>
+
+  <section class="gsec"><h3>용어 사전</h3>
+    <div class="gterms"><div class="gterm"><b>지정가 주문</b><span>&#x27;이 값이 되면 사겠다&#x27;고 미리 걸어두는 주문입니다. 값이 안 오면 안 사집니다. 지난주 넷플릭스를 75.50달러에 걸었는데 그날 가장 싼 값이 76.15달러여서 0.65달러 차이로 못 샀습니다.</span></div><div class="gterm"><b>종가 진입</b><span>&#x27;그냥 지금 값에 사겠다&#x27;는 뜻입니다. 오늘 마이크로소프트를 505.41달러(오늘 문 닫은 값)에 사는 방식입니다. 싸게 못 사는 대신 거의 확실히 사집니다.</span></div><div class="gterm"><b>손절</b><span>손실이 정해진 선을 넘으면 자동으로 파는 것입니다. 마이크로소프트는 480.14달러(−5%)입니다. 지난주 마이크론이 실제로 이 방식으로 −3.6%에서 정리됐습니다.</span></div><div class="gterm"><b>이동평균선 (20일·50일·200일)</b><span>최근 20일/50일/200일 주가의 평균입니다. 지금 주가가 이 셋 위에 다 있으면 &#x27;짧게 봐도 길게 봐도 오르는 흐름&#x27;이라고 봅니다. 오늘 12종목 중 4개(메타·구글·마이크로소프트·애플)가 그렇습니다.</span></div><div class="gterm"><b>기대값</b><span>&#x27;성공 확률 × 벌 금액 + 실패 확률 × 잃을 금액&#x27;입니다. 마이크로소프트는 0.532×11.63% + 0.468×(−5%) = +3.85%입니다. 플러스여야 살 자격이 생깁니다.</span></div><div class="gterm"><b>손익분기 승률</b><span>본전만 하려면 열 번에 몇 번 맞아야 하는지입니다. 마이크로소프트는 30.1%, 메타는 33.3%입니다. 추정 성공 확률(53%·60%)이 이보다 높아야 의미가 있습니다.</span></div><div class="gterm"><b>FOMC</b><span>미국 중앙은행의 금리 결정 회의입니다. 9월 15~16일에 열리고 결과는 16일에 나옵니다. 지금 시장은 금리를 올릴 확률을 86~88%로 봅니다.</span></div></div></section>
+</div>
+
+<details class="expert">
+<summary class="expert-sum">
+  <span class="ex-l"><b>전문가용 상세 리포트</b>
+    <i>7역할 에이전트 원문 · 등급표 전수 · 산식 검증 · 리스크 3관점 · 품질 기록</i></span>
+  <span class="ex-r">펼치기 ▾</span>
+</summary>
+<div class="expert-body">
+
+<div class="tiles"><div class="tile"><div class="t-l">비중가중 예상수익률</div><div class="t-v up">+1.1%</div><div class="t-s">목표가 전량 도달 가정</div></div><div class="tile"><div class="t-l">비중가중 기대값</div><div class="t-v neutral">+0.4%</div><div class="t-s">승률 반영 (알파 주장 없음)</div></div><div class="tile"><div class="t-l">최대손실 (정상 / 갭조정)</div><div class="t-v dn">0.0% / 0.0%</div><div class="t-s">전 종목 손절 동시 발동</div></div><div class="tile"><div class="t-l">투자비중 / 현금</div><div class="t-v neutral">10% / 90%</div><div class="t-s">유효 베팅수 1.92</div></div></div>
+
+<h2>펀드매니저 총평</h2>
+<div class="panel">
+  <p>신규 1건 / 보유유지 1건 / 청산 1건 / 미발주 1건 / 관망 8건. MSFT 4%(종가 505.41 신규) · META 6%(647.22 보유유지) · 현금 90%. ★직전 지시 3건 중 MU는 손절 발동(−3.614%), NFLX 지정가는 4사이클 중 3번째 미체결로 자동 종결, META만 살아남았다. ★종합 2위 GOOGL은 좌표 8개 전항을 통과하고 기대값이 3종 최고(+4.997%)였으나 리스크 2관점이 하한 미만을 권고해 4-4절에 따라 절충 없이 전량 미진입했다.</p>
+  <h4 style="margin-top:16px">시장 국면 진단</h4>
+  <p>국면 약세 — QQQ 709.18이 MA20(714.57)·MA50(710.34)·MA60(712.35)을 전부 하회했다. 직전 회차에 이어 2회 연속 약세이며, 이번엔 MA50까지 내려앉아 경계값 잡음이 아니다. β_base 68.2%에서 −16%p를 차감해 기준선은 52.2%다. ★그러나 이번 회차를 지배한 것은 국면이 아니라 캘린더다. 집행일 9/15(화)는 FOMC 첫날이고 시장 반영 금리 *인상* 확률이 86~88%이며, 결과는 9/16(수)에 나온다. 즉 모든 신규 진입은 바이너리 이벤트 하루 전 진입이다. 여기에 10년물 4.96%(장중 5.01%, 19년래 최고), WTI +3.57%(사우디 송유관 피격), VIX +12.37%가 겹친다.</p>
+  <h4 style="margin-top:16px">두 결과 병기 — 승률 가정의 규범적 지위</h4>
+  <div class="dualbox">
+    <div><h4>파이프라인 확정 승률 적용 (META 60.2% · MSFT 53.2%)</h4>비중가중 기대값 +0.3957%p. 목표 전량 도달 시 +1.0653%p, 전량 손절 시 −0.5000%p.</div>
+    <div><h4>무드리프트 귀무가설 (승률 = 손익분기승률)</h4>META 33.333% · MSFT 30.062%를 대입하면 두 건의 기대값이 정확히 0이 된다. 즉 이 포트폴리오의 기대 알파 전부가 &#x27;승률 추정이 손익분기보다 높다&#x27;는 가정 하나에 실려 있고, 그 승률의 기저율(85.2%)은 일방적 상승장 표본에서 나왔다.</div>
+  </div>
+  <p style="margin-top:12px">손절은 갭다운을 막지 못한다. FOMC 결과가 나오는 9/16 개장 갭을 −8%(손절 규정 최대폭)로 가정하면 포트폴리오 최대손실은 −0.5000%p에서 −0.8000%p(100만 원 기준 8,000원)로 확대된다. 배정을 10%로 묶은 1차 근거가 이것이다.</p>
+</div>
+
+<h2>최종 승인 등급표 — 후보 12종목 전수</h2>
+<table>
+<thead><tr>
+<th>#</th><th>종목</th><th>섹터</th><th>승인 등급</th><th>명문규칙</th><th class="n">진입</th><th class="n">목표</th><th class="n">손절</th>
+<th class="n">예상수익</th><th class="n">손실</th><th class="n">손익비</th><th class="n">손절÷ATR</th><th class="n">승률</th>
+<th class="n">손익분기</th><th class="n">기대값</th><th class="n">비중</th><th>손실 ← → 수익</th>
+</tr></thead><tbody><tr><td class="rk">1</td><td><b class="tk">META</b><div class="sub">메타 플랫폼스</div></td><td class="sub">인터넷/미디어</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과 · 확장목표 자격 O(완전정배열·3일 +1.82%) · 목표 711.94 ≤ 유효저항 812.51</span></td><td class="n">$647.22</td><td class="n up">$711.94</td><td class="n dn">$614.86</td><td class="n up"><b>+10.0%</b></td><td class="n dn">-5.0%</td><td class="n">2.00</td><td class="n">1.49</td><td class="n">60%</td><td class="n">33.3%</td><td class="n up"><b>+4.0%</b></td><td class="n"><b>6.0%</b></td><td class="bar"><div class="rrbar" title="목표 +10.0% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:39.6px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:79.1px"></span></div></div></td></tr><tr><td class="rk">2</td><td><b class="tk">GOOGL</b><div class="sub">알파벳 A</div></td><td class="sub">인터넷/미디어</td><td><span class="badge crit">탈락</span></td><td><span class="badge good">좌표 8개 전항 통과(R/R 2.983·EV +4.997%·손÷ATR 2.334) — ★4-4절 하한충돌로 미진입</span></td><td class="n">$349.39</td><td class="n up">$401.50</td><td class="n dn">$331.92</td><td class="n up"><b>+14.9%</b></td><td class="n dn">-5.0%</td><td class="n">2.98</td><td class="n">2.33</td><td class="n">50%</td><td class="n">25.1%</td><td class="n up"><b>+5.0%</b></td><td class="n"><b>0.0%</b></td><td class="bar"><div class="rrbar" title="목표 +14.9% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:39.6px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:118.0px"></span></div></div></td></tr><tr><td class="rk">3</td><td><b class="tk">MSFT</b><div class="sub">마이크로소프트</div></td><td class="sub">소프트웨어</td><td><span class="badge sig">매수 승인</span></td><td><span class="badge good">통과(8개 전항) · 완전정배열 유일 지속 · 확장목표 적용(564.20 = 52주최고 553.72 + ATR 10.48)</span></td><td class="n">$505.41</td><td class="n up">$564.20</td><td class="n dn">$480.14</td><td class="n up"><b>+11.6%</b></td><td class="n dn">-5.0%</td><td class="n">2.33</td><td class="n">2.41</td><td class="n">53%</td><td class="n">30.1%</td><td class="n up"><b>+3.9%</b></td><td class="n"><b>4.0%</b></td><td class="bar"><div class="rrbar" title="목표 +11.6% / 손절 -5.0%"><div class="rr-l"><span class="rr-fill dn" style="width:39.6px"></span></div><div class="rr-mid"></div><div class="rr-r"><span class="rr-fill up" style="width:92.0px"></span></div></div></td></tr><tr><td class="rk">4</td><td><b class="tk">GILD</b><div class="sub">길리어드 사이언시스</div></td><td class="sub">바이오/제약</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">유효저항 152.55(스윙고점)까지 여력 +4.19% &lt; 5% → 강등 · MA20(146.65) 하회로 확장목표 자격 없음</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">5</td><td><b class="tk">MU</b><div class="sub">마이크론 테크놀로지</div></td><td class="sub">반도체</td><td><span class="badge crit">청산</span></td><td><span class="badge warn">★9/14 저가 902.60 &lt; 손절 960.97 → 손절 발동 청산(실현 −3.614%)</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">6</td><td><b class="tk">AMZN</b><div class="sub">아마존닷컴</div></td><td class="sub">인터넷/커머스</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">유효저항 257.59(스윙고점)까지 여력 +1.60% &lt; 5% → 강등 · MA20·MA50 하회</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">7</td><td><b class="tk">AAPL</b><div class="sub">애플</div></td><td class="sub">하드웨어</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">유효저항 336.22까지 여력 +0.94% &lt; 5% → 강등 · 목표주가 상승여력 −2.61%(12종 유일 마이너스)</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">8</td><td><b class="tk">NVDA</b><div class="sub">엔비디아</div></td><td class="sub">반도체</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">MA20·MA50 하회 · mom_20d −6.31 · rs −3.32%p</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">9</td><td><b class="tk">NFLX</b><div class="sub">넷플릭스</div></td><td class="sub">인터넷/미디어</td><td><span class="badge crit">미발주</span></td><td><span class="badge warn">★지정가 75.50 미체결(9/11 저가 76.15, $0.65=ATR의 0.29배 차이) → 4-2절 자동 종결·재설계 금지</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">10</td><td><b class="tk">AMD</b><div class="sub">어드밴스드 마이크로 디바이시스</div></td><td class="sub">반도체</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">MA50(496.06) 하회로 정배열 붕괴 · 3일누적 −5.32% · 당일 −4.40%</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">11</td><td><b class="tk">PLTR</b><div class="sub">팔란티어 테크놀로지스</div></td><td class="sub">소프트웨어</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">MA20(175.52) 하회 · mom_20d −0.42 · 펀더멘털 47(12종 최저, forward PER 88배)</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr><tr><td class="rk">12</td><td><b class="tk">AVGO</b><div class="sub">브로드컴</div></td><td class="sub">반도체</td><td><span class="badge warn">관망</span></td><td><span class="badge warn">역배열(MA20·MA50·MA200 전부 하회) · mom_20d −12.29·rs −9.30%p 12종 최하위 · RSI 34.32</span></td><td class="n sub" colspan="10">설계 없음 — 리서치·규칙 검정 단계에서 배제</td><td class="n"><b>0.0%</b></td><td class="bar"></td></tr></tbody></table>
+
+<h2>배정·조건부 종목 상세</h2>
+<div class="cards">
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">META</span>
+      <div>
+        <h3>메타 플랫폼스</h3>
+        <div class="meta">인터넷/미디어 · 비중 6.0% · 통과 · 확장목표 자격 O(완전정배열·3일 +1.82%) · 목표 711.94 ≤ 유효저항 812.51</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> 중간</span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="61.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 50점</title></circle><circle cx="113.7" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 50점</title></circle><circle cx="103.9" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 50점</title></circle><circle cx="72.1" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 50점</title></circle><circle cx="62.3" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 50점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$647.22</b></div>
+        <div class="pz up"><span>목표</span><b>$711.94</b><i>+10.0%</i></div>
+        <div class="pz dn"><span>손절</span><b>$614.86</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>2.00</b><i>1.49</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>60%</b><i>33.3%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+4.0%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      <div class="adj"><b>집행 조건</b> 리스크 3관점 전부 하한 이상(8/6/4%) → 4-4절 &#x27;유지&#x27;. 중립 관점 6% 채택.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">GOOGL</span>
+      <div>
+        <h3>알파벳 A</h3>
+        <div class="meta">인터넷/미디어 · 비중 0.0% · 좌표 8개 전항 통과(R/R 2.983·EV +4.997%·손÷ATR 2.334) — ★4-4절 하한충돌로 미진입</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> 낮음</span>
+      <span class="badge crit">탈락</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="61.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 50점</title></circle><circle cx="113.7" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 50점</title></circle><circle cx="103.9" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 50점</title></circle><circle cx="72.1" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 50점</title></circle><circle cx="62.3" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 50점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$349.39</b></div>
+        <div class="pz up"><span>목표</span><b>$401.50</b><i>+14.9%</i></div>
+        <div class="pz dn"><span>손절</span><b>$331.92</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>2.98</b><i>2.33</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>50%</b><i>25.1%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+5.0%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      <div class="adj"><b>집행 조건</b> ★설계 4-4절: 리스크 2관점(중립 0%·보수 0%)이 하한 4% 미만 권고 → 절충 없이 전량 미진입. 사유: 9/22 반독점+9/16 FOMC 이중 바이너리, 3일누적 +5.67%(확장문턱 6% 근접), mom_20d +1.01로 진출 6종 최저.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article>
+<article class="card">
+  <header class="card-h">
+    <div class="ch-left">
+      <span class="rank">MSFT</span>
+      <div>
+        <h3>마이크로소프트</h3>
+        <div class="meta">소프트웨어 · 비중 4.0% · 통과(8개 전항) · 완전정배열 유일 지속 · 확장목표 적용(564.20 = 52주최고 553.72 + ATR 10.48)</div>
+      </div>
+    </div>
+    <div class="ch-right"><span class="badge warn"><b>★</b> 중간</span>
+      <span class="badge sig">매수 승인</span></div>
+  </header>
+  <div class="card-b">
+    <div class="radar"><svg viewBox="0 0 176 176" width="176" height="176" role="img" aria-label="에이전트 5축 점수 레이더"><polygon points="88.0,74.5 100.8,83.8 95.9,98.9 80.1,98.9 75.2,83.8" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,47.5 126.5,75.5 111.8,120.8 64.2,120.8 49.5,75.5" fill="none" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,34.0 139.4,71.3 119.7,131.7 56.3,131.7 36.6,71.3" fill="none" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="88.0" y2="34.0" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="139.4" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="119.7" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="56.3" y2="131.7" stroke="#e1e0d9" stroke-width="1"/><line x1="88.0" y1="88.0" x2="36.6" y2="71.3" stroke="#e1e0d9" stroke-width="1"/><polygon points="88.0,61.0 113.7,79.7 103.9,109.8 72.1,109.8 62.3,79.7" fill="#2a78d6" fill-opacity="0.20" stroke="#2a78d6" stroke-width="2" stroke-linejoin="round"/><circle cx="88.0" cy="61.0" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>테크니컬: 50점</title></circle><circle cx="113.7" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>센티먼트: 50점</title></circle><circle cx="103.9" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>뉴스: 50점</title></circle><circle cx="72.1" cy="109.8" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>펀더멘털: 50점</title></circle><circle cx="62.3" cy="79.7" r="3.5" fill="#2a78d6" stroke="#fcfcfb" stroke-width="2"><title>리서치: 50점</title></circle><text x="88.0" y="18.0" text-anchor="middle" font-size="10" fill="#52514e">테크니컬</text><text x="88.0" y="29.0" text-anchor="middle" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="157.4" y="68.4" text-anchor="start" font-size="10" fill="#52514e">센티먼트</text><text x="157.4" y="79.4" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="130.9" y="150.1" text-anchor="start" font-size="10" fill="#52514e">뉴스</text><text x="130.9" y="161.1" text-anchor="start" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="45.1" y="150.1" text-anchor="end" font-size="10" fill="#52514e">펀더멘털</text><text x="45.1" y="161.1" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text><text x="18.6" y="68.4" text-anchor="end" font-size="10" fill="#52514e">리서치</text><text x="18.6" y="79.4" text-anchor="end" font-size="9.5" font-weight="700" fill="#898781">50</text></svg></div>
+    <div class="card-main">
+      <div class="prices">
+        <div class="pz"><span>진입(지정가)</span><b>$505.41</b></div>
+        <div class="pz up"><span>목표</span><b>$564.20</b><i>+11.6%</i></div>
+        <div class="pz dn"><span>손절</span><b>$480.14</b><i>-5.0%</i></div>
+        <div class="pz"><span>손익비 / 손절÷ATR</span><b>2.33</b><i>2.41</i></div>
+        <div class="pz"><span>승률 / 손익분기</span><b>53%</b><i>30.1%</i></div>
+        <div class="pz"><span>기대값</span><b class="up">+3.8%</b></div>
+      </div>
+      <p class="thesis"></p>
+      <div class="cat"><b>진입 근거</b> </div>
+      <div class="adj"><b>집행 조건</b> 리스크 1관점(보수 0%)만 하한 미만 → 4-4절 &#x27;4% 절충&#x27;. 반대 논거: FOMC 결과 전날 신규 진입이며 약세 국면이라 자본보전 우선. 공격 9%·중립 6% 대비 축소 배정.</div>
+    </div>
+  </div>
+  <div class="card-f">
+    <div class="chain"><h4>에이전트 근거 체인</h4></div>
+    <div class="risks"><h4>핵심 리스크</h4><ul></ul></div>
+  </div>
+</article></div>
+
+<h2>집행 지침</h2>
+<table><thead><tr><th>티커</th><th class="n">지정가</th><th class="n">체결 하한</th><th>주문 취소일</th>
+<th>축소 규칙</th><th>강제 청산</th><th>진입 근거</th></tr></thead><tbody><tr><td><b>MSFT</b></td><td class="n">$505.41</td><td class="n">$480.14</td><td class="sub">2026-09-15 종가 미체결 시 종결</td><td class="sub">체결 즉시 손절 480.14 동시 설정. 시가가 515.52(+2%) 초과 갭업 시 진입 포기.</td><td class="sub">2026-10-13</td><td class="rat">종가 진입(괴리 0.00%). 4사이클 중 3회 미체결 이력에 따라 저가 지정가를 포기하고 체결확률 95%를 택했다.</td></tr><tr><td><b>META</b></td><td class="n">$647.22</td><td class="n">$614.86</td><td class="sub">해당 없음(기체결 보유)</td><td class="sub">무조치. 손절 614.86 유지. 목표 711.94 도달 시 절반 익절.</td><td class="sub">2026-10-07</td><td class="rat">9/10 지정가 647.22 체결분 보유 유지. 평가손익 +2.84%. 목표 711.94는 유효저항 812.51 이내로 좌표 유효.</td></tr><tr><td><b>MU</b></td><td class="n">$960.97</td><td class="n">$960.97</td><td class="sub">2026-09-14 손절 체결 — 종결</td><td class="sub">청산 완료. 재진입 금지(이번 회차 관망).</td><td class="sub">종결</td><td class="rat">9/14 저가 902.60이 손절 960.97을 관통. 실현 −3.614%. 9/14 시가 미확인이라 갭다운 시 체결가가 더 낮을 수 있다.</td></tr><tr><td><b>NFLX</b></td><td class="n">$75.50</td><td class="n">$75.50</td><td class="sub">2026-09-11 미체결 — 자동 종결</td><td class="sub">4-2절에 따라 재설계 금지. 이번 회차 미발주.</td><td class="sub">종결</td><td class="rat">9/11 저가 76.15로 $0.65(ATR의 0.29배) 차이 미체결. 괴리가 +0.68%에 불과했는데도 비껴갔다.</td></tr></tbody></table>
+
+<h2>포트폴리오 섹터 배분</h2>
+<div class="panel"><div class="srow"><span class="sname">인터넷/미디어</span><span class="sbar"><i style="width:6.7%;background:#3987e5"></i></span><span class="spct">6.0%</span></div><div class="srow"><span class="sname">소프트웨어</span><span class="sbar"><i style="width:4.4%;background:#2a78d6"></i></span><span class="spct">4.0%</span></div><div class="srow"><span class="sname">반도체</span><span class="sbar"><i style="width:0.0%;background:#256abf"></i></span><span class="spct">0.0%</span></div><div class="srow"><span class="sname">현금</span><span class="sbar"><i style="width:100.0%;background:#1c5cab"></i></span><span class="spct">90.0%</span></div></div>
+
+<h2>Ⅰ. 애널리스트 — 4축 시장 진단</h2>
+<div class="panel"><div class="anx"><h4>① 펀더멘털 + 뉴스 (40%)</h4><p>eps_revision 실측을 6/12까지 끌어올렸다(AMD +1 · MU 0 · NVDA +1 · NFLX −1 · AMZN +1 · AVGO +1, 30일 상향/하향 애널리스트 수 실측). 직전 회차의 전수 null보다는 나아졌으나 META·MSFT·AAPL·GOOGL·GILD·PLTR 6종은 소스 차단으로 여전히 null이고, ★배정된 2종(META·MSFT)이 모두 null이라는 점이 이번 회차 판별력의 최대 공백이다. 추론 대체는 하지 않았다. 보유기간(9/15~10/13) 내 실적 이벤트는 MU 9/30 하나뿐이며 나머지는 전부 10/20 이후다. 펀더멘털 최고 NVDA(85, forward PER 17.5배)·최저 PLTR(47, forward PER 88배).</p></div><div class="anx"><h4>② 테크니컬 + 센티먼트 (60%)</h4><p>★MA200을 12/12 전수 확보해 3사이클 만에 완전 정배열 판정이 가능해졌다. 다만 애널리스트가 기재한 &#x27;완전정배열 MSFT 1종&#x27;은 오류였고, 메인 세션이 확보된 MA200 실측치로 재계산한 결과 META·GOOGL·MSFT·AAPL 4종이 충족한다 — 4-3절 확장목표 자격이 걸린 판정이라 정정했다. ADX는 12/12 확보 실패(전 소스 세션 날짜 스테일로 기각) → 라운드 넘버 예외를 적용하지 못했다. 테크니컬 최고 META(86) · 최저 AVGO(20, 역배열·RS −9.30%p). 센티먼트 최고 NVDA(92, 상승여력 +55.3%) · 최저 AAPL(25, 상승여력 −2.61%로 12종 유일 마이너스).</p></div></div>
+
+<h2>Ⅱ. 리서치 — Bull vs Bear 변증 공방</h2>
+
+<h2 style="font-size:15px;border-bottom-width:1px">Facilitator 판정</h2>
+<div class="panel"><p></p>
+</div>
+<table style="margin-top:12px"><thead><tr><th>티커</th><th>승자</th><th>명문규칙</th>
+<th>판정 근거</th></tr></thead><tbody><tr><td><b>META</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">통과 · 좌표 유효(711.94 ≤ 812.51)</span></td><td class="rat">승률 60.2% = 52.2 + rs 1위(+6) + 유효저항 여력 +22.07%(+2) + mom +12.84 최고(+3) − FOMC(−3). 보유 중이므로 신규 진입 리스크 자체가 없다.</td></tr><tr><td><b>MSFT</b></td><td><span class="badge good">Bull 승</span></td><td><span class="badge good">조건부 → 통과</span></td><td class="rat">승률 53.2% = 52.2 + 완전정배열·저항여력 +11.63%(+4) + 하락장 상대강도 +5.01%p(+2) − FOMC 전날 신규(−3) − eps_revision null(−2).</td></tr><tr><td><b>GOOGL</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge good">좌표 통과 · 4-4절 하한충돌로 미진입</span></td><td class="rat">승률 50.2% = 52.2 + 완전정배열(+3) − 9/22 반독점 바이너리(−3) − 3일 +5.67% 과열(−2). 좌표는 최고였으나 리스크 2관점이 배제했다.</td></tr><tr><td><b>GILD</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge warn">저항여력 +4.19% &lt; 5% → 관망 강등</span></td><td class="rat">승률 47.2% 참고치. MA20(146.65)을 $0.23 차이로 하회해 확장목표 자격을 잃자 유효저항이 스윙고점 152.55로 내려앉았다.</td></tr><tr><td><b>MU</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge warn">손절 발동 청산 · 재진입 관망</span></td><td class="rat">승률 42.2%(종목조정 −10%p 상한 도달). 3일 −10.09%, MA20·MA50 하회, 9/30 실적 바이너리가 보유기간 내 유일한 실적 이벤트.</td></tr><tr><td><b>AMZN</b></td><td><span class="badge crit">Bear 승</span></td><td><span class="badge warn">저항여력 +1.60% &lt; 5% → 관망 강등</span></td><td class="rat">승률 44.2% 참고치. 진출 6종 중 유효저항 여력 최저이고 MA20·MA50을 모두 하회한다.</td></tr></tbody></table>
+
+<h2>Ⅲ. 트레이더 — 시장 포지셔닝</h2>
+<div class="panel"><p>★이번 회차의 핵심 설계 변경은 &#x27;저가 지정가 포기&#x27;다. 최근 4사이클 중 3회가 미체결이었고, 직전 NFLX는 괴리가 +0.68%(ATR의 0.29배)에 불과했는데도 $0.65 차이로 비껴갔다. 하드 상한(+5%)도, 압축(+1.00%)도 체결률을 구조적으로 개선하지 못한다는 것이 4회분 근거로 확인됐다. 따라서 MSFT·GOOGL을 모두 종가 진입(괴리 0.000%, 체결확률 95%)으로 설계했다. GOOGL ATR14 $7.486은 stockanalysis history 16거래일 OHLC로 직접 계산했고 마지막 행 종가가 기준일 확정 종가 349.39와 일치함을 대조했다. ★GOOGL 목표는 유효저항 416.10(=52주최고 408.61 + ATR 7.486)이 아니라 401.50으로 내렸다 — 유효저항을 쓰면 예상수익률이 +19.09%로 사용자 확정 파라미터 목표 밴드(+5~15%)를 벗어나 발행 게이트에서 차단되기 때문이다. 저항이 목표의 상한이지 목표 그 자체는 아니다.</p></div>
+
+<h2>Ⅳ. 리스크 심사 — 3관점</h2>
+<details class="deb"><summary>공격 관점</summary><p class="thesis-p">총 27% 권고. 3종 모두 기대값 양(+3.848~+4.997%)·R/R 2.0 이상이고 MSFT·GOOGL은 완전정배열 종가 진입이라 체결 리스크가 없다. 이벤트 리스크는 이미 손절폭에 반영됐다고 본다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>META</b></td><td><span class="badge good">찬성</span></td><td class="n">8.0%</td><td class="rat">rs 1위·유효저항 여력 +22.07%로 상방이 가장 두껍다.</td></tr><tr><td><b>MSFT</b></td><td><span class="badge good">찬성</span></td><td class="n">9.0%</td><td class="rat">완전정배열 유일 지속, 하락장에서 +1.97%.</td></tr><tr><td><b>GOOGL</b></td><td><span class="badge good">찬성</span></td><td class="n">10.0%</td><td class="rat">기대값 +4.997%로 3종 최고, R/R 2.983.</td></tr></tbody></table></details><details class="deb"><summary>중립 관점</summary><p class="thesis-p">총 12% 권고. 기대값과 이벤트 리스크의 균형. GOOGL만 배제한다.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>META</b></td><td><span class="badge good">찬성</span></td><td class="n">6.0%</td><td class="rat">기존 보유 유지가 신규 진입보다 리스크가 낮다.</td></tr><tr><td><b>MSFT</b></td><td><span class="badge warn">조건부 찬성</span></td><td class="n">6.0%</td><td class="rat">FOMC 전날 진입이지만 정배열·종가진입으로 상쇄.<div class="flag">⚠ 9/16 FOMC 결과 갭</div></td></tr><tr><td><b>GOOGL</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">9/22 반독점 + 9/16 FOMC 이중 바이너리. mom_20d +1.01로 진출 6종 최저.<div class="flag">⚠ 이중 바이너리</div><div class="flag">⚠ 3일 +5.67% 과열</div></td></tr></tbody></table></details><details class="deb"><summary>보수 관점</summary><p class="thesis-p">총 4% 권고. FOMC 결과 전 신규 진입 자체를 회피한다. META는 기존 보유라 하한까지만 트리밍.</p><table class="mini"><thead><tr><th>티커</th><th>판정</th><th>권고비중</th><th>의견</th></tr></thead><tbody><tr><td><b>META</b></td><td><span class="badge warn">조건부 찬성</span></td><td class="n">4.0%</td><td class="rat">보유분은 유지하되 하한까지 축소.<div class="flag">⚠ 10년물 4.96%가 고멀티플 직접 압박</div></td></tr><tr><td><b>MSFT</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">금리 인상 확률 86~88%인 이벤트 하루 전 신규 진입은 자본보전 원칙에 반한다.<div class="flag">⚠ FOMC 전날 신규</div></td></tr><tr><td><b>GOOGL</b></td><td><span class="badge crit">반대</span></td><td class="n">0.0%</td><td class="rat">이중 바이너리.<div class="flag">⚠ 이중 바이너리</div></td></tr></tbody></table></details>
+
+<h2>숨기지 않는 하방 리스크</h2>
+<div class="panel"><div class="rk-item"><div class="rk-h"><span class="rk-n">1</span><b>9/16 FOMC 금리 인상 결정 — 보유 2영업일차</b><span class="badge warn">확률 인상 86~88%</span></div><div class="rk-q"><b>정량</b> 갭조정 최대손실 −0.8000%p (100만 원 기준 8,000원). 손절 480.14·614.86은 갭다운을 막지 못한다.</div><div class="rk-e"><b>근거</b> 집행일 9/15가 FOMC 첫날, 결과는 9/16. 10년물이 장중 5.01%로 19년래 최고를 터치했다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">2</span><b>배정 2종 모두 eps_revision null — 판별변수 1/3 공백</b><span class="badge warn">확률 확정</span></div><div class="rk-q"><b>정량</b> META·MSFT 둘 다 eps_revision 확보 실패. 12종 중 6종만 실측(6/12).</div><div class="rk-e"><b>근거</b> Yahoo/Zacks/WSJ 로드 실패. 추론 대체는 뉴스 축 재활용이라 금지 — null을 감수했다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">3</span><b>WTI +3.57%($103.61) + 10년물 4.96% 동반 급등</b><span class="badge warn">확률 진행 중</span></div><div class="rk-q"><b>정량</b> META(PER 고멀티플)·MSFT 모두 할인율 상승의 직접 영향권.</div><div class="rk-e"><b>근거</b> 사우디 송유관 피격. VIX 17.80(+12.37%).</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">4</span><b>MSFT 목표 564.20은 52주최고(553.72) 돌파를 전제한다</b><span class="badge warn">확률 중</span></div><div class="rk-q"><b>정량</b> 확장목표 예외 적용분 +$10.48(ATR 1.0배). 돌파 실패 시 상단이 553.72로 막혀 예상수익률이 +11.63%→+9.56%로 축소된다.</div><div class="rk-e"><b>근거</b> 4-3절 확장목표는 완전정배열+3일 +2.80%(&lt;6%) 충족으로 적용했으나, 약세 국면에서의 신고가 돌파는 확률이 낮다.</div></div><div class="rk-item"><div class="rk-h"><span class="rk-n">5</span><b>승률 기저율이 상승장 표본 의존 — 그 표본의 종목들이 지금 무너지고 있다</b><span class="badge warn">확률 구조적</span></div><div class="rk-q"><b>정량</b> β_base 68.2%의 원천인 2026-08 성숙 코호트(실현 승률 85.2%)는 일방적 상승장이었다. 그 사이 MU는 손절, NVDA·GILD는 청산됐다.</div><div class="rk-e"><b>근거</b> 손익분기승률(META 33.333% · MSFT 30.062%) 대입 시 두 건의 기대값이 정확히 0.</div></div></div>
+
+<h2>파이프라인 품질 기록 — 이번 실행에서 검출한 오류</h2>
+<table><thead><tr><th>검출자</th><th>내용</th><th>중대도</th></tr></thead><tbody><tr><td class="sub">발행 게이트 WARN</td><td class="rat">MSFT 승률 53.2%가 β_base 68.2% ±12%p 밖 — 소명: 약세 국면 −16%p 적용 후 종목조정 −1%p(FOMC −3 · eps null −2 · 정배열+저항여력 +6 · 상대강도 +2 상쇄분 순계). 4-1절 산식의 정상 산출 결과다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">발행 게이트 WARN</td><td class="rat">판별 3변수 null 6건 — eps_revision이 META·MSFT·AAPL·GOOGL·GILD·PLTR 6종 미확보. ★배정 2종이 모두 여기 포함된다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">웹조사 단계 배분</td><td class="rat">매크로 담당이 22회 상한을 1회 초과(23회). 시세·매크로·캘린더 단계 합산은 50/60으로 단계 상한 내. 총 131/200.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">애널리스트 ② 자체 오류</td><td class="rat">정배열판정 필드에 &#x27;완전정배열 MSFT 1종&#x27;으로 기재됐으나 확보된 MA200 실측치 재계산 결과 META·GOOGL·MSFT·AAPL 4종이 충족. 메인 세션이 산술 검증으로 정정 — 4-3절 확장목표 자격이 걸린 판정이었다.</td><td><span class="badge crit">중대</span></td></tr><tr><td class="sub">ADX 확보 실패</td><td class="rat">12/12 전수 실패(전 소스 세션 날짜 스테일 → 기각, barchart 상시 기각). 4-3절 라운드넘버 예외를 적용하지 못했으나 이번 회차 좌표에는 영향 없음.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">MU 손절 체결가 불확실</td><td class="rat">9/14 저가 902.60이 손절 960.97을 관통한 것은 확정이나 9/14 시가를 확보하지 못해 갭다운 여부 미확인. 실현 −3.614%는 손절가 체결 가정치다.</td><td><span class="badge warn">경미</span></td></tr><tr><td class="sub">산식 경로</td><td class="rat">기대값 3건 전부 단일 경로(p×수익률+(1−p)×손실률)로만 산출, 게이트 재계산과 ±0.06 이내 일치.</td><td><span class="badge warn">경미</span></td></tr></tbody></table>
+
+<h2>다음 사이클 개선 권고</h2>
+<table><thead><tr><th>우선순위</th><th>항목</th><th>상태</th></tr></thead><tbody><tr><td><span class="badge crit">최우선</span></td><td class="rat">★진입 지정가 전략의 전면 폐기 검토 — 4사이클 중 3회 미체결, 직전 NFLX는 괴리 +0.68%(ATR 0.29배)에서도 실패했다. 이번 회차는 신규 전량을 종가 진입으로 전환했다. 다음 회차에 체결 결과를 검증하고 규칙으로 승격할 것.</td><td class="sub">이월 3사이클 · 이번 회차 실험 착수</td></tr><tr><td><span class="badge crit">최우선</span></td><td class="rat">발행 게이트에 &#x27;보유·재게시 종목의 목표가 &gt; 유효 측정저항 → FAIL&#x27; 조항 추가 — 4사이클 연속 이월. 이번엔 META 좌표가 유효해 사고가 없었을 뿐이다.</td><td class="sub">이월 4사이클</td></tr><tr><td><span class="badge crit">최우선</span></td><td class="rat">eps_revision 소스 재지정 — 6/12까지 올라왔으나 ★배정된 2종이 모두 null이다. Yahoo/Zacks/WSJ 외 대체 경로(예: 증권사 컨센서스 페이지) 확보 필요.</td><td class="sub">이월 2사이클 · 부분 개선(0/12 → 6/12)</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">MA200을 애널리스트 ② 12종 전수 필수 산출물로 고정 — 이번 회차 12/12 확보로 완전정배열 판정이 3사이클 만에 가능해졌다. 예산 배정을 상시화할 것.</td><td class="sub">해소 — 상시화 필요</td></tr><tr><td><span class="badge warn">높음</span></td><td class="rat">애널리스트의 정배열 판정을 메인 세션이 산술 재검증하는 절차를 게이트에 편입 — 이번에 4종을 1종으로 잘못 기재했고 확장목표 자격이 걸린 판정이었다.</td><td class="sub">신규</td></tr></tbody></table>
+
+</div>
+</details>
+
+<div class="disc">
+<b>⚠ 투자 유의사항 (반드시 확인)</b>
+본 리포트는 TradingAgents 멀티에이전트 프레임워크를 이용한 <b>LLM 기반 분석 결과물이며, 투자 조언이 아닙니다.</b>
+기재된 승률·기대값·목표가는 모델의 추정치로 실현 수익을 전혀 보장하지 않으며,
+일부 수치는 공개 정보 기반 추정치가 포함되어 있습니다. 승률 50~60%가 높아 보이는 것은 모형이 개선돼서가 아니라 직전 월간평가의 실현 승률(85.2%, 32포지션)을 기저율 앵커로 삼았기 때문이며, 그 표본 기간은 일방적인 상승장이었습니다. 이번 회차는 약세 국면이라 −16%p가 차감됐습니다.
+최종 투자 판단과 그 결과에 대한 책임은 전적으로 투자자 본인에게 있습니다.
+</div>
+<div class="backfoot"><a href="../index.html#reports">← 리포트 목록으로 돌아가기</a></div>
+<div class="foot">TradingAgents (arXiv:2412.20138) 프레임워크 기반 · 경량판 v3 7역할 + 발행 게이트 ·
+데이터 기준 2026-09-14 미국장 마감</div>
+</div></body></html>
