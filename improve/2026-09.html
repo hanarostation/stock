@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>월간 모형평가 반영 결과 — 2026년 9월 | 데이터스테이션</title>
+<meta name="description" content="2026년 9월 월간 모형평가(부분 Amber)가 나스닥 멀티에이전트 추천에 반영된 내용 — 설계 v4·프로토콜·발행게이트 개정 As-Is/To-Be 대조">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='22' fill='%232a78d6'/><path d='M22 66 L40 46 L54 58 L78 32' stroke='white' stroke-width='9' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>">
+<style>
+:root{
+  --bg:#f9f9f7; --surface:#fcfcfb; --surface2:#fdfdfc;
+  --ink:#0b0b0b; --ink2:#52514e; --ink3:#898781;
+  --line:rgba(11,11,11,0.10); --line2:#e1e0d9; --line3:#c3c2b7;
+  --accent:#2a78d6; --gold:#eda100; --up:#006300; --dn:#d03b3b; --violet:#4a3aa7;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif;
+ font-size:14px;line-height:1.65;-webkit-font-smoothing:antialiased}
+a{color:inherit}
+.wrap{max-width:1180px;margin:0 auto;padding:0 22px 70px}
+.hero{padding:42px 0 4px}
+.pill{display:inline-block;background:var(--violet);color:#fff;font-size:11px;font-weight:700;
+ padding:3px 11px;border-radius:99px;letter-spacing:.03em;margin-bottom:14px}
+h1{font-size:31px;margin:0 0 10px;letter-spacing:-.03em;line-height:1.25}
+.lede{color:var(--ink2);font-size:14.5px;max-width:790px;margin:0}
+.meta{margin:15px 0 0;font-size:12.5px;color:var(--ink3);display:flex;flex-wrap:wrap;gap:6px 16px}
+.meta b{color:var(--ink2);font-weight:700}
+h2{font-size:19px;margin:46px 0 16px;padding-bottom:9px;border-bottom:2px solid var(--ink);
+ letter-spacing:-.02em;display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
+h2 .cnt{font-size:12px;font-weight:600;color:var(--ink3);letter-spacing:0}
+h3{font-size:15px;margin:26px 0 10px;letter-spacing:-.01em}
+p{margin:0 0 12px}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:20px 22px}
+.panel p:last-child{margin-bottom:0}
+.stiles{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:26px 0 0}
+.stile{background:var(--surface);border:1px solid var(--line);border-radius:11px;padding:13px 15px}
+.stile .k{font-size:11px;color:var(--ink3);letter-spacing:.03em}
+.stile .v{font-size:21px;font-weight:800;letter-spacing:-.03em;margin:3px 0 2px;
+ font-variant-numeric:tabular-nums;line-height:1.2}
+.stile .s{font-size:11px;color:var(--ink3);line-height:1.5}
+.up{color:var(--up)}.dn{color:var(--dn)}.ac{color:var(--accent)}.neutral{color:var(--ink)}
+.gd{color:var(--gold)}
+table{width:100%;border-collapse:collapse;background:var(--surface);border:1px solid var(--line);
+ border-radius:12px;overflow:hidden;font-size:13px}
+th{background:var(--bg);text-align:left;padding:10px 13px;font-size:11px;color:var(--ink2);
+ border-bottom:1px solid var(--line3);letter-spacing:.04em;white-space:nowrap}
+td{padding:10px 13px;border-bottom:1px solid var(--line2);vertical-align:top}
+tbody tr:last-child td{border-bottom:none}
+tbody tr:hover{background:#f5f8fd}
+td.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap;font-weight:700}
+.tscroll{overflow-x:auto;border-radius:12px}
+.tscroll table{min-width:660px}
+.badge{display:inline-block;font-size:10.5px;font-weight:800;padding:2.5px 9px;border-radius:99px;
+ white-space:nowrap;letter-spacing:.02em}
+.badge.done{background:#e8f7e8;color:#0a5a0a}
+.badge.part{background:#fdf0cf;color:#7a5400}
+.badge.open{background:#f2f1ed;color:var(--ink3)}
+.badge.new{background:var(--accent);color:#fff}
+.badge.red{background:#fdecec;color:#a12020}
+
+/* 타임라인 */
+.tl{position:relative;margin:6px 0 0;padding:26px 0 4px}
+.tl-line{position:absolute;left:0;right:0;top:44px;height:3px;background:var(--line2);border-radius:3px}
+.tl-line i{position:absolute;left:0;width:50%;top:0;bottom:0;background:var(--ink3);border-radius:3px}
+.tl-line b{position:absolute;left:50%;width:25%;top:0;bottom:0;background:var(--accent);border-radius:3px}
+.tl-nodes{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.tl-n{position:relative;padding-top:38px;text-align:left}
+.tl-n::before{content:"";position:absolute;top:11px;left:0;width:13px;height:13px;border-radius:50%;
+ background:var(--surface);border:3px solid var(--ink3)}
+.tl-n.on::before{border-color:var(--accent);background:var(--accent);
+ box-shadow:0 0 0 4px rgba(42,120,214,.18)}
+.tl-n.pend::before{border-color:var(--gold);background:var(--surface);border-style:dashed}
+.tl-n .d{font-size:12.5px;font-weight:800;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.tl-n .t{font-size:11.5px;color:var(--ink2);line-height:1.5;margin-top:2px}
+.tl-n.on .d{color:var(--accent)}
+.tl-n.pend .d{color:#8a6000}
+.cut{margin:16px 0 0;background:#eaf2fc;border:1px solid rgba(42,120,214,.35);
+ border-left:3px solid var(--accent);border-radius:0 11px 11px 0;padding:14px 17px;font-size:13.2px;color:var(--ink2)}
+.cut b{color:var(--ink)}
+
+/* 도식 */
+.figure{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:16px 8px 10px;margin:0}
+.figscroll{overflow-x:auto}
+.figure svg{display:block;min-width:1000px;width:100%;height:auto}
+.figcap{font-size:11.5px;color:var(--ink3);padding:8px 14px 4px;margin:0;line-height:1.6}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--ink2);padding:2px 14px 6px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:11px;height:11px;border-radius:3px;display:block;border:1.5px solid var(--line3);background:var(--surface2)}
+.legend i.ch{border-color:var(--accent);background:#eaf2fc}
+.legend i.no{border-color:var(--dn);background:#fdecec;border-style:dashed}
+
+/* As-Is / To-Be 카드 */
+.abgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:13px}
+.ab{background:var(--surface);border:1px solid var(--line);border-radius:13px;overflow:hidden}
+.ab-h{display:flex;align-items:flex-start;justify-content:space-between;gap:10px;padding:14px 17px 12px}
+.ab-h .ti{font-size:14.5px;font-weight:800;letter-spacing:-.01em;line-height:1.4}
+.ab-h .src{font-size:11px;color:var(--ink3);margin-top:2px}
+.ab-b{border-top:1px solid var(--line2);background:var(--surface2);padding:0}
+.ab-row{display:grid;grid-template-columns:56px 1fr;gap:12px;padding:12px 17px;border-bottom:1px solid var(--line2);
+ font-size:12.8px;line-height:1.6}
+.ab-row:last-child{border-bottom:none}
+.ab-row .lb{font-size:10.5px;font-weight:800;letter-spacing:.05em;padding-top:2px}
+.ab-row.as .lb{color:var(--ink3)}
+.ab-row.to .lb{color:var(--accent)}
+.ab-row.as{color:var(--ink3)}
+.ab-row.as .tx{text-decoration:line-through;text-decoration-color:rgba(137,135,129,.5)}
+.ab-row.to{background:#f4f8fe;color:var(--ink2)}
+.ab-row.to b{color:var(--ink)}
+.ab-ev{padding:11px 17px;border-top:1px dotted var(--line2);font-size:11.8px;color:var(--ink2);background:var(--surface)}
+.ab-ev b{color:var(--accent)}
+
+/* 콜아웃 */
+.callout{background:var(--surface);border:1px solid var(--line);border-radius:13px;padding:18px 20px;margin:16px 0 0}
+.callout .ttl{font-size:14.5px;font-weight:800;letter-spacing:-.01em;margin:0 0 4px}
+.callout .sub{font-size:12.2px;color:var(--ink3);margin:0 0 15px}
+.cc{display:grid;grid-template-columns:1fr auto 1fr;gap:14px;align-items:center}
+.cbox{border:1px solid var(--line2);border-radius:11px;padding:13px 15px;background:var(--surface2)}
+.cbox.tgt{border-color:rgba(42,120,214,.45);background:#eaf2fc}
+.cbox.bad{border-color:rgba(208,59,59,.4);background:#fdecec}
+.cbox .cl{font-size:10.5px;font-weight:800;letter-spacing:.05em;color:var(--ink3);margin-bottom:7px}
+.cbox.tgt .cl{color:var(--accent)}
+.cbox.bad .cl{color:#a12020}
+.cbox dl{margin:0;display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px}
+.cbox dt{color:var(--ink3)}
+.cbox dd{margin:0;text-align:right;font-weight:700;font-variant-numeric:tabular-nums}
+.carrow{font-size:22px;color:var(--accent);font-weight:800}
+.callout .note{font-size:12px;color:var(--ink2);margin:14px 0 0;line-height:1.6}
+.warnbox{background:#fef9ec;border:1px solid rgba(237,161,0,.4);border-left:3px solid var(--gold);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:13px;color:var(--ink2)}
+.warnbox b{color:var(--ink)}
+.redbox{background:#fdecec;border:1px solid rgba(208,59,59,.35);border-left:3px solid var(--dn);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:13px;color:var(--ink2)}
+.redbox b{color:var(--ink)}
+.disc{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--dn);
+ border-radius:0 11px 11px 0;padding:15px 18px;font-size:12.5px;color:var(--ink2);margin-top:14px}
+ul.tight{margin:0;padding-left:19px}
+ul.tight li{margin-bottom:7px}
+ul.tight li:last-child{margin-bottom:0}
+code{background:#f2f1ed;border:1px solid var(--line);border-radius:5px;padding:1px 6px;font-size:12px}
+pre.flow{background:#f4f3ef;border:1px solid var(--line);border-radius:10px;padding:14px 16px;
+ font-size:12px;line-height:1.75;overflow-x:auto;margin:0;font-family:ui-monospace,SFMono-Regular,Menlo,monospace}
+@media(max-width:820px){
+  .stiles{grid-template-columns:repeat(2,1fr)}
+  .tl-nodes{grid-template-columns:repeat(2,1fr);gap:18px 10px}
+  .tl-line{display:none}
+  .cc{grid-template-columns:1fr;gap:9px}
+  .carrow{text-align:center;transform:rotate(90deg)}
+  h1{font-size:25px}
+}
+</style>
+</head>
+<body>
+<!-- ═══ 데이터스테이션 공통 상단바 — index 헤더 이식 + 뒤로가기 (공통 삽입 블록) ═══ -->
+<style>
+.ds-topbar{position:sticky;top:0;z-index:900;background:rgba(249,249,247,.88);
+ backdrop-filter:saturate(180%) blur(12px);-webkit-backdrop-filter:saturate(180%) blur(12px);
+ border-bottom:1px solid rgba(11,11,11,.10);
+ font-family:'Noto Sans CJK KR','Noto Sans KR',system-ui,-apple-system,'Segoe UI',sans-serif}
+.ds-topbar *{box-sizing:border-box}
+.ds-topbar-in{max-width:1180px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:18px;height:60px}
+.ds-brand{display:flex;align-items:center;gap:11px;font-weight:800;letter-spacing:-.02em;
+ font-size:15.5px;color:#0b0b0b;text-decoration:none;min-width:0;white-space:nowrap}
+.ds-logo{width:30px;height:30px;flex:0 0 30px;border-radius:8px;overflow:hidden;
+ display:flex;align-items:center;justify-content:center}
+.ds-logo img{width:100%;height:100%;object-fit:contain;display:block}
+.ds-logo .ds-fb{width:100%;height:100%;border-radius:8px;background:#2a78d6;
+ display:none;align-items:center;justify-content:center}
+.ds-logo .ds-fb svg{width:17px;height:17px}
+.ds-nav{display:flex;gap:4px;align-items:center;margin-left:auto;overflow-x:auto;
+ -webkit-overflow-scrolling:touch;scrollbar-width:none}
+.ds-nav::-webkit-scrollbar{display:none}
+a.ds-tab{font-size:13px;font-weight:700;color:#52514e;border:1px solid transparent;
+ padding:6px 15px;border-radius:99px;text-decoration:none;white-space:nowrap;
+ transition:background .15s,color .15s,border-color .15s}
+a.ds-tab:hover{background:#f2f1ed;color:#0b0b0b}
+a.ds-tab[aria-current="true"]{background:#0b0b0b;color:#fff;border-color:#0b0b0b}
+a.ds-back{flex:0 0 auto;display:inline-flex;align-items:center;gap:7px;background:#2a78d6;color:#fff;
+ font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:99px;border:1px solid #2a78d6;
+ text-decoration:none;white-space:nowrap;transition:opacity .15s}
+a.ds-back:hover{opacity:.85}
+@media(max-width:640px){
+  .ds-topbar-in{height:56px;gap:10px;padding:0 15px}
+  .ds-brand{font-size:13px;gap:8px}
+  .ds-logo{width:26px;height:26px;flex:0 0 26px}
+  .ds-full{display:none}
+  a.ds-tab{font-size:12px;padding:6px 11px}
+  a.ds-back{font-size:12px;padding:7px 13px}
+}
+@media(max-width:540px){
+  .ds-txt{display:none}
+  .ds-nav{gap:2px}
+  a.ds-tab{font-size:11.5px;padding:6px 9px}
+}
+@media print{.ds-topbar{display:none}}
+</style>
+<div class="ds-topbar" id="ds-topbar">
+  <div class="ds-topbar-in">
+    <a class="ds-brand" href="../index.html" data-ds-home="">
+      <span class="ds-logo">
+        <img src="../image/logo.png" alt="데이터스테이션 로고" id="ds-logo-img"
+             onerror="this.style.display='none';this.nextElementSibling.style.display='flex'">
+        <span class="ds-fb"><svg viewBox="0 0 100 100"><path d="M18 70 L40 46 L56 60 L82 28" stroke="#fff" stroke-width="11" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+      </span>
+      <span class="ds-txt">데이터스테이션 나스닥<span class="ds-full"> 분석 리포트</span></span>
+    </a>
+    <nav class="ds-nav">
+      <a class="ds-tab" href="../index.html#reports" data-ds-home="#reports">일일 리포트</a>
+      <a class="ds-tab" href="../index.html#eval" data-ds-home="#eval" aria-current="true">모형 안정성 평가</a>
+      <a class="ds-tab" href="../index.html#about" data-ds-home="#about">시스템 개요</a>
+    </nav>
+    <a class="ds-back" id="ds-back" href="../index.html#eval" data-ds-home="#eval">← 목록으로</a>
+  </div>
+</div>
+<script>
+(function(){
+  if(!/\/(reports|eval)\/[^\/]*$/i.test(location.pathname)){
+    document.querySelectorAll('#ds-topbar [data-ds-home]').forEach(function(a){
+      a.setAttribute('href','index.html'+a.getAttribute('data-ds-home'));
+    });
+    var im=document.getElementById('ds-logo-img'); if(im) im.src='image/logo.png';
+  }
+  var bk=document.getElementById('ds-back');
+  if(bk) bk.addEventListener('click',function(e){
+    try{
+      if(document.referrer && new URL(document.referrer).origin===location.origin && history.length>1){
+        e.preventDefault(); history.back();
+      }
+    }catch(err){}
+  });
+})();
+</script>
+<!-- ═══ /공통 상단바 ═══ -->
+
+<div class="wrap">
+
+<div class="hero">
+  <span class="pill">MONTHLY EVAL → APPLIED CHANGES</span>
+  <h1>월간 모형평가 반영 결과 — 2026년 9월</h1>
+  <p class="lede">2026년 9월 모형 안정성 평가(종합 <b>부분 Amber</b>)의 필수 권고 3건·높음 3건·보통 2건과
+    일일리포트에서 최대 7사이클 이월된 자체 안건 2건이 추천 시스템에 어떻게 반영됐는지를 As-Is / To-Be로 대조한 문서입니다.
+    <b>8월 개정이 "측정된 결함"에 대응한 것이었다면, 이번 개정의 절반은 "측정 자체가 불가능해진 원인"에 대한 대응입니다.</b></p>
+  <p class="meta">
+    <span><b>평가기준일</b> 2026-09-30 미국장 마감</span>
+    <span><b>설계문서 개정</b> 경량판 v4 · 2026-10-01</span>
+    <span><b>반영 이전 마지막 회차</b> 2026-09-29 리포트 (v3)</span>
+    <span><b>다음 검증</b> 2026-11-01 월간평가</span>
+  </p>
+</div>
+
+<div class="stiles">
+  <div class="stile"><div class="k">평가 권고 이행</div><div class="v up">8 / 8</div>
+    <div class="s">필수 3건·높음 3건·보통 2건 전부 반영 + 자체 이월 2건 종결</div></div>
+  <div class="stile"><div class="k">평가 입력 리포트</div><div class="v neutral">09-01 → 09-29</div>
+    <div class="s">11개 코호트 38 포지션 · 그중 성숙은 1코호트 3 포지션뿐</div></div>
+  <div class="stile"><div class="k">개정 산출물</div><div class="v ac">문서 3종</div>
+    <div class="s">설계 v3→v4 · 평가 프로토콜 · publish_gate.py v4</div></div>
+  <div class="stile"><div class="k">발행 게이트 차단조항</div><div class="v up">7 → 10종</div>
+    <div class="s">픽스처 4종 실행 검증 완료 · 구 게이트가 통과시키던 건을 차단</div></div>
+</div>
+
+<!-- ══════════ 1 ══════════ -->
+<h2>1. 어디까지 평가에 들어갔고, 어디부터 반영되나 <span class="cnt">반영 경계</span></h2>
+
+<div class="panel">
+  <p>8월 문서와 한 가지가 다릅니다. <b>8월에는 평가 확정일과 최초 반영 회차가 같은 날(08-28)이었지만, 이번에는 아직 반영된 리포트가 없습니다.</b>
+    개정은 2026-10-01에 끝났고, 실제 적용은 <b>10월 첫 승인 발행 회차</b>부터입니다.
+    따라서 이 문서의 To-Be는 "이미 산출된 결과"가 아니라 <b>"확정된 규칙과 그 규칙에 대한 검증 결과"</b>입니다.</p>
+
+  <div class="tl">
+    <div class="tl-line"><i></i><b></b></div>
+    <div class="tl-nodes">
+      <div class="tl-n">
+        <div class="d">2026-09-01 → 09-29</div>
+        <div class="t"><b>평가 입력 구간.</b> 11개 코호트·38 포지션이 수집됐으나 20영업일 관측창을 통과한 것은
+          <b>09-01 코호트 1건(3 포지션)</b>뿐이다. 09-02는 20영업일차가 10-01 당일이라 제외.
+          나머지 9개 코호트는 미성숙으로 잠정 표기·등급 제외.</div>
+      </div>
+      <div class="tl-n">
+        <div class="d">2026-09-30 마감</div>
+        <div class="t"><b>평가기준일.</b> <b>2026-09-29 일일 리포트가 평가의 입력이자, 평가 결과가 반영되지 않은 마지막 회차</b>다(경량판 v3로 발행).
+          이 시점에 시세 수집이 전면 차단돼 블록 B·C·D·F가 산출되지 않았다.</div>
+      </div>
+      <div class="tl-n on">
+        <div class="d">2026-10-01 (KST)</div>
+        <div class="t"><b>평가 확정 · 3개 문서 일괄 개정.</b> 종합 부분 Amber 확정(확정 9개 중 Green 4 / Amber 3 / Red 2),
+          같은 날 설계문서를 <b>경량판 v4</b>로, 모형평가 프로토콜과 <code>publish_gate.py</code>를 함께 개정해
+          권고 8건 + 자체 이월 2건을 반영.</div>
+      </div>
+      <div class="tl-n pend">
+        <div class="d">10월 첫 승인 발행</div>
+        <div class="t"><b>★ 최초 반영 회차 — 아직 발생하지 않음.</b> 승인 게이트가 있으므로 날짜를 미리 확정할 수 없다.
+          그 회차부터 앵커 동결·종가 진입 기본값·<code>dist_52w_high</code>·트레일링·FAIL 10종이 동시에 작동한다.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="cut">
+    <b>한 줄 정리 —</b> 9월 평가는 <b>2026-09-01부터 2026-09-29까지의 일일 리포트</b>를 입력으로 삼았고,
+    그 결과는 <b>2026-10-01에 설계·프로토콜·게이트 세 문서에 반영</b>됐습니다.
+    <b>2026-09-29 리포트까지가 반영 이전(v3)</b>이며, <b>반영 이후(v4) 리포트는 아직 발행되지 않았습니다.</b>
+    이 문서의 검증 근거는 실제 산출물이 아니라 <b>게이트 실행 결과와 과거 사례 역산</b>입니다.
+  </div>
+</div>
+
+<div class="redbox" style="margin-top:14px">
+  <b>이번 평가의 등급 상향을 개선으로 읽어서는 안 됩니다.</b> 8월 Red 8개 중 6개가 B(예측편의)·C(Brier·ECE·과신비율)·D(AUROC) 블록이었는데,
+  <b>이번 회차는 바로 그 블록들이 측정되지 않았습니다.</b> <code>stockanalysis.com</code> WebFetch가 10종목 전부
+  <code>PROVENANCE_REQUIRED</code>로 차단돼(Agent 2조 30회 + 메인 세션 3회 전부 실패) 시세를 한 행도 받지 못했고,
+  프로토콜의 "추측·보간·생성 금지" 원칙에 따라 <b>값을 채우는 대신 산출 불가로 남겼습니다.</b>
+  Red가 사라진 것이 아니라 보이지 않을 뿐이며, Red 2개(E 종합 PSI·섹터 PSI)는 8월과 동일하게 유지됐습니다.
+</div>
+
+<!-- ══════════ 2 ══════════ -->
+<h2>2. 파이프라인 As-Is → To-Be <span class="cnt">구조가 어떻게 바뀌나</span></h2>
+
+<div class="figure">
+ <div class="figscroll">
+  <svg viewBox="0 0 1180 352" role="img" aria-label="v3와 v4 파이프라인 대조 도식"
+       font-family="'Noto Sans CJK KR','Noto Sans KR',system-ui,sans-serif">
+    <defs>
+      <marker id="ar" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#c3c2b7"/>
+      </marker>
+      <marker id="arb" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+        <path d="M0,0 L10,5 L0,10 z" fill="#2a78d6"/>
+      </marker>
+    </defs>
+
+    <rect x="0" y="26" width="1180" height="124" rx="12" fill="#f4f3ef"/>
+    <rect x="0" y="166" width="1180" height="156" rx="12" fill="#eef4fc"/>
+
+    <text x="16" y="50" font-size="11.5" font-weight="800" fill="#898781" letter-spacing="1">AS-IS · 경량판 v3</text>
+    <text x="16" y="66" font-size="11" fill="#898781">~ 2026-09-29 리포트</text>
+    <text x="16" y="190" font-size="11.5" font-weight="800" fill="#2a78d6" letter-spacing="1">TO-BE · 경량판 v4</text>
+    <text x="16" y="206" font-size="11" fill="#2a78d6">10월 첫 승인 회차 ~</text>
+
+    <!-- ===== AS-IS 8단계 ===== -->
+    <g font-size="10">
+      <rect x="176" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="224" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">후보 12종</text>
+      <text x="224" y="108" text-anchor="middle" fill="#d03b3b">eps_revision</text>
+      <text x="224" y="120" text-anchor="middle" fill="#898781">확보율 70.5%</text>
+
+      <rect x="286" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="334" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">애널리스트 2인</text>
+      <text x="334" y="108" text-anchor="middle" fill="#898781">52주최고 선택적</text>
+      <text x="334" y="120" text-anchor="middle" fill="#898781">7/12 확보</text>
+
+      <rect x="396" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="444" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">승률 산정</text>
+      <text x="444" y="108" text-anchor="middle" fill="#d03b3b">앵커 무조건 갱신</text>
+      <text x="444" y="120" text-anchor="middle" fill="#898781">n=0 → β 50.0</text>
+
+      <rect x="506" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="554" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">트레이더 좌표</text>
+      <text x="554" y="108" text-anchor="middle" fill="#d03b3b">지정가 기본</text>
+      <text x="554" y="120" text-anchor="middle" fill="#d03b3b">ADX 외부조회 9.1%</text>
+
+      <rect x="616" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="664" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">리스크 3관점</text>
+      <text x="664" y="108" text-anchor="middle" fill="#898781">분기 규칙</text>
+      <text x="664" y="120" text-anchor="middle" fill="#898781">변경 없음</text>
+
+      <rect x="726" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="774" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">펀드매니저</text>
+      <text x="774" y="108" text-anchor="middle" fill="#d03b3b">목표 터치 → 청산</text>
+      <text x="774" y="120" text-anchor="middle" fill="#898781">signal_type 6종</text>
+
+      <rect x="836" y="74" width="96" height="54" rx="9" fill="#fdecec" stroke="#d03b3b" stroke-dasharray="5 4"/>
+      <text x="884" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#a12020">발행 게이트</text>
+      <text x="884" y="108" text-anchor="middle" fill="#a12020">FAIL 7종</text>
+      <text x="884" y="120" text-anchor="middle" fill="#a12020">무효좌표 통과시킴</text>
+
+      <rect x="946" y="74" width="96" height="54" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="994" y="94" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">발행</text>
+      <text x="994" y="108" text-anchor="middle" fill="#898781">HTML · PDF</text>
+      <text x="994" y="122" text-anchor="middle" fill="#a12020" font-weight="700">OHLC 폐기</text>
+    </g>
+    <g stroke="#c3c2b7" stroke-width="1.6" marker-end="url(#ar)">
+      <line x1="272" y1="101" x2="282" y2="101"/><line x1="382" y1="101" x2="392" y2="101"/>
+      <line x1="492" y1="101" x2="502" y2="101"/><line x1="602" y1="101" x2="612" y2="101"/>
+      <line x1="712" y1="101" x2="722" y2="101"/><line x1="822" y1="101" x2="832" y2="101"/>
+      <line x1="932" y1="101" x2="942" y2="101"/>
+    </g>
+
+    <!-- ===== TO-BE 9단계 ===== -->
+    <g font-size="9.5">
+      <rect x="176" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="224" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">후보 12종</text>
+      <text x="224" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★판별 3변수</text>
+      <text x="224" y="261" text-anchor="middle" fill="#52514e">mom · rs ·</text>
+      <text x="224" y="273" text-anchor="middle" fill="#52514e" font-weight="700">dist_52w_high</text>
+      <text x="224" y="285" text-anchor="middle" fill="#898781">eps는 참고필드 강등</text>
+
+      <rect x="286" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="334" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">애널리스트 2인</text>
+      <text x="334" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★52주최고 전수</text>
+      <text x="334" y="261" text-anchor="middle" fill="#52514e">필수 산출물 승격</text>
+      <text x="334" y="273" text-anchor="middle" fill="#52514e">스테일 즉시 기각</text>
+      <text x="334" y="285" text-anchor="middle" fill="#898781">미확보 = 후보 제외</text>
+
+      <rect x="396" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="444" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">승률 산정</text>
+      <text x="444" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★앵커 유효성 게이트</text>
+      <text x="444" y="261" text-anchor="middle" fill="#52514e">n ≥ 10 일 때만 갱신</text>
+      <text x="444" y="273" text-anchor="middle" fill="#52514e">미만 = 직전 앵커 동결</text>
+      <text x="444" y="285" text-anchor="middle" fill="#006300" font-weight="700">β_base 68.2% 유지</text>
+
+      <rect x="506" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="554" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">트레이더 좌표</text>
+      <text x="554" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★종가 진입 기본</text>
+      <text x="554" y="261" text-anchor="middle" fill="#52514e">지정가는 사유 기재시</text>
+      <text x="554" y="273" text-anchor="middle" fill="#2a78d6" font-weight="700">★ADX 직접계산</text>
+      <text x="554" y="285" text-anchor="middle" fill="#52514e">OHLC 30일 · 웹 0회</text>
+
+      <rect x="616" y="214" width="96" height="76" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="664" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">리스크 3관점</text>
+      <text x="664" y="248" text-anchor="middle" fill="#898781">2관점↓ = 미진입</text>
+      <text x="664" y="261" text-anchor="middle" fill="#898781">1관점↓ = 하한 유지</text>
+      <text x="664" y="277" text-anchor="middle" fill="#898781">변경 없음</text>
+
+      <rect x="726" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6"/>
+      <text x="774" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">펀드매니저</text>
+      <text x="774" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★4-6절 트레일링</text>
+      <text x="774" y="261" text-anchor="middle" fill="#52514e">목표 터치 → 좌표 리셋</text>
+      <text x="774" y="273" text-anchor="middle" fill="#52514e">ref_entry 재산출</text>
+      <text x="774" y="285" text-anchor="middle" fill="#898781">signal_type 7종</text>
+
+      <rect x="836" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6" stroke-width="2"/>
+      <text x="884" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">발행 게이트</text>
+      <text x="884" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★FAIL 10종</text>
+      <text x="884" y="261" text-anchor="middle" fill="#52514e">목표 &gt; 유효저항</text>
+      <text x="884" y="273" text-anchor="middle" fill="#52514e">entry_mode 필수</text>
+      <text x="884" y="285" text-anchor="middle" fill="#898781">동결2회 상한 65%</text>
+
+      <rect x="946" y="214" width="96" height="76" rx="9" fill="#fcfcfb" stroke="#c3c2b7"/>
+      <text x="994" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">발행</text>
+      <text x="994" y="250" text-anchor="middle" fill="#898781">HTML · PDF</text>
+      <text x="994" y="268" text-anchor="middle" fill="#006300" font-weight="700">PASS 시에만</text>
+
+      <rect x="1056" y="214" width="96" height="76" rx="9" fill="#eaf2fc" stroke="#2a78d6" stroke-width="2"/>
+      <text x="1104" y="233" text-anchor="middle" font-size="10.5" font-weight="800" fill="#0b0b0b">시세 적재</text>
+      <text x="1104" y="248" text-anchor="middle" fill="#2a78d6" font-weight="700">★5-3절 신설</text>
+      <text x="1104" y="261" text-anchor="middle" fill="#52514e">claude/시세/</text>
+      <text x="1104" y="273" text-anchor="middle" fill="#52514e">일자별 ohlc.md</text>
+      <text x="1104" y="285" text-anchor="middle" fill="#898781">월간평가 1순위</text>
+    </g>
+    <g stroke="#2a78d6" stroke-width="1.8" marker-end="url(#arb)">
+      <line x1="272" y1="252" x2="282" y2="252"/><line x1="382" y1="252" x2="392" y2="252"/>
+      <line x1="492" y1="252" x2="502" y2="252"/><line x1="602" y1="252" x2="612" y2="252"/>
+      <line x1="712" y1="252" x2="722" y2="252"/><line x1="822" y1="252" x2="832" y2="252"/>
+      <line x1="932" y1="252" x2="942" y2="252"/><line x1="1042" y1="252" x2="1052" y2="252"/>
+    </g>
+
+    <path d="M884 290 L884 308 L554 308 L554 294" fill="none" stroke="#d03b3b" stroke-width="1.6"
+          stroke-dasharray="5 4" marker-end="url(#ar)"/>
+    <text x="719" y="321" text-anchor="middle" font-size="10" fill="#a12020" font-weight="700">FAIL → 해당 항목 수정 후 재검사 (게이트 우회·임계 완화 금지)</text>
+
+    <path d="M1104 294 L1104 334 L120 334 L120 300" fill="none" stroke="#2a78d6" stroke-width="1.5"
+          stroke-dasharray="4 4" marker-end="url(#arb)"/>
+    <text x="612" y="347" text-anchor="middle" font-size="10" fill="#2a78d6" font-weight="700">적재된 OHLC → 다음 달 월간평가가 재수집 없이 읽는다 (단일 실패점 제거)</text>
+  </svg>
+ </div>
+ <div class="legend">
+   <span><i class="ch"></i> v4에서 신설·변경된 단계</span>
+   <span><i></i> 변경 없음</span>
+   <span><i class="no"></i> v3에서 통제가 작동하지 않던 지점</span>
+ </div>
+ <p class="figcap">7역할 파이프라인의 골격, 점수 가중치(35/25/22/18), 산출물 형식, 주 2회 발행주기는 <b>바뀌지 않았습니다.</b>
+   바뀐 것은 ① 판별 제3변수의 교체 ② 승률 앵커 앞에 붙은 유효성 게이트 ③ 진입 방식의 기본값 전환
+   ④ 목표 달성 포지션의 처리 경로 ⑤ 게이트 차단조항 3건 추가, 그리고 ⑥ <b>파이프라인 끝에 「시세 적재」 단계가 하나 추가</b>된 것입니다.</p>
+</div>
+
+<!-- ══════════ 3 ══════════ -->
+<h2>3. 규칙별 As-Is / To-Be 대조 <span class="cnt">평가 권고 8건</span></h2>
+
+<div class="abgrid">
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">① 승률 앵커 유효성 게이트</div><div class="src">필수 권고 1 · 설계 4-1절 + 프로토콜 5절</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">월간평가가 산출한 R·n을 <b>무조건 채택</b>. n이 0이어도 공식에 그대로 대입.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><b>n ≥ 10일 때만 갱신</b>, 미만이면 <b>직전 유효 앵커를 동결</b>하고 각주에 동결 회차를 명시.
+        <b>2회 연속 동결 시</b> 앵커 신뢰도 하락을 확신 축소로 반영 — 승률 상한 75→<b>65%</b>, 종목조정 ±10→<b>±6%p</b>.
+        평가 문서는 산출값과 함께 <b>「적용 보류」 판정을 반드시 기재</b>.</span></div>
+    </div>
+    <div class="ab-ev">근거: 성숙 코호트 경로 확정 승패 <b>0건</b> → R 분모 0 → 공식상 β_base <b>50.0</b>.
+      그대로 적용하면 기준 승률이 68.2%에서 18.2%p 급락해 손익분기승률(28~39%) 근처까지 내려가고 전 좌표 기대값이 붕괴한다.
+      <b>2026-10 적용값: β_base 68.2% (동결 1회차)</b>.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">② CLOSED — 제4의 결과 신설</div><div class="src">필수 권고 2 · 프로토콜 2-1절</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx"><code>walk()</code>가 <b>WIN / LOSS / OPEN 3종</b>만 정의.
+        규칙으로 조기 청산된 건은 셋 중 어디에도 속하지 않아 <b>모든 지표에서 증발</b>.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><b>CLOSED(규칙 청산)</b> 추가 + 블록별 집계 규칙 명문화 —
+        승률 앵커 R <b>제외</b> / 블록 B·F <b>포함</b>(경과영업일은 청산일까지) / 블록 C·D <b>제외</b>(이진 라벨 부재).
+        신규 G블록 지표 <b>규칙청산 비율 &gt; 40% = Red</b>. 사유를 <code>무효좌표·목표터치·리스크하한·강제청산일·기타</code>로 분류.</span></div>
+    </div>
+    <div class="ab-ev">근거: 체결 후 종결 5건 중 <b>3건(60%)</b>이 분류 불능이었고, 그 결과 성숙 코호트의 경로 확정이 0건이 되어
+      <b>승률 앵커·Brier·AUROC의 입력이 동시에 고갈</b>됐다. <b>2026-09 실적 60% → Red.</b></div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">③ 목표 터치 후 트레일링 재설계</div><div class="src">권고 2 연동 · 설계 4-6절 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">규정 없음. 모든 산식이 <b>원 진입가</b>를 분모로 써서
+        ⓐ예상수익률이 밴드(5~15%)를 초과하고 ⓑ손절이 진입가 위로 올라가 손실률이 양수가 되어 <b>R/R이 산출되지 않음</b> → 강제 청산.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><b>좌표 리셋.</b> <code>ref_entry</code> = 목표 터치일 종가로 재설정하고
+        새 손절 = <b>max(원 목표가 × 0.98, ref_entry − 1.5×ATR14)</b>, 새 목표는 4-3절로 재산출.
+        R/R ≥ 1.5 · 예상수익률 5~15% · 손절÷ATR ≥ 1.5를 <b>모두</b> 충족하면 <code>signal_type = 트레일링</code>, 아니면 전량 청산.
+        <b>포지션당 최대 2회</b>, 강제청산일은 원 진입일 기준 유지, 성과는 <code>realized_from_origin_pct</code>로 별도 집계.</span></div>
+    </div>
+    <div class="ab-ev">근거: 09-25 META가 목표를 터치하고도 끌고 갈 방법이 없어 전량 청산됐고 <b>이틀 뒤 733.00에 재진입</b>했다 —
+      왕복 비용과 판단 일관성 손상이 실제로 발생(2사이클 이월 후 비용 실현). <b>역산 검증은 4절 참조.</b></div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">④ 시세 단일 실패점 제거</div><div class="src">필수 권고 3 · 설계 5-3절 + 프로토콜 1-1절</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">일일 파이프라인이 수집한 OHLC를 <b>사용 후 폐기</b>.
+        월간평가가 한 달 뒤 <code>stockanalysis.com</code> 단일 소스에서 <b>전량 재수집</b>.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>발행 게이트 통과 후 수집분을 <code>claude/시세/YYYY-MM-DD-ohlc.md</code>에
+        <b>적재 — 종료 조건의 일부</b>. 월간평가 조달 순서를 <b>①적재분 → ②history → ③quote 경로</b>로 고정하고
+        <b>WebSearch 스니펫은 사용 금지</b>(추정치 혼입 위험). 2·3순위도 막히면 <code>null</code> + 「시세 미확보」를 G블록 사고로 계상.</span></div>
+    </div>
+    <div class="ab-ev">근거: 10종목 <b>0행</b> 확보로 블록 B·C·D·F 전면 불능.
+      <b>핵심은 간단하다 — 일일 파이프라인은 매 회차 그 시세를 이미 수집한다.</b> 한 달 뒤에 다시 긁는 구조 자체가 불필요한 단일 실패점이었다.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑤ 판별 제3변수 교체</div><div class="src">권고 5 · 설계 3-1절</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx"><code>eps_revision</code> — 확보율 <b>70.5%</b>(93/132).
+        확보분 상당수가 <b>목표주가·등급 프록시</b>여서 AUROC가 EPS가 아니라 뉴스 축(22%)을 자기참조로 측정.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><b><code>dist_52w_high</code></b> = (종가 ÷ 52주 최고 − 1) × 100.
+        52주 최고는 4-3절이 이미 전 종목에 요구하므로 <b>추가 웹조사 0회</b>이고,
+        미확보 시 <b>저항 산정 자체가 불가 → 좌표 설계 불가(관망)</b>라 결측이 숨지 않는다.
+        <code>eps_revision</code>은 참고 필드로 강등. <b>정성 추론으로 판별변수를 채우는 것을 금지</b>.</span></div>
+    </div>
+    <div class="ab-ev">근거: 09-09 회차는 오염을 피하려 <b>12종 전수를 null로 되돌렸다</b> — 변수 자체가 조달 불가능하다는 뜻이다.
+      측정 차원도 다르다 — mom은 절대 모멘텀, rs는 상대 강도, dist는 <b>레인지 내 위치</b>.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑥ ADX 직접 계산 편입</div><div class="src">권고 6 · 설계 5-1절 + 4-3절</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">외부 기술지표 페이지 조회. 확보율 <b>9.1%</b>(12/132)로 <b>5사이클 연속 실패</b>.
+        4-3절 라운드넘버 예외가 ADX ≥ 25를 요구하는데 판정 자체가 불가능.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>트레이더 단계에서 <b>ATR14와 ADX14를 같은 OHLC 한 벌에서 모두 계산</b>
+        (+DM/−DM/TR 14일 와일더 평활). <b>추가 웹조사 0회</b>, OHLC 수집량만 16→<b>30거래일</b>로 확대.
+        외부 ADX 조회는 폐지. <b>미산출 종목은 라운드넘버 예외를 적용하지 않고 저항으로 계산</b>(보수적 기본값).</span></div>
+    </div>
+    <div class="ab-ev">근거: 5사이클 중 유일한 성공 회차(2026-09-09, 12/12)가 <b>직접 계산</b>이었다.
+      일일리포트가 09-08·09-09에 이미 제안했던 안이다.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑦ 발행 리듬의 승인 종속 해소</div><div class="src">권고 7 · 설계 0-1절 ⑤ 신설</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">기준일 갱신·결번·예정 외 추가 발행이 <b>전부 문서화되지 않음</b>.
+        9월 상순 4영업일 연속 발행 vs 09-18~09-24 <b>8거래일 공백</b>이 기록 없이 발생.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span>승인 알림에 <b>기준일 명시</b> → 승인 지연 시 최신 마감일로 갱신하고 <b>그 사실을 머리글에 기재</b> →
+        결번 발생 시 <b>「&lt;날짜&gt; 결번, N거래일 공백」</b> 기재 → <b>주당 2회 초과 발행은 사유 기재</b>.
+        전부 <code>result.json["발행메타"]</code>에 기록해 월간평가 G블록이 읽는다.</span></div>
+    </div>
+    <div class="ab-ev">근거: 발행률 <b>85.7%</b>(예정 7회 중 09-21 완전 결번), 09-24·09-28 <b>2사이클 연속 기준일 갱신</b>.
+      정시 발행만 세면 57.1%. 발행 리듬이 승인 응답 시점에 종속돼 있었다.</div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h">
+      <div><div class="ti">⑧ 섹터 이동 원인 분류</div><div class="src">권고 8 · 설계 4-4절 + 프로토콜 블록 E</div></div>
+      <span class="badge done">반영 완료</span>
+    </div>
+    <div class="ab-b">
+      <div class="ab-row as"><span class="lb">AS-IS</span><span class="tx">섹터 구성비 ±25%p 이동 시 <b>사유만 기재</b>. 그 사유가 재량인지 규칙의 귀결인지 구분 없음.</span></div>
+      <div class="ab-row to"><span class="lb">TO-BE</span><span><code>result.json["섹터이동"]</code>에 원인을
+        <b><code>규칙귀결</code> / <code>재량</code> / <code>유니버스</code></b>로 분류 기록.
+        월간평가가 이를 집계해 섹터 PSI를 분해하고, <b><code>규칙귀결</code>이 지배적이면 재량 교정이 아니라 규칙 자체의 섹터 편향</b>을 권고 대상으로 올린다.</span></div>
+    </div>
+    <div class="ab-ev">근거: 섹터 CSI <b>1.501</b>이 블록 E의 Red를 단독으로 끌었다. 반면 승률 CSI는 1.131→<b>0.005</b>,
+      비중 1.063→0.150, 기대값 0.023으로 전부 안정권 진입 — <b>"모형 전반의 불안정"이 아니라 "섹터 선택의 불안정"으로 좁혀진다.</b></div>
+  </div>
+
+</div>
+
+<h3>함께 종결된 자체 이월 안건 2건</h3>
+<div class="tscroll">
+<table>
+  <thead><tr><th>이월 안건</th><th>As-Is</th><th>To-Be (v4)</th><th style="width:88px">이월 기간</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>보유 종목 목표가 &gt; 유효 측정저항</b></td>
+      <td>게이트에 해당 조항이 없어 무효좌표가 그대로 발행됨. 09-08 MSFT·09-09 GILD·09-10 NVDA+GILD·09-17 MSFT에서
+        같은 유형이 <b>5회 발생했고 매번 육안이 적발</b>해 사후 청산</td>
+      <td><b>게이트 FAIL 조건 8 신설</b> — <code>target &gt; effective_resistance</code>이면 전 <code>signal_type</code> 공통 차단.
+        <b><code>effective_resistance</code> 필드 자체가 누락돼도 FAIL</b>. 4-3절 확장목표 예외 판정도 게이트가 자동 수행</td>
+      <td class="n">7사이클</td>
+    </tr>
+    <tr>
+      <td><b>확장 목표 예외의 수동 적용</b></td>
+      <td>애널리스트 단계가 4-3절 예외를 누락해 메인 세션이 <b>3사이클 연속 수동 정정</b>.
+        정정하지 않았다면 보유 포지션이 근거 없이 청산될 뻔한 건이 3건</td>
+      <td>예외 적용 여부를 <b>발행 게이트가 자동 판정</b>(FAIL 8에 편입). 아울러
+        <b>"스윙 고점 미확보 → 52주 최고 대체" 금지</b>를 명문화 — <code>history</code> 실측 의무</td>
+      <td class="n">4사이클</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p class="figcap" style="padding-left:2px">이 밖에 5절 <b>종가 확정치의 정본을 history 마지막 행으로 고정</b>(09-17 MSFT $0.09 불일치 사고),
+  프로토콜 0-1절 ②에 <b>「성숙 코호트의 최초 산출은 소급 금지가 아니다」</b> 명확화,
+  블록 C·D <b>표본 요건</b>(각 10건·5건)과 블록 E <b>소표본 보완</b>(풀 비교 병기)이 함께 명문화됐습니다.</p>
+
+<!-- ══════════ 4 ══════════ -->
+<h2>4. 개정이 실제로 작동하는지 검증 <span class="cnt">게이트 실행 + 과거 사례 역산</span></h2>
+
+<p style="color:var(--ink2);margin-bottom:16px">반영 이후 리포트가 아직 없으므로, 8월 문서처럼 "실제 산출물 전후 대조"를 할 수 없습니다.
+  대신 <b>새 게이트를 실제로 실행</b>하고, <b>9월에 문제가 됐던 좌표를 새 규칙에 역산</b>해 넣어 검증했습니다.</p>
+
+<div class="callout">
+  <p class="ttl">META — 산식 결함으로 버렸던 포지션이, 새 규칙에서는 살아남는다</p>
+  <p class="sub">09-25 실제로 벌어진 일: 목표 711.94를 터치했으나 트레일링 좌표가 성립하지 않아 전량 청산 → <b>이틀 뒤 733.00에 재진입</b>.
+    같은 상황을 설계 4-6절에 넣고 새 게이트에 통과시킨 결과입니다.</p>
+  <div class="cc">
+    <div class="cbox bad">
+      <div class="cl">AS-IS · v3 (실제로 일어난 일)</div>
+      <dl>
+        <dt>기준 진입가</dt><dd>647.22 (원 진입가)</dd>
+        <dt>재설계 목표 / 손절</dt><dd>800.00 / 700.00</dd>
+        <dt>예상수익률</dt><dd class="dn">+23.61% · 밴드 초과</dd>
+        <dt>손실률</dt><dd class="dn">양수 — 산출 불가</dd>
+        <dt>R/R</dt><dd class="dn">산출 불가</dd>
+        <dt>판정</dt><dd class="dn">전량 청산 → 왕복</dd>
+      </dl>
+    </div>
+    <div class="carrow">→</div>
+    <div class="cbox tgt">
+      <div class="cl">TO-BE · v4 (4-6절 역산 · 게이트 PASS)</div>
+      <dl>
+        <dt>기준 진입가 ref_entry</dt><dd class="ac">740.00 (터치일 종가)</dd>
+        <dt>목표 / 손절</dt><dd>805.00 / 710.15</dd>
+        <dt>예상수익률</dt><dd class="ac">+8.78% · 밴드 내</dd>
+        <dt>손절 ÷ ATR14</dt><dd class="ac">1.50 ✓</dd>
+        <dt>R/R</dt><dd class="ac">2.18 ✓</dd>
+        <dt>판정</dt><dd class="up">트레일링 성립</dd>
+      </dl>
+    </div>
+  </div>
+  <p class="note"><b>산출 경로:</b> 새 손절 = max(원 목표 711.94 × 0.98, 740 − 1.5 × ATR14 19.90) = max(697.70, <b>710.15</b>) = 710.15.
+    앞항이 이익 보호선이고 뒷항이 변동성 여유이며, <b>둘 중 높은 쪽</b>을 씁니다.
+    목표 805는 확장저항 상한 809.72 이내라 게이트 FAIL 8도 통과합니다.
+    <b>09-28 청산 → 09-29 재진입의 왕복을 피할 수 있었던 좌표입니다.</b>
+    다만 목표를 겨우 터치한 경우에는 이익 보호선이 <code>ref_entry</code>에 붙어 손절÷ATR이 1.5 미만이 되어 <b>자동으로 청산됩니다</b> — 의도된 동작입니다.</p>
+</div>
+
+<h3>발행 게이트 v4 — 픽스처 4종 실행 결과</h3>
+<div class="tscroll">
+<table>
+  <thead><tr><th>픽스처</th><th>입력</th><th>기대</th><th>실제 출력</th><th style="width:70px">결과</th></tr></thead>
+  <tbody>
+    <tr>
+      <td><b>무효좌표</b></td>
+      <td>09-04 MSFT 좌표 — 진입 498.60 / 목표 553.72 / 유효저항 517.78</td>
+      <td>FAIL 8</td>
+      <td><code>목표 553.72 &gt; 유효 측정저항 517.78 (초과 6.941%) — 4-3절 위반·무효좌표</code></td>
+      <td><span class="badge red">FAIL</span></td>
+    </tr>
+    <tr>
+      <td><b>트레일링</b></td>
+      <td>META 역산 좌표 — ref_entry 740 / 목표 805 / 손절 710.15 / trail_count 1</td>
+      <td>PASS</td>
+      <td><code>PASS · WARN 1건 (앵커 동결 1회차)</code></td>
+      <td><span class="badge done">PASS</span></td>
+    </tr>
+    <tr>
+      <td><b>진입방식·구변수</b></td>
+      <td>지정가인데 <code>limit_reason</code> 미기재 + <code>eps_revision</code> 잔존(<code>dist_52w_high</code> 누락)</td>
+      <td>FAIL 9 + FAIL 6</td>
+      <td><code>판별변수 키 'dist_52w_high' 누락</code> / <code>지정가 진입인데 limit_reason 미기재</code></td>
+      <td><span class="badge red">FAIL 2</span></td>
+    </tr>
+    <tr>
+      <td><b>동결·트레일 한도</b></td>
+      <td>앵커 동결 2회차에 승률 73.2% + <code>trail_count</code> 3</td>
+      <td>FAIL 4 + FAIL 10</td>
+      <td><code>승률 73.2%가 밴드 35~65% 밖 (동결 2회차로 상한 인하 적용)</code> / <code>trail_count 3 &gt; 최대 2회</code></td>
+      <td><span class="badge red">FAIL 2</span></td>
+    </tr>
+  </tbody>
+</table>
+</div>
+
+<div class="redbox" style="margin-top:14px">
+  <b>구 게이트는 1번 픽스처를 통과시켰습니다.</b> 09-04 MSFT 좌표는 산식 대조·R/R·기대값·괴리·승률밴드를 전부 통과하지만,
+  목표 553.72가 유효 저항 517.78을 6.941% 초과한 <b>무효좌표</b>였습니다.
+  이것이 7사이클 동안 같은 유형이 반복 발행되고 매번 사람 눈이 잡아야 했던 이유이며,
+  09-08에 이 포지션은 결국 R/R 0.769로 강등돼 −1.11%에 청산됐습니다.
+</div>
+
+<!-- ══════════ 5 ══════════ -->
+<h2>5. 측정된 범위에서는 무엇이 좋아졌나 <span class="cnt">v3 규칙의 9월 성적표</span></h2>
+
+<p style="color:var(--ink2);margin-bottom:14px">이번 개정의 근거가 된 수치들입니다. <b>8월 개정(v3)의 효과가 확인된 항목</b>과
+  <b>악화돼 이번에 손본 항목</b>을 함께 봐야 개정의 방향이 보입니다.</p>
+
+<div class="tscroll">
+<table>
+  <thead><tr>
+    <th>지표</th><th>2026-07</th><th>2026-08</th><th>2026-09</th><th>판정</th><th>v4 조치</th>
+  </tr></thead>
+  <tbody>
+    <tr><td><b>진입가 절대괴리</b></td><td class="n">3.35%</td><td class="n">3.70%</td><td class="n up">1.198%</td>
+      <td><span class="badge done">Green</span></td><td>4-2절 유지 · 종가 진입 기본값 추가</td></tr>
+    <tr><td><b>괴리 드리프트</b></td><td class="n">+3.73%p</td><td class="n">−3.76%p</td><td class="n up">+0.24%p</td>
+      <td><span class="badge done">Green</span></td><td>유지</td></tr>
+    <tr><td><b>괴리 &gt; +5% 건수</b></td><td class="n">—</td><td class="n">다수</td><td class="n up">0건</td>
+      <td><span class="badge done">준수</span></td><td>하드 상한 유지 (최대 +3.56%)</td></tr>
+    <tr><td><b>산식·규칙 위반</b></td><td class="n">0건</td><td class="n dn">2건</td><td class="n up">0 / 80건</td>
+      <td><span class="badge done">Green</span></td><td>8월 2건은 일회성 확인</td></tr>
+    <tr><td><b>파이프라인 완주율</b></td><td class="n">80%</td><td class="n">93.3%</td><td class="n up">100%</td>
+      <td><span class="badge done">Green</span></td><td>—</td></tr>
+    <tr><td><b>종목 회전율</b></td><td class="n">55.8%</td><td class="n">69.2%</td><td class="n">49.5%</td>
+      <td><span class="badge part">Amber</span></td><td>—</td></tr>
+    <tr><td><b>체결률</b> (신규·재진입)</td><td class="n">53.3%</td><td class="n dn">34.4%</td><td class="n">53.3%</td>
+      <td><span class="badge part">Amber</span></td><td>종가 진입 기본값 전환</td></tr>
+    <tr><td><b>발행률</b></td><td class="n">100%</td><td class="n">81.8%</td><td class="n">85.7%</td>
+      <td><span class="badge part">Amber</span></td><td>0-1절 ⑤ 기준일·결번 규칙</td></tr>
+    <tr><td><b>회차당 사고건수</b></td><td class="n">4.2건</td><td class="n">2.33건</td><td class="n dn">4.73건</td>
+      <td><span class="badge part">Amber</span></td><td>ADX 직접계산 · 52주최고 전수화</td></tr>
+    <tr><td><b>종합 PSI</b></td><td class="n dn">1.286</td><td class="n dn">0.563</td><td class="n dn">0.396</td>
+      <td><span class="badge red">Red</span></td><td>소표본 보완 규칙 · 원인 분해</td></tr>
+    <tr><td><b>섹터 PSI</b></td><td class="n dn">0.936</td><td class="n dn">0.676</td><td class="n dn">1.501</td>
+      <td><span class="badge red">Red</span></td><td>4-4절 섹터 이동 원인 분류</td></tr>
+    <tr><td><b>eps_revision 확보율</b></td><td class="n">—</td><td class="n dn">16.7%<br><span style="font-size:10px;font-weight:400;color:var(--ink3)">08-28 회차</span></td><td class="n dn">70.5%<br><span style="font-size:10px;font-weight:400;color:var(--ink3)">93/132</span></td>
+      <td><span class="badge red">입력 무효</span></td><td><code>dist_52w_high</code>로 교체</td></tr>
+    <tr><td><b>ADX 확보율</b></td><td class="n">—</td><td class="n">—</td><td class="n dn">9.1%<br><span style="font-size:10px;font-weight:400;color:var(--ink3)">12/132</span></td>
+      <td><span class="badge red">5사이클 실패</span></td><td>OHLC 직접 계산 편입</td></tr>
+    <tr><td><b>규칙청산 비율</b> <span style="font-size:11px;color:var(--ink3)">(신규 지표)</span></td>
+      <td class="n">—</td><td class="n">—</td><td class="n dn">60%</td>
+      <td><span class="badge red">Red</span></td><td>4-6절 트레일링 + FAIL 8</td></tr>
+    <tr><td><b>기대값 순위 AUROC</b></td><td class="n">0.490</td><td class="n dn">0.467</td><td class="n">측정 불가</td>
+      <td><span class="badge open">결번</span></td><td>카운터 유지 규칙 · 10월이 3개월째</td></tr>
+    <tr><td><b>승률 앵커 n</b></td><td class="n">0</td><td class="n up">32</td><td class="n dn">0</td>
+      <td><span class="badge red">갱신 불가</span></td><td>앵커 유효성 게이트 · 68.2% 동결</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="warnbox" style="margin-top:14px">
+  <b>표를 읽는 법 —</b> 위쪽 다섯 줄(괴리 계열·산식·완주율)은 <b>8월 개정이 실제로 통했다는 증거</b>입니다.
+  2026-08 평가의 필수 권고 2(괴리 상한)와 3(재계산 게이트)은 <b>이행·효과 확인이 끝났습니다.</b>
+  반면 아래쪽은 전부 <b>"측정할 수 없게 된" 또는 "조달이 실패한"</b> 항목이고, 이번 v4 개정의 대상이 정확히 이 구간입니다.
+  <b>모형의 취약점은 추론이 아니라 입력이라는 2026-07 평가의 결론이 3개월째 유효합니다.</b>
+</div>
+
+<!-- ══════════ 6 ══════════ -->
+<h2>6. 아직 반영되지 않은 것과 다음 확인 사항 <span class="cnt">2026-11-01 월간평가 입력</span></h2>
+
+<div class="abgrid">
+  <div class="ab">
+    <div class="ab-h"><div><div class="ti">미반영 · 보류</div><div class="src">v4로 해소되지 않은 항목</div></div>
+      <span class="badge part">진행 중</span></div>
+    <div class="ab-b" style="padding:15px 17px">
+      <ul class="tight">
+        <li><b>시세 권한 복구</b> — <code>PROVENANCE_REQUIRED</code> 차단은 설계로 해소할 수 없다.
+          5-3절 적재는 <b>다음 달부터</b> 효과를 내므로 <b>9월분 소급 산출은 10월 평가의 웹 조달에 의존</b>한다.
+          해당 URL을 메시지에 포함하면 권한이 열린다.</li>
+        <li><b>AUROC 발동 보류</b> — 2개월 연속 0.55 미만(07 0.490 · 08 0.467)에서 9월이 결번.
+          <b>발동하지 않되 카운터도 리셋하지 않는다</b> — 2026-10이 3개월째 판정 회차다.</li>
+        <li><b>체결률 분기 미결</b> — 9월 53.3%는 기준(60% 종결 / 40% 재상정) 사이의 중간 지대.
+          종가 진입 기본값의 효과를 10월에 측정한다.</li>
+        <li><b>배정 비중 저조</b> — <b>11회차 연속</b> 평시 밴드(30~60%) 하회(10~23%, 평균 17.2%).
+          "규칙 보수성에 의한 구조적 미배정"인지는 결과 지표가 복구돼야 정량화 가능.</li>
+        <li><b><code>eps_revision</code> 복귀</b> — 실제 EPS 컨센서스 리비전 테이블 소스가 확보되면 판별변수 복귀를 재검토. 현재는 참고 필드.</li>
+        <li><b>문서·코드 미세 불일치</b> — 설계 6-1절 FAIL 2 목록에 게이트가 실제로 강제하는
+          <b>비중 4~12% 밴드</b>와 <b>예상수익률 5~15% 밴드</b>가 빠져 있다(v3부터의 기존 간극, 동작에는 영향 없음). 다음 개정 시 합친다.</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ab">
+    <div class="ab-h"><div><div class="ti">11월 평가에서 판가름 날 것</div><div class="src">반영 효과의 검증 조건</div></div>
+      <span class="badge open">대기</span></div>
+    <div class="ab-b" style="padding:15px 17px">
+      <ul class="tight">
+        <li><b>규칙청산 비율 &lt; 40%</b> — 4-6절(트레일링)과 FAIL 8(무효좌표 차단)이 두 사유를 제거했다.
+          여전히 40%를 넘으면 <b>모형 검증 가능성 자체가 설계 결함</b>임을 확정한다.</li>
+        <li><b>승률 앵커 n ≥ 10</b> — 미달이면 동결 2회차가 되어 승률 상한 65%·종목조정 ±6%p가 <b>자동 발동</b>한다.</li>
+        <li><b>AUROC 3개월째 판정</b> — 0.55 미만이면 스코어 체계 교체 즉시 발동.
+          측정 불가가 2개월 연속이면 <b>그 자체를 Red로 계상</b>한다.</li>
+        <li><b><code>dist_52w_high</code> 확보율 100%</b> — 미달이면 제3변수 교체가 실패한 것이다.</li>
+        <li><b>FAIL 8 발동 0건</b> — 발동했다면 애널리스트 단계의 저항 산정이 여전히 틀리고 있다는 뜻이며,
+          게이트가 막아준 것이므로 사고로 계상한다.</li>
+        <li><b><code>claude/시세/</code> 적재 100%</b> — 10월 전 발행 회차에 적재 문서가 존재해야 한다.</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<h3>개정된 문서 3종</h3>
+<div class="tscroll">
+<table>
+  <thead><tr><th>문서</th><th>버전</th><th>주요 변경</th></tr></thead>
+  <tbody>
+    <tr><td><code>claude/나스닥-멀티에이전트-시스템-설계.md</code></td><td class="n">v3 → v4</td>
+      <td>4-1절 앵커 유효성 게이트 · 3-1절 판별변수 교체 · <b>4-6절 트레일링 신설</b> · 5-1절 ADX 편입 ·
+        <b>5-3절 OHLC 적재 신설</b> · 0-1절 ⑤ 발행 리듬 · 4-4절 섹터 분류 · 6-1절 FAIL 3건 추가</td></tr>
+    <tr><td><code>claude/모형평가-프로토콜.md</code></td><td class="n">2026-10-01판</td>
+      <td><b>2-1절 CLOSED 신설</b> · 1-1절 시세 조달 순서 · 3-D절 AUROC 카운터 운용 ·
+        5절 승률 앵커 산출 규약 · 4절 부분 등급 표기 의무 · 블록 C·D 표본 요건 · 블록 E 소표본 보완</td></tr>
+    <tr><td><code>claude/publish_gate.py.txt</code></td><td class="n">v4</td>
+      <td>FAIL 7종 → <b>10종</b> · <code>DISC_KEYS</code> 교체 · <code>signal_type</code>에 트레일링 추가 ·
+        <code>--frozen N</code> 인자로 동결 회차별 승률 상한 적용 · WARN 2종 추가</td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>면책</h2>
+<div class="disc">
+  본 문서는 2026년 9월 모형 안정성 평가의 권고가 나스닥 멀티에이전트 추천 시스템에 반영된 내역을 정리한
+  <b>시스템 변경 기록</b>이며, <b>투자 조언이 아닙니다</b>. 대조에 사용한 수치는 2026-09-01~09-29 일일 리포트의 기재값과
+  <code>claude/월간평가/2026-09.md</code>, 설계문서 경량판 v4의 원문을 옮긴 것입니다.
+  <b>9월 평가는 외부 시세를 확보하지 못해 블록 B·C·D·F가 산출되지 않았으며, 종목별 결말은 후속 일일리포트의 자기기록으로
+  외부 검증되지 않았습니다.</b> 4절의 META 역산은 과거 데이터에 새 규칙을 적용한 사후 검증이며 미래 성과를 보장하지 않습니다.
+  승률·기대값은 모델 추정치이고, 특히 <b>승률 앵커 β_base 68.2%는 2026-07~08의 일방적 상승장 표본에서 도출된 뒤 갱신되지 못하고 동결된 값</b>입니다.
+  동결 중에는 실현 승률에 의한 자동 하향이 작동하지 않으므로 국면 조정이 유일한 방어선입니다.
+  규칙이 반영됐다는 사실이 성과 개선을 의미하지 않습니다. 최종 판단과 그 결과에 대한 책임은 전적으로 이용자에게 있습니다.
+</div>
+
+<p class="figcap" style="margin-top:20px">정본 · <code>claude/월간평가/2026-09.md</code> ·
+  <code>claude/월간평가/2026-09-반영결과.md</code> ·
+  <code>claude/나스닥-멀티에이전트-시스템-설계.md</code>(경량판 v4, 2026-10-01 개정) ·
+  <code>claude/모형평가-프로토콜.md</code>(2026-10-01 개정) · <code>claude/publish_gate.py.txt</code>(v4)</p>
+
+</div>
+</body>
+</html>
